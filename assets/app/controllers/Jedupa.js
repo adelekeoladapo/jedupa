@@ -13,8 +13,18 @@ app.factory('Session', function(){
     
     var data = {};
     
+    var app_data = {};
+    
     data.getSchoolID = function(){
         return "1";
+    };
+    
+    data.setAppData = function(data){
+        app_data = data;
+    };
+    
+    data.getAppData = function(){
+        return app_data;
     };
     
     return data;
