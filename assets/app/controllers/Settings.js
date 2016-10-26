@@ -41,10 +41,42 @@ app.controller('GeneralSettingsCtrl', function($scope, Session, states, school){
 });
 
 
-app.controller('AcademicSettingsCtrl', function($scope){
+/*******************Academic Settings Controller ***************/
+
+app.controller('AcademicSettingsCtrl', function($scope, Service, Session){
+    
+    $scope.session = Session;
+    
+    $scope.dept = {};
+    
+    $scope.addAcademicDept = function(){
+        if($('#form-add-student-dept').smkValidate()){
+            show_loading_overlay();
+            $scope.dept.school_id = $scope.session.getSchoolID();
+            Service.addDept($scope.dept).then(function(response){
+                Service.getSchoolDepts($scope.dept.school_id).then(function(response){
+                    console.log(response.data);
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
     
     
 });
+
+
+
+
+
+
+
+
+
+
 
 
 app.controller('HRSettingsCtrl', function($scope){

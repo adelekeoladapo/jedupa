@@ -49,6 +49,20 @@ app.service('Service', function($http){
         });
     };
     
+    this.addDept = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-student-dept",
+            data: data
+        });
+    }
+    
+    this.getSchoolDepts = function(school_id){
+        return $http.get(base_url+"api/add-get-school-depts", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    }
+    
 });
 
 

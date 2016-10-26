@@ -54,7 +54,13 @@ $route['login'] = 'user/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+/******** School APIs *****************/
 $route['api/get-school'] = 'School/getSchool';
 $route['api/update-school'] = 'School/updateSchool';
 
+/************* State APIs ******************/
 $route['api/get-states'] = 'State/getStates';
+
+/************* Academic Department APIs ***************/
+$route['api/add-student-dept'] = 'StudentDepartment/addDept';
+$route['api/add-get-school-depts'] = 'StudentDepartment/getDepts';

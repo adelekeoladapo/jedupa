@@ -188,7 +188,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 
 .has-feedback .smk-error-msg {
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     font-size: 11px;
 }
 
