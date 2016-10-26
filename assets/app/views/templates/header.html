@@ -1,0 +1,54 @@
+            <div class="navbar-header aside bg-black" data-status="open">
+                <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+                  <i class="icon-list"></i>
+                </a>
+                <a href="#" class="navbar-brand text-lt" title="Jedupa | Dashboard">
+                    <i class="icon-layers"></i>
+                    <span class="hidden-nav-xs m-l-sm">Jedupa</span>
+                </a>
+                <a class="btn btn-link visible-xs" data-toggle="collapse" data-target="#menu">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </div>
+            <div id="menu" class="collapse navbar-collapse bg-white ">
+                <ul class="nav navbar-nav hidden-xs">
+                    <li> 
+                        <a href="" class="text-muted" id="nav-toggler">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left m-t m-l-n-xs" role="search">
+                    <div class="form-group dropdown" id="ajax-search">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" value="" autocomplete="off" class="form-control input-sm no-border rounded" name="s" placeholder="Search...">
+                        </div>
+                        <a id="ajax-search-toggle" data-target="#ajax-search" data-toggle="dropdown"></a>
+                        <div class="dropdown-menu bg-white">
+                            <div id="ajax-search-loading" class="wrapper text-center"><i class="fa fa-spin icon-refresh"></i></div>
+                            <div id="ajax-search-results" class="list-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li id="cart">
+                            <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
+                                <i class="icon-envelope"></i>
+                                <span class="badge badge-sm up bg-danger count edd-cart-quantity">0</span>
+                                <span class="visible-xs-inline m-l-xs">Your Inbox</span>
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+            </div>
+
+
+
+
+

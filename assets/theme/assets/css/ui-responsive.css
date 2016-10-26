@@ -1,0 +1,29 @@
+/* 
+    Created on : Oct 19, 2016, 7:46:09 AM
+    Author     : Adeleke Oladapo
+*/
+
+/*Unnecessaryly small device*/
+@media (max-width: 400px){
+    
+}
+
+/*Extra small devices*/
+@media (max-width: 768px) { 
+    
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+   
+    
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
+

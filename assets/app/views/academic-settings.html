@@ -1,0 +1,129 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Settings / Academic
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="dept">
+                                                <a href="">Departments</a>
+                                            </li>
+                                            <li data-href="class">
+                                                <a href="">Classes</a>
+                                            </li>
+                                            <li data-href="subject">
+                                                <a href="">Subject</a>
+                                            </li>
+                                            <li data-href="session">
+                                                <a href="">Sessions</a>
+                                            </li>
+                                            <li data-href="quota">
+                                                <a href="">Quota</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="dept">
+                                            <div class="jd-cards-container">
+                                                <div class="jd-card active" id="card-all-dept">
+                                                    <h1 class="h5 m-b-md m-t-none font-normal jd-card-title">
+                                                        All Departments
+                                                    </h1>
+                                                    <div class="btn-block-full">
+                                                        <button class="btn jd-btn jd-btn-primary" onclick="showCard('card-new-dept')">New</button>
+                                                    </div>
+                                                    <table class="table table-hover table-striped table-responsive">
+                                                        <thead class="table-bordered">
+                                                            <tr>
+                                                                <th>SN</th>
+                                                                <th>Name</th>
+                                                                <th>Code</th>
+                                                                <th>No. of Classes</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-bordered">
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Computer Science</td>
+                                                                <td>CSC</td>
+                                                                <td>0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Mechanical Engineering</td>
+                                                                <td>MECH</td>
+                                                                <td>0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Sociology</td>
+                                                                <td>SOC</td>
+                                                                <td>0</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="jd-card" id="card-new-dept">
+                                                    <h1 class="h5 m-b-md m-t-none font-normal jd-card-title">
+                                                        New Departments
+                                                    </h1>
+                                                    <div class="btn-block-full">
+                                                        <button class="btn jd-btn jd-btn-default jd-btn-back" onclick="showCard('card-all-dept')">Back</button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <form class="form-horizontal" id="form-update-school" novalidate style="margin-top: 20px;">
+                                                                <input type="hidden" name="school-id" value="{{ session.getSchoolID() }}">
+                                                                <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Dept Name<span class="required-field"> *</span></label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" value="{{ school.name }}" name="name" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Dept Code<span class="required-field"> *</span></label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" value="{{ school.name }}" name="name" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label"></label>
+                                                                    <div class="col-sm-8">
+                                                                        <button class="btn jd-btn jd-btn-primary">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="jd-card" id="card-3">Card 3</div>
+                                            </div>
+                                        </div>
+                                        <div class="jd-tab-pane" id="class">
+                                            Classes
+                                        </div>
+                                        <div class="jd-tab-pane" id="subject">
+                                            Subject
+                                        </div>
+                                        <div class="jd-tab-pane" id="session">
+                                            Session
+                                        </div>
+                                        <div class="jd-tab-pane" id="quota">
+                                            Quota
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->

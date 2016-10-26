@@ -1,0 +1,299 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 19, 2016, 7:46:09 AM
+    Author     : Adeleke Oladapo
+*/
+
+ul#menu-discover-music li ul.nav.sub-menu li>a>i {
+    font-size: 5px;
+}
+
+.jd-content {
+    width: 100%;
+    padding: 10px 10px;
+}
+
+.jd-content .jd-page {
+    width: 100%;
+    height: 100%;
+    border: solid #eee 1px;
+    border-radius: 4px;
+    background-color: #fff;
+    padding-bottom: 20px;
+}
+
+.jd-content .jd-page .jd-page-title {
+    border-bottom: solid 1px #eee;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.jd-content .jd-page .jd-page-content {
+    padding: 15px 10px 10px;
+}
+
+.broken-line {
+    width: 100%;
+    height: 1px;
+    border: dashed 1px #eee;
+    margin: 10px 0px;
+}
+
+.btn-block-full {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+/********** Form Custom Image Select ************/
+.img-placeholder {
+    /*border: solid 1px #eee;*/
+    width: 150px;
+    height: 150px;
+    border-radius: 3px;
+}
+
+.img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.select-btn-container {
+    margin-top: 20px;
+    margin-left: 28px;
+}
+
+.select-image-btn {
+    border: solid 1px #ddd;
+    background-color: #f8f8f8;
+    padding: 5px 10px;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.select-image-btn:hover, .select-image-btn:focus {
+    background-color: #eee;
+} 
+
+/********** End Form Custom Image Select **********/
+
+
+
+/******************* jD Tab Layout *****************/
+
+.jd-tab-container {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.jd-tab-container .jd-tab-title-block {
+    
+}
+
+.jd-tab-container .jd-tab-title-block > ul {
+    list-style-type: none;
+    padding: 0 8px;
+}
+
+.jd-tab-container .jd-tab-title-block > ul > li {
+    display: inline-block;
+}
+
+.jd-tab-container .jd-tab-title-block > ul > li > a {
+    padding: 8px 35px;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.jd-tab-container .jd-tab-title-block > ul > li.active > a {
+    background-color: #f8f8f8;
+    border: solid 1px #eee;
+    border-bottom: transparent;
+}
+
+.jd-tab-container .jd-tab-title-block > ul > li > a:hover {
+}
+
+.jd-tab-container .jd-tab-content-block {
+    width: 100%;
+    height: auto;
+    margin-top: -2px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+
+.jd-tab-container .jd-tab-content-block .jd-tab-pane {
+    width: 100%;
+    padding: 10px 10px 10px;
+    display: none;
+}
+
+.jd-tab-container .jd-tab-content-block .jd-tab-pane.active {
+    display: block;
+}
+
+/******************** End jD Tab Layout **********/
+
+
+/******************** jD Card Layout *************/
+
+.jd-cards-container {
+    width: 100%;
+}
+
+.jd-cards-container .jd-card {
+    width: 100%;
+    display: none;
+}
+
+.jd-cards-container .jd-card .jd-card-title {
+    padding-bottom: 10px;
+    border-bottom: dashed 1px #ddd;
+    margin-bottom: 5px;
+}
+
+.jd-cards-container .jd-card.active {
+    display: block;
+}
+
+/******************** End jD Card Layout *************/
+
+
+
+/******************* Form ************************/
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.form-control:focus {
+    border-color: #60bed1;
+}
+
+.form-btns-container {
+    /*border: solid 1px #ccc;*/
+}
+
+.has-feedback .smk-error-msg {
+    margin-top: 30px;
+    font-size: 11px;
+}
+
+.help-block {
+    margin-bottom: 0px;
+}
+
+.form-horizontal .form-group {
+    padding-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.transparent-overlay {
+    top: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: rgba(22, 33, 40, 0.12);
+    right: 0;
+    display: none;
+}
+
+.transparent-overlay .loading-img {
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    margin-top: 290px;
+}
+
+/******************* Datatable  *******************/
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background-color: #60bed1;
+    border-color: #60bed1;
+}
+
+table.dataTable thead > tr > th {
+    padding-left: 8px;
+    padding-right: 18px;
+}
+/****************** End Datatable ******************/
+
+/******************* End Form *********************/
+
+/******************* Buttons **********************/
+.jd-btn {
+    border-radius: 3px;
+    padding: 5px 20px;
+}
+
+.jd-btn-primary {
+    color: #fff;
+    background-color : #60bed1;
+    border: solid 1px #60bed1;
+}
+
+.jd-btn-primary:hover, .jd-btn-primary:focus {
+    background-color: #49b9d0;
+    border-color: #49b9d0;
+    color: #fff;
+}
+
+.jd-btn-default {
+    background-color: #f8f8f8;
+    border: solid 1px #ccc;
+}
+
+.jd-btn-back {
+    float: right;
+}
+
+/********************* End Buttons *****************/
+
+/********************** Toast **********************/
+.toast-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.toast-container .toast {
+    display: block;
+    width: 300px;
+    padding: 30px 10px;
+    margin: auto;
+    border: solid 1px #eee;
+    text-align: center;
+    position: relative;
+    top: 50px;
+    box-shadow: 0 2px 5px 0px rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    background-color: #eee;
+    float: right;
+    margin-right: 10px;
+    border-radius: 3px;
+    color: #fff;
+    display: none;
+}
+
+.toast-container .toast.success {
+    border-color: #9fd160;
+    background-color: #9fd160;
+}
+
+/********************** End Toast **********************/

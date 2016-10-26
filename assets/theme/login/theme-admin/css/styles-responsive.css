@@ -1,0 +1,210 @@
+/*Unnecessaryly small device*/
+@media (max-width: 400px){
+    .notification-bar .user-info {
+        display: none;
+    }
+}
+
+/*Extra small devices*/
+@media (max-width: 768px) { 
+    .header {
+        min-height: 64px;
+    }
+    
+    nav .brand{
+        width: 100%;
+        margin-left: -16px !important;
+        margin-top: -1px;
+    }
+    
+    .notification-bar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 64px;
+    }
+    
+    .notification-bar ul>li{
+        float: left;
+    }
+    
+    .notification-bar ul>li a{
+        display: block;
+    }
+    
+    .notification-bar .navbar-nav>li>a {
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .notification-bar .notification-icons{
+        float: right;
+    }
+    
+    .notification-bar .user-info{
+        float: left;
+    }
+    
+    .notification-bar{
+        width:100%;
+    }
+    
+    .main-container .nav-container {
+        display: none;
+        top: 128px;
+    }
+    
+    .page-container {
+        margin-left: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    
+    .page-container .page-content{
+        margin: 75px 10px;
+        padding: 5px;
+    }
+    
+    .page-container .page-title{
+        margin: 5px -5px 10px -5px;
+        padding: 0px 0px 10px 20px;
+    }
+    
+    .page-content .page-head {
+        padding: 0px;
+        margin-bottom: 45px;
+    }
+    
+    /***********************/
+    nav .brand {
+        height: 50px;
+    }
+    
+    .navbar-brand img {
+        height: 40px;
+    }
+    
+    .navbar-brand {
+        height: 50px;
+    }
+    
+    .navbar .navbar-toggle {
+        margin-top: 10px;
+    }
+    
+    nav .notification-bar ul {
+        height: 50px;
+        margin-top: 50px;
+    }
+    
+    .notification-bar .navbar-nav>li>a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .page-container .page-content {
+        margin: 55px 10px;
+    }
+    
+    .main-container .nav-container {
+        top: 102px;
+        display: none;
+    }
+    
+    .add-media .select-file-block .file-input{
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .add-media .select-file-block form{
+        width: 250px;
+    }
+    
+    .add-media .select-file-block form .upload-btn{
+        display: block;
+        width: 100%;
+    }
+    
+    .add-media .select-file-block ul{
+        margin-left: -40px;
+    }
+    
+    .uploaded-images img {
+        margin-top: 20px;
+    }
+    
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin: 5px 0px 0px 0px;
+    }
+    
+    .header {
+        min-height: 64px;
+    }
+    
+    nav .brand {
+        height: 64px;
+        margin-left: -16px !important;
+        display: inline-block;
+        width: 220px;
+        margin-top: -1px;
+    }
+    
+    .navbar-default .navbar-nav .notification-bar>li>a {
+        color: #777;
+        height: 100%;
+    }
+    
+    .notification-bar .navbar-nav>li>a {
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .navbar .notification-bar {
+        margin-right: 15px;
+    }
+    
+    .navbar .notification-bar .user-info{
+        margin-right: 20px;
+    }
+    
+    nav .notification-bar ul{
+        height: 62px;
+    }
+
+    nav .notification-bar ul>li{
+        height: 100%;
+    }
+    
+    .main-container .nav-container {
+        display: block !important;
+        top: 64px;
+    }
+    
+    .page-content .page-head {
+        padding: 0px;
+        margin-bottom: 48px;
+    }
+    
+    .form-horizontal .control-label{
+        text-align: left;
+    }
+    
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    
+    .page-content .page-head {
+        padding: 0px;
+        margin-bottom: 15px;
+    }
+    
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
