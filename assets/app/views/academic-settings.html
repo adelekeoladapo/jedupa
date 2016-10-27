@@ -40,34 +40,25 @@
                                                     <div class="btn-block-full">
                                                         <button class="btn jd-btn jd-btn-primary" onclick="showCard('card-new-dept')">New</button>
                                                     </div>
-                                                    <table class="table table-hover table-striped table-responsive" datatable="">
+                                                    <table class="table table-hover table-striped table-responsive" datatable="ng">
                                                         <thead class="table-bordered">
                                                             <tr>
                                                                 <th>SN</th>
                                                                 <th>Name</th>
                                                                 <th>Code</th>
                                                                 <th>No. of Classes</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-bordered">
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Computer Science</td>
-                                                                <td>CSC</td>
+                                                            <tr ng-repeat="department in departments">
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ department.name }}</td>
+                                                                <td>{{ department.code }}</td>
                                                                 <td>0</td>
+                                                                <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>Mechanical Engineering</td>
-                                                                <td>MECH</td>
-                                                                <td>0</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>Sociology</td>
-                                                                <td>SOC</td>
-                                                                <td>0</td>
-                                                            </tr>
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -80,7 +71,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <form class="form-horizontal" id="form-add-student-dept" novalidate style="margin-top: 20px;">
+                                                            <form class="form-horizontal" name="form-add-student-dept" id="form-add-student-dept" novalidate style="margin-top: 20px;">
                                                                 <div class="form-group">
                                                                         <label for="name" class="col-sm-4 control-label">Dept Name<span class="required-field"> *</span></label>
                                                                     <div class="col-sm-8">

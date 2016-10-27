@@ -6,6 +6,8 @@ app.controller('GeneralSettingsCtrl', function($scope, Session, states, school){
     
     $scope.school = school.data;
     
+    $scope.app_data = $scope.session.getAppData();
+    
     $scope.updateSchool = function(){
         if($('#form-update-school').smkValidate()){
             show_loading_overlay();
@@ -43,19 +45,26 @@ app.controller('GeneralSettingsCtrl', function($scope, Session, states, school){
 
 /*******************Academic Settings Controller ***************/
 
-app.controller('AcademicSettingsCtrl', function($scope, Service, Session){
+app.controller('AcademicSettingsCtrl', function($scope, Service, Session, departments){
     
-    $scope.session = Session;
+    Session.updateStudentDepartments(departments.data);
+    
+    $scope.departments = Session.getStudentDepartments();
     
     $scope.dept = {};
     
     $scope.addAcademicDept = function(){
         if($('#form-add-student-dept').smkValidate()){
             show_loading_overlay();
-            $scope.dept.school_id = $scope.session.getSchoolID();
+            $scope.dept.school_id = Session.getSchoolID();
             Service.addDept($scope.dept).then(function(response){
                 Service.getSchoolDepts($scope.dept.school_id).then(function(response){
-                    console.log(response.data);
+                    $scope.departments = response.data;
+                    Session.updateStudentDepartments(response.data);
+                    showCard('card-all-dept');
+                    clear_form_fields('form-add-student-dept');
+                    hide_loading_overlay();
+                    toast('Department Successfully Added');
                 }, function(error){
                     console.log(error);
                 });

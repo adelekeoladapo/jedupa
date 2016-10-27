@@ -9,6 +9,7 @@
     <title>Jedupa</title>
     <link rel='stylesheet' id='font-awesome-css'  href='<? echo base_url(); ?>assets/theme/font/font-awesome/css/font-awesome.min.css' type='text/css' />
     <link rel='stylesheet' id='simple-line-icons-css'  href='<? echo base_url(); ?>assets/theme/font/simple-line-icons/css/simple-line-icons1c9b.css' type='text/css' />
+    <link rel='stylesheet' id='simple-line-icons-css'  href='<? echo base_url(); ?>assets/lib/ionicons-2.0.1/css/ionicons.min.css' type='text/css' />
     <link rel='stylesheet' id='bootstrap-css'  href='<? echo base_url(); ?>assets/theme/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
     
     

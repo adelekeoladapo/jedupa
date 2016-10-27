@@ -27,6 +27,14 @@ app.factory('Session', function(){
         return app_data;
     };
     
+    data.getStudentDepartments = function(){
+        return app_data.departments;
+    };
+    
+    data.updateStudentDepartments = function(dt){
+        app_data.departments = dt;
+    };
+    
     return data;
     
 });
@@ -36,6 +44,12 @@ app.factory('Session', function(){
  * App Services
  */
 app.service('Service', function($http){
+    
+    this.loadAppData = function(school_id){
+        return $http.get(base_url+"api/init-app", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    }
     
     this.getSchool = function(id){
         return $http({
@@ -68,7 +82,7 @@ app.service('Service', function($http){
     }
     
     this.getSchoolDepts = function(school_id){
-        return $http.get(base_url+"api/add-get-school-depts", {
+        return $http.get(base_url+"api/get-school-depts", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     }
@@ -113,7 +127,12 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('academic-settings', {
             url: "/academic-settings",
             templateUrl: "assets/app/views/academic-settings.html",
-            controller: "AcademicSettingsCtrl"
+            controller: "AcademicSettingsCtrl",
+            resolve: {
+                departments: function(Service, Session){
+                    return Service.getSchoolDepts(Session.getSchoolID());
+                } 
+            }
         })
         
         .state('hr-settings', {
@@ -128,7 +147,16 @@ app.config(function($stateProvider, $urlRouterProvider){
 /*
  * App Controller
  */
-app.controller('mainCtrl', function($rootScope, $http, Service){
+app.controller('mainCtrl', function($rootScope, $http, Session, Service){
+    
+    /** Init App Data **/
+    Service.loadAppData(Session.getSchoolID()).then(function(response){
+        Session.setAppData(response.data);
+    }, function(error){
+        console.log(error);
+    });
+    
+    
     
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){ 
         show_loading_overlay();

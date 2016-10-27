@@ -49,10 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'edugate';
+$route['default_controller'] = 'jedupa';
 $route['login'] = 'user/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['api/init-app'] = 'Jedupa/init';
 
 /******** School APIs *****************/
 $route['api/get-school'] = 'School/getSchool';
@@ -63,4 +65,4 @@ $route['api/get-states'] = 'State/getStates';
 
 /************* Academic Department APIs ***************/
 $route['api/add-student-dept'] = 'StudentDepartment/addDept';
-$route['api/add-get-school-depts'] = 'StudentDepartment/getDepts';
+$route['api/get-school-depts'] = 'StudentDepartment/getDepts';

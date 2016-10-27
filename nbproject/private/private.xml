@@ -4,11 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/edugate/assets/theme/assets/js/ui.js</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/StudentDepartment.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Jedupa.js</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/theme/assets/css/ui.css</file>
             <file>file:/C:/xampp/htdocs/edugate/application/config/routes.php</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/views/general-settings.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/models/SchoolModel.php</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/views/academic-settings.html</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/theme/assets/css/ui-responsive.css</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/Jedupa.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/models/StudentDeptModel.php</file>
         </group>
     </open-files>
 </project-private>

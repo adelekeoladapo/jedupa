@@ -228,10 +228,6 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     border-color: #60bed1;
 }
 
-table.dataTable thead > tr > th {
-    padding-left: 8px;
-    padding-right: 18px;
-}
 /****************** End Datatable ******************/
 
 /******************* End Form *********************/
@@ -261,6 +257,41 @@ table.dataTable thead > tr > th {
 
 .jd-btn-back {
     float: right;
+}
+
+table > tbody > tr > td.tb-btn i {
+    padding: 1px 4px 3px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: auto;
+}
+
+.dataTables_wrapper .table > tbody > tr > td {
+    padding-left: 18px;
+}
+table > tbody > tr > td.tb-btn {
+    text-align: right;
+    padding: 7px 8px 0px 0px;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    /*padding: 12px;*/
+    /*line-height: 1.42857143;*/
+    vertical-align: top;
+    /*border-top: 1px solid #ddd;*/
+    /*font-size: 13px;*/
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: rgba(0,0,0,0.9);
 }
 
 /********************* End Buttons *****************/
