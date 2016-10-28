@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2016 at 02:37 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.5.35
+-- Generation Time: Oct 28, 2016 at 07:55 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -62,6 +62,7 @@ CREATE TABLE `tb_class` (
   `student_department_id` int(11) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `code` varchar(200) NOT NULL,
+  `parent_class_id` int(11) NOT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -512,6 +513,21 @@ CREATE TABLE `tb_student_department` (
   `type_of_result` varchar(100) DEFAULT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_student_department`
+--
+
+INSERT INTO `tb_student_department` (`student_department_id`, `school_id`, `name`, `code`, `type_of_result`, `date_created`) VALUES
+(1, 1, 'common', 'CM', NULL, '2016-10-26 16:45:14'),
+(2, 1, 'Science', 'Sci', NULL, '2016-10-26 17:29:28'),
+(3, 1, 'Commercial', 'COMM', NULL, '2016-10-27 13:07:58'),
+(4, 1, 'Arts', 'Arts', NULL, '2016-10-27 13:11:12'),
+(5, 1, 'Computer Science', 'CSC', NULL, '2016-10-27 13:14:50'),
+(6, 1, 'Chemical Engineering', 'CEngr', NULL, '2016-10-27 13:57:07'),
+(7, 1, 'sgsfdhsgdj', 'jgghf', NULL, '2016-10-27 13:58:52'),
+(8, 1, 'sssssss', 'ghghf', NULL, '2016-10-27 14:04:03'),
+(9, 1, 'Fine Art', 'FA', NULL, '2016-10-28 14:30:32');
 
 -- --------------------------------------------------------
 
@@ -1042,7 +1058,7 @@ ALTER TABLE `tb_student_category_subject`
 -- AUTO_INCREMENT for table `tb_student_department`
 --
 ALTER TABLE `tb_student_department`
-  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_subject`
 --
