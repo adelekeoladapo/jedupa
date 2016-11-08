@@ -1,15 +1,9 @@
 var app = angular.module("jedupa", ['ui.router', 'datatables']);
 
-/*
- * App factory
- */
+
+
+/** Factory **/
 app.factory('Factory', function(){
-    
-});
-
-
-/** Session **/
-app.factory('Session', function(){
     
     var data = {};
     
@@ -27,6 +21,7 @@ app.factory('Session', function(){
         return app_data;
     };
     
+    /** academic department **/
     data.getStudentDepartments = function(){
         return app_data.departments;
     };
@@ -34,6 +29,35 @@ app.factory('Session', function(){
     data.updateStudentDepartments = function(dt){
         app_data.departments = dt;
     };
+    
+    /** class **/
+    data.getClasses = function(){
+        return app_data.classes;
+    };
+    
+    data.updateClasses = function(dt){
+        app_data.classes = dt;
+    };
+    
+    data.getClass = function(id){
+        var dt = {};
+        angular.forEach(app_data.classes, function(value, key, obj){
+            if(value.class_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    /** class levels **/
+    data.getClassLevels = function(){
+        return app_data.class_levels;
+    };
+    
+    data.updateLevels = function(dt){
+        app_data.class_levels = dt;
+    };
+    
     
     return data;
     
@@ -51,6 +75,7 @@ app.service('Service', function($http){
         });
     }
     
+    /** school **/
     this.getSchool = function(id){
         return $http({
             method: "POST",
@@ -60,6 +85,7 @@ app.service('Service', function($http){
         });
     };
     
+    /** state **/
     this.getStates = function(){
         return $http.get(base_url+"api/get-states");
     };
@@ -73,19 +99,50 @@ app.service('Service', function($http){
         });
     };
     
+    /** academic department **/
     this.addDept = function(data){
         return $http({
             method: "POST",
             url: base_url+"api/add-student-dept",
             data: data
         });
-    }
+    };
     
     this.getSchoolDepts = function(school_id){
         return $http.get(base_url+"api/get-school-depts", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
-    }
+    };
+    
+    /** class **/
+    this.addClass = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class",
+            data: data
+        });
+    };
+    
+    this.getClasses = function(school_id){
+        return $http.get(base_url+"api/get-school-classes", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** class level **/
+    this.addLevel = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-level",
+            data: data
+        });
+    };
+    
+    this.getLevels = function(school_id){
+        return $http.get(base_url+"api/get-class-levels", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
     
 });
 
@@ -118,8 +175,8 @@ app.config(function($stateProvider, $urlRouterProvider){
                 states: function(Service){
                     return Service.getStates();
                 },
-                school: function(Service, Session){
-                    return Service.getSchool(Session.getSchoolID());
+                school: function(Service, Factory){
+                    return Service.getSchool(Factory.getSchoolID());
                 }
             }
         })
@@ -129,9 +186,12 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: "assets/app/views/academic-settings.html",
             controller: "AcademicSettingsCtrl",
             resolve: {
-                departments: function(Service, Session){
-                    return Service.getSchoolDepts(Session.getSchoolID());
-                } 
+                departments: function(Service, Factory){
+                    return Service.getSchoolDepts(Factory.getSchoolID());
+                },
+                classes: function(Service, Factory){
+                    return Service.getClasses(Factory.getSchoolID());
+                }
             }
         })
         
@@ -147,11 +207,11 @@ app.config(function($stateProvider, $urlRouterProvider){
 /*
  * App Controller
  */
-app.controller('mainCtrl', function($rootScope, $http, Session, Service){
+app.controller('mainCtrl', function($rootScope, $http, Factory, Service){
     
     /** Init App Data **/
-    Service.loadAppData(Session.getSchoolID()).then(function(response){
-        Session.setAppData(response.data);
+    Service.loadAppData(Factory.getSchoolID()).then(function(response){
+        Factory.setAppData(response.data);
     }, function(error){
         console.log(error);
     });

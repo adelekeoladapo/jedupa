@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2016 at 07:55 PM
+-- Generation Time: Nov 07, 2016 at 06:27 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -62,9 +62,24 @@ CREATE TABLE `tb_class` (
   `student_department_id` int(11) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `code` varchar(200) NOT NULL,
-  `parent_class_id` int(11) NOT NULL,
+  `class_level_id` int(11) NOT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class`
+--
+
+INSERT INTO `tb_class` (`class_id`, `school_id`, `student_department_id`, `name`, `code`, `class_level_id`, `date_created`) VALUES
+(1, 1, 1, 'Junior Secondary School One A', 'J S S 1 A', 1, '2016-11-07 17:52:46'),
+(2, 1, 1, 'Junior Secondary School One B', 'J S S 1 B', 1, '2016-11-07 17:53:40'),
+(3, 1, 1, 'Junior Secondary School Two', 'J S S 2', 2, '2016-11-07 17:57:41'),
+(4, 1, 1, 'Junior Secondary School Three A', 'J S S 3 A', 3, '2016-11-07 17:58:28'),
+(5, 1, 1, 'Junior Secondary School Three B', 'J S S 3 B', 3, '2016-11-07 17:58:58'),
+(6, 1, 1, 'Junior Secondary School Three C', 'J S S 3 C', 3, '2016-11-07 17:59:26'),
+(7, 1, 2, 'Senior Secondary School One A', 'S S 1 A', 4, '2016-11-07 18:02:07'),
+(8, 1, 4, 'Senior Secondary School One B', 'S S 1 B', 4, '2016-11-07 18:04:33'),
+(9, 1, 3, 'Senior Secondary School One C', 'S S 1 C', 4, '2016-11-07 18:06:11');
 
 -- --------------------------------------------------------
 
@@ -80,6 +95,29 @@ CREATE TABLE `tb_class_basic_subject` (
   `subject_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_class_level`
+--
+
+CREATE TABLE `tb_class_level` (
+  `class_level_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_level`
+--
+
+INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `name`, `date_created`) VALUES
+(1, 1, 'Level 1', '2016-11-07 17:40:10'),
+(2, 1, 'Level 2', '2016-11-07 17:40:17'),
+(3, 1, 'Level 3', '2016-11-07 17:40:21'),
+(4, 1, 'Level 4', '2016-11-07 18:01:16');
 
 -- --------------------------------------------------------
 
@@ -519,15 +557,10 @@ CREATE TABLE `tb_student_department` (
 --
 
 INSERT INTO `tb_student_department` (`student_department_id`, `school_id`, `name`, `code`, `type_of_result`, `date_created`) VALUES
-(1, 1, 'common', 'CM', NULL, '2016-10-26 16:45:14'),
-(2, 1, 'Science', 'Sci', NULL, '2016-10-26 17:29:28'),
-(3, 1, 'Commercial', 'COMM', NULL, '2016-10-27 13:07:58'),
-(4, 1, 'Arts', 'Arts', NULL, '2016-10-27 13:11:12'),
-(5, 1, 'Computer Science', 'CSC', NULL, '2016-10-27 13:14:50'),
-(6, 1, 'Chemical Engineering', 'CEngr', NULL, '2016-10-27 13:57:07'),
-(7, 1, 'sgsfdhsgdj', 'jgghf', NULL, '2016-10-27 13:58:52'),
-(8, 1, 'sssssss', 'ghghf', NULL, '2016-10-27 14:04:03'),
-(9, 1, 'Fine Art', 'FA', NULL, '2016-10-28 14:30:32');
+(1, 1, 'default', 'DFT', NULL, '2016-11-07 17:40:47'),
+(2, 1, 'Science', 'Sci', NULL, '2016-11-07 18:00:14'),
+(3, 1, 'Arts', 'Arts', NULL, '2016-11-07 18:00:29'),
+(4, 1, 'Commercial', 'Com', NULL, '2016-11-07 18:00:47');
 
 -- --------------------------------------------------------
 
@@ -645,88 +678,29 @@ CREATE TABLE `tb_weekday_class_period` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `temp_vw_student1`
+-- Stand-in structure for view `vw_class`
 --
-CREATE TABLE `temp_vw_student1` (
-`school_id` int(11)
-,`user_id` int(11)
-,`parent_id` int(11)
-,`firstname` varchar(100)
-,`lastname` varchar(100)
-,`othernames` varchar(100)
-,`batch` varchar(100)
-,`batch_id` int(11)
-,`class` varchar(100)
-,`class_id` int(11)
-,`registration_number` varchar(100)
-,`date_admitted` datetime
-,`department` varchar(100)
+CREATE TABLE `vw_class` (
+`class_id` int(11)
+,`school_id` int(11)
 ,`student_department_id` int(11)
+,`name` varchar(100)
+,`code` varchar(200)
+,`level_id` int(11)
+,`level_name` varchar(50)
+,`date_created` datetime
+,`department_name` varchar(100)
+,`department_code` varchar(20)
 );
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `temp_vw_student2`
+-- Structure for view `vw_class`
 --
+DROP TABLE IF EXISTS `vw_class`;
 
-CREATE TABLE `temp_vw_student2` (
-  `parent_id` int(11) DEFAULT NULL,
-  `parent` varchar(302) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vw_employee`
---
-
-CREATE TABLE `vw_employee` (
-  `school_id` int(11) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
-  `othernames` varchar(100) DEFAULT NULL,
-  `employee_department_id` int(11) DEFAULT NULL,
-  `employee_department` varchar(200) DEFAULT NULL,
-  `student_department_id` int(11) DEFAULT NULL,
-  `student_department` varchar(100) DEFAULT NULL,
-  `date_joined` date DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vw_student`
---
-
-CREATE TABLE `vw_student` (
-  `school_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `department_id` int(11) DEFAULT NULL,
-  `batch_id` int(11) DEFAULT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
-  `othernames` varchar(100) DEFAULT NULL,
-  `batch` varchar(100) DEFAULT NULL,
-  `class` varchar(100) DEFAULT NULL,
-  `registration_number` varchar(100) DEFAULT NULL,
-  `department` varchar(100) DEFAULT NULL,
-  `date_admitted` datetime DEFAULT NULL,
-  `parent` varchar(302) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure for view `temp_vw_student1`
---
-DROP TABLE IF EXISTS `temp_vw_student1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`jedupaco`@`localhost` SQL SECURITY DEFINER VIEW `temp_vw_student1`  AS  select `tb_user`.`school_id` AS `school_id`,`tb_user`.`user_id` AS `user_id`,`tb_student`.`parent_id` AS `parent_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_batch`.`name` AS `batch`,`tb_student`.`batch_id` AS `batch_id`,`tb_class`.`name` AS `class`,`tb_student`.`class_id` AS `class_id`,`tb_student`.`registration_number` AS `registration_number`,`tb_student`.`date_admitted` AS `date_admitted`,`tb_student_department`.`name` AS `department`,`tb_student_department`.`student_department_id` AS `student_department_id` from ((((`tb_user` join `tb_student` on((`tb_student`.`user_id` = `tb_user`.`user_id`))) join `tb_batch` on((`tb_batch`.`batch_id` = `tb_student`.`batch_id`))) join `tb_class` on((`tb_student`.`class_id` = `tb_class`.`class_id`))) join `tb_student_department` on((`tb_student`.`student_department_id` = `tb_student_department`.`student_department_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class`  AS  select `tb_class`.`class_id` AS `class_id`,`tb_class`.`school_id` AS `school_id`,`tb_class`.`student_department_id` AS `student_department_id`,`tb_class`.`name` AS `name`,`tb_class`.`code` AS `code`,`tb_class_level`.`class_level_id` AS `level_id`,`tb_class_level`.`name` AS `level_name`,`tb_class`.`date_created` AS `date_created`,`tb_student_department`.`name` AS `department_name`,`tb_student_department`.`code` AS `department_code` from ((`tb_class` join `tb_student_department` on((`tb_class`.`student_department_id` = `tb_student_department`.`student_department_id`))) join `tb_class_level` on((`tb_class_level`.`class_level_id` = `tb_class`.`class_level_id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -755,6 +729,12 @@ ALTER TABLE `tb_class`
 --
 ALTER TABLE `tb_class_basic_subject`
   ADD PRIMARY KEY (`class_basic_subject_id`);
+
+--
+-- Indexes for table `tb_class_level`
+--
+ALTER TABLE `tb_class_level`
+  ADD PRIMARY KEY (`class_level_id`);
 
 --
 -- Indexes for table `tb_class_period`
@@ -948,12 +928,17 @@ ALTER TABLE `tb_batch`
 -- AUTO_INCREMENT for table `tb_class`
 --
 ALTER TABLE `tb_class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
 ALTER TABLE `tb_class_basic_subject`
   MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_class_level`
+--
+ALTER TABLE `tb_class_level`
+  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_class_period`
 --
@@ -1058,7 +1043,7 @@ ALTER TABLE `tb_student_category_subject`
 -- AUTO_INCREMENT for table `tb_student_department`
 --
 ALTER TABLE `tb_student_department`
-  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_subject`
 --

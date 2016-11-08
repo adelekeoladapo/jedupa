@@ -3,14 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model;
+    private $school_model, $student_dept_model, $class_model;
     
     function __construct() {
         parent::__construct();
         $this->load->model('SchoolModel');
         $this->load->model('StudentDeptModel');
+        $this->load->model('ClassModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
+        $this->class_model = new ClassModel();
     }
 
     public function index(){
@@ -27,6 +29,8 @@ class Jedupa extends CI_Controller {
         
         $data['school'] = $this->school_model->getSchool($school_id);
         $data['student_departments'] = $this->student_dept_model->getStudentDepts($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['classes'] = $this->class_model->getClasses($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['class_levels'] = $this->class_model->getLevels($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }

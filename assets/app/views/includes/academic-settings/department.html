@@ -1,11 +1,5 @@
-                                            <div class="jd-cards-container">
-                                                <div class="jd-card active" id="card-all-dept">
-                                                    <h1 class="h5 m-b-md m-t-none font-normal jd-card-title">
-                                                        All Departments
-                                                    </h1>
-                                                    <div class="btn-block-full">
-                                                        <button class="btn jd-btn jd-btn-primary" onclick="showCard('card-new-dept')">New</button>
-                                                    </div>
+                                            <div class="row">    
+                                                <div class="col-md-9">
                                                     <table class="table table-hover table-striped table-responsive" datatable="ng"> 
                                                         <thead class="table-bordered">
                                                             <tr>
@@ -24,41 +18,28 @@
                                                                 <td>0</td>
                                                                 <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
                                                             </tr>
-                                                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="jd-card" id="card-new-dept">
-                                                    <h1 class="h5 m-b-md m-t-none font-normal jd-card-title">
-                                                        New Departments
-                                                    </h1>
-                                                    <div class="btn-block-full">
-                                                        <button class="btn jd-btn jd-btn-default jd-btn-back" onclick="showCard('card-all-dept')">Back</button>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <form class="form-horizontal" name="form-add-student-dept" id="form-add-student-dept" novalidate style="margin-top: 20px;">
-                                                                <div class="form-group">
-                                                                        <label for="name" class="col-sm-4 control-label">Dept Name<span class="required-field"> *</span></label>
-                                                                    <div class="col-sm-8">
-                                                                        <input type="text" ng-model="dept.name" name="name" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                        <label for="name" class="col-sm-4 control-label">Dept Code<span class="required-field"> *</span></label>
-                                                                    <div class="col-sm-8">
-                                                                        <input type="text" ng-model="dept.code" name="code" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                        <label for="name" class="col-sm-4 control-label"></label>
-                                                                    <div class="col-sm-8">
-                                                                        <button class="btn jd-btn jd-btn-primary" ng-click="addAcademicDept()">Submit</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
+                                                <div class="col-md-3">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">New Department</h3>
+                                                        <form class="sidebar-form-content" name="form-add-student-dept" id="form-add-student-dept" novalidate>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Dept Name<span class="required-field"> *</span></label>
+                                                                <input type="text" ng-model="dept.name" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Dept Code<span class="required-field"> *</span></label>
+                                                                <input type="text" ng-model="dept.code" name="code" class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group button-container">
+                                                                <button class="btn jd-btn jd-btn-default">Cancel</button>
+                                                                <button class="btn jd-btn jd-btn-primary" ng-click="addAcademicDept()">Submit</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                                <div class="jd-card" id="card-3">Card 3</div>
                                             </div>
+                                               

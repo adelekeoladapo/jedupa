@@ -66,3 +66,9 @@ $route['api/get-states'] = 'State/getStates';
 /************* Academic Department APIs ***************/
 $route['api/add-student-dept'] = 'StudentDepartment/addDept';
 $route['api/get-school-depts'] = 'StudentDepartment/getDepts';
+
+/************* Class APIs *************************/
+$route['api/add-class'] = 'Classs/addClass';
+$route['api/get-school-classes'] = 'Classs/getClasses';
+$route['api/add-class-level'] = 'Classs/addLevel';
+$route['api/get-class-levels'] = 'Classs/getLevels';

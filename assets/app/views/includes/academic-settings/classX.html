@@ -1,0 +1,88 @@
+                                            <div class="row">    
+                                                <div class="col-md-9">
+                                                    
+                                                    <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                        <thead class="table-bordered">
+                                                            <tr>
+                                                                <th>SN</th>
+                                                                <th>Name</th>
+                                                                <th>Code</th>
+                                                                <th>Level</th>
+                                                                <th>Department</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-bordered">
+                                                            <tr ng-repeat="classs in classes">
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ classs.name }}</td>
+                                                                <td>{{ classs.code }}</td>
+                                                                <td>{{ classs.level_name }}</td>
+                                                                <td>{{ classs.department_name }}</td>
+                                                                <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                </div>
+                                                <div class="col-md-3">
+                                                    
+                                                    <!-- class levels list -->
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Levels</h3>
+                                                        <ul class="class-level-list">
+                                                            <li ng-repeat="level in class_levels">
+                                                                <a href="#">
+                                                                    {{ level.name }}
+                                                                    <span class="counter">0</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-class-level" name="form-add-class-level">
+                                                            <div class="form-group" style="margin: 0">
+                                                                <input type="text" ng-model="class_level.name" placeholder="New Level" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div style="border: solid 1px red" ng-hide="true">
+                                                                <button type="submit" ng-click="addClassLevel()">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!--/ class levels list -->
+                                                    
+                                                    <!-- new class form -->
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">New Class</h3>
+                                                        <form class="sidebar-form-content" name="form-add-class" id="form-add-class" novalidate>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Name<span class="required-field"> *</span></label>
+                                                                <input type="text" ng-model="classs.name" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Code<span class="required-field"> *</span></label>
+                                                                <input type="text" ng-model="classs.code" name="code" class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="level_id" class="control-label">Level</label>
+                                                                <select class="form-control" ng-model="classs.class_level_id">
+                                                                    <option value="{{ level.class_level_id }}" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="department_id" class="control-label">Department</label>
+                                                                <select class="form-control" ng-model="classs.student_department_id">
+                                                                    <option value="{{ department.student_department_id }}" ng-repeat="department in departments">{{ department.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group button-container">
+                                                                <button class="btn jd-btn jd-btn-default" onclick="">Cancel</button>
+                                                                <button class="btn jd-btn jd-btn-primary" ng-click="addClass()">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!--/ new class form -->
+                                                    
+                                                </div>
+                                            </div>
+
+                                               

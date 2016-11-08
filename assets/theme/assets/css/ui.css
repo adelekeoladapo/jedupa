@@ -223,6 +223,10 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 
 /******************* Datatable  *******************/
+.dt-table {
+    width: 100% !important;
+}
+
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
     background-color: #60bed1;
     border-color: #60bed1;
@@ -328,3 +332,67 @@ table > tbody > tr > td.tb-btn {
 }
 
 /********************** End Toast **********************/
+
+
+/********** Sidebar ************/
+.sidebar-container {
+    border: solid 1px #ddd;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.sidebar-container .sidebar-form-title {
+    padding: 10px;
+    border-bottom: solid 1px #ddd;
+    margin-bottom: 0px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+.sidebar-container .sidebar-form-content {
+    padding: 10px;
+}
+
+.sidebar-container form .button-container {
+    border-top: solid 1px #eee;
+    margin-top: 20px;
+    text-align: right;
+    padding: 15px 0 0;
+}
+/********** End Sidebar ************/
+
+
+/********* class-level list *********/
+ul.class-level-list {
+    padding: 0;
+    list-style-type: none;
+    margin-bottom: -1px;
+}
+
+ul.class-level-list > li {
+    display: block;
+}
+
+ul.class-level-list > li > a {
+    display: block;
+    border-bottom: solid 1px #eee;
+    padding: 8px 10px;
+    position: relative;
+}
+
+ul.class-level-list > li > a > .counter {
+    border: solid 1px #60bed1;
+    padding: 2px 6px;
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    background-color: #60bed1;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+ul.class-level-list > li > a:hover {
+    background-color: #f8f8f8;
+}
+/******** end class-level list ********/
