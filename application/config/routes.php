@@ -72,3 +72,11 @@ $route['api/add-class'] = 'Classs/addClass';
 $route['api/get-school-classes'] = 'Classs/getClasses';
 $route['api/add-class-level'] = 'Classs/addLevel';
 $route['api/get-class-levels'] = 'Classs/getLevels';
+
+/************ Session APIs **********************/
+$route['api/add-session'] = 'Session/addSession';
+$route['api/get-sessions'] = 'Session/getSessions';
+
+/************ Quota APIs **********************/
+$route['api/add-quota'] = 'Quota/addQuota';
+$route['api/get-quotas'] = 'Quota/getQuotas';

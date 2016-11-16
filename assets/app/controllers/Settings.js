@@ -45,7 +45,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, states, school){
 
 /*******************Academic Settings Controller ***************/
 
-app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes){
+app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes, sessions){
     
     $scope.factory = Factory;
     
@@ -53,11 +53,17 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     Factory.updateClasses(classes.data);
     
+    Factory.updateSessions(sessions.data);
+    
     $scope.departments = Factory.getStudentDepartments();
     
     $scope.classes = Factory.getClasses();
     
     $scope.class_levels = Factory.getClassLevels();
+    
+    $scope.sessions = Factory.getSessions();
+    
+    $scope.quotas = Factory.getQuotas();
     
     $scope.dept = {};
     
@@ -65,11 +71,20 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.class_level = {};
     
+    $scope.session = {};
+    
+    $scope.quota = {};
      
     
     /** add department **/
+    
+    $scope.show_add_dept_overlay = function(){
+        $('#add-department-overlay').show();
+    }
+    
     $scope.addAcademicDept = function(){
         if($('#form-add-student-dept').smkValidate()){
+            hide_form_modal('add-department-overlay', '');
             show_loading_overlay();
             $scope.dept.school_id = Factory.getSchoolID();
             Service.addDept($scope.dept).then(function(response){
@@ -90,8 +105,12 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** end add department **/
     
     /** add class **/
+    $scope.show_add_class_overlay = function(){
+        $('#add-class-overlay').show();
+    }
     $scope.addClass = function(){
         if($('#form-add-class').smkValidate()){
+            hide_form_modal('add-class-overlay', '');
             show_loading_overlay();
             $scope.classs.school_id = Factory.getSchoolID();
             Service.addClass($scope.classs).then(function(response){
@@ -99,6 +118,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.classes = response.data;
                     Factory.updateClasses(response.data);
                     clear_form_fields('form-add-class');
+                    $scope.setActiveLevel($scope.classs.class_level_id);
                     hide_loading_overlay();
                     toast('Class Successfully Added');
                 }, function(error){
@@ -110,6 +130,9 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     };
     /** end add class **/
+    
+    
+    /*** CLASS LEVEL ***/
     
     /** add class level **/
     $scope.addClassLevel = function(){
@@ -131,8 +154,63 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     }
     /** end add class level **/
     
+    /** set active level **/
+    $scope.setActiveLevel = function(level_id){
+        $scope.active_level = Factory.getLevel(level_id);
+        $scope.active_level_classes = Factory.getLevelClasses(level_id);
+    }
+    $scope.setActiveLevel($scope.class_levels[0].class_level_id);
+    
+    
+    
+    /**** SESSION *****/
+    
+    /** add session **/
+    $scope.addSession = function(){
+        if($('#form-add-session').smkValidate()){
+            show_loading_overlay();
+            $scope.session.school_id = Factory.getSchoolID();
+            Service.addSession($scope.session).then(function(response){
+                Service.getSessions().then(function(response){
+                    Factory.updateSessions(response.data);
+                    $scope.sessions = response.data;
+                    clear_form_fields('form-add-session');
+                    hide_loading_overlay();
+                    toast('Session Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add session **/
+    
+    /** add quota **/
+    $scope.addQuota = function(){
+        if($('#form-add-quota').smkValidate()){
+            show_loading_overlay();
+            $scope.quota.school_id = Factory.getSchoolID();
+            Service.addQuota($scope.quota).then(function(response){
+                Service.getQuotas().then(function(response){
+                    Factory.updateQuotas(response.data);
+                    $scope.quotas = response.data;
+                    clear_form_fields('form-add-quota');
+                    hide_loading_overlay();
+                    toast('Quota Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add quota **/
+    
+    
+    
+    $scope.t_id = 1;
+    
     $scope.test = function(){
-        alert('Hello world');
+        $scope.t_id++;
     }
     
     

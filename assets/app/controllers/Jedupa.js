@@ -58,6 +58,65 @@ app.factory('Factory', function(){
         app_data.class_levels = dt;
     };
     
+    data.getLevelClasses = function(level_id){
+        var dt = [];
+        angular.forEach(app_data.classes, function(value, key, obj){
+            if(value.level_id == level_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    };
+    
+    data.getLevel = function(id){
+        var dt = {};
+        angular.forEach(app_data.class_levels, function(value, key, obj){
+            if(value.class_level_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    
+    /**  session **/
+    data.getSessions = function(){
+        return app_data.sessions;
+    };
+    
+    data.updateSessions = function(dt){
+        app_data.sessions = dt;
+    };
+    
+    /**  quota **/
+    data.getQuotas = function(){
+        return app_data.quotas;
+    };
+    
+    data.updateQuotas = function(dt){
+        app_data.quotas = dt;
+    };
+    
+    
+    /** 
+     *  UTILITIES
+    **/
+    
+    /** 2016-06-17 14:35:32 to July 17. 2016 **/
+    data.formatDate_1 = function(date){
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        date = date.split(" ")[0].split("-");
+        return months[date[1]-1]+" "+date[2]+", "+date[0];
+    };
+    
+    /** 2016-06-17 14:35:32 to July 17. 2016 at 16:00 **/
+    data.formatDate_2 = function(date){
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        d = date.split(" ");
+        date = d[0].split("-");
+        return months[date[1]-1]+" "+date[2]+", "+date[0]+" at "+d[1];
+    }
+    
     
     return data;
     
@@ -144,6 +203,36 @@ app.service('Service', function($http){
         });
     };
     
+    /** session **/
+    this.addSession = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-session",
+            data: data
+        });
+    };
+    
+    this.getSessions = function(school_id){
+        return $http.get(base_url+"api/get-sessions", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** quota **/
+    this.addQuota = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-quota",
+            data: data
+        });
+    };
+    
+    this.getQuotas = function(school_id){
+        return $http.get(base_url+"api/get-quotas", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
 });
 
 
@@ -191,6 +280,10 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 classes: function(Service, Factory){
                     return Service.getClasses(Factory.getSchoolID());
+                }
+                ,
+                sessions: function(Service, Factory){
+                    return Service.getSessions(Factory.getSchoolID());
                 }
             }
         })

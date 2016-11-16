@@ -1,0 +1,72 @@
+                                            <div class="row"> 
+                                                
+                                                <div class="col-md-12">
+                                                    <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
+                                                        All Departments
+                                                        <span class="top-add-btn-container">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="show_add_dept_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
+                                                        </span>
+                                                    </h1>
+                                                    
+                                                </div>
+                                                
+                                                <div class="col-md-12">
+                                                    <table class="table table-hover table-striped table-responsive" datatable="ng"> 
+                                                        <thead class="table-bordered">
+                                                            <tr>
+                                                                <th>SN</th>
+                                                                <th>Name</th>
+                                                                <th>Code</th>
+                                                                <th>No. of Classes</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-bordered">
+                                                            <tr ng-repeat="department in departments">
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ department.name }}</td>
+                                                                <td>{{ department.code }}</td>
+                                                                <td>0</td>
+                                                                <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Loading overlay -->
+                                            <div class="transparent-overlay" id="add-department-overlay">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-md-offset-4">
+                                                        <div class="jd-modal">
+                                                            <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
+                                                                New Department
+                                                            </h1>
+                                                            <div class="jd-modal-body">
+                                                                <form class="form-horizontal" name="form-add-student-dept" id="form-add-student-dept"  novalidate> 
+                                                                    <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" ng-model="dept.name" name="name" placeholder="Department Name" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="code" class="col-sm-4 control-label">Code <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" ng-model="dept.code" name="code" placeholder="Department Code" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="jd-modal-footer">
+                                                                <button class="btn jd-modal-btn" onclick="hide_form_modal('add-department-overlay', dept)">Cancel</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addAcademicDept()">OK</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Loading overlay -->
+                                               

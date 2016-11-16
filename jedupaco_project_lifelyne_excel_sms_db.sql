@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2016 at 06:27 PM
+-- Generation Time: Nov 11, 2016 at 06:31 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -571,7 +571,6 @@ INSERT INTO `tb_student_department` (`student_department_id`, `school_id`, `name
 CREATE TABLE `tb_subject` (
   `subject_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
   `credit_unit` int(11) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,

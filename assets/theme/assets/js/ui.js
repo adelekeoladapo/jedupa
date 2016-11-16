@@ -80,6 +80,9 @@ $(document).ready(function(){
     
     /** End jd Tab Layout script **/
     
+    /** init datepickers **/
+    $('#start_time').datepicker();
+   
     
     
 });
@@ -120,3 +123,12 @@ function showCard(id){
 }
 
 /** End jD Card Layout Script **/
+
+
+/** hide form modal **/
+function hide_form_modal(modal_id, obj = false){
+    $('#'+modal_id).hide();
+    obj = null;
+}
+/** end hide form modal **/
+

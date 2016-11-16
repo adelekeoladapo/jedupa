@@ -1,0 +1,70 @@
+                                            <div class="row">    
+                                                <div class="col-md-9">
+                                                    <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                        <thead class="table-bordered">
+                                                            <tr>
+                                                                <th>SN</th>
+                                                                <th>Name</th>
+                                                                <th>Session</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-bordered">
+                                                            <tr ng-repeat="quota in quotas">
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ quota.name }}</td>
+                                                                <td>{{ quota.name }}</td>
+                                                                <td>{{ factory.formatDate_1(quota.start_time) }}</td>
+                                                                <td>{{ factory.formatDate_1(quota.end_time) }}</td>
+                                                                <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">New Quota</h3>
+                                                        <form class="sidebar-form-content" name="form-add-quota" id="form-add-quota" novalidate>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Name<span class="required-field"> *</span></label>
+                                                                <input type="text" ng-model="quota.name" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="start_time" class="control-label">Start Date<span class="required-field"> *</span></label>
+                                                                <div class="input-group date" data-provide="datepicker">    
+                                                                    <input type="text" ng-model="quota.start_time" name="start_time" class="form-control" required>
+                                                                    <div class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-th"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="end_time" class="control-label">Finish Date<span class="required-field"> *</span></label>
+                                                                <div class="input-group date" data-provide="datepicker">    
+                                                                    <input type="text" ng-model="quota.end_time" name="end_time" class="form-control" required>
+                                                                    <div class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-th"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="name" class="control-label">Session<span class="required-field"> *</span></label>
+                                                                <select ng-model="quota.session_id" class="form-control" required>
+                                                                    <option value="{{ session.session_id }}" ng-repeat="session in sessions">{{ session.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group button-container">
+                                                                <button class="btn jd-btn jd-btn-default" type="reset">Cancel</button>
+                                                                <button class="btn jd-btn jd-btn-primary" ng-click="addQuota()">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                               

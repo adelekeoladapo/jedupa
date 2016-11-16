@@ -18,6 +18,8 @@
     <link rel='stylesheet' id='app-css'  href='<? echo base_url(); ?>assets/theme/assets/css/app1c9b.css' type='text/css' media='all' />
     <link rel='stylesheet' id='font-css'  href='<? echo base_url(); ?>assets/theme/assets/css/font1c9b.css?ver=4.6.1' type='text/css' media='all' />
     
+    <link rel='stylesheet' id='app-css'  href='<? echo base_url(); ?>assets/lib/bootstrap/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.min.css' type='text/css' media='all' />
+    
     
     <!-- Base url -->
     <script>
@@ -34,13 +36,14 @@
     <script type="text/javascript" src="<? echo base_url(); ?>assets/lib/datatables/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="<? echo base_url(); ?>assets/lib/datatables/media/js/dataTables.bootstrap.min.js"></script>
     
+    
+    
     <link rel='stylesheet' id='bootstrap-css'  href='<? echo base_url(); ?>assets/theme/assets/css/ui.css' type='text/css' media='all' />
-    
-    
     
     <script src="<? echo base_url(); ?>assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="<? echo base_url(); ?>assets/lib/smoke/js/smoke.min.js"></script>
    
+    <script src="<? echo base_url(); ?>assets/lib/bootstrap/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
     
     <script src="<? echo base_url(); ?>assets/lib/imagepreview/src/imagepreview.js"></script>
     <script src="<? echo base_url(); ?>assets/lib/angular/angular.min.js"></script>
