@@ -96,6 +96,19 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     background-color: #eee;
 } 
 
+.jd-tiny-btn {
+    border: solid 1px #60bed1;
+    padding: 2px 4px 2px 4px;
+    background-color: #60bed1;
+    border-radius: 2px;
+    float: right;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 100%;
+    margin-top: -2px;
+}
+
+
 /********** End Form Custom Image Select **********/
 
 
@@ -385,6 +398,10 @@ ul.class-level-list > li > a {
     border-bottom: solid 1px #eee;
     padding: 8px 10px;
     position: relative;
+}
+
+ul.class-level-list > li.active > a{
+    background-color: #f8f8f8;
 }
 
 ul.class-level-list > li > a > .counter {

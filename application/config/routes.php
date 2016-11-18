@@ -72,6 +72,8 @@ $route['api/add-class'] = 'Classs/addClass';
 $route['api/get-school-classes'] = 'Classs/getClasses';
 $route['api/add-class-level'] = 'Classs/addLevel';
 $route['api/get-class-levels'] = 'Classs/getLevels';
+$route['api/add-class-type'] = 'Classs/addType';
+$route['api/get-class-types'] = 'Classs/getTypes';
 
 /************ Session APIs **********************/
 $route['api/add-session'] = 'Session/addSession';

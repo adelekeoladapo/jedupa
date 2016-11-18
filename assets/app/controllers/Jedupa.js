@@ -78,6 +78,41 @@ app.factory('Factory', function(){
         return dt;
     };
     
+    /** class types **/
+    data.getClassTypes = function(){
+        return app_data.class_types;
+    };
+    
+    data.updateClassTypes = function(dt){
+        app_data.class_types = dt;
+    };
+    
+    data.updateClassTypes = function(dt){
+        app_data.class_types = dt;
+    };
+    
+    data.getClassType = function(id){
+        var dt = {};
+        angular.forEach(app_data.class_types, function(value, key, obj){
+            if(value.class_type_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    data.getClassTypeLevels = function(class_type_id){
+        var dt = [];
+        angular.forEach(app_data.class_levels, function(value, key, obj){
+            if(value.class_type_id == class_type_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    
+    
     
     /**  session **/
     data.getSessions = function(){
@@ -199,6 +234,21 @@ app.service('Service', function($http){
     
     this.getLevels = function(school_id){
         return $http.get(base_url+"api/get-class-levels", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** class type **/
+    this.addClassType = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-type",
+            data: data
+        });
+    };
+    
+    this.getClassTypes = function(school_id){
+        return $http.get(base_url+"api/get-class-types", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };

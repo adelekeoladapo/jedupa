@@ -8,7 +8,7 @@
  */
 class ClassModel extends CI_Model {
     
-    private $table_name = 'tb_class', $view_name = 'vw_class', $tb_level = 'tb_class_level';
+    private $table_name = 'tb_class', $view_name = 'vw_class', $tb_level = 'tb_class_level', $tb_type = 'tb_class_type';
     
     function insertClass($data){
         $this->db->insert($this->table_name, $data);
@@ -53,5 +53,29 @@ class ClassModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     /** end class level **/
+    
+    
+    /** class type **/
+    function insertType($data){
+        $this->db->insert($this->tb_type, $data);
+        return $this->db->insert_id();
+    }
+    
+    function getTypes($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){ 
+        $this->db->select('*');
+        $this->db->order_by($sort_field, $sort_order_mode);
+        ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
+        ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
+        $query = $this->db->get($this->tb_type);
+        return ($query->num_rows()) ? $query->result() : [];
+    }
+    
+    function getType($id){
+        $this->db->select('*');
+        $this->db->where('class_id', $id);
+        $query = $this->db->get($this->tb_type);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
+    /** end class type **/
     
 }

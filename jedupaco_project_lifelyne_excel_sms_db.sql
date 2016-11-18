@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2016 at 03:29 PM
+-- Generation Time: Nov 18, 2016 at 06:59 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -66,24 +66,6 @@ CREATE TABLE `tb_class` (
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_class`
---
-
-INSERT INTO `tb_class` (`class_id`, `school_id`, `student_department_id`, `name`, `code`, `class_level_id`, `date_created`) VALUES
-(1, 1, 1, 'Junior Secondary School One A', 'J S S 1 A', 1, '2016-11-07 17:52:46'),
-(2, 1, 1, 'Junior Secondary School One B', 'J S S 1 B', 1, '2016-11-07 17:53:40'),
-(3, 1, 1, 'Junior Secondary School Two', 'J S S 2', 2, '2016-11-07 17:57:41'),
-(4, 1, 1, 'Junior Secondary School Three A', 'J S S 3 A', 3, '2016-11-07 17:58:28'),
-(5, 1, 1, 'Junior Secondary School Three B', 'J S S 3 B', 3, '2016-11-07 17:58:58'),
-(6, 1, 1, 'Junior Secondary School Three C', 'J S S 3 C', 3, '2016-11-07 17:59:26'),
-(7, 1, 2, 'Senior Secondary School One A', 'S S 1 A', 4, '2016-11-07 18:02:07'),
-(8, 1, 4, 'Senior Secondary School One B', 'S S 1 B', 4, '2016-11-07 18:04:33'),
-(9, 1, 3, 'Senior Secondary School One C', 'S S 1 C', 4, '2016-11-07 18:06:11'),
-(11, 1, 1, 'NNNN', 'NNNN', 1, '2016-11-15 18:47:25'),
-(12, 1, 1, 'N222', 'BRRRR', 2, '2016-11-15 18:50:13'),
-(13, 1, 1, 'noooooooooo', 'fdgdhgdf', 1, '2016-11-15 18:50:27');
-
 -- --------------------------------------------------------
 
 --
@@ -108,6 +90,7 @@ CREATE TABLE `tb_class_basic_subject` (
 CREATE TABLE `tb_class_level` (
   `class_level_id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
+  `class_type_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -116,13 +99,17 @@ CREATE TABLE `tb_class_level` (
 -- Dumping data for table `tb_class_level`
 --
 
-INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `name`, `date_created`) VALUES
-(1, 1, 'Level 1', '2016-11-07 17:40:10'),
-(2, 1, 'Level 2', '2016-11-07 17:40:17'),
-(3, 1, 'Level 3', '2016-11-07 17:40:21'),
-(4, 1, 'Level 4', '2016-11-07 18:01:16'),
-(5, 1, 'Level 5', '2016-11-15 17:19:00'),
-(6, 1, 'Level 6', '2016-11-15 17:19:06');
+INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `class_type_id`, `name`, `date_created`) VALUES
+(1, 1, 1, 'K G 1', '2016-11-18 18:50:25'),
+(2, 1, 1, 'K G 2', '2016-11-18 18:54:25'),
+(3, 1, 2, 'Pry One', '2016-11-18 18:55:10'),
+(4, 1, 2, 'Pry Two', '2016-11-18 18:55:40'),
+(5, 1, 2, 'Pry Three', '2016-11-18 18:55:48'),
+(6, 1, 2, 'Pry Four', '2016-11-18 18:55:53'),
+(7, 1, 2, 'Pry Five', '2016-11-18 18:56:02'),
+(8, 1, 3, 'J S S 1', '2016-11-18 18:56:17'),
+(9, 1, 3, 'J S S 2', '2016-11-18 18:56:23'),
+(10, 1, 3, 'J S S 3', '2016-11-18 18:56:32');
 
 -- --------------------------------------------------------
 
@@ -155,6 +142,30 @@ CREATE TABLE `tb_class_timing_set` (
   `description` varchar(200) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_class_type`
+--
+
+CREATE TABLE `tb_class_type` (
+  `class_type_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_type`
+--
+
+INSERT INTO `tb_class_type` (`class_type_id`, `school_id`, `name`, `description`, `date_created`) VALUES
+(1, 1, 'Nursery', '', '2016-11-18 18:49:21'),
+(2, 1, 'Primary', '', '2016-11-18 18:49:28'),
+(3, 1, 'Junior Secondary', '', '2016-11-18 18:49:39'),
+(4, 1, 'Senior Secondary', '', '2016-11-18 18:49:50');
 
 -- --------------------------------------------------------
 
@@ -798,6 +809,12 @@ ALTER TABLE `tb_class_timing_set`
   ADD PRIMARY KEY (`class_timing_set_id`);
 
 --
+-- Indexes for table `tb_class_type`
+--
+ALTER TABLE `tb_class_type`
+  ADD PRIMARY KEY (`class_type_id`);
+
+--
 -- Indexes for table `tb_country`
 --
 ALTER TABLE `tb_country`
@@ -977,7 +994,7 @@ ALTER TABLE `tb_batch`
 -- AUTO_INCREMENT for table `tb_class`
 --
 ALTER TABLE `tb_class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
@@ -987,7 +1004,7 @@ ALTER TABLE `tb_class_basic_subject`
 -- AUTO_INCREMENT for table `tb_class_level`
 --
 ALTER TABLE `tb_class_level`
-  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_class_period`
 --
@@ -998,6 +1015,11 @@ ALTER TABLE `tb_class_period`
 --
 ALTER TABLE `tb_class_timing_set`
   MODIFY `class_timing_set_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_class_type`
+--
+ALTER TABLE `tb_class_type`
+  MODIFY `class_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_country`
 --

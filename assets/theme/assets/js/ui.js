@@ -80,6 +80,13 @@ $(document).ready(function(){
     
     /** End jd Tab Layout script **/
     
+    /* sidebar list active toggler*/
+    $('body').on('click', 'ul.class-level-list > li > a', function(){ 
+        $(this).parent('li').siblings().removeClass('active');
+        $(this).parent('li').addClass('active');
+    });
+    
+    
     /** init datepickers **/
     $('#start_time').datepicker();
    

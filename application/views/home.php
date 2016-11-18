@@ -39,6 +39,7 @@
     
     
     <link rel='stylesheet' id='bootstrap-css'  href='<? echo base_url(); ?>assets/theme/assets/css/ui.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css'  href='<? echo base_url(); ?>assets/theme/assets/css/ui-responsive.css' type='text/css' media='all' />
     
     <script src="<? echo base_url(); ?>assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="<? echo base_url(); ?>assets/lib/smoke/js/smoke.min.js"></script>

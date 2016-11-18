@@ -61,6 +61,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.class_levels = Factory.getClassLevels();
     
+    $scope.class_types = Factory.getClassTypes();  
+    
     $scope.sessions = Factory.getSessions();
     
     $scope.quotas = Factory.getQuotas();
@@ -70,6 +72,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.classs = {};
     
     $scope.class_level = {};
+    
+    $scope.class_type = {};
     
     $scope.session = {};
     
@@ -132,6 +136,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** end add class **/
     
     
+    
     /*** CLASS LEVEL ***/
     
     /** add class level **/
@@ -139,10 +144,12 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         if($('#form-add-class-level').smkValidate()){
             show_loading_overlay();
             $scope.class_level.school_id = Factory.getSchoolID();
+            $scope.class_level.class_type_id = $scope.active_class_type.class_type_id;
             Service.addLevel($scope.class_level).then(function(response){
                 Service.getLevels().then(function(response){
                     Factory.updateLevels(response.data);
                     $scope.class_levels = response.data;
+                    $scope.setActiveClassType($scope.active_class_type.class_type_id);
                     clear_form_fields('form-add-class-level');
                     hide_loading_overlay();
                     toast('Level Successfully Added');
@@ -159,8 +166,52 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         $scope.active_level = Factory.getLevel(level_id);
         $scope.active_level_classes = Factory.getLevelClasses(level_id);
     }
-    $scope.setActiveLevel($scope.class_levels[0].class_level_id);
+    try{
+        $scope.setActiveLevel($scope.class_levels[0].class_level_id);
+    }catch(e){
+        console.log(e.message);
+    }
     
+    
+    
+    
+    /*** CLASS TYPE ***/
+    
+    /** add class type **/
+    $scope.addClassType = function(){
+        if($('#form-add-class-type').smkValidate()){
+            show_loading_overlay();
+            $scope.class_type.school_id = Factory.getSchoolID();
+            Service.addClassType($scope.class_type).then(function(response){
+                Service.getClassTypes().then(function(response){
+                    Factory.updateClassTypes(response.data);
+                    $scope.class_types = response.data;
+                    clear_form_fields('form-add-class-type');
+                    hide_loading_overlay();
+                    toast('Type Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add class type **/
+    
+    /** set active class type **/
+    $scope.setActiveClassType = function(class_type_id){
+        $scope.active_class_type = Factory.getClassType(class_type_id);
+        $scope.active_class_type_levels = Factory.getClassTypeLevels(class_type_id);
+        try{
+            $scope.setActiveLevel($scope.active_class_type_levels[0].class_level_id);
+        }catch(e){
+            console.log(e.message);
+        }
+    }
+    try{
+        $scope.setActiveClassType($scope.class_types[0].class_type_id);
+    }catch(e){
+        console.log(e.message);
+    }
     
     
     /**** SESSION *****/
