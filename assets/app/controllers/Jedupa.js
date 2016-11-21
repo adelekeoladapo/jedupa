@@ -75,7 +75,7 @@ app.factory('Factory', function(){
                 dt = angular.copy(obj[key]);
             }
         });
-        return dt;
+        return (dt) ? dt : null;
     };
     
     /** class types **/
@@ -123,6 +123,18 @@ app.factory('Factory', function(){
         app_data.sessions = dt;
     };
     
+    data.getSession = function(id){
+        var dt = {};
+        angular.forEach(app_data.sessions, function(value, key, obj){
+            if(value.session_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    
+    
     /**  quota **/
     data.getQuotas = function(){
         return app_data.quotas;
@@ -131,6 +143,22 @@ app.factory('Factory', function(){
     data.updateQuotas = function(dt){
         app_data.quotas = dt;
     };
+    
+    data.getSessionQuotas = function(session_id){
+        var dt = [];
+        angular.forEach(app_data.quotas, function(value, key, obj){
+            if(value.session_id == session_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    
+    
+    
+    
+    
     
     
     /** 

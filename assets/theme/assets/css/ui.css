@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.input-group[class*=col-] {
+    float: none;
+     padding-right: 15px; 
+     padding-left: 15px; 
+}
+
 ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     font-size: 5px;
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2016 at 06:59 PM
+-- Generation Time: Nov 21, 2016 at 01:53 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -63,8 +63,17 @@ CREATE TABLE `tb_class` (
   `name` varchar(100) NOT NULL,
   `code` varchar(200) NOT NULL,
   `class_level_id` int(11) NOT NULL,
+  `class_type_id` int(11) NOT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class`
+--
+
+INSERT INTO `tb_class` (`class_id`, `school_id`, `student_department_id`, `name`, `code`, `class_level_id`, `class_type_id`, `date_created`) VALUES
+(1, 1, 1, 'Junior Secondary School One (A)', 'J S S 1 A', 1, 1, '2016-11-21 13:45:00'),
+(2, 1, 1, 'Junior Secondary School One (B)', 'J S S 1B', 1, 1, '2016-11-21 13:45:40');
 
 -- --------------------------------------------------------
 
@@ -100,16 +109,10 @@ CREATE TABLE `tb_class_level` (
 --
 
 INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `class_type_id`, `name`, `date_created`) VALUES
-(1, 1, 1, 'K G 1', '2016-11-18 18:50:25'),
-(2, 1, 1, 'K G 2', '2016-11-18 18:54:25'),
-(3, 1, 2, 'Pry One', '2016-11-18 18:55:10'),
-(4, 1, 2, 'Pry Two', '2016-11-18 18:55:40'),
-(5, 1, 2, 'Pry Three', '2016-11-18 18:55:48'),
-(6, 1, 2, 'Pry Four', '2016-11-18 18:55:53'),
-(7, 1, 2, 'Pry Five', '2016-11-18 18:56:02'),
-(8, 1, 3, 'J S S 1', '2016-11-18 18:56:17'),
-(9, 1, 3, 'J S S 2', '2016-11-18 18:56:23'),
-(10, 1, 3, 'J S S 3', '2016-11-18 18:56:32');
+(1, 1, 1, 'J S S 1', '2016-11-21 13:43:43'),
+(2, 1, 1, 'J S S 2', '2016-11-21 13:43:51'),
+(3, 1, 2, 'S S S 1', '2016-11-21 13:44:02'),
+(4, 1, 2, 'S S S 2', '2016-11-21 13:44:08');
 
 -- --------------------------------------------------------
 
@@ -162,10 +165,8 @@ CREATE TABLE `tb_class_type` (
 --
 
 INSERT INTO `tb_class_type` (`class_type_id`, `school_id`, `name`, `description`, `date_created`) VALUES
-(1, 1, 'Nursery', '', '2016-11-18 18:49:21'),
-(2, 1, 'Primary', '', '2016-11-18 18:49:28'),
-(3, 1, 'Junior Secondary', '', '2016-11-18 18:49:39'),
-(4, 1, 'Senior Secondary', '', '2016-11-18 18:49:50');
+(1, 1, 'Junior Classes', '', '2016-11-21 13:42:42'),
+(2, 1, 'Senior Classes', '', '2016-11-21 13:42:58');
 
 -- --------------------------------------------------------
 
@@ -353,8 +354,8 @@ CREATE TABLE `tb_quota` (
 --
 
 INSERT INTO `tb_quota` (`school_id`, `session_id`, `quota_id`, `name`, `start_time`, `end_time`, `description`, `date_created`) VALUES
-(1, 1, 1, 'First Term', '2016-11-01', '2016-11-23', NULL, '2016-11-15 11:20:06'),
-(1, 1, 2, 'Second Term', '2016-11-10', '2016-11-09', NULL, '2016-11-15 12:42:08');
+(1, 1, 1, 'First Term', '2013-11-01', '2013-03-16', NULL, '2016-11-21 13:47:57'),
+(1, 1, 2, 'Second Term', '2013-03-29', '2013-06-22', NULL, '2016-11-21 13:48:31');
 
 -- --------------------------------------------------------
 
@@ -429,8 +430,7 @@ CREATE TABLE `tb_session` (
 --
 
 INSERT INTO `tb_session` (`session_id`, `school_id`, `grading_system_id`, `name`, `start_time`, `end_time`, `description`, `date_created`) VALUES
-(1, 1, 1, '2015/2016 Session', '2016-10-30', '2016-12-09', '', '2016-11-15 08:33:06'),
-(2, 1, 1, '2015/2016 Session', '2016-11-08', '2016-12-07', '', '2016-11-15 08:39:30');
+(1, 1, 1, '2013/2014 Session', '2016-11-01', '2017-12-02', '', '2016-11-21 13:46:33');
 
 -- --------------------------------------------------------
 
@@ -588,14 +588,10 @@ CREATE TABLE `tb_student_department` (
 --
 
 INSERT INTO `tb_student_department` (`student_department_id`, `school_id`, `name`, `code`, `type_of_result`, `date_created`) VALUES
-(1, 1, 'default', 'DFT', NULL, '2016-11-07 17:40:47'),
-(2, 1, 'Science', 'Sci', NULL, '2016-11-07 18:00:14'),
-(3, 1, 'Arts', 'Arts', NULL, '2016-11-07 18:00:29'),
-(4, 1, 'Commercial', 'Com', NULL, '2016-11-07 18:00:47'),
-(5, 1, 'Test Department', 'TDPT', NULL, '2016-11-15 15:53:38'),
-(6, 1, 'thj', 'ty', NULL, '2016-11-15 16:18:33'),
-(7, 1, 'New Department', 'NDPTM', NULL, '2016-11-15 16:26:25'),
-(8, 1, 'Witchcraft', 'WTCHCR', NULL, '2016-11-15 16:29:06');
+(1, 1, 'Default', 'DFT', NULL, '2016-11-21 13:51:44'),
+(2, 1, 'Science', 'SCI', NULL, '2016-11-21 13:52:02'),
+(3, 1, 'Arts', 'ART', NULL, '2016-11-21 13:52:16'),
+(4, 1, 'Commercial', 'COMM', NULL, '2016-11-21 13:52:31');
 
 -- --------------------------------------------------------
 
@@ -725,6 +721,8 @@ CREATE TABLE `vw_class` (
 ,`date_created` datetime
 ,`department_name` varchar(100)
 ,`department_code` varchar(20)
+,`class_type_id` int(11)
+,`class_type` varchar(50)
 );
 
 -- --------------------------------------------------------
@@ -751,7 +749,7 @@ CREATE TABLE `vw_quota` (
 --
 DROP TABLE IF EXISTS `vw_class`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class`  AS  select `tb_class`.`class_id` AS `class_id`,`tb_class`.`school_id` AS `school_id`,`tb_class`.`student_department_id` AS `student_department_id`,`tb_class`.`name` AS `name`,`tb_class`.`code` AS `code`,`tb_class_level`.`class_level_id` AS `level_id`,`tb_class_level`.`name` AS `level_name`,`tb_class`.`date_created` AS `date_created`,`tb_student_department`.`name` AS `department_name`,`tb_student_department`.`code` AS `department_code` from ((`tb_class` join `tb_student_department` on((`tb_class`.`student_department_id` = `tb_student_department`.`student_department_id`))) join `tb_class_level` on((`tb_class_level`.`class_level_id` = `tb_class`.`class_level_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class`  AS  select `tb_class`.`class_id` AS `class_id`,`tb_class`.`school_id` AS `school_id`,`tb_class`.`student_department_id` AS `student_department_id`,`tb_class`.`name` AS `name`,`tb_class`.`code` AS `code`,`tb_class_level`.`class_level_id` AS `level_id`,`tb_class_level`.`name` AS `level_name`,`tb_class`.`date_created` AS `date_created`,`tb_student_department`.`name` AS `department_name`,`tb_student_department`.`code` AS `department_code`,`tb_class_type`.`class_type_id` AS `class_type_id`,`tb_class_type`.`name` AS `class_type` from (((`tb_class` join `tb_student_department` on((`tb_class`.`student_department_id` = `tb_student_department`.`student_department_id`))) join `tb_class_level` on((`tb_class_level`.`class_level_id` = `tb_class`.`class_level_id`))) join `tb_class_type` on((`tb_class_type`.`class_type_id` = `tb_class`.`class_type_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -994,7 +992,7 @@ ALTER TABLE `tb_batch`
 -- AUTO_INCREMENT for table `tb_class`
 --
 ALTER TABLE `tb_class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
@@ -1004,7 +1002,7 @@ ALTER TABLE `tb_class_basic_subject`
 -- AUTO_INCREMENT for table `tb_class_level`
 --
 ALTER TABLE `tb_class_level`
-  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_class_period`
 --
@@ -1019,7 +1017,7 @@ ALTER TABLE `tb_class_timing_set`
 -- AUTO_INCREMENT for table `tb_class_type`
 --
 ALTER TABLE `tb_class_type`
-  MODIFY `class_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `class_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_country`
 --
@@ -1079,7 +1077,7 @@ ALTER TABLE `tb_score_group`
 -- AUTO_INCREMENT for table `tb_session`
 --
 ALTER TABLE `tb_session`
-  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_state`
 --
@@ -1114,7 +1112,7 @@ ALTER TABLE `tb_student_category_subject`
 -- AUTO_INCREMENT for table `tb_student_department`
 --
 ALTER TABLE `tb_student_department`
-  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `student_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_subject`
 --
