@@ -1,0 +1,110 @@
+                                            <div class="row"> 
+                                                
+                                                <div class="col-md-12">
+                                                    <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
+                                                        Score Groups
+                                                        <span class="top-add-btn-container">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="show_add_score_group_structure_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
+                                                        </span>
+                                                    </h1>
+                                                    
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-2">
+                                                    
+                                                    <!-- class types list -->
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Score Groups <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_session_overlay()"></i></span></h3>
+                                                        <ul class="class-level-list">
+                                                            <li ng-repeat="group in score_groups">
+                                                                <a ng-init="id = group.score_group_id" href="" ng-click="">
+                                                                    {{ group.name }}
+                                                                    <!--<span class="counter">0</span>-->
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-score-group" name="form-add-score-group">
+                                                            <div class="form-group" style="margin: 0">
+                                                                <input type="text" ng-model="score_group.name" placeholder="New Score Group" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div style="border: solid 1px red" ng-hide="true">
+                                                                <button type="submit" ng-click="addScoreGroup()">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!--/ class types list -->
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-10 main-table-with-sidebar">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                            {{ active_session.name }}
+                                                            <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_quota_overlay()"></i></span>
+                                                        </h3>
+                                                        <div style="padding: 10px">
+                                                            <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                                <thead class="table-bordered">
+                                                                    <tr>
+                                                                        <th>SN</th>
+                                                                        <th>Name</th>
+                                                                        <th>Session</th>
+                                                                        <th>Start Date</th>
+                                                                        <th>Finish Date</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-bordered">
+                                                                    <tr ng-repeat="quota in active_session_quota">
+                                                                        <td>{{ $index + 1 }}</td>
+                                                                        <td>{{ quota.name }}</td>
+                                                                        <td>{{ quota.session }}</td>
+                                                                        <td>{{ factory.formatDate_1(quota.start_time) }}</td>
+                                                                        <td>{{ factory.formatDate_1(quota.end_time) }}</td>
+                                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- New Score Group Structuer overlay -->
+                                            <div class="transparent-overlay" id="add-score-group-structure-overlay">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-md-offset-4">
+                                                        <div class="jd-modal">
+                                                            <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
+                                                                New Pattern
+                                                            </h1>
+                                                            <div class="jd-modal-body">
+                                                                <form class="form-horizontal" name="form-add-score-group-structure" id="form-add-score-group-structure"  novalidate> 
+                                                                    <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" ng-model="score_group_structures.name" name="name" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="description" class="col-sm-4 control-label">Description</label>
+                                                                        <div class="col-sm-8" data-provide="datepicker">    
+                                                                            <input type="text" ng-model="score_group_structures.description" name="description" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="jd-modal-footer">
+                                                                <button class="btn jd-modal-btn" onclick="$('#form-add-score-group-pattern').trigger('reset'); hide_form_modal('add-score-group-structure-overlay', '')">Cancel</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addScoreGroupStructure()">OK</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End New Session overlay -->
+                                            
+                                            

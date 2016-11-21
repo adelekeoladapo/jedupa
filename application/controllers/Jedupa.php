@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model;
+    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model;
     
     function __construct() {
         parent::__construct();
@@ -12,11 +12,13 @@ class Jedupa extends CI_Controller {
         $this->load->model('ClassModel');
         $this->load->model('SessionModel');
         $this->load->model('QuotaModel');
+        $this->load->model('ScoreGroupModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
         $this->session_model = new SessionModel();
         $this->quota_model = new QuotaModel();
+        $this->score_group_model = new ScoreGroupModel();
     }
 
     public function index(){
@@ -38,6 +40,8 @@ class Jedupa extends CI_Controller {
         $data['class_types'] = $this->class_model->getTypes($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['sessions'] = $this->session_model->getSessions($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['quotas'] = $this->quota_model->getQuotas($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['score_groups'] = $this->score_group_model->getScoreGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['score_group_structures'] = $this->score_group_model->getScoreGroupStructures($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }

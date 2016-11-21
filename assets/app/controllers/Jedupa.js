@@ -154,6 +154,23 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** score group **/
+    data.getScoreGroups = function(){
+        return app_data.score_groups;
+    }
+    
+    data.updateScoreGroups = function(dt){
+        app_data.score_groups = dt;
+    }
+    
+    data.getScoreGroupStructures = function(){
+        return app_data.score_group_structures;
+    }
+    
+    data.updateScoreGroupStructures = function(dt){
+        app_data.score_group_structures = dt;
+    }
+    
     
     
     
@@ -307,6 +324,35 @@ app.service('Service', function($http){
     
     this.getQuotas = function(school_id){
         return $http.get(base_url+"api/get-quotas", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** score group **/
+    this.addScoreGroup = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-score-group",
+            data: data
+        });
+    };
+    
+    this.getScoreGroups = function(school_id){
+        return $http.get(base_url+"api/get-score-groups", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.addScoreGroupStructure = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-score-group-structure",
+            data: data
+        });
+    };
+    
+    this.getScoreGroupStructures = function(school_id){
+        return $http.get(base_url+"api/get-score-group-structures", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };

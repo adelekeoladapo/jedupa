@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2016 at 01:53 PM
+-- Generation Time: Nov 21, 2016 at 06:30 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -355,7 +355,8 @@ CREATE TABLE `tb_quota` (
 
 INSERT INTO `tb_quota` (`school_id`, `session_id`, `quota_id`, `name`, `start_time`, `end_time`, `description`, `date_created`) VALUES
 (1, 1, 1, 'First Term', '2013-11-01', '2013-03-16', NULL, '2016-11-21 13:47:57'),
-(1, 1, 2, 'Second Term', '2013-03-29', '2013-06-22', NULL, '2016-11-21 13:48:31');
+(1, 1, 2, 'Second Term', '2013-03-29', '2013-06-22', NULL, '2016-11-21 13:48:31'),
+(1, 1, 3, 'Third Term', '2016-11-02', '2016-12-30', NULL, '2016-11-21 16:41:40');
 
 -- --------------------------------------------------------
 
@@ -404,8 +405,32 @@ INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `a
 CREATE TABLE `tb_score_group` (
   `score_group_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
+  `name` varchar(30) DEFAULT NULL,
   `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_score_group`
+--
+
+INSERT INTO `tb_score_group` (`score_group_id`, `school_id`, `name`, `date_created`) VALUES
+(1, 1, 'Default', '2016-11-21 16:42:34'),
+(2, 1, 'Practicals', '2016-11-21 16:47:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_score_group_structure`
+--
+
+CREATE TABLE `tb_score_group_structure` (
+  `score_group_structure_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `score_group_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `decsription` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -885,6 +910,12 @@ ALTER TABLE `tb_score_group`
   ADD PRIMARY KEY (`score_group_id`);
 
 --
+-- Indexes for table `tb_score_group_structure`
+--
+ALTER TABLE `tb_score_group_structure`
+  ADD PRIMARY KEY (`score_group_structure_id`);
+
+--
 -- Indexes for table `tb_session`
 --
 ALTER TABLE `tb_session`
@@ -1062,7 +1093,7 @@ ALTER TABLE `tb_grading_system`
 -- AUTO_INCREMENT for table `tb_quota`
 --
 ALTER TABLE `tb_quota`
-  MODIFY `quota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `quota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_school`
 --
@@ -1072,7 +1103,12 @@ ALTER TABLE `tb_school`
 -- AUTO_INCREMENT for table `tb_score_group`
 --
 ALTER TABLE `tb_score_group`
-  MODIFY `score_group_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `score_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_score_group_structure`
+--
+ALTER TABLE `tb_score_group_structure`
+  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_session`
 --

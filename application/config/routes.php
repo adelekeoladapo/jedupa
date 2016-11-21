@@ -82,3 +82,9 @@ $route['api/get-sessions'] = 'Session/getSessions';
 /************ Quota APIs **********************/
 $route['api/add-quota'] = 'Quota/addQuota';
 $route['api/get-quotas'] = 'Quota/getQuotas';
+
+/*********** Score Group APIs ****************/
+$route['api/add-score-group'] = 'ScoreGroup/addScoreGroup';
+$route['api/get-score-groups'] = 'ScoreGroup/getScoreGroups';
+$route['api/add-score-group-structure'] = 'ScoreGroup/addScoreGroupStructure';
+$route['api/get-score-group-structures'] = 'ScoreGroup/getScoreGroupStructures';

@@ -67,6 +67,10 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.quotas = Factory.getQuotas();
     
+    $scope.score_groups = Factory.getScoreGroups();
+    
+    $scope.score_group_structures = Factory.getScoreGroupStructures();
+    
     $scope.dept = {};
     
     $scope.classs = {};
@@ -78,6 +82,10 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.session = {};
     
     $scope.quota = {};
+    
+    $scope.score_group = {};
+    
+    $scope.score_group_structure = {};
      
     
     /** add department **/
@@ -284,6 +292,53 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     }
     /** end add quota **/
+    
+    
+    /** SCORE GROUP **/
+    
+    /** add score group **/
+    $scope.addScoreGroup = function(){
+        if($('#form-add-score-group').smkValidate()){
+            show_loading_overlay();
+            $scope.score_group.school_id = Factory.getSchoolID();
+            Service.addScoreGroup($scope.score_group).then(function(response){
+                Service.getScoreGroups().then(function(response){
+                    Factory.updateScoreGroups(response.data);
+                    $scope.score_groups = response.data;
+                    clear_form_fields('form-add-score-group');
+                    hide_loading_overlay();
+                    toast('Score Group Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add score group **/
+    
+    /** add score group structure **/
+    $scope.show_add_score_group_structure_overlay = function(){
+        $('#add-score-group-structure-overlay').show();
+    }
+    $scope.addScoreGroupStructure = function(){
+        if($('#form-add-score-group-structure').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('add-score-group-structure-overlay', '');
+            $scope.score_group_structures.school_id = Factory.getSchoolID();
+            Service.addSession($scope.session).then(function(response){
+                Service.getSessions().then(function(response){
+                    Factory.updateSessions(response.data);
+                    $scope.sessions = response.data;
+                    clear_form_fields('form-add-session');
+                    hide_loading_overlay();
+                    toast('Session Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add score group structure **/
     
     
     
