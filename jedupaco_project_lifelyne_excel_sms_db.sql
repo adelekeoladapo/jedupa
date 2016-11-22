@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2016 at 06:30 PM
+-- Generation Time: Nov 22, 2016 at 08:05 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -414,8 +414,8 @@ CREATE TABLE `tb_score_group` (
 --
 
 INSERT INTO `tb_score_group` (`score_group_id`, `school_id`, `name`, `date_created`) VALUES
-(1, 1, 'Default', '2016-11-21 16:42:34'),
-(2, 1, 'Practicals', '2016-11-21 16:47:23');
+(1, 1, 'Default', '2016-11-22 07:58:47'),
+(2, 1, 'Practicals', '2016-11-22 08:02:09');
 
 -- --------------------------------------------------------
 
@@ -430,8 +430,17 @@ CREATE TABLE `tb_score_group_structure` (
   `name` varchar(100) NOT NULL,
   `date_created` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
-  `decsription` varchar(300) NOT NULL
+  `description` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_score_group_structure`
+--
+
+INSERT INTO `tb_score_group_structure` (`score_group_structure_id`, `school_id`, `score_group_id`, `name`, `date_created`, `date_modified`, `description`) VALUES
+(1, 1, 1, 'Test 1', '2016-11-22 08:01:18', '0000-00-00 00:00:00', 'First Periodic Test'),
+(2, 1, 1, 'Test 2', '2016-11-22 08:01:36', '0000-00-00 00:00:00', 'Second Periodic Test'),
+(3, 1, 1, 'Exam', '2016-11-22 08:01:53', '0000-00-00 00:00:00', 'Examination');
 
 -- --------------------------------------------------------
 
@@ -770,6 +779,22 @@ CREATE TABLE `vw_quota` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_score_group_structure`
+--
+CREATE TABLE `vw_score_group_structure` (
+`score_group_structure_id` int(11)
+,`school_id` int(11)
+,`name` varchar(100)
+,`date_created` datetime
+,`date_modified` datetime
+,`description` varchar(300)
+,`score_group_id` int(11)
+,`score_group` varchar(30)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_class`
 --
 DROP TABLE IF EXISTS `vw_class`;
@@ -784,6 +809,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_quota`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_quota`  AS  select `tb_quota`.`school_id` AS `school_id`,`tb_quota`.`session_id` AS `session_id`,`tb_quota`.`quota_id` AS `quota_id`,`tb_quota`.`name` AS `name`,`tb_quota`.`start_time` AS `start_time`,`tb_quota`.`end_time` AS `end_time`,`tb_quota`.`description` AS `description`,`tb_quota`.`date_created` AS `date_created`,`tb_session`.`name` AS `session` from (`tb_quota` join `tb_session` on((`tb_quota`.`session_id` = `tb_session`.`session_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_score_group_structure`
+--
+DROP TABLE IF EXISTS `vw_score_group_structure`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_score_group_structure`  AS  select `tb_score_group_structure`.`score_group_structure_id` AS `score_group_structure_id`,`tb_score_group_structure`.`school_id` AS `school_id`,`tb_score_group_structure`.`name` AS `name`,`tb_score_group_structure`.`date_created` AS `date_created`,`tb_score_group_structure`.`date_modified` AS `date_modified`,`tb_score_group_structure`.`description` AS `description`,`tb_score_group`.`score_group_id` AS `score_group_id`,`tb_score_group`.`name` AS `score_group` from (`tb_score_group_structure` join `tb_score_group`) where (`tb_score_group_structure`.`score_group_id` = `tb_score_group`.`score_group_id`) ;
 
 --
 -- Indexes for dumped tables
@@ -1108,7 +1142,7 @@ ALTER TABLE `tb_score_group`
 -- AUTO_INCREMENT for table `tb_score_group_structure`
 --
 ALTER TABLE `tb_score_group_structure`
-  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_session`
 --

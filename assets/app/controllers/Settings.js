@@ -316,6 +316,18 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     }
     /** end add score group **/
     
+    /** set active score group **/
+    $scope.setActiveScoreGroup = function(score_group_id){
+        $scope.active_score_group = Factory.getScoreGroup(score_group_id);
+        $scope.active_score_group_structures = Factory.getScoreGroupStructures_(score_group_id);
+    }
+    try{
+        $scope.setActiveScoreGroup($scope.score_groups[0].score_group_id);
+    }catch(e){
+        console.log(e.message);
+    }
+    /** end set active score group **/
+    
     /** add score group structure **/
     $scope.show_add_score_group_structure_overlay = function(){
         $('#add-score-group-structure-overlay').show();
@@ -324,14 +336,16 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         if($('#form-add-score-group-structure').smkValidate()){
             show_loading_overlay();
             hide_form_modal('add-score-group-structure-overlay', '');
-            $scope.score_group_structures.school_id = Factory.getSchoolID();
-            Service.addSession($scope.session).then(function(response){
-                Service.getSessions().then(function(response){
-                    Factory.updateSessions(response.data);
-                    $scope.sessions = response.data;
-                    clear_form_fields('form-add-session');
+            $scope.score_group_structure.school_id = Factory.getSchoolID();
+            $scope.score_group_structure.score_group_id = $scope.active_score_group.score_group_id;
+            Service.addScoreGroupStructure($scope.score_group_structure).then(function(response){
+                Service.getScoreGroupStructures().then(function(response){
+                    Factory.updateScoreGroupStructures(response.data);
+                    $scope.score_group_structures = response.data;
+                    $scope.setActiveScoreGroup($scope.active_score_group.score_group_id);
+                    clear_form_fields('form-add-score-group-structure');
                     hide_loading_overlay();
-                    toast('Session Successfully Added');
+                    toast('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);

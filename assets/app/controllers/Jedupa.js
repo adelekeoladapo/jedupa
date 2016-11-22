@@ -163,6 +163,26 @@ app.factory('Factory', function(){
         app_data.score_groups = dt;
     }
     
+    data.getScoreGroup = function(id){
+        var dt = {};
+        angular.forEach(app_data.score_groups, function(value, key, obj){
+            if(value.score_group_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    data.getScoreGroupStructures_ = function(score_group_id){
+        var dt = [];
+        angular.forEach(app_data.score_group_structures, function(value, key, obj){
+            if(value.score_group_id == score_group_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
     data.getScoreGroupStructures = function(){
         return app_data.score_group_structures;
     }

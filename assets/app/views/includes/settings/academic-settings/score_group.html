@@ -18,7 +18,7 @@
                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Score Groups <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_session_overlay()"></i></span></h3>
                                                         <ul class="class-level-list">
                                                             <li ng-repeat="group in score_groups">
-                                                                <a ng-init="id = group.score_group_id" href="" ng-click="">
+                                                                <a ng-init="id = group.score_group_id" href="" ng-click="setActiveScoreGroup(id)">
                                                                     {{ group.name }}
                                                                     <!--<span class="counter">0</span>-->
                                                                 </a>
@@ -38,9 +38,9 @@
                                                 
                                                 
                                                 <div class="col-md-10 main-table-with-sidebar">
-                                                    <div class="sidebar-container">
+                                                    <div class="sidebar-container" ng-hide="{{ score_groups.length == 0 }}">
                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
-                                                            {{ active_session.name }}
+                                                            {{ active_score_group.name }}
                                                             <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_quota_overlay()"></i></span>
                                                         </h3>
                                                         <div style="padding: 10px">
@@ -49,19 +49,17 @@
                                                                     <tr>
                                                                         <th>SN</th>
                                                                         <th>Name</th>
-                                                                        <th>Session</th>
-                                                                        <th>Start Date</th>
-                                                                        <th>Finish Date</th>
+                                                                        <th>Description</th>
+                                                                        <th>Score Group</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="table-bordered">
-                                                                    <tr ng-repeat="quota in active_session_quota">
+                                                                    <tr ng-repeat="structure in active_score_group_structures">
                                                                         <td>{{ $index + 1 }}</td>
-                                                                        <td>{{ quota.name }}</td>
-                                                                        <td>{{ quota.session }}</td>
-                                                                        <td>{{ factory.formatDate_1(quota.start_time) }}</td>
-                                                                        <td>{{ factory.formatDate_1(quota.end_time) }}</td>
+                                                                        <td>{{ structure.name }}</td>
+                                                                        <td>{{ structure.description }}</td>
+                                                                        <td>{{ structure.score_group }}</td>
                                                                         <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
                                                                     </tr>
 
@@ -86,13 +84,13 @@
                                                                     <div class="form-group">
                                                                         <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" ng-model="score_group_structures.name" name="name" class="form-control" required>
+                                                                            <input type="text" ng-model="score_group_structure.name" name="name" class="form-control" required>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="description" class="col-sm-4 control-label">Description</label>
-                                                                        <div class="col-sm-8" data-provide="datepicker">    
-                                                                            <input type="text" ng-model="score_group_structures.description" name="description" class="form-control">
+                                                                        <div class="col-sm-8">    
+                                                                            <input type="text" ng-model="score_group_structure.description" name="description" class="form-control">
                                                                         </div>
                                                                     </div>
                                                                 </form>
