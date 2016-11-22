@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2016 at 08:05 AM
+-- Generation Time: Nov 22, 2016 at 04:00 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -545,35 +545,6 @@ CREATE TABLE `tb_student` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_student_additional_detail`
---
-
-CREATE TABLE `tb_student_additional_detail` (
-  `student_additional_detail_id` int(11) NOT NULL,
-  `school_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `student_additional_field_id` int(11) DEFAULT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  `date_created` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_student_additional_field`
---
-
-CREATE TABLE `tb_student_additional_field` (
-  `student_additional_field_id` int(11) NOT NULL,
-  `school_id` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `date_created` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_student_category`
 --
 
@@ -585,6 +556,13 @@ CREATE TABLE `tb_student_category` (
   `date_created` datetime DEFAULT NULL,
   `code` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_student_category`
+--
+
+INSERT INTO `tb_student_category` (`student_category_id`, `school_id`, `name`, `description`, `date_created`, `code`) VALUES
+(1, 1, 'Default', 'The default category for all students', '2016-11-22 13:04:15', 'DFT');
 
 -- --------------------------------------------------------
 
@@ -710,6 +688,45 @@ CREATE TABLE `tb_user` (
   `photo` varchar(200) NOT NULL,
   `privilege_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_additional_details`
+--
+
+CREATE TABLE `tb_user_additional_details` (
+  `user_additional_detail_id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `user_additional_field_id` int(11) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_additional_field`
+--
+
+CREATE TABLE `tb_user_additional_field` (
+  `student_additional_field_id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `type` varchar(20) NOT NULL,
+  `date_created` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_additional_field`
+--
+
+INSERT INTO `tb_user_additional_field` (`student_additional_field_id`, `school_id`, `name`, `description`, `type`, `date_created`) VALUES
+(1, 1, 'Height', 'The height of each student in cm', 'student', '2016-11-22 15:00:56'),
+(2, 1, 'Blood Group', 'The blood group of students', 'student', '2016-11-22 15:01:45'),
+(3, 1, 'Bank Name', 'Bank name of all our staff', 'employee', '2016-11-22 15:02:29');
 
 -- --------------------------------------------------------
 
@@ -968,18 +985,6 @@ ALTER TABLE `tb_student`
   ADD PRIMARY KEY (`student_id`);
 
 --
--- Indexes for table `tb_student_additional_detail`
---
-ALTER TABLE `tb_student_additional_detail`
-  ADD PRIMARY KEY (`student_additional_detail_id`);
-
---
--- Indexes for table `tb_student_additional_field`
---
-ALTER TABLE `tb_student_additional_field`
-  ADD PRIMARY KEY (`student_additional_field_id`);
-
---
 -- Indexes for table `tb_student_category`
 --
 ALTER TABLE `tb_student_category`
@@ -1026,6 +1031,18 @@ ALTER TABLE `tb_time_zone`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `tb_user_additional_details`
+--
+ALTER TABLE `tb_user_additional_details`
+  ADD PRIMARY KEY (`user_additional_detail_id`);
+
+--
+-- Indexes for table `tb_user_additional_field`
+--
+ALTER TABLE `tb_user_additional_field`
+  ADD PRIMARY KEY (`student_additional_field_id`);
 
 --
 -- Indexes for table `tb_weekday`
@@ -1159,20 +1176,10 @@ ALTER TABLE `tb_state`
 ALTER TABLE `tb_student`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `tb_student_additional_detail`
---
-ALTER TABLE `tb_student_additional_detail`
-  MODIFY `student_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tb_student_additional_field`
---
-ALTER TABLE `tb_student_additional_field`
-  MODIFY `student_additional_field_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `tb_student_category`
 --
 ALTER TABLE `tb_student_category`
-  MODIFY `student_category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_student_category_subject`
 --
@@ -1208,6 +1215,16 @@ ALTER TABLE `tb_time_zone`
 --
 ALTER TABLE `tb_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_user_additional_details`
+--
+ALTER TABLE `tb_user_additional_details`
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_user_additional_field`
+--
+ALTER TABLE `tb_user_additional_field`
+  MODIFY `student_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_weekday`
 --
