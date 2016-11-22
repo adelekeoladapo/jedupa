@@ -1,12 +1,21 @@
-app.controller('GeneralSettingsCtrl', function($scope, Factory, states, school){
+app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states, school){
     
     $scope.factory = Factory;
+    
+    $scope.app_data = $scope.factory.getAppData();
     
     $scope.states = states.data;
     
     $scope.school = school.data;
     
-    $scope.app_data = $scope.factory.getAppData();
+    $scope.student_categories = Factory.getStudentCategories();
+    
+    $scope.additional_fields = Factory.getAdditionalFields();
+    
+    $scope.student_category = {};
+    
+    $scope.additional_field = {};
+    
     
     $scope.updateSchool = function(){
         if($('#form-update-school').smkValidate()){
@@ -39,6 +48,71 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, states, school){
         }
         return false;
     };
+    
+    /**
+     * Student Category
+     */
+    
+    /** add department **/
+    
+    $scope.show_add_student_category_overlay = function(){
+        $('#add-student-category-overlay').show();
+    }
+    
+    $scope.addStudentCategory = function(){
+        if($('#form-add-student-category').smkValidate()){
+            hide_form_modal('add-student-category-overlay', '');
+            show_loading_overlay();
+            $scope.student_category.school_id = Factory.getSchoolID();
+            Service.addStudentCategory($scope.student_category).then(function(response){
+                Service.getStudentCategories($scope.student_category.school_id).then(function(response){
+                    $scope.student_categories = response.data;
+                    Factory.updateStudentCategories(response.data);
+                    clear_form_fields('form-add-student-category');
+                    hide_loading_overlay();
+                    toast('Category Successfully Added');
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
+    /** end add department **/
+    
+    
+    /**
+     * ADDITIONAL FIELD
+     */
+    
+    /** add additional field **/
+    
+    $scope.show_add_additional_field_overlay = function(){
+        $('#add-additional-field-overlay').show();
+    }
+    
+    $scope.addAdditionalField = function(){
+        if($('#form-add-additional-field').smkValidate()){
+            hide_form_modal('add-additional-field-overlay', '');
+            show_loading_overlay();
+            $scope.additional_field.school_id = Factory.getSchoolID();
+            Service.addAdditionalField($scope.additional_field).then(function(response){
+                Service.getAdditionalFields($scope.additional_field.school_id).then(function(response){ console.log(response.data);
+                    $scope.additional_fields = response.data;
+                    Factory.updateAdditionalFields(response.data);
+                    clear_form_fields('form-add-additional-field');
+                    hide_loading_overlay();
+                    toast('Field Successfully Added');
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
+    /** end add additional field **/
     
 });
 

@@ -88,3 +88,11 @@ $route['api/add-score-group'] = 'ScoreGroup/addScoreGroup';
 $route['api/get-score-groups'] = 'ScoreGroup/getScoreGroups';
 $route['api/add-score-group-structure'] = 'ScoreGroup/addScoreGroupStructure';
 $route['api/get-score-group-structures'] = 'ScoreGroup/getScoreGroupStructures';
+
+/************* Student Category APIs ***************/
+$route['api/add-student-category'] = 'StudentCategory/addStudentCategory';
+$route['api/get-student-categories'] = 'StudentCategory/getStudentCategories';
+
+/************* Additional Field APIs ***************/
+$route['api/add-additional-field'] = 'AdditionalField/addAdditionalField';
+$route['api/get-additional-fields'] = 'AdditionalField/getAdditionalFields';

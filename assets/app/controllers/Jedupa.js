@@ -191,6 +191,45 @@ app.factory('Factory', function(){
         app_data.score_group_structures = dt;
     }
     
+     /** student category **/
+    data.getStudentCategories = function(){
+        return app_data.student_categories;
+    }
+    
+    data.updateStudentCategories = function(dt){
+        app_data.student_categories = dt;
+    }
+    
+    data.getStudentCategory = function(id){
+        var dt = {};
+        angular.forEach(app_data.student_categories, function(value, key, obj){
+            if(value.student_category_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    
+    /** additional field **/
+    data.getAdditionalFields = function(){
+        return app_data.additional_fields;
+    }
+    
+    data.updateAdditionalFields = function(dt){
+        app_data.additional_fields = dt;
+    }
+    
+    data.getAdditionalField = function(id){
+        var dt = {};
+        angular.forEach(app_data.additional_fields, function(value, key, obj){
+            if(value.additional_field_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
     
     
     
@@ -373,6 +412,36 @@ app.service('Service', function($http){
     
     this.getScoreGroupStructures = function(school_id){
         return $http.get(base_url+"api/get-score-group-structures", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** student category **/
+    this.addStudentCategory = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-student-category",
+            data: data
+        });
+    };
+    
+    this.getStudentCategories = function(school_id){
+        return $http.get(base_url+"api/get-student-categories", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** additional field **/
+    this.addAdditionalField = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-additional-field",
+            data: data
+        });
+    };
+    
+    this.getAdditionalFields = function(school_id){
+        return $http.get(base_url+"api/get-additional-fields", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };

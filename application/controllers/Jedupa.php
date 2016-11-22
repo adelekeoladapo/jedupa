@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model;
+    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model;
     
     function __construct() {
         parent::__construct();
@@ -13,12 +13,16 @@ class Jedupa extends CI_Controller {
         $this->load->model('SessionModel');
         $this->load->model('QuotaModel');
         $this->load->model('ScoreGroupModel');
+        $this->load->model('StudentCategoryModel');
+        $this->load->model('AdditionalFieldModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
         $this->session_model = new SessionModel();
         $this->quota_model = new QuotaModel();
         $this->score_group_model = new ScoreGroupModel();
+        $this->student_category_model = new StudentCategoryModel();
+        $this->additional_field_model = new AdditionalFieldModel();
     }
 
     public function index(){
@@ -42,6 +46,8 @@ class Jedupa extends CI_Controller {
         $data['quotas'] = $this->quota_model->getQuotas($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['score_groups'] = $this->score_group_model->getScoreGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['score_group_structures'] = $this->score_group_model->getScoreGroupStructures($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['student_categories'] = $this->student_category_model->getStudentCategories($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['additional_fields'] = $this->additional_field_model->getAdditionalFields($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }
