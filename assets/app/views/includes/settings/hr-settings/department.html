@@ -2,7 +2,7 @@
                                                 
                                                 <div class="col-md-12">
                                                     <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
-                                                        Academic Departments
+                                                        Employee Departments
                                                         <span class="top-add-btn-container">
                                                             <button class="btn jd-btn jd-btn-primary" ng-click="show_add_dept_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
                                                         </span>
@@ -17,12 +17,12 @@
                                                                 <th>SN</th>
                                                                 <th>Name</th>
                                                                 <th>Code</th>
-                                                                <th>No. of Classes</th>
+                                                                <th>No. of Staff</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-bordered">
-                                                            <tr ng-repeat="department in departments">
+                                                            <tr ng-repeat="department in employee_departments">
                                                                 <td>{{ $index + 1 }}</td>
                                                                 <td>{{ department.name }}</td>
                                                                 <td>{{ department.code }}</td>
@@ -42,27 +42,27 @@
                                                     <div class="col-md-4 col-md-offset-4">
                                                         <div class="jd-modal">
                                                             <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
-                                                                New Department
+                                                                New Employee Department
                                                             </h1>
                                                             <div class="jd-modal-body">
-                                                                <form class="form-horizontal" name="form-add-student-dept" id="form-add-student-dept"  novalidate> 
+                                                                <form class="form-horizontal" name="form-add-employee-department" id="form-add-employee-department"  novalidate> 
                                                                     <div class="form-group">
                                                                         <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" ng-model="dept.name" name="name" placeholder="Department Name" class="form-control" required>
+                                                                            <input type="text" ng-model="employee_department.name" name="name" placeholder="Department Name" class="form-control" required>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="code" class="col-sm-4 control-label">Code <span class="required-field"> *</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" ng-model="dept.code" name="code" placeholder="Department Code" class="form-control" required>
+                                                                            <input type="text" ng-model="employee_department.code" name="code" placeholder="Department Code" class="form-control" required>
                                                                         </div>
                                                                     </div>
                                                                 </form>
                                                             </div>
                                                             <div class="jd-modal-footer">
-                                                                <button class="btn jd-modal-btn" onclick="hide_form_modal('add-department-overlay', dept)">Cancel</button>
-                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addAcademicDept()">OK</button>
+                                                                <button class="btn jd-modal-btn" onclick="hide_form_modal('add-department-overlay', '')">Cancel</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addEmpDepartment()">OK</button>
                                                             </div>
                                                         </div>
                                                     </div>

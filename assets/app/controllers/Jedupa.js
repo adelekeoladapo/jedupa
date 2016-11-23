@@ -112,8 +112,6 @@ app.factory('Factory', function(){
     }
     
     
-    
-    
     /**  session **/
     data.getSessions = function(){
         return app_data.sessions;
@@ -229,6 +227,15 @@ app.factory('Factory', function(){
         });
         return dt;
     };
+    
+    /** employee department **/
+    data.getEmpDepartments = function(){
+        return app_data.employee_departments;
+    }
+    
+    data.updateEmpDepartments = function(dt){
+        app_data.employee_departments = dt;
+    }
     
     
     
@@ -446,6 +453,21 @@ app.service('Service', function($http){
         });
     };
     
+    /** employee department **/
+    this.addEmpDepartment = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-employee-department",
+            data: data
+        });
+    };
+    
+    this.getEmpDepartments = function(school_id){
+        return $http.get(base_url+"api/get-employee-departments", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
 });
 
 
@@ -504,7 +526,12 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('hr-settings', {
             url: "/hr-settings",
             templateUrl: "assets/app/views/hr-settings.html",
-            controller: "HRSettingsCtrl"
+            controller: "HRSettingsCtrl",
+            resolve: {
+                employee_departments: function(Service, Factory){
+                    return Service.getEmpDepartments(Factory.getSchoolID());
+                }
+            }
         });
     
 });

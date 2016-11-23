@@ -450,7 +450,43 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
 
 
 
-app.controller('HRSettingsCtrl', function($scope){
+app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_departments){
+    
+    $scope.factory = Factory;
+    
+    $scope.employee_departments = employee_departments.data;
+    
+    $scope.employee_department = {};
+    
+    
+    /** add department **/
+    
+    $scope.show_add_dept_overlay = function(){
+        $('#add-department-overlay').show();
+    }
+    
+    $scope.addEmpDepartment = function(){
+        if($('#form-add-employee-department').smkValidate()){
+            hide_form_modal('add-department-overlay', '');
+            show_loading_overlay();
+            $scope.employee_department.school_id = Factory.getSchoolID();
+            Service.addEmpDepartment($scope.employee_department).then(function(response){
+                Service.getEmpDepartments($scope.employee_department.school_id).then(function(response){
+                    $scope.employee_departments = response.data;
+                    Factory.updateEmpDepartments(response.data);
+                    clear_form_fields('form-add-employee-department');
+                    hide_loading_overlay();
+                    toast('Department Successfully Added');
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
+    /** end add department **/
+    
     
 });
 

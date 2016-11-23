@@ -96,3 +96,7 @@ $route['api/get-student-categories'] = 'StudentCategory/getStudentCategories';
 /************* Additional Field APIs ***************/
 $route['api/add-additional-field'] = 'AdditionalField/addAdditionalField';
 $route['api/get-additional-fields'] = 'AdditionalField/getAdditionalFields';
+
+/************* Employee Department APIs ***************/
+$route['api/add-employee-department'] = 'EmpDepartment/addEmpDepartment';
+$route['api/get-employee-departments'] = 'EmpDepartment/getEmpDepartments';

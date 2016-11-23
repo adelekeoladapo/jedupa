@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2016 at 04:00 PM
+-- Generation Time: Nov 23, 2016 at 07:42 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -231,6 +231,15 @@ CREATE TABLE `tb_employee_department` (
   `is_ative` int(11) DEFAULT NULL,
   `code` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_employee_department`
+--
+
+INSERT INTO `tb_employee_department` (`employee_department_id`, `school_id`, `name`, `date_created`, `is_ative`, `code`) VALUES
+(1, 1, 'Language', '2016-11-23 07:24:24', NULL, 'LANG'),
+(2, 1, 'Finance', '2016-11-23 07:29:15', NULL, 'FIN'),
+(3, 1, 'Sports', '2016-11-23 07:38:48', NULL, 'SPT');
 
 -- --------------------------------------------------------
 
@@ -1114,7 +1123,7 @@ ALTER TABLE `tb_employee_category`
 -- AUTO_INCREMENT for table `tb_employee_department`
 --
 ALTER TABLE `tb_employee_department`
-  MODIFY `employee_department_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_employee_grade_level`
 --
