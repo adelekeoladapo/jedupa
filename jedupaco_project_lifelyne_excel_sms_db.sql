@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2016 at 07:42 AM
+-- Generation Time: Nov 23, 2016 at 06:18 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -217,6 +217,15 @@ CREATE TABLE `tb_employee_category` (
   `code` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_employee_category`
+--
+
+INSERT INTO `tb_employee_category` (`employee_category_id`, `school_id`, `name`, `description`, `date_created`, `code`) VALUES
+(1, 1, 'Teaching Staff', NULL, '2016-11-23 17:27:33', ''),
+(2, 1, 'Non Teaching Staff', NULL, '2016-11-23 17:28:39', ''),
+(3, 1, 'Library Staff', NULL, '2016-11-23 17:29:11', '');
+
 -- --------------------------------------------------------
 
 --
@@ -237,9 +246,8 @@ CREATE TABLE `tb_employee_department` (
 --
 
 INSERT INTO `tb_employee_department` (`employee_department_id`, `school_id`, `name`, `date_created`, `is_ative`, `code`) VALUES
-(1, 1, 'Language', '2016-11-23 07:24:24', NULL, 'LANG'),
-(2, 1, 'Finance', '2016-11-23 07:29:15', NULL, 'FIN'),
-(3, 1, 'Sports', '2016-11-23 07:38:48', NULL, 'SPT');
+(1, 1, 'Academics', '2016-11-23 18:07:12', NULL, 'ACD'),
+(2, 1, 'Sports', '2016-11-23 18:07:32', NULL, 'SPR');
 
 -- --------------------------------------------------------
 
@@ -250,8 +258,19 @@ INSERT INTO `tb_employee_department` (`employee_department_id`, `school_id`, `na
 CREATE TABLE `tb_employee_grade_level` (
   `tb_employee_grade_level_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL
+  `name` varchar(200) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_employee_grade_level`
+--
+
+INSERT INTO `tb_employee_grade_level` (`tb_employee_grade_level_id`, `school_id`, `name`, `description`, `date_created`) VALUES
+(1, 1, '5.0', 'Entry Level Grade', '2016-11-23 17:59:35'),
+(2, 1, '5.5', 'After five years experience', '2016-11-23 18:01:35'),
+(3, 1, '6.0', 'BSc with more than 5 years experience', '2016-11-23 18:05:53');
 
 -- --------------------------------------------------------
 
@@ -265,9 +284,17 @@ CREATE TABLE `tb_employee_position` (
   `name` varchar(100) NOT NULL,
   `description` varchar(200) NOT NULL,
   `date_created` datetime NOT NULL,
-  `date_registered` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
   `employee_category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_employee_position`
+--
+
+INSERT INTO `tb_employee_position` (`employee_position_id`, `school_id`, `name`, `description`, `date_created`, `date_modified`, `employee_category_id`) VALUES
+(1, 1, 'Senior Teachers', 'Teachers with more than 10 years experience', '2016-11-23 17:30:40', '0000-00-00 00:00:00', 1),
+(2, 1, 'Cooks', 'Staff that work in the kitchen', '2016-11-23 17:31:14', '0000-00-00 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -788,6 +815,23 @@ CREATE TABLE `vw_class` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_employee_position`
+--
+CREATE TABLE `vw_employee_position` (
+`employee_position_id` int(11)
+,`school_id` int(11)
+,`name` varchar(100)
+,`description` varchar(200)
+,`date_created` datetime
+,`date_modified` datetime
+,`employee_category_id` int(11)
+,`category` varchar(100)
+,`category_code` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_quota`
 --
 CREATE TABLE `vw_quota` (
@@ -826,6 +870,15 @@ CREATE TABLE `vw_score_group_structure` (
 DROP TABLE IF EXISTS `vw_class`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class`  AS  select `tb_class`.`class_id` AS `class_id`,`tb_class`.`school_id` AS `school_id`,`tb_class`.`student_department_id` AS `student_department_id`,`tb_class`.`name` AS `name`,`tb_class`.`code` AS `code`,`tb_class_level`.`class_level_id` AS `level_id`,`tb_class_level`.`name` AS `level_name`,`tb_class`.`date_created` AS `date_created`,`tb_student_department`.`name` AS `department_name`,`tb_student_department`.`code` AS `department_code`,`tb_class_type`.`class_type_id` AS `class_type_id`,`tb_class_type`.`name` AS `class_type` from (((`tb_class` join `tb_student_department` on((`tb_class`.`student_department_id` = `tb_student_department`.`student_department_id`))) join `tb_class_level` on((`tb_class_level`.`class_level_id` = `tb_class`.`class_level_id`))) join `tb_class_type` on((`tb_class_type`.`class_type_id` = `tb_class`.`class_type_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_employee_position`
+--
+DROP TABLE IF EXISTS `vw_employee_position`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_employee_position`  AS  select `tb_employee_position`.`employee_position_id` AS `employee_position_id`,`tb_employee_position`.`school_id` AS `school_id`,`tb_employee_position`.`name` AS `name`,`tb_employee_position`.`description` AS `description`,`tb_employee_position`.`date_created` AS `date_created`,`tb_employee_position`.`date_modified` AS `date_modified`,`tb_employee_position`.`employee_category_id` AS `employee_category_id`,`tb_employee_category`.`name` AS `category`,`tb_employee_category`.`code` AS `category_code` from (`tb_employee_position` join `tb_employee_category` on((`tb_employee_position`.`employee_category_id` = `tb_employee_category`.`employee_category_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1118,22 +1171,22 @@ ALTER TABLE `tb_country`
 -- AUTO_INCREMENT for table `tb_employee_category`
 --
 ALTER TABLE `tb_employee_category`
-  MODIFY `employee_category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_employee_department`
 --
 ALTER TABLE `tb_employee_department`
-  MODIFY `employee_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `employee_department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_employee_grade_level`
 --
 ALTER TABLE `tb_employee_grade_level`
-  MODIFY `tb_employee_grade_level_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tb_employee_grade_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_employee_position`
 --
 ALTER TABLE `tb_employee_position`
-  MODIFY `employee_position_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_employee_subject`
 --

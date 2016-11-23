@@ -100,3 +100,15 @@ $route['api/get-additional-fields'] = 'AdditionalField/getAdditionalFields';
 /************* Employee Department APIs ***************/
 $route['api/add-employee-department'] = 'EmpDepartment/addEmpDepartment';
 $route['api/get-employee-departments'] = 'EmpDepartment/getEmpDepartments';
+
+/************* Employee Position APIs ***************/
+$route['api/add-employee-position'] = 'EmpPosition/addEmpPosition';
+$route['api/get-employee-positions'] = 'EmpPosition/getEmpPositions';
+
+/************* Employee Category APIs ***************/
+$route['api/add-employee-category'] = 'EmpCategory/addEmpCategory';
+$route['api/get-employee-categories'] = 'EmpCategory/getEmpCategories';
+
+/************* Employee Grade Level APIs ***************/
+$route['api/add-employee-grade-level'] = 'EmpGradeLevel/addEmpGradeLevel';
+$route['api/get-employee-grade-levels'] = 'EmpGradeLevel/getEmpGradeLevel';

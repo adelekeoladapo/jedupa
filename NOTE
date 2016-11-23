@@ -12,3 +12,7 @@ CREATE VIEW vw_class AS SELECT tb_class.class_id AS class_id, tb_class.school_id
 
 
 CREATE VIEW vw_score_group_structure AS SELECT tb_score_group_structure.score_group_structure_id AS score_group_structure_id, tb_score_group_structure.school_id AS school_id, tb_score_group_structure.name AS name, tb_score_group_structure.date_created AS date_created, tb_score_group_structure.date_modified AS date_modified, tb_score_group_structure.description AS description, tb_score_group.score_group_id AS score_group_id, tb_score_group.name AS score_group FROM tb_score_group_structure JOIN tb_score_group WHERE tb_score_group_structure.score_group_id = tb_score_group.score_group_id
+
+
+
+CREATE VIEW vw_employee_position AS SELECT tb_employee_position.employee_position_id AS employee_position_id, tb_employee_position.school_id AS school_id, tb_employee_position.name AS name, tb_employee_position.description AS description, tb_employee_position.date_created AS date_created, tb_employee_position.date_modified as date_modified, tb_employee_position.employee_category_id AS employee_category_id, tb_employee_category.name AS category, tb_employee_category.code AS category_code FROM tb_employee_position JOIN tb_employee_category ON tb_employee_position.employee_category_id = tb_employee_category.employee_category_id

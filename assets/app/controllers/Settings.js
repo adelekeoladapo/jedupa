@@ -450,14 +450,30 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
 
 
 
-app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_departments){
+app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_departments, employee_categories, employee_positions, employee_grade_levels){
     
     $scope.factory = Factory;
     
     $scope.employee_departments = employee_departments.data;
     
+    $scope.employee_categories = employee_categories.data;
+    
+    $scope.employee_positions = employee_positions.data;
+    
+    $scope.employee_grade_levels = employee_grade_levels.data;
+    
     $scope.employee_department = {};
     
+    $scope.employee_category = {};
+    
+    $scope.employee_position = {};
+    
+    $scope.employee_grade_level = {};
+    
+    
+    /*
+     * Employee Department 
+     */
     
     /** add department **/
     
@@ -486,6 +502,104 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
         }
     };
     /** end add department **/
+    
+    
+    /**
+     * Employee Position
+     */
+    
+    /** add employee category **/
+    $scope.addEmpCategory = function(){
+        if($('#form-add-employee-category').smkValidate()){
+            show_loading_overlay();
+            $scope.employee_category.school_id = Factory.getSchoolID();
+            Service.addEmpCategory($scope.employee_category).then(function(response){
+                Service.getEmpCategories().then(function(response){
+                    Factory.updateEmpCategories(response.data);
+                    $scope.employee_categories = response.data;
+                    clear_form_fields('form-add-employee-category');
+                    hide_loading_overlay();
+                    toast('Category Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add employee category **/
+    
+    
+    
+    /** add employee position **/
+    $scope.show_add_position_overlay = function(){
+        $('#add-position-overlay').show();
+    }
+    $scope.addEmpPosition = function(){
+        if($('#form-add-employee-position').smkValidate()){
+            hide_form_modal('add-position-overlay', '');
+            show_loading_overlay();
+            $scope.employee_position.school_id = Factory.getSchoolID();
+            $scope.employee_position.employee_category_id = $scope.active_employee_category.employee_category_id;
+            Service.addEmpPosition($scope.employee_position).then(function(response){
+                Service.getEmpPositions(Factory.getSchoolID()).then(function(response){
+                    $scope.employee_positions = response.data;
+                    Factory.updateEmpPositions(response.data);
+                    clear_form_fields('form-add-employee-position');
+                    $scope.setActiveEmpCategory($scope.active_employee_category.employee_category_id);
+                    hide_loading_overlay();
+                    toast('Position Successfully Added');
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
+    /** end add employee position **/
+    
+    /** set active category **/
+    $scope.setActiveEmpCategory = function(employee_category_id){
+        $scope.active_employee_category = Factory.getEmpCategory(employee_category_id);
+        $scope.active_employee_positions = Factory.getEmpCategoryPositions(employee_category_id);
+    }
+    try{
+        $scope.setActiveEmpCategory($scope.employee_categories[0].employee_category_id);
+    }catch(e){
+        console.log(e.message);
+    }
+    
+    
+    /*
+     * Employee Grade Level
+    */
+   /** add grade level **/
+    
+    $scope.show_add_grade_level_overlay = function(){
+        $('#add-grade-level-overlay').show();
+    }
+    
+    $scope.addEmpGradeLevel = function(){
+        if($('#form-add-employee-grade-level').smkValidate()){
+            hide_form_modal('add-grade-level-overlay', '');
+            show_loading_overlay();
+            $scope.employee_grade_level.school_id = Factory.getSchoolID();
+            Service.addEmpGradeLevel($scope.employee_grade_level).then(function(response){
+                Service.getEmpGradeLevels($scope.employee_grade_level.school_id).then(function(response){
+                    $scope.employee_grade_levels = response.data;
+                    Factory.updateEmpGradeLevels(response.data);
+                    clear_form_fields('form-add-employee-grade-level');
+                    hide_loading_overlay();
+                    toast('Grade Level Successfully Added');
+                }, function(error){
+                    console.log(error);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+    };
+    /** end grade level **/
     
     
 });

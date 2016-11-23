@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model, $employee_department_model;
+    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model;
     
     function __construct() {
         parent::__construct();
@@ -16,6 +16,9 @@ class Jedupa extends CI_Controller {
         $this->load->model('StudentCategoryModel');
         $this->load->model('AdditionalFieldModel');
         $this->load->model('EmpDepartmentModel');
+        $this->load->model('EmpCategoryModel');
+        $this->load->model('EmpPositionModel');
+        $this->load->model('EmpGradeLevelModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
@@ -25,6 +28,9 @@ class Jedupa extends CI_Controller {
         $this->student_category_model = new StudentCategoryModel();
         $this->additional_field_model = new AdditionalFieldModel();
         $this->employee_department_model = new EmpDepartmentModel();
+        $this->employee_category_model = new EmpCategoryModel();
+        $this->employee_position_model = new EmpPositionModel();
+        $this->employee_grade_level_model = new EmpGradeLevelModel();
     }
 
     public function index(){
@@ -51,6 +57,9 @@ class Jedupa extends CI_Controller {
         $data['student_categories'] = $this->student_category_model->getStudentCategories($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['additional_fields'] = $this->additional_field_model->getAdditionalFields($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['employee_departments'] = $this->employee_department_model->getEmpDepartments($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['employee_categories'] = $this->employee_category_model->getEmpCategories($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['employee_positions'] = $this->employee_position_model->getEmpPositions($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['employee_grade_levels'] = $this->employee_grade_level_model->getEmpGradeLevels($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }

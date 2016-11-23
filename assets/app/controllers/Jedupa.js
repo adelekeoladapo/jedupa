@@ -237,6 +237,53 @@ app.factory('Factory', function(){
         app_data.employee_departments = dt;
     }
     
+    /** employee categories **/
+    data.getEmpCategories = function(){
+        return app_data.employee_categories;
+    }
+    
+    data.updateEmpCategories = function(dt){
+        app_data.employee_categories = dt;
+    }
+    
+    data.getEmpCategory = function(id){
+        var dt = {};
+        angular.forEach(app_data.employee_categories, function(value, key, obj){
+            if(value.employee_category_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    data.getEmpCategoryPositions = function(employee_category_id){
+        var dt = [];
+        angular.forEach(app_data.employee_positions, function(value, key, obj){
+            if(value.employee_category_id == employee_category_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    /** employee positions **/
+    data.getEmpPositions = function(){
+        return app_data.employee_positions;
+    }
+    
+    data.updateEmpPositions = function(dt){
+        app_data.employee_positions = dt;
+    }
+    
+    /** employee grade level **/
+    data.getEmpGradeLevels = function(){
+        return app_data.employee_grade_levels;
+    }
+    
+    data.updateEmpGradeLevels = function(dt){
+        app_data.employee_grade_levels = dt;
+    }
+    
     
     
     
@@ -468,6 +515,51 @@ app.service('Service', function($http){
         });
     };
     
+    /** employee category **/
+    this.addEmpCategory = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-employee-category",
+            data: data
+        });
+    };
+    
+    this.getEmpCategories = function(school_id){
+        return $http.get(base_url+"api/get-employee-categories", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** employee position **/
+    this.addEmpPosition = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-employee-position",
+            data: data
+        });
+    };
+    
+    this.getEmpPositions = function(school_id){
+        return $http.get(base_url+"api/get-employee-positions", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** employee grade level **/
+    this.addEmpGradeLevel = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-employee-grade-level",
+            data: data
+        });
+    };
+    
+    this.getEmpGradeLevels = function(school_id){
+        return $http.get(base_url+"api/get-employee-grade-levels", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
 });
 
 
@@ -515,8 +607,7 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 classes: function(Service, Factory){
                     return Service.getClasses(Factory.getSchoolID());
-                }
-                ,
+                },
                 sessions: function(Service, Factory){
                     return Service.getSessions(Factory.getSchoolID());
                 }
@@ -530,6 +621,15 @@ app.config(function($stateProvider, $urlRouterProvider){
             resolve: {
                 employee_departments: function(Service, Factory){
                     return Service.getEmpDepartments(Factory.getSchoolID());
+                },
+                employee_categories: function(Service, Factory){
+                    return Service.getEmpCategories(Factory.getSchoolID());
+                },
+                employee_positions: function(Service, Factory){
+                    return Service.getEmpPositions(Factory.getSchoolID());
+                },
+                employee_grade_levels: function(Service, Factory){
+                    return Service.getEmpGradeLevels(Factory.getSchoolID());
                 }
             }
         });
