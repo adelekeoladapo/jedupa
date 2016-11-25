@@ -4,12 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/academic-settings/session.html</file>
-            <file>file:/C:/xampp/htdocs/edugate/application/controllers/Session.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/hr-settings.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/models/EmpGradeLevelModel.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/hr-settings/position.html</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/theme/assets/js/ui.js</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/hr-settings/grade-level.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/EmpGradeLevel.php</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Jedupa.js</file>
             <file>file:/C:/xampp/htdocs/edugate/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/academic-settings/class.html</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Settings.js</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/academic-settings/class.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/Jedupa.php</file>
         </group>
     </open-files>
 </project-private>
