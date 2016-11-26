@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2016 at 06:18 PM
--- Server version: 10.1.16-MariaDB
+-- Generation Time: Nov 26, 2016 at 02:02 AM
+-- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -350,7 +350,9 @@ CREATE TABLE `tb_parent` (
   `parent_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `education` varchar(200) NOT NULL,
+  `date_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -573,8 +575,6 @@ CREATE TABLE `tb_student` (
   `date_admitted` datetime NOT NULL,
   `batch_id` int(11) NOT NULL,
   `student_category_id` int(11) NOT NULL,
-  `parent_id` int(11) NOT NULL,
-  `parent_relationship` varchar(50) NOT NULL,
   `class_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -722,7 +722,14 @@ CREATE TABLE `tb_user` (
   `phone2` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `photo` varchar(200) NOT NULL,
-  `privilege_id` int(11) NOT NULL
+  `privilege_id` int(11) NOT NULL,
+  `religion` varchar(100) NOT NULL,
+  `mother_tongue` varchar(100) NOT NULL,
+  `address1` varchar(200) NOT NULL,
+  `address2` varchar(200) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `occupation` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1202,6 +1209,11 @@ ALTER TABLE `tb_grade_level_payroll`
 --
 ALTER TABLE `tb_grading_system`
   MODIFY `grading_system_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_parent`
+--
+ALTER TABLE `tb_parent`
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_quota`
 --

@@ -8,6 +8,13 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.broken-horizontal-line {
+    border: dashed 1px #eee;
+    height: 1px;
+    margin: 20px 0;
+}
+
+
 .input-group[class*=col-] {
     float: none;
      padding-right: 15px; 
@@ -247,6 +254,15 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     text-align: center;
     margin-top: 290px;
 }
+
+.jd-form-block {
+}
+
+.jd-form-block .jd-form-block-title {
+    
+}
+
+
 
 /******************* Datatable  *******************/
 .dt-table {

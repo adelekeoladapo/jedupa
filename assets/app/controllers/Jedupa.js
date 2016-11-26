@@ -583,6 +583,12 @@ app.config(function($stateProvider, $urlRouterProvider){
             controller: "StudentsCtrl"
         })
         
+        .state('new-student', {
+            url: "/new-student",
+            templateUrl: "assets/app/views/new-student.html",
+            controller: "NewStudentCtrl"
+        })
+        
         .state('general-settings', {
             url: "/general-settings",
             templateUrl: "assets/app/views/general-settings.html",

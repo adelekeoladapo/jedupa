@@ -10,6 +10,8 @@
 
 /*Extra small devices*/
 @media (max-width: 768px) { 
+    .jd-form-block {
+    }
     
 }
 
