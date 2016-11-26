@@ -646,7 +646,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 /*
  * App Controller
  */
-app.controller('mainCtrl', function($rootScope, $http, Factory, Service){
+app.controller('mainCtrl', function($rootScope, Factory, Service){
     
     /** Init App Data **/
     Service.loadAppData(Factory.getSchoolID()).then(function(response){

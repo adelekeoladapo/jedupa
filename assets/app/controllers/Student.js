@@ -15,7 +15,13 @@ app.controller('NewStudentCtrl', function($scope, Factory, Service){
     
     $scope.class_types = Factory.getClassTypes();
     
-    console.log($scope.departments);
+    $scope.classes = Factory.getClasses();
+    
+    console.log($scope.classes);
+    
+    $scope.test = function(){
+        console.log($scope.factory.getClasses());
+    }
     
 });
 

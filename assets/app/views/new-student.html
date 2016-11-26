@@ -75,7 +75,9 @@
                                             <div class="form-group">
                                                 <label for="code" class="col-sm-4 control-label">Department <span class="required-field"> *</span></label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" ng-model="classs.code" name="code" class="form-control" required>
+                                                    <select class="form-control">
+                                                        <option ng-repeat="department in classes">{{ department.name }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -207,6 +209,10 @@
                                         
                                         <div class="col-md-4 jd-form-block">
                                             <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Additional Information</h6>
+                                            
+                                            
+                                            
+                                            <button ng-click="test()">Test</button>
                                             
                                         </div>
                                         
