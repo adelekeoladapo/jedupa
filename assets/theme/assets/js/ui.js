@@ -89,7 +89,6 @@ $(document).ready(function(){
     
     /** init datepickers **/
     $('#start_time').datepicker();
-   
     
     
 });

@@ -112,3 +112,6 @@ $route['api/get-employee-categories'] = 'EmpCategory/getEmpCategories';
 /************* Employee Grade Level APIs ***************/
 $route['api/add-employee-grade-level'] = 'EmpGradeLevel/addEmpGradeLevel';
 $route['api/get-employee-grade-levels'] = 'EmpGradeLevel/getEmpGradeLevel';
+
+/************* Student APIs ***************/
+$route['api/add-student'] = 'User/addStudent';

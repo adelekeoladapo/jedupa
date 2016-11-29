@@ -462,6 +462,8 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     
     $scope.employee_grade_levels = employee_grade_levels.data;
     
+    $scope.additional_fields = Factory.getAdditionalFields();
+    
     $scope.employee_department = {};
     
     $scope.employee_category = {};

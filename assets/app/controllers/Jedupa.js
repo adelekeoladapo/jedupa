@@ -23,11 +23,11 @@ app.factory('Factory', function(){
     
     /** academic department **/
     data.getStudentDepartments = function(){
-        return app_data.departments;
+        return app_data.student_departments;
     };
     
     data.updateStudentDepartments = function(dt){
-        app_data.departments = dt;
+        app_data.student_departments = dt;
     };
     
     /** class **/
@@ -210,8 +210,18 @@ app.factory('Factory', function(){
     
     
     /** additional field **/
-    data.getAdditionalFields = function(){
-        return app_data.additional_fields;
+    data.getAdditionalFields = function(type = false){
+        if(!type){
+            return app_data.additional_fields;
+        }else{
+            var dt = [];
+            angular.forEach(app_data.additional_fields, function(value, key, obj){
+                if(value.type == type){
+                    dt.push(angular.copy(obj[key]));
+                }
+            });
+            return dt;
+        }
     }
     
     data.updateAdditionalFields = function(dt){
@@ -586,7 +596,12 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('new-student', {
             url: "/new-student",
             templateUrl: "assets/app/views/new-student.html",
-            controller: "NewStudentCtrl"
+            controller: "NewStudentCtrl",
+            resolve: {
+                states: function(Service){
+                    return Service.getStates();
+                }
+            }
         })
         
         .state('general-settings', {
