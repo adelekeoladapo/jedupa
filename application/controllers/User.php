@@ -47,6 +47,22 @@ class User extends CI_Controller {
         
         $user_id = $this->model->insertUser($data);
         
+        
+        /** add student parent **/
+        $pu_data = new stdClass();
+        $pu_data->firstname = $this->input->post('parent-name');
+        $pu_data->phone1 = $this->input->post('parent-phone');
+        $pu_data->email = $this->input->post('parent-email');
+        $pu_data->address = $this->input->post('parent-address');
+        $pu_data->school_id = $school_id;
+        $parent_user_id = $this->model->insertUser($pu_data);
+        $p_data = new stdClass();
+        $p_data->user_id = $parent_user_id;
+        $p_data->date_created = $this->penguin->getTime();
+        $p_data->school_id = $school_id;
+        $parent_id = $this->model->insertParent($p_data);
+        
+        
         /** student table data **/
         $s_data = new stdClass();
         $s_data->user_id = $user_id;
@@ -59,6 +75,8 @@ class User extends CI_Controller {
         $s_data->class_type_id = $this->input->post('class-type-id');
         $s_data->class_level_id = $this->input->post('class-level-id');
         $s_data->class_id = $this->input->post('class-id');
+        $s_data->parent_relationship = $this->input->post('parent-relationship');
+        $s_data->parent_id = $parent_id;
         $s_data->date_created = $this->penguin->getTime();
         
         $student_id = $this->model->insertStudent($s_data);
@@ -77,6 +95,21 @@ class User extends CI_Controller {
         
         echo json_encode(array('status' => true, 'message' => 'Student added successfully'));
         
+    }
+    
+    function getStudents(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page = $this->input->get('page');
+        $page_size = $this->input->get('page-size');
+        echo json_encode($this->model->getStudents($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function getStudent(){
+        $id = $this->input->get('student_id');
+        echo json_encode($this->model->getStudent($id));
     }
     
 }

@@ -294,6 +294,15 @@ app.factory('Factory', function(){
         app_data.employee_grade_levels = dt;
     }
     
+    /**  students **/
+    data.getStudents = function(){
+        return app_data.students;
+    }
+    
+    data.updateStudents = function(dt){
+        app_data.students = dt;
+    }
+    
     
     
     
@@ -570,6 +579,19 @@ app.service('Service', function($http){
         });
     };
     
+    /** student **/
+    this.getStudents = function(school_id){
+        return $http.get(base_url+"api/get-students", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getStudent = function(id){
+        return $http.get(base_url+"api/get-student", {
+            params : {'student_id' : id}
+        });
+    };
+    
 });
 
 
@@ -590,7 +612,12 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('students', {
             url: "/students",
             templateUrl: "assets/app/views/students.html",
-            controller: "StudentsCtrl"
+            controller: "StudentsCtrl",
+            resolve: {
+                students: function(Service){
+                    return Service.getStudents();
+                }
+            }
         })
         
         .state('new-student', {
@@ -600,6 +627,17 @@ app.config(function($stateProvider, $urlRouterProvider){
             resolve: {
                 states: function(Service){
                     return Service.getStates();
+                }
+            }
+        })
+        
+        .state('view-student', {
+            url: "/view-student/:id",
+            templateUrl: "assets/app/views/view-student.html",
+                controller: "ViewStudentCtrl",
+            resolve: {
+                student: function($stateParams, Service){
+                    return Service.getStudent($stateParams.id);
                 }
             }
         })

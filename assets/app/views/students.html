@@ -2,18 +2,59 @@
                         <div class="jd-page">
                             
                                                         <!-- Page Title -->
-                            <h1 class="h4 m-b-md m-t-none font-thin jd-page-title">
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
                                 Students
                             </h1>
                             <!-- Page Title -->
                             
                             <!-- Page Content -->
-                            <div class="font-thin jd-page-content">
-                                This is the content of the page jkdkffhfdjfdjh
+                            <div class="font-normal jd-page-content">
                                 
-                                <span class="top-add-btn-container">
-                                    <a ui-sref="new-student" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
-                                </span>
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container" style="margin-top: -12px;">
+                                        <a ui-sref="new-student" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="students">
+                                                <a href="">All Students</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="students">
+                                            <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                <thead class="table-bordered">
+                                                    <tr>
+                                                        <th>SN</th>
+                                                        <th>Registration No</th>
+                                                        <th>Firstname</th>
+                                                        <th>Lastname</th>
+                                                        <th>Category</th>
+                                                        <th>Department</th>
+                                                        <th>Level</th>
+                                                        <th>Class</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-bordered">
+                                                    <tr ng-repeat="student in students">
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>{{ student.registration_number }}</td>
+                                                        <td>{{ student.firstname }}</td>
+                                                        <td>{{ student.lastname }}</td>
+                                                        <td>{{ student.category }}</td>
+                                                        <td>{{ student.department }}</td>
+                                                        <td>{{ student.level }}</td>
+                                                        <td>{{ student.class_code }}</td>
+                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-student({ id : student.student_id })"></i></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                             </div>
                             <!-- End Page Content -->

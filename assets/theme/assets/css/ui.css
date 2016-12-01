@@ -45,6 +45,10 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     margin-bottom: 0px;
 }
 
+.jd-content .jd-page .jd-page-title a {
+    color: #60bed1;
+}
+
 .jd-content .jd-page .jd-page-content {
     padding: 15px 10px 10px;
 }

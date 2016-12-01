@@ -606,3 +606,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     
 });
 
+
+
+
+

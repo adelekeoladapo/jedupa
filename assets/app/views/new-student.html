@@ -3,237 +3,264 @@
                             
                                                         <!-- Page Title -->
                             <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                New Students
+                                <a ui-sref="students">Students /</a> New Student
                             </h1>
                             <!-- Page Title -->
                             
                             <!-- Page Content -->
-                            <div class="font-thin jd-page-content">
-                               
-                                
-                                <form class="form-horizontal" name="form-add-student" id="form-add-student"  novalidate> 
-                                    <input type="hidden" name="school-id" value="{{ school_id }}">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-4 jd-form-block">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Basic Information</h6>
-                                            <div class="form-group">
-                                                <label for="reg-no" class="col-sm-4 control-label">Registration No <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="reg-no" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="firstname" class="col-sm-4 control-label">Firstname <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="firstname" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="lastname" class="col-sm-4 control-label">Lastname <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="lastname" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="other-names" class="col-sm-4 control-label">Other names </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="other-names" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="gender" class="col-sm-4 control-label">Gender </label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" name="gender" required>
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dob" class="col-sm-4 control-label">Date of Birth <span class="required-field"> *</span></label>
-                                                <div class="col-md-8 input-group date" data-provide="datepicker">    
-                                                    <input type="text" name="dob" class="form-control" required>
-                                                    <div class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-th"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 jd-form-block">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Academic Information</h6>
-                                            <div class="form-group">
-                                                <label for="admission-date" class="col-sm-4 control-label">Admission Date <span class="required-field"> *</span></label>
-                                                <div class="col-md-8 input-group date" data-provide="datepicker">    
-                                                    <input type="text" name="admission-date" class="form-control" required>
-                                                    <div class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-th"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="department-id" class="col-sm-4 control-label">Department <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" name="department-id">
-                                                        <option value="{{ department.student_department_id }}" ng-repeat="department in departments">{{ department.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="category-id" class="col-sm-4 control-label">Category <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" name="category-id">
-                                                        <option value="{{ category.student_category_id }}" ng-repeat="category in categories">{{ category.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="class-type-id" class="col-sm-4 control-label">Class Type <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" ng-model="student.class_type_id" name="class-type-id" ng-change="setActiveClassType(student.class_type_id)" required>
-                                                        <option selected></option>
-                                                        <option value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="class-level-id" class="col-sm-4 control-label">Class Level <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" ng-model="student.class_level_id" name="class-level-id" ng-change="setActiveLevel(student.class_level_id)" required>
-                                                        <option selected></option>
-                                                        <option value="{{ level.class_level_id }}" ng-repeat="level in active_class_type_levels">{{ level.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="class-id" class="col-sm-4 control-label">Class <span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" name="class-id" required>
-                                                        <option selected></option>
-                                                        <option value="{{ classs.class_id }}" ng-repeat="classs in active_level_classes">{{ classs.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 jd-form-block plus-115-bottom-margin">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Student's Photo</h6>
-                                            <div class="form-group">
-                                                <label for="phone" class="col-sm-4 control-label">Photo<span class="required-field"> *</span></label>
-                                                <div class="col-sm-8">
-                                                    <div class="img-placeholder" id="img-placeholder" ng-init=" path = (school.logo) ? 'uploads/'+school.school_id+'/'+school.logo : 'system-images/placeholder.png' ">
-                                                        <img ng-src="assets/images/{{ path }}">
-                                                    </div>
-                                                    <div class="select-btn-container">
-                                                        <input type="file" class="custom-file-input" accept="image/*" id="photo" name="photo">
-                                                        <span class="select-image-btn" onclick="$('.custom-file-input').click();">Select Image</span>
-                                                        <!--<span class="photo-spec">Accepted formats: .jpg, .gif and .jpeg</span>-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- horizontal line -->
-                                        <div class="col-md-12">
-                                            <div class="broken-horizontal-line"></div>
-                                        </div>
-                                        <!--/ horizontal line -->
-                                        
-                                        
-                                        
-                                        <div class="col-md-4 jd-form-block">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Contact Details</h6>
-                                            
-                                            <div class="form-group">
-                                                <label for="phone-no" class="col-sm-4 control-label">Phone No </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="phone-no" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email" class="col-sm-4 control-label">Email </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="state-id" class="col-sm-4 control-label">State </label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" name="state-id">
-                                                        <option selected></option>
-                                                        <option value="{{ state.id }}" ng-repeat="state in states">{{ state.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="city" class="col-sm-4 control-label">City </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="city" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="address" class="col-sm-4 control-label">Address </label>
-                                                <div class="col-sm-8">
-                                                    <textarea class="form-control" name="address" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="col-md-4 jd-form-block">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Guardian's Information</h6>
-                                            <div class="form-group">
-                                                <label for="parent-name" class="col-sm-4 control-label">Full Name </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="parent-name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="parent-phone" class="col-sm-4 control-label">Phone No </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="parent-phone" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="parent-email" class="col-sm-4 control-label">Email </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="parent-email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="parent-address" class="col-sm-4 control-label">Address </label>
-                                                <div class="col-sm-8">
-                                                    <textarea class="form-control" name="parent-address" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 jd-form-block">
-                                            <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Additional Information</h6>
-                                            
-                                            <div class="form-group" ng-repeat="field in additional_fields">
-                                                <label for="{{ field.user_additional_field_id }}" class="col-sm-4 control-label">{{ field.name }} <span class="required-field"> {{ (field.required == 1) ? '*' : ''; }}</span> </label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" value="" name="{{ field.user_additional_field_id }}" class="form-control" required="{{ (field.required == 1) ? 'required' : ''; }}" >
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                        
-                                        <div class="col-md-12 form-btns-container">
-                                            <div class="broken-line"></div>
-                                            <button class="btn jd-btn jd-btn-default" type="reset" >Reset</button>
-                                            <button class="btn jd-btn jd-btn-primary" ng-click="addStudent()">Submit</button>
-                                        </div>
-                                        
-                                        
+                            <div class="font-normal jd-page-content">
+
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container">
+                                        <a ui-sref="students" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="new-students">
+                                                <a href="">New Student</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    
-                                </form>
-                                
-                                
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="new-students">
+
+                                            <form class="form-horizontal" name="form-add-student" id="form-add-student"  novalidate> 
+                                                <input type="hidden" name="school-id" value="{{ school_id }}">
+                                                <div class="row">
+
+                                                    <div class="col-md-4 jd-form-block">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Basic Information</h6>
+                                                        <div class="form-group">
+                                                            <label for="reg-no" class="col-sm-4 control-label">Registration No <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="reg-no" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-4 control-label">Firstname <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="firstname" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="lastname" class="col-sm-4 control-label">Lastname <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="lastname" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="other-names" class="col-sm-4 control-label">Other names </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="other-names" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="gender" class="col-sm-4 control-label">Gender </label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="gender" required>
+                                                                    <option>Male</option>
+                                                                    <option>Female</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="dob" class="col-sm-4 control-label">Date of Birth <span class="required-field"> *</span></label>
+                                                            <div class="col-md-8 input-group date" data-provide="datepicker">    
+                                                                <input type="text" name="dob" class="form-control" required>
+                                                                <div class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-th"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 jd-form-block">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Academic Information</h6>
+                                                        <div class="form-group">
+                                                            <label for="admission-date" class="col-sm-4 control-label">Admission Date <span class="required-field"> *</span></label>
+                                                            <div class="col-md-8 input-group date" data-provide="datepicker">    
+                                                                <input type="text" name="admission-date" class="form-control" required>
+                                                                <div class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-th"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="department-id" class="col-sm-4 control-label">Department <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="department-id">
+                                                                    <option value="{{ department.student_department_id }}" ng-repeat="department in departments">{{ department.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="category-id" class="col-sm-4 control-label">Category <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="category-id">
+                                                                    <option value="{{ category.student_category_id }}" ng-repeat="category in categories">{{ category.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="class-type-id" class="col-sm-4 control-label">Class Type <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" ng-model="student.class_type_id" name="class-type-id" ng-change="setActiveClassType(student.class_type_id)" required>
+                                                                    <option selected></option>
+                                                                    <option value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="class-level-id" class="col-sm-4 control-label">Class Level <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" ng-model="student.class_level_id" name="class-level-id" ng-change="setActiveLevel(student.class_level_id)" required>
+                                                                    <option selected></option>
+                                                                    <option value="{{ level.class_level_id }}" ng-repeat="level in active_class_type_levels">{{ level.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="class-id" class="col-sm-4 control-label">Class <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="class-id" required>
+                                                                    <option selected></option>
+                                                                    <option value="{{ classs.class_id }}" ng-repeat="classs in active_level_classes">{{ classs.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 jd-form-block plus-115-bottom-margin">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Student's Photo</h6>
+                                                        <div class="form-group">
+                                                            <label for="phone" class="col-sm-4 control-label">Photo<span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <div class="img-placeholder" id="img-placeholder" ng-init=" path = (school.logo) ? 'uploads/'+school.school_id+'/'+school.logo : 'system-images/placeholder.png' ">
+                                                                    <img ng-src="assets/images/{{ path }}">
+                                                                </div>
+                                                                <div class="select-btn-container">
+                                                                    <input type="file" class="custom-file-input" accept="image/*" id="photo" name="photo">
+                                                                    <span class="select-image-btn" onclick="$('.custom-file-input').click();">Select Image</span>
+                                                                    <!--<span class="photo-spec">Accepted formats: .jpg, .gif and .jpeg</span>-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- horizontal line -->
+                                                    <div class="col-md-12">
+                                                        <div class="broken-horizontal-line"></div>
+                                                    </div>
+                                                    <!--/ horizontal line -->
+
+
+
+                                                    <div class="col-md-4 jd-form-block">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Contact Details</h6>
+
+                                                        <div class="form-group">
+                                                            <label for="phone-no" class="col-sm-4 control-label">Phone No </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="phone-no" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="email" class="col-sm-4 control-label">Email </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="email" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="state-id" class="col-sm-4 control-label">State </label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="state-id">
+                                                                    <option selected></option>
+                                                                    <option value="{{ state.id }}" ng-repeat="state in states">{{ state.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="city" class="col-sm-4 control-label">City </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="city" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="address" class="col-sm-4 control-label">Address </label>
+                                                            <div class="col-sm-8">
+                                                                <textarea class="form-control" name="address" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-4 jd-form-block">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Guardian's Information</h6>
+                                                        <div class="form-group">
+                                                            <label for="parent-name" class="col-sm-4 control-label">Full Name <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="parent-name" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="parent-relationship" class="col-sm-4 control-label">Relationship </label>
+                                                            <div class="col-sm-8">
+                                                                <select name="parent-relationship" class="form-control">
+                                                                    <option>Father</option>
+                                                                    <option>Mother</option>
+                                                                    <option>Brother</option>
+                                                                    <option>Sister</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="parent-phone" class="col-sm-4 control-label">Phone No </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="parent-phone" class="form-control" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="parent-email" class="col-sm-4 control-label">Email </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="parent-email" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="parent-address" class="col-sm-4 control-label">Address </label>
+                                                            <div class="col-sm-8">
+                                                                <textarea class="form-control" name="parent-address" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 jd-form-block">
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Additional Information</h6>
+
+                                                        <div class="form-group" ng-repeat="field in additional_fields">
+                                                            <label for="{{ field.user_additional_field_id }}" class="col-sm-4 control-label">{{ field.name }} <span class="required-field"> {{ (field.required == 1) ? '*' : ''; }}</span> </label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="{{ field.user_additional_field_id }}" class="form-control">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-12 form-btns-container">
+                                                        <div class="broken-line"></div>
+                                                        <button class="btn jd-btn jd-btn-default" type="reset" >Reset</button>
+                                                        <button class="btn jd-btn jd-btn-primary" ng-click="addStudent()">Submit</button>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- End Page Content -->
                             

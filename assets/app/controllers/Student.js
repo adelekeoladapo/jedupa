@@ -1,11 +1,11 @@
-app.controller('StudentsCtrl', function($scope){
+app.controller('StudentsCtrl', function($scope, $scope, students){
     
-    
+    $scope.students = students.data;
     
 });
 
 
-app.controller('NewStudentCtrl', function($scope, Factory, Service, states){
+app.controller('NewStudentCtrl', function($scope, $state, Factory, Service, states){
     
     $scope.factory = Factory;
     
@@ -69,6 +69,7 @@ app.controller('NewStudentCtrl', function($scope, Factory, Service, states){
                     result = JSON.parse(result);
                     hide_loading_overlay();
                     if(result.status){
+                        $state.reload();
                         toast(result.message);
                     }else{
                         toast(result.message);
@@ -91,4 +92,14 @@ app.controller('NewStudentCtrl', function($scope, Factory, Service, states){
     
 });
 
+
+
+
+
+
+app.controller('ViewStudentCtrl', function($scope, $state, Factory, Service, student){
+    
+    $scope.student = student.data;
+    
+});
 

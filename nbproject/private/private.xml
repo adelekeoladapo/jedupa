@@ -11,10 +11,13 @@
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Settings.js</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Student.js</file>
             <file>file:/C:/xampp/htdocs/edugate/application/controllers/Jedupa.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/students.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/templates.html</file>
             <file>file:/C:/xampp/htdocs/edugate/application/controllers/User.php</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/general-settings/basic-information.html</file>
             <file>file:/C:/xampp/htdocs/edugate/application/config/routes.php</file>
             <file>file:/C:/xampp/htdocs/edugate/application/models/AdditionalFieldModel.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/academic-settings.html</file>
             <file>file:/C:/xampp/htdocs/edugate/application/models/UserModel.php</file>
         </group>
     </open-files>

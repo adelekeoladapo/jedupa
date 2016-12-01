@@ -1,0 +1,60 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                <a ui-sref="students">Student /</a> {{ student.firstname+' '+student.lastname }}
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container">
+                                        <a ui-sref="students" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="basic-info">
+                                                <a href="">Basic Details</a>
+                                            </li>
+                                            <li data-href="guardian-info">
+                                                <a href="">Guardian's Information</a>
+                                            </li>
+                                            <li data-href="library-record">
+                                                <a href="">Library Record</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="basic-info">
+                                            Basic Information
+                                        </div>
+                                        <div class="jd-tab-pane" id="guardian-info">
+                                            Guardian's Information
+                                        </div>
+                                        <div class="jd-tab-pane" id="library-record">
+                                            Library Record
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->
+                    
+                    
+                    
+                    
+<script>
+    $(function(){
+        $('#img-placeholder').imagepreview({
+            input: '[name="photo"]',
+            reset: '',
+            preview: '#img-placeholder'
+        });
+    });
+</script>

@@ -24,7 +24,7 @@ class SchoolModel extends CI_Model {
     
     function updateSchool($id, $data){
         $this->db->where('school_id', $id);
-        return $this->db->update('tb_school', $data);
+        return $this->db->update($this->table_name, $data);
     }
     
     function getSchools($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = 25){ 

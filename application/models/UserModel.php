@@ -9,7 +9,7 @@
 
 class UserModel extends CI_Model {
     
-    private $table_name = 'tb_user', $table_student = 'tb_student', $table_employee = 'tb_employee', $table_parent = 'tb_parent';
+    private $table_name = 'tb_user', $table_student = 'tb_student', $table_employee = 'tb_employee', $table_parent = 'tb_parent', $view_student = 'vw_student';
     
     function insertUser($data){
         $this->db->insert($this->table_name, $data);
@@ -46,14 +46,14 @@ class UserModel extends CI_Model {
         $this->db->order_by($sort_field, $sort_order_mode);
         ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
         ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
-        $query = $this->db->get($this->table_student);
+        $query = $this->db->get($this->view_student);
         return ($query->num_rows()) ? $query->result() : [];
     }
     
     function getStudent($id){
         $this->db->select('*');
         $this->db->where('student_id', $id);
-        $query = $this->db->get($this->table_name);
+        $query = $this->db->get($this->view_student);
         return ($query->num_rows()) ? $query->row() : null;
     }
     

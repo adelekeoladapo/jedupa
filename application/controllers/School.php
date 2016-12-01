@@ -35,13 +35,13 @@ class School extends CI_Controller {
         
         $data->name = $this->input->post('name');
         $data->code = $this->input->post('code');
-        $data->address1 = $this->input->post('address');;
-        $data->phone1 = $this->input->post('phone-1');;
-        $data->phone2 = $this->input->post('phone-2');;
+        $data->address1 = $this->input->post('address');
+        $data->phone1 = $this->input->post('phone-1');
+        $data->phone2 = $this->input->post('phone-2');
         $data->country_id = $this->input->post('country-id');
-        $data->state_id = $this->input->post('state-id');;
+        $data->state_id = $this->input->post('state-id');
         $data->auto_gen_student_id = $this->input->post('auto-generate-student-id');
-        $data->auto_gen_employee_id = $this->input->post('auto-generate-employee-id');;
+        $data->auto_gen_employee_id = $this->input->post('auto-generate-employee-id');
         $data->auto_gen_parent_id = $this->input->post('auto-generate-parent-id');
         $data->email = $this->input->post('email');
         $data->website = $this->input->post('website');
