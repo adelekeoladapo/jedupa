@@ -158,7 +158,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 
 .jd-tab-container .jd-tab-title-block > ul > li.active > a {
     background-color: #f8f8f8;
-    border: solid 1px #eee;
+    border: solid 1px #ddd;
     border-bottom: transparent;
 }
 
@@ -168,15 +168,20 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 .jd-tab-container .jd-tab-content-block {
     width: 100%;
     height: auto;
-    margin-top: -2px;
-    border: solid 1px #eee;
-    border-radius: 3px;
+    margin-top: -3px;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    border-left: solid 2px #60bed1;
 }
 
 .jd-tab-container .jd-tab-content-block .jd-tab-pane {
     width: 100%;
     padding: 10px 10px 10px;
     display: none;
+}
+
+.jd-tab-container .jd-tab-content-block .jd-tab-pane.jd-info-pane {
+    padding: 25px 30px;
 }
 
 .jd-tab-container .jd-tab-content-block .jd-tab-pane.active {
@@ -508,12 +513,31 @@ ul.class-level-list > li > a:hover {
     color: #212a30;
 }
 
-
-
 /************ end jd modal *************/
 
 
+/************** jd info block ***********/
 
+.jd-info-block {
+    
+}
+
+.jd-info-block .info-item {
+    margin-left: 5px;
+}
+
+.jd-info-block .info-item .info-item-title {
+    font-weight: bold;
+}
+
+.jd-info-block .info-item .info-item-descr {
+}
+
+.jd-info-block .table td {
+    border: 0;
+}
+
+/************** jd info block ***********/
 
 
 

@@ -28,13 +28,122 @@
                                         </ul>
                                     </div>
                                     <div class="jd-tab-content-block">
-                                        <div class="jd-tab-pane active" id="basic-info">
-                                            Basic Information
+                                        <div class="jd-tab-pane jd-info-pane active" id="basic-info">
+                                            <div class="row">
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Registration No 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.registration_number }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Firstname
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    {{ student.firstname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Lastname
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.lastname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Other Names
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.othernames }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Gender
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.gender }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Date Of Birth
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ factory.formatDate_1(student.dob) }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Admission Date 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.admission_date }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Category
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.category }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Department
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.department }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Class Type
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.class_type }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Class Level
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.level }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Class
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.class }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="jd-tab-pane" id="guardian-info">
+                                        <div class="jd-tab-pane jd-info-pane" id="guardian-info">
                                             Guardian's Information
                                         </div>
-                                        <div class="jd-tab-pane" id="library-record">
+                                        <div class="jd-tab-pane jd-info-pane" id="library-record">
                                             Library Record
                                         </div>
                                     </div>

@@ -1,4 +1,6 @@
-app.controller('StudentsCtrl', function($scope, $scope, students){
+app.controller('StudentsCtrl', function($scope, $scope, Factory, Service, students){
+    
+    $scope.factory = Factory;
     
     $scope.students = students.data;
     
@@ -98,6 +100,8 @@ app.controller('NewStudentCtrl', function($scope, $state, Factory, Service, stat
 
 
 app.controller('ViewStudentCtrl', function($scope, $state, Factory, Service, student){
+    
+    $scope.factory = Factory;
     
     $scope.student = student.data;
     
