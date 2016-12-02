@@ -8,7 +8,7 @@
  */
 class AdditionalFieldModel extends CI_Model {
     
-    private $table_name = 'tb_user_additional_details', $table_additional_field = 'tb_user_additional_field';
+    private $table_name = 'tb_user_additional_details', $table_additional_field = 'tb_user_additional_field', $view_additional_details = 'vw_additional_details';
     
     function insertAdditionalDetail($data){
         $this->db->insert($this->table_name, $data);
@@ -29,6 +29,14 @@ class AdditionalFieldModel extends CI_Model {
         $this->db->where('class_id', $id);
         $query = $this->db->get($this->table_name);
         return ($query->num_rows()) ? $query->row() : null;
+    }
+    
+    function getUserAdditionalDetails($user_id, $user_group_type){
+        $data = array('user_id' => $user_id, 'type' => $user_group_type);
+        $this->db->select('*');
+        $this->db->where($data);
+        $query = $this->db->get($this->view_additional_details);
+        return ($query->num_rows()) ? $query->result() : [];
     }
     
     /*

@@ -81,6 +81,30 @@
                                                                     {{ factory.formatDate_1(student.dob) }}
                                                                 </td>
                                                             </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Phone No
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.phone1 }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Email
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.email }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Address
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ (student.address) ? student.address+', ' : '' }} {{ (student.city) ? student.city+', ' : ''}} {{ student.state+' State' }}
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -133,6 +157,32 @@
                                                                 </td>
                                                                 <td class="info-item-descr">
                                                                     {{ student.class }}
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                            <!-- additional details -->
+                                                            <tr class="info-item" ng-repeat="detail in student.additional_details">
+                                                                <td class="info-item-title">
+                                                                    {{ detail.name }}
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ detail.value }}
+                                                                </td>
+                                                            </tr>
+                                                            <!--/ additional details -->
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Photo 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    <img ng-src="assets/images/uploads/1/passport_photo.jpg">
                                                                 </td>
                                                             </tr>
                                                         </tbody>

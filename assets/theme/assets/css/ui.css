@@ -533,6 +533,12 @@ ul.class-level-list > li > a:hover {
 .jd-info-block .info-item .info-item-descr {
 }
 
+.jd-info-block .info-item .info-item-descr img {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+}
+
 .jd-info-block .table td {
     border: 0;
 }

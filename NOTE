@@ -28,5 +28,15 @@ tb_student.date_created AS date_created, tb_student.batch_id AS batch_id, tb_stu
 tb_student.parent_id AS parent_id, tb_student.parent_relationship AS parent_relationship, tb_student.class_type_id AS class_type_id,
 tb_student.class_level_id AS class_level_id, tb_student.class_id AS class_id, vw_class.name AS class, vw_class.code AS class_code,
 vw_class.level_name AS level, vw_class.department_name AS department, vw_class.department_code AS department_code, vw_class.class_type AS class_type,
-tb_student_category.name AS category, tb_student_category.code AS category_code 
-FROM tb_user JOIN tb_student ON tb_user.user_id = tb_student.user_id JOIN vw_class ON tb_student.class_id = vw_class.class_id JOIN tb_student_category ON tb_student_category.student_category_id = tb_student.student_category_id
+tb_student_category.name AS category, tb_student_category.code AS category_code, tb_state.name AS state
+FROM tb_user JOIN tb_student ON tb_user.user_id = tb_student.user_id JOIN vw_class ON tb_student.class_id = vw_class.class_id JOIN tb_student_category ON tb_student_category.student_category_id = tb_student.student_category_id JOIN tb_state ON tb_user.state_id = tb_state.id
+
+
+
+CREATE VIEW vw_additional_details AS SELECT tb_user_additional_details.user_additional_detail_id AS user_additional_detail_id, tb_user_additional_details.school_id AS 
+school_id, tb_user_additional_details.user_id AS user_id, tb_user_additional_details.user_additional_field_id AS user_additional_field_id, tb_user_additional_details.value
+ AS value, tb_user_additional_field.name AS name, tb_user_additional_field.type AS type, tb_user_additional_field.required AS required, tb_user_additional_field.description AS description 
+ FROM tb_user_additional_details JOIN tb_user_additional_field ON tb_user_additional_details.user_additional_field_id = tb_user_additional_field.user_additional_field_id 
+
+
+

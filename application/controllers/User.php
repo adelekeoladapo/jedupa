@@ -85,7 +85,7 @@ class User extends CI_Controller {
         $fields = $this->additonal_fields_model->getAdditionalFields(false, false, 'type', 'student', false, '');
         $_data = NEW stdClass();
         $_data->school_id = $school_id;
-        $_data->student_id = $student_id;
+        $_data->user_id = $user_id;
         foreach ($fields as $field) {
             $d = $field->user_additional_field_id;
             $_data->user_additional_field_id = $d;
@@ -109,7 +109,9 @@ class User extends CI_Controller {
     
     function getStudent(){
         $id = $this->input->get('student_id');
-        echo json_encode($this->model->getStudent($id));
+        $data = $this->model->getStudent($id);
+        $data->additional_details = $this->additonal_fields_model->getUserAdditionalDetails($data->user_id, 'student');
+        echo json_encode($data);
     }
     
 }
