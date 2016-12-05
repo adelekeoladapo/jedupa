@@ -1,0 +1,159 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                <a ui-sref="parents">Guardian /</a> {{ parent.fullname }}
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container">
+                                        <a ui-sref="parents" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="basic-info">
+                                                <a href="">Basic Details</a>
+                                            </li>
+                                            <li data-href="children">
+                                                <a href="">Children</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane jd-info-pane active" id="basic-info">
+                                            <div class="row">
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Username 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ parent.username }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Fullname
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    {{ parent.fullname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    No. of Children
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    0
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Phone No.
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ parent.phone1 }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Email
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ parent.email }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Address
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ parent.address }}
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Photo 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    <img ng-src="assets/images/{{ (parent.photo) ? 'uploads/'+parent.school_id+'/'+parent.photo : 'system-images/placeholder.png' }}">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jd-tab-pane" id="children">
+                                            <br />
+                                            <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                <thead class="table-bordered">
+                                                    <tr>
+                                                        <th>SN</th>
+                                                        <th>Registration No</th>
+                                                        <th>Firstname</th>
+                                                        <th>Lastname</th>
+                                                        <th>Category</th>
+                                                        <th>Department</th>
+                                                        <th>Level</th>
+                                                        <th>Class</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-bordered">
+                                                    <tr ng-repeat="child in children">
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>{{ child.registration_number }}</td>
+                                                        <td>{{ child.firstname }}</td>
+                                                        <td>{{ child.lastname }}</td>
+                                                        <td>{{ child.category }}</td>
+                                                        <td>{{ child.department }}</td>
+                                                        <td>{{ child.level }}</td>
+                                                        <td>{{ child.class_code }}</td>
+                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-student({ id : child.student_id })"></i></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->
+                    
+                    
+                    
+                    
+<script>
+    $(function(){
+        $('#img-placeholder').imagepreview({
+            input: '[name="photo"]',
+            reset: '',
+            preview: '#img-placeholder'
+        });
+    });
+</script>

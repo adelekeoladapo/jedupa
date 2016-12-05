@@ -56,8 +56,10 @@
     
     <script src="<? echo base_url(); ?>assets/theme/assets/js/ui.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Jedupa.js"></script>
-    <script src="<? echo base_url(); ?>assets/app/controllers/Student.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Settings.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Student.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Parent.js"></script>
+    
     <!-- JS Links -->
     
     

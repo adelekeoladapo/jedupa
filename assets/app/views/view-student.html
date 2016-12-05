@@ -182,7 +182,7 @@
                                                                    Photo 
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    <img ng-src="assets/images/uploads/1/passport_photo.jpg">
+                                                                    <img ng-src="assets/images/{{ (student.photo) ? 'uploads/'+student.school_id+'/'+student.photo : 'system-images/placeholder.png' }}">
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -191,7 +191,82 @@
                                             </div>
                                         </div>
                                         <div class="jd-tab-pane jd-info-pane" id="guardian-info">
-                                            Guardian's Information
+                                            <div class="row">
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Username
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    {{ student.parent_username }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Fullname
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.parent_name }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Relationship
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.parent_relationship }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Phone No
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    {{ student.parent_phone1 }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Email
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.parent_email }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Address
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ student.parent_address }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Photo 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    <img ng-src="assets/images/{{ (student.parent_photo) ? 'uploads/'+student.school_id+'/'+student.parent_photo : 'system-images/placeholder.png' }}">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="jd-tab-pane jd-info-pane" id="library-record">
                                             Library Record

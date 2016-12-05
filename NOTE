@@ -18,6 +18,14 @@ CREATE VIEW vw_score_group_structure AS SELECT tb_score_group_structure.score_gr
 CREATE VIEW vw_employee_position AS SELECT tb_employee_position.employee_position_id AS employee_position_id, tb_employee_position.school_id AS school_id, tb_employee_position.name AS name, tb_employee_position.description AS description, tb_employee_position.date_created AS date_created, tb_employee_position.date_modified as date_modified, tb_employee_position.employee_category_id AS employee_category_id, tb_employee_category.name AS category, tb_employee_category.code AS category_code FROM tb_employee_position JOIN tb_employee_category ON tb_employee_position.employee_category_id = tb_employee_category.employee_category_id
 
 
+CREATE VIEW vw_parent AS SELECT tb_user.user_id AS user_id, tb_user.firstname AS fullname, tb_user.username AS username, tb_user.password AS password, tb_user.is_active AS is_active,
+tb_user.school_id as school_id, tb_user.gender AS gender, tb_user.dob AS dob, tb_user.marital_status AS marital_status,
+tb_user.state_id AS state_id, tb_user.address AS address, tb_user.city AS city, tb_user.phone1 AS phone1, tb_user.phone2 AS phone2,
+tb_user.email AS email, tb_user.photo AS photo, tb_user.privilege_id AS privilege_id, tb_parent.parent_id AS parent_id
+FROM tb_user JOIN tb_parent ON tb_user.user_id = tb_parent.user_id
+
+
+
 CREATE VIEW vw_student AS SELECT tb_user.user_id AS user_id, tb_user.firstname AS firstname, tb_user.lastname AS lastname,
 tb_user.othernames AS othernames, tb_user.username AS username, tb_user.password AS password, tb_user.is_active AS is_active,
 tb_user.school_id as school_id, tb_user.gender AS gender, tb_user.dob AS dob, tb_user.marital_status AS marital_status,
@@ -28,8 +36,11 @@ tb_student.date_created AS date_created, tb_student.batch_id AS batch_id, tb_stu
 tb_student.parent_id AS parent_id, tb_student.parent_relationship AS parent_relationship, tb_student.class_type_id AS class_type_id,
 tb_student.class_level_id AS class_level_id, tb_student.class_id AS class_id, vw_class.name AS class, vw_class.code AS class_code,
 vw_class.level_name AS level, vw_class.department_name AS department, vw_class.department_code AS department_code, vw_class.class_type AS class_type,
-tb_student_category.name AS category, tb_student_category.code AS category_code, tb_state.name AS state
-FROM tb_user JOIN tb_student ON tb_user.user_id = tb_student.user_id JOIN vw_class ON tb_student.class_id = vw_class.class_id JOIN tb_student_category ON tb_student_category.student_category_id = tb_student.student_category_id JOIN tb_state ON tb_user.state_id = tb_state.id
+tb_student_category.name AS category, tb_student_category.code AS category_code, tb_state.name AS state, vw_parent.fullname AS parent_name, vw_parent.username AS parent_username,
+vw_parent.address AS parent_address, vw_parent.city AS parent_city, vw_parent.phone1 AS parent_phone1, vw_parent.phone2 as parent_phone2, vw_parent.email AS parent_email,
+vw_parent.photo AS parent_photo
+FROM tb_user JOIN tb_student ON tb_user.user_id = tb_student.user_id JOIN vw_class ON tb_student.class_id = vw_class.class_id JOIN tb_student_category ON tb_student_category.student_category_id = tb_student.student_category_id JOIN tb_state ON tb_user.state_id = tb_state.id JOIN vw_parent ON tb_student.parent_id = vw_parent.parent_id
+
 
 
 

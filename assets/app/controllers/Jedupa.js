@@ -303,8 +303,10 @@ app.factory('Factory', function(){
         app_data.students = dt;
     }
     
-    
-    
+    /**  parents **/
+    data.getParents = function(){
+        return app_data.parents;
+    }
     
     
     
@@ -592,6 +594,25 @@ app.service('Service', function($http){
         });
     };
     
+    /** parent **/
+    this.getParents = function(school_id){
+        return $http.get(base_url+"api/get-parents", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getParent = function(id){
+        return $http.get(base_url+"api/get-parent", {
+            params : {'parent_id' : id}
+        });
+    };
+    
+    this.getChildren = function(parent_id){
+        return $http.get(base_url+"api/get-students", {
+            params : {'filter-field': 'parent_id', 'filter-value': parent_id}
+        });
+    };
+    
 });
 
 
@@ -638,6 +659,31 @@ app.config(function($stateProvider, $urlRouterProvider){
             resolve: {
                 student: function($stateParams, Service){
                     return Service.getStudent($stateParams.id);
+                }
+            }
+        })
+        
+        .state('parents', {
+            url: "/parents",
+            templateUrl: "assets/app/views/parents.html",
+            controller: "ParentsCtrl",
+            resolve: {
+                parents: function(Service){
+                    return Service.getParents();
+                }
+            }
+        })
+        
+        .state('view-parent', {
+            url: "/view-parent/:id",
+            templateUrl: "assets/app/views/view-parent.html",
+                controller: "ViewParentCtrl",
+            resolve: {
+                parent: function($stateParams, Service){
+                    return Service.getParent($stateParams.id);
+                },
+                children: function($stateParams, Service){
+                    return Service.getChildren($stateParams.id);
                 }
             }
         })

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2016 at 06:26 PM
+-- Generation Time: Dec 05, 2016 at 06:11 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -359,11 +359,8 @@ CREATE TABLE `tb_parent` (
 --
 
 INSERT INTO `tb_parent` (`parent_id`, `school_id`, `date_created`, `user_id`) VALUES
-(1, 1, '2016-11-30 12:24:03', 2),
-(2, 1, '2016-11-30 12:33:53', 4),
-(3, 1, '2016-11-30 12:35:59', 6),
-(4, 1, '2016-11-30 17:55:01', 8),
-(5, 1, '2016-12-02 13:15:53', 10);
+(1, 1, '2016-12-05 13:24:46', 12),
+(2, 1, '2016-12-05 14:14:26', 14);
 
 -- --------------------------------------------------------
 
@@ -597,11 +594,8 @@ CREATE TABLE `tb_student` (
 --
 
 INSERT INTO `tb_student` (`student_id`, `school_id`, `user_id`, `student_department_id`, `registration_number`, `admission_date`, `date_created`, `batch_id`, `student_category_id`, `parent_id`, `parent_relationship`, `class_type_id`, `class_level_id`, `class_id`) VALUES
-(1, 1, 1, 1, 'REG-01', '0000-00-00 00:00:00', '2016-11-30 12:24:03', 0, 1, 1, 'Father', 1, 1, 1),
-(2, 1, 3, 2, 'REG-02', '0000-00-00 00:00:00', '2016-11-30 12:33:53', 0, 2, 2, 'Father', 1, 1, 1),
-(3, 1, 5, 1, 'REG-03', '0000-00-00 00:00:00', '2016-11-30 12:35:59', 0, 1, 3, 'Brother', 1, 1, 1),
-(4, 1, 7, 1, 'REG-04', '0000-00-00 00:00:00', '2016-11-30 17:55:02', 0, 1, 4, 'Father', 1, 2, 3),
-(5, 1, 9, 1, 'REG-05', '0000-00-00 00:00:00', '2016-12-02 13:15:53', 0, 1, 5, 'Father', 1, 1, 1);
+(1, 1, 11, 1, 'REG-01', '0000-00-00 00:00:00', '2016-12-05 13:24:46', 0, 1, 1, 'Father', 1, 1, 1),
+(2, 1, 13, 1, 'REG-02', '0000-00-00 00:00:00', '2016-12-05 14:14:26', 0, 1, 2, 'Father', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -768,7 +762,11 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (7, 'Christiana', 'Perri', '', '', '', 0, 1, 'Female', '2016-11-09 00:00:00', '', 16, '', 'Lagos', '0802324364', '', 'sundayijeoma001@gmail.com', '', 0),
 (8, 'Mr Perri', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
 (9, 'Adeleke', 'Oladapo', 'Philips', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 1, 'Ajah', 'Lagos', '0802324364', '', 'adelekeoladapo@gmail.com', '14725506_10208052812786742_2500313437545856516_n1.jpg', 0),
-(10, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0);
+(10, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0),
+(11, 'Adeleke', 'Oladapo', 'Philips', '', '', 0, 1, 'Male', '2016-12-21 00:00:00', '', 24, 'Lagos', 'Lagos', '0802324364', '', 'adelekeoladapo@gmail.com', '14725506_10208052812786742_2500313437545856516_n2.jpg', 0),
+(12, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0),
+(13, 'Mark', 'Zuckerberg', 'Elliot', '', '', 0, 1, 'Male', '2016-12-30 00:00:00', '', 18, 'Daura', 'Daura', '0802324364', '', 'mark@gmail.com', 'passport_photo2.jpg', 0),
+(14, 'Mr Zuckerberg Jim', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, 'Somewhere in the U.S', '', '08095775757', '', 'zuckjim@gmail.com', '', 0);
 
 -- --------------------------------------------------------
 
@@ -789,42 +787,14 @@ CREATE TABLE `tb_user_additional_details` (
 --
 
 INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_id`, `user_id`, `user_additional_field_id`, `value`) VALUES
-(1, 1, 1, 1, '7cm'),
-(2, 1, 1, 2, 'Group O'),
-(3, 1, 1, 4, 'Christianity'),
-(4, 1, 1, 5, 'Green'),
-(5, 1, 2, 1, '80cm'),
-(6, 1, 2, 2, 'Group A'),
-(7, 1, 2, 4, 'Islam'),
-(8, 1, 2, 5, 'RED'),
-(9, 1, 3, 1, '5cm'),
-(10, 1, 3, 2, 'O group'),
-(11, 1, 3, 4, 'Islam'),
-(12, 1, 3, 5, 'Grey'),
-(13, 1, 1, 1, '10cm'),
-(14, 1, 1, 2, 'Group A'),
-(15, 1, 1, 4, 'Christian'),
-(16, 1, 1, 5, 'RED'),
-(17, 1, 1, 1, '10cm'),
-(18, 1, 1, 2, 'Group O'),
-(19, 1, 1, 4, 'Christianity'),
-(20, 1, 1, 5, 'Red'),
-(21, 1, 2, 1, '10cm'),
-(22, 1, 2, 2, ''),
-(23, 1, 2, 4, 'Christianity'),
-(24, 1, 2, 5, ''),
-(25, 1, 3, 1, ''),
-(26, 1, 3, 2, ''),
-(27, 1, 3, 4, ''),
-(28, 1, 3, 5, ''),
-(29, 1, 4, 1, '20cm'),
-(30, 1, 4, 2, 'O'),
-(31, 1, 4, 4, 'Hindu'),
-(32, 1, 4, 5, 'Green'),
-(33, 1, 9, 1, '10cm'),
-(34, 1, 9, 2, 'Group A'),
-(35, 1, 9, 4, 'Islam'),
-(36, 1, 9, 5, 'RED');
+(1, 1, 11, 1, '50m'),
+(2, 1, 11, 2, 'Group A'),
+(3, 1, 11, 4, 'Christianity'),
+(4, 1, 11, 5, 'RED'),
+(5, 1, 13, 1, '45cm'),
+(6, 1, 13, 2, 'Group O'),
+(7, 1, 13, 4, 'Christianity'),
+(8, 1, 13, 5, 'Grey');
 
 -- --------------------------------------------------------
 
@@ -848,10 +818,8 @@ CREATE TABLE `tb_user_additional_field` (
 
 INSERT INTO `tb_user_additional_field` (`user_additional_field_id`, `school_id`, `name`, `description`, `type`, `required`, `date_created`) VALUES
 (1, 1, 'Height', 'The height of each student in cm', 'student', 0, '2016-11-22 15:00:56'),
-(2, 1, 'Blood Group', 'The blood group of students', 'student', 0, '2016-11-22 15:01:45'),
 (3, 1, 'Bank Name', 'Bank name of all our staff', 'employee', 0, '2016-11-22 15:02:29'),
-(4, 1, 'Religion', 'The religion of student', 'student', 0, '2016-11-29 07:20:15'),
-(5, 1, 'House Color', 'Student''s house color', 'student', 1, '2016-11-29 07:31:25');
+(4, 1, 'Religion', 'The religion of student', 'student', 0, '2016-11-29 07:20:15');
 
 -- --------------------------------------------------------
 
@@ -938,6 +906,32 @@ CREATE TABLE `vw_employee_position` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_parent`
+--
+CREATE TABLE `vw_parent` (
+`user_id` int(11)
+,`fullname` varchar(100)
+,`username` varchar(100)
+,`password` varchar(200)
+,`is_active` int(11)
+,`school_id` int(11)
+,`gender` varchar(10)
+,`dob` datetime
+,`marital_status` varchar(50)
+,`state_id` int(11)
+,`address` varchar(200)
+,`city` varchar(50)
+,`phone1` varchar(50)
+,`phone2` varchar(50)
+,`email` varchar(100)
+,`photo` varchar(200)
+,`privilege_id` int(11)
+,`parent_id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_quota`
 --
 CREATE TABLE `vw_quota` (
@@ -1014,6 +1008,14 @@ CREATE TABLE `vw_student` (
 ,`category` varchar(200)
 ,`category_code` varchar(50)
 ,`state` varchar(30)
+,`parent_name` varchar(100)
+,`parent_username` varchar(100)
+,`parent_address` varchar(200)
+,`parent_city` varchar(50)
+,`parent_phone1` varchar(50)
+,`parent_phone2` varchar(50)
+,`parent_email` varchar(100)
+,`parent_photo` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -1046,6 +1048,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_parent`
+--
+DROP TABLE IF EXISTS `vw_parent`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_parent`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `fullname`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_parent`.`parent_id` AS `parent_id` from (`tb_user` join `tb_parent` on((`tb_user`.`user_id` = `tb_parent`.`user_id`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_quota`
 --
 DROP TABLE IF EXISTS `vw_quota`;
@@ -1068,7 +1079,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_student`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_student`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_student`.`student_id` AS `student_id`,`tb_student`.`student_department_id` AS `department_id`,`tb_student`.`registration_number` AS `registration_number`,`tb_student`.`admission_date` AS `admission_date`,`tb_student`.`date_created` AS `date_created`,`tb_student`.`batch_id` AS `batch_id`,`tb_student`.`student_category_id` AS `category_id`,`tb_student`.`parent_id` AS `parent_id`,`tb_student`.`parent_relationship` AS `parent_relationship`,`tb_student`.`class_type_id` AS `class_type_id`,`tb_student`.`class_level_id` AS `class_level_id`,`tb_student`.`class_id` AS `class_id`,`vw_class`.`name` AS `class`,`vw_class`.`code` AS `class_code`,`vw_class`.`level_name` AS `level`,`vw_class`.`department_name` AS `department`,`vw_class`.`department_code` AS `department_code`,`vw_class`.`class_type` AS `class_type`,`tb_student_category`.`name` AS `category`,`tb_student_category`.`code` AS `category_code`,`tb_state`.`name` AS `state` from ((((`tb_user` join `tb_student` on((`tb_user`.`user_id` = `tb_student`.`user_id`))) join `vw_class` on((`tb_student`.`class_id` = `vw_class`.`class_id`))) join `tb_student_category` on((`tb_student_category`.`student_category_id` = `tb_student`.`student_category_id`))) join `tb_state` on((`tb_user`.`state_id` = `tb_state`.`id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_student`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_student`.`student_id` AS `student_id`,`tb_student`.`student_department_id` AS `department_id`,`tb_student`.`registration_number` AS `registration_number`,`tb_student`.`admission_date` AS `admission_date`,`tb_student`.`date_created` AS `date_created`,`tb_student`.`batch_id` AS `batch_id`,`tb_student`.`student_category_id` AS `category_id`,`tb_student`.`parent_id` AS `parent_id`,`tb_student`.`parent_relationship` AS `parent_relationship`,`tb_student`.`class_type_id` AS `class_type_id`,`tb_student`.`class_level_id` AS `class_level_id`,`tb_student`.`class_id` AS `class_id`,`vw_class`.`name` AS `class`,`vw_class`.`code` AS `class_code`,`vw_class`.`level_name` AS `level`,`vw_class`.`department_name` AS `department`,`vw_class`.`department_code` AS `department_code`,`vw_class`.`class_type` AS `class_type`,`tb_student_category`.`name` AS `category`,`tb_student_category`.`code` AS `category_code`,`tb_state`.`name` AS `state`,`vw_parent`.`fullname` AS `parent_name`,`vw_parent`.`username` AS `parent_username`,`vw_parent`.`address` AS `parent_address`,`vw_parent`.`city` AS `parent_city`,`vw_parent`.`phone1` AS `parent_phone1`,`vw_parent`.`phone2` AS `parent_phone2`,`vw_parent`.`email` AS `parent_email`,`vw_parent`.`photo` AS `parent_photo` from (((((`tb_user` join `tb_student` on((`tb_user`.`user_id` = `tb_student`.`user_id`))) join `vw_class` on((`tb_student`.`class_id` = `vw_class`.`class_id`))) join `tb_student_category` on((`tb_student_category`.`student_category_id` = `tb_student`.`student_category_id`))) join `tb_state` on((`tb_user`.`state_id` = `tb_state`.`id`))) join `vw_parent` on((`tb_student`.`parent_id` = `vw_parent`.`parent_id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -1378,7 +1389,7 @@ ALTER TABLE `tb_grading_system`
 -- AUTO_INCREMENT for table `tb_parent`
 --
 ALTER TABLE `tb_parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_quota`
 --
@@ -1413,7 +1424,7 @@ ALTER TABLE `tb_state`
 -- AUTO_INCREMENT for table `tb_student`
 --
 ALTER TABLE `tb_student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_student_category`
 --
@@ -1453,12 +1464,12 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --

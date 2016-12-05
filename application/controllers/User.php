@@ -114,4 +114,24 @@ class User extends CI_Controller {
         echo json_encode($data);
     }
     
+    /*
+     * Parents
+     */
+    function getParents(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page = $this->input->get('page');
+        $page_size = $this->input->get('page-size');
+        echo json_encode($this->model->getParents($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function getParent(){
+        $id = $this->input->get('parent_id');
+        $data = $this->model->getParent($id);
+        $data->additional_details = $this->additonal_fields_model->getUserAdditionalDetails($data->user_id, 'parent');
+        echo json_encode($data);
+    }
+    
 }
