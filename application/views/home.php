@@ -59,6 +59,7 @@
     <script src="<? echo base_url(); ?>assets/app/controllers/Settings.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Student.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Parent.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Employee.js"></script>
     
     <!-- JS Links -->
     

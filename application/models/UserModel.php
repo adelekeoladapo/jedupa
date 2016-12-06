@@ -9,7 +9,7 @@
 
 class UserModel extends CI_Model {
     
-    private $table_name = 'tb_user', $table_student = 'tb_student', $table_employee = 'tb_employee', $table_parent = 'tb_parent', $view_student = 'vw_student', $view_parent = 'vw_parent';
+    private $table_name = 'tb_user', $table_student = 'tb_student', $table_employee = 'tb_employee', $table_parent = 'tb_parent', $view_student = 'vw_student', $view_parent = 'vw_parent', $view_employee = 'vw_employee';
     
     function insertUser($data){
         $this->db->insert($this->table_name, $data);
@@ -58,7 +58,7 @@ class UserModel extends CI_Model {
     }
     
     /**
-     * PARENT MODEL
+     * Parent Model
      */
     function insertParent($data){
         $this->db->insert($this->table_parent, $data);
@@ -81,5 +81,29 @@ class UserModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    
+    /*
+     * Employee Model
+     */
+    function insertEmployee($data){
+        $this->db->insert($this->table_employee, $data);
+        return $this->db->insert_id();
+    }
+    
+    function getEmployees($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){ 
+        $this->db->select('*');
+        $this->db->order_by($sort_field, $sort_order_mode);
+        ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
+        ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
+        $query = $this->db->get($this->view_employee);
+        return ($query->num_rows()) ? $query->result() : [];
+    }
+    
+    function getEmployee($id){
+        $this->db->select('*');
+        $this->db->where('employee_id', $id);
+        $query = $this->db->get($this->view_employee);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
     
 }

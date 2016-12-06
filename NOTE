@@ -51,3 +51,43 @@ school_id, tb_user_additional_details.user_id AS user_id, tb_user_additional_det
 
 
 
+CREATE VIEW vw_employee AS SELECT 
+    tb_user.user_id AS user_id, 
+    tb_user.firstname AS firstname,
+    tb_user.lastname AS lastname,
+    tb_user.othernames AS othernames,
+    tb_user.username AS username, 
+    tb_user.password AS password, 
+    tb_user.is_active AS is_active,
+	tb_user.school_id as school_id, 
+    tb_user.gender AS gender, 
+    tb_user.dob AS dob, 
+    tb_user.marital_status AS marital_status,
+	tb_user.state_id AS state_id, 
+    tb_user.address AS address,
+    tb_user.city AS city, 
+    tb_user.phone1 AS phone1,
+    tb_user.phone2 AS phone2,
+	tb_user.email AS email,
+    tb_user.photo AS photo,
+    tb_user.privilege_id AS privilege_id,
+    tb_user_privilege.name AS privilege, 
+    employee_id,
+    tb_employee.employee_department_id AS deparment_id,
+    tb_employee.employee_category_id AS category_id,
+    tb_employee.employee_position_id AS position_id, 
+	tb_employee.date_joined AS date_joined,
+    tb_employee.employee_code AS employee_code, 
+    tb_employee.employee_grade_level_id AS grade_level_id, 
+	tb_employee_department.name AS department, 
+    tb_employee_category.name AS category, 
+    tb_employee_position.name AS position, 
+    tb_employee_grade_level.name AS grade_level
+FROM tb_user 
+JOIN tb_user_privilege ON tb_user_privilege.user_privilege_id = tb_user.privilege_id 
+JOIN tb_employee ON tb_employee.user_id = tb_user.user_id 
+JOIN tb_employee_department ON tb_employee_department.employee_department_id = tb_employee.employee_department_id 
+JOIN tb_employee_category ON tb_employee_category.employee_category_id = tb_employee.employee_category_id 
+JOIN tb_employee_position ON tb_employee_position.employee_position_id = tb_employee.employee_position_id 
+JOIN tb_employee_grade_level ON tb_employee_grade_level.employee_grade_level_id = tb_employee.employee_grade_level_id 
+

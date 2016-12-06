@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2016 at 06:11 PM
+-- Generation Time: Dec 06, 2016 at 06:51 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -198,10 +198,18 @@ CREATE TABLE `tb_employee` (
   `employee_position_id` int(11) DEFAULT NULL,
   `date_joined` date DEFAULT NULL,
   `employee_code` varchar(100) DEFAULT NULL,
-  `tb_employee_grade_level_id` int(11) DEFAULT NULL,
+  `employee_grade_level_id` int(11) DEFAULT NULL,
   `date_created` datetime NOT NULL,
   `student_department_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_employee`
+--
+
+INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_code`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
+(1, 1, 21, 2, 2, 2, '2016-12-04', 'EMP-001', 2, '2016-12-06 17:08:59', NULL),
+(2, 1, 22, 1, 1, 1, '2016-12-20', 'EMP-002', 3, '2016-12-06 18:48:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -257,7 +265,7 @@ INSERT INTO `tb_employee_department` (`employee_department_id`, `school_id`, `na
 --
 
 CREATE TABLE `tb_employee_grade_level` (
-  `tb_employee_grade_level_id` int(11) NOT NULL,
+  `employee_grade_level_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `name` varchar(200) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
@@ -268,7 +276,7 @@ CREATE TABLE `tb_employee_grade_level` (
 -- Dumping data for table `tb_employee_grade_level`
 --
 
-INSERT INTO `tb_employee_grade_level` (`tb_employee_grade_level_id`, `school_id`, `name`, `description`, `date_created`) VALUES
+INSERT INTO `tb_employee_grade_level` (`employee_grade_level_id`, `school_id`, `name`, `description`, `date_created`) VALUES
 (1, 1, '5.0', 'Entry Level Grade', '2016-11-23 17:59:35'),
 (2, 1, '5.5', 'After five years experience', '2016-11-23 18:01:35'),
 (3, 1, '6.0', 'BSc with more than 5 years experience', '2016-11-23 18:05:53');
@@ -766,7 +774,9 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (11, 'Adeleke', 'Oladapo', 'Philips', '', '', 0, 1, 'Male', '2016-12-21 00:00:00', '', 24, 'Lagos', 'Lagos', '0802324364', '', 'adelekeoladapo@gmail.com', '14725506_10208052812786742_2500313437545856516_n2.jpg', 0),
 (12, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0),
 (13, 'Mark', 'Zuckerberg', 'Elliot', '', '', 0, 1, 'Male', '2016-12-30 00:00:00', '', 18, 'Daura', 'Daura', '0802324364', '', 'mark@gmail.com', 'passport_photo2.jpg', 0),
-(14, 'Mr Zuckerberg Jim', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, 'Somewhere in the U.S', '', '08095775757', '', 'zuckjim@gmail.com', '', 0);
+(14, 'Mr Zuckerberg Jim', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, 'Somewhere in the U.S', '', '08095775757', '', 'zuckjim@gmail.com', '', 0),
+(21, 'Michael', 'Jordan', '', '', '', 0, 1, 'Male', '2016-12-11 00:00:00', '', 10, 'Ikoyi', 'Lagos', '0802324364', '', 'jordan@gmail.com', '10.jpg', 1),
+(22, 'James', 'Gosling', 'Mike', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 19, 'Ikoyi', 'Lagos', '0802324364', '', 'jamesgosling@gmail.com', '1018px-James_Gosling_2008.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -794,7 +804,9 @@ INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_i
 (5, 1, 13, 1, '45cm'),
 (6, 1, 13, 2, 'Group O'),
 (7, 1, 13, 4, 'Christianity'),
-(8, 1, 13, 5, 'Grey');
+(8, 1, 13, 5, 'Grey'),
+(10, 1, 21, 3, 'Zenith Bank'),
+(11, 1, 22, 3, 'Diamond');
 
 -- --------------------------------------------------------
 
@@ -820,6 +832,25 @@ INSERT INTO `tb_user_additional_field` (`user_additional_field_id`, `school_id`,
 (1, 1, 'Height', 'The height of each student in cm', 'student', 0, '2016-11-22 15:00:56'),
 (3, 1, 'Bank Name', 'Bank name of all our staff', 'employee', 0, '2016-11-22 15:02:29'),
 (4, 1, 'Religion', 'The religion of student', 'student', 0, '2016-11-29 07:20:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_privilege`
+--
+
+CREATE TABLE `tb_user_privilege` (
+  `user_privilege_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_privilege`
+--
+
+INSERT INTO `tb_user_privilege` (`user_privilege_id`, `name`, `description`) VALUES
+(1, 'Super Admin', '');
 
 -- --------------------------------------------------------
 
@@ -884,6 +915,45 @@ CREATE TABLE `vw_class` (
 ,`department_code` varchar(20)
 ,`class_type_id` int(11)
 ,`class_type` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_employee`
+--
+CREATE TABLE `vw_employee` (
+`user_id` int(11)
+,`firstname` varchar(100)
+,`lastname` varchar(100)
+,`othernames` varchar(100)
+,`username` varchar(100)
+,`password` varchar(200)
+,`is_active` int(11)
+,`school_id` int(11)
+,`gender` varchar(10)
+,`dob` datetime
+,`marital_status` varchar(50)
+,`state_id` int(11)
+,`address` varchar(200)
+,`city` varchar(50)
+,`phone1` varchar(50)
+,`phone2` varchar(50)
+,`email` varchar(100)
+,`photo` varchar(200)
+,`privilege_id` int(11)
+,`privilege` varchar(50)
+,`employee_id` int(11)
+,`deparment_id` int(11)
+,`category_id` int(11)
+,`position_id` int(11)
+,`date_joined` date
+,`employee_code` varchar(100)
+,`grade_level_id` int(11)
+,`department` varchar(200)
+,`category` varchar(100)
+,`position` varchar(100)
+,`grade_level` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -1039,6 +1109,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_employee`
+--
+DROP TABLE IF EXISTS `vw_employee`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_employee`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_user_privilege`.`name` AS `privilege`,`tb_employee`.`employee_id` AS `employee_id`,`tb_employee`.`employee_department_id` AS `deparment_id`,`tb_employee`.`employee_category_id` AS `category_id`,`tb_employee`.`employee_position_id` AS `position_id`,`tb_employee`.`date_joined` AS `date_joined`,`tb_employee`.`employee_code` AS `employee_code`,`tb_employee`.`employee_grade_level_id` AS `grade_level_id`,`tb_employee_department`.`name` AS `department`,`tb_employee_category`.`name` AS `category`,`tb_employee_position`.`name` AS `position`,`tb_employee_grade_level`.`name` AS `grade_level` from ((((((`tb_user` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user`.`privilege_id`))) join `tb_employee` on((`tb_employee`.`user_id` = `tb_user`.`user_id`))) join `tb_employee_department` on((`tb_employee_department`.`employee_department_id` = `tb_employee`.`employee_department_id`))) join `tb_employee_category` on((`tb_employee_category`.`employee_category_id` = `tb_employee`.`employee_category_id`))) join `tb_employee_position` on((`tb_employee_position`.`employee_position_id` = `tb_employee`.`employee_position_id`))) join `tb_employee_grade_level` on((`tb_employee_grade_level`.`employee_grade_level_id` = `tb_employee`.`employee_grade_level_id`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_employee_position`
 --
 DROP TABLE IF EXISTS `vw_employee_position`;
@@ -1140,6 +1219,12 @@ ALTER TABLE `tb_country`
   ADD PRIMARY KEY (`country_id`);
 
 --
+-- Indexes for table `tb_employee`
+--
+ALTER TABLE `tb_employee`
+  ADD PRIMARY KEY (`employee_id`);
+
+--
 -- Indexes for table `tb_employee_category`
 --
 ALTER TABLE `tb_employee_category`
@@ -1155,7 +1240,7 @@ ALTER TABLE `tb_employee_department`
 -- Indexes for table `tb_employee_grade_level`
 --
 ALTER TABLE `tb_employee_grade_level`
-  ADD PRIMARY KEY (`tb_employee_grade_level_id`);
+  ADD PRIMARY KEY (`employee_grade_level_id`);
 
 --
 -- Indexes for table `tb_employee_position`
@@ -1290,6 +1375,12 @@ ALTER TABLE `tb_user_additional_field`
   ADD PRIMARY KEY (`user_additional_field_id`);
 
 --
+-- Indexes for table `tb_user_privilege`
+--
+ALTER TABLE `tb_user_privilege`
+  ADD PRIMARY KEY (`user_privilege_id`);
+
+--
 -- Indexes for table `tb_weekday`
 --
 ALTER TABLE `tb_weekday`
@@ -1351,6 +1442,11 @@ ALTER TABLE `tb_class_type`
 ALTER TABLE `tb_country`
   MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tb_employee`
+--
+ALTER TABLE `tb_employee`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tb_employee_category`
 --
 ALTER TABLE `tb_employee_category`
@@ -1364,7 +1460,7 @@ ALTER TABLE `tb_employee_department`
 -- AUTO_INCREMENT for table `tb_employee_grade_level`
 --
 ALTER TABLE `tb_employee_grade_level`
-  MODIFY `tb_employee_grade_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `employee_grade_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_employee_position`
 --
@@ -1464,17 +1560,22 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --
 ALTER TABLE `tb_user_additional_field`
-  MODIFY `user_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `tb_user_privilege`
+--
+ALTER TABLE `tb_user_privilege`
+  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_weekday`
 --

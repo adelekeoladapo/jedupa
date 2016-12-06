@@ -116,7 +116,7 @@ class User extends CI_Controller {
     
     /*
      * Parents
-     */
+    */
     function getParents(){
         $sort_field = $this->input->get('sort-field');
         $sort_order_mode = $this->input->get('sort-order-mode');
@@ -133,5 +133,88 @@ class User extends CI_Controller {
         $data->additional_details = $this->additonal_fields_model->getUserAdditionalDetails($data->user_id, 'parent');
         echo json_encode($data);
     }
+    
+    /*
+     * Employee
+    */
+    function addEmployee(){
+        $school_id = $this->input->post('school-id');
+        $data = new stdClass();
+        
+        /** Upload Logo **/
+        $image = $this->upload->upload_image('photo', $school_id);
+        if($image->status){
+            $data->photo = $image->message['file_name'];
+        }else{
+            if($image->message == '<p>You did not select a file to upload.</p>'){
+                
+            }else{
+                echo json_encode($image);
+                return;
+            }
+        }
+        $data->school_id = $school_id;
+        $data->firstname = $this->input->post('firstname');
+        $data->lastname = $this->input->post('lastname');
+        $data->othernames = $this->input->post('other-names');
+        $data->gender = $this->input->post('gender');
+        $data->dob = date_format(new DateTime($this->input->post('dob')), "Y-m-d");
+        $data->phone1 = $this->input->post('phone-no');
+        $data->email = $this->input->post('email');
+        $data->state_id = $this->input->post('state-id');
+        $data->city = $this->input->post('city');
+        $data->address = $this->input->post('address');
+        $data->privilege_id = $this->input->post('privilege-id');
+        
+        $user_id = $this->model->insertUser($data);
+        
+        /** employee data **/
+        $e_data = new stdClass();
+        $e_data->school_id = $school_id;
+        $e_data->employee_code = $this->input->post('employee-no');
+        $e_data->user_id = $user_id;
+        $e_data->employee_department_id = $this->input->post('department-id');
+        $e_data->employee_category_id = $this->input->post('category-id');
+        $e_data->employee_position_id = $this->input->post('position-id');
+        $e_data->date_joined = date_format(new DateTime($this->input->post('date-joined')), "Y-m-d");
+        $e_data->employee_code = $this->input->post('employee-no');
+        $e_data->employee_grade_level_id = $this->input->post('grade-level-id');
+        $e_data->date_created = $this->penguin->getTime(); 
+        
+        $employee_id = $this->model->insertEmployee($e_data);
+        
+        /** additional fields **/
+        $fields = $this->additonal_fields_model->getAdditionalFields(false, false, 'type', 'employee', false, '');
+        $_data = new stdClass();
+        $_data->school_id = $school_id;
+        $_data->user_id = $user_id;
+        foreach ($fields as $field) {
+            $d = $field->user_additional_field_id;
+            $_data->user_additional_field_id = $d;
+            $_data->value = $this->input->post($d);
+            $this->additonal_fields_model->insertAdditionalDetail($_data);
+        }
+        
+        echo json_encode(array('status' => true, 'message' => 'Employee added successfully'));
+    }
+    
+    function getEmployees(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page = $this->input->get('page');
+        $page_size = $this->input->get('page-size');
+        echo json_encode($this->model->getEmployees($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function getEmployee(){
+        $id = $this->input->get('employee_id');
+        $data = $this->model->getEmployee($id);
+        $data->additional_details = $this->additonal_fields_model->getUserAdditionalDetails($data->user_id, 'employee');
+        echo json_encode($data);
+    }
+    
+    
     
 }

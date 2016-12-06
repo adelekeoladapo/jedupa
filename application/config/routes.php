@@ -121,3 +121,8 @@ $route['api/get-student'] = 'User/getStudent';
 /************* Parent APIs ****************/
 $route['api/get-parents'] = 'User/getParents';
 $route['api/get-parent'] = 'User/getParent';
+
+/************* Employee APIs ****************/
+$route['api/add-employee'] = 'User/addEmployee';
+$route['api/get-employees'] = 'User/getEmployees';
+$route['api/get-employee'] = 'User/getEmployee';

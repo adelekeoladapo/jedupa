@@ -1,0 +1,63 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                                                        <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Employees
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container" style="margin-top: -12px;">
+                                        <a ui-sref="new-employee" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="students">
+                                                <a href="">All Employees</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="students">
+                                            <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                <thead class="table-bordered">
+                                                    <tr>
+                                                        <th>SN</th>
+                                                        <th>Employee No</th>
+                                                        <th>Fullname</th>
+                                                        <th>Lastname</th>
+                                                        <th>Department</th>
+                                                        <th>Category</th>
+                                                        <th>Position</th>
+                                                        <th>Privilege</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-bordered">
+                                                    <tr ng-repeat="employee in employees">
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>{{ employee.employee_code }}</td>
+                                                        <td>{{ employee.firstname }}</td>
+                                                        <td>{{ employee.lastname }}</td>
+                                                        <td>{{ employee.department }}</td>
+                                                        <td>{{ employee.category }}</td>
+                                                        <td>{{ employee.position }}</td>
+                                                        <td>{{ employee.privilege }}</td>
+                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-employee({ id : employee.employee_id })"></i></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->

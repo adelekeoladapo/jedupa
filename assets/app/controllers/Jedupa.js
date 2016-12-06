@@ -613,6 +613,19 @@ app.service('Service', function($http){
         });
     };
     
+    /** employee **/
+    this.getEmployees = function(school_id){
+        return $http.get(base_url+"api/get-employees", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getEmployee = function(id){
+        return $http.get(base_url+"api/get-employee", {
+            params : {'employee_id' : id}
+        });
+    };
+    
 });
 
 
@@ -635,8 +648,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: "assets/app/views/students.html",
             controller: "StudentsCtrl",
             resolve: {
-                students: function(Service){
-                    return Service.getStudents();
+                students: function(Service, Factory){
+                    return Service.getStudents(Factory.getSchoolID());
                 }
             }
         })
@@ -668,8 +681,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: "assets/app/views/parents.html",
             controller: "ParentsCtrl",
             resolve: {
-                parents: function(Service){
-                    return Service.getParents();
+                parents: function(Service, Factory){
+                    return Service.getParents(Factory.getSchoolID());
                 }
             }
         })
@@ -684,6 +697,39 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 children: function($stateParams, Service){
                     return Service.getChildren($stateParams.id);
+                }
+            }
+        })
+        
+        .state('employees', {
+            url: "/employees",
+            templateUrl: "assets/app/views/employees.html",
+            controller: "EmployeesCtrl",
+            resolve: {
+                employees: function(Service, Factory){
+                    return Service.getEmployees(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('new-employee', {
+            url: "/new-employee",
+            templateUrl: "assets/app/views/new-employee.html",
+            controller: "NewEmployeeCtrl",
+            resolve: {
+                states: function(Service){
+                    return Service.getStates();
+                }
+            }
+        })
+        
+        .state('view-employee', {
+            url: "/view-employee/:id",
+            templateUrl: "assets/app/views/view-employee.html",
+                controller: "ViewEmployeeCtrl",
+            resolve: {
+                employee: function($stateParams, Service){
+                    return Service.getEmployee($stateParams.id);
                 }
             }
         })
