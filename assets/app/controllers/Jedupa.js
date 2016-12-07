@@ -308,6 +308,15 @@ app.factory('Factory', function(){
         return app_data.parents;
     }
     
+    /**  students **/
+    data.getSubjects = function(){
+        return app_data.subjects;
+    }
+    
+    data.updateSubjects = function(dt){
+        app_data.subjects = dt;
+    }
+    
     
     
     
@@ -623,6 +632,27 @@ app.service('Service', function($http){
     this.getEmployee = function(id){
         return $http.get(base_url+"api/get-employee", {
             params : {'employee_id' : id}
+        });
+    };
+    
+    /** subject **/
+    this.addSubject = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-subject",
+            data: data
+        });
+    };
+    
+    this.getSubjects = function(school_id){
+        return $http.get(base_url+"api/get-subjects", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getSubject = function(id){
+        return $http.get(base_url+"api/get-subject", {
+            params : {'subject_id' : id}
         });
     };
     

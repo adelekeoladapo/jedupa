@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/new-employee.html</file>
-            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/employees.html</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/Subject.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/models/SubjectModel.php</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Jedupa.js</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/controllers/Quota.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/config/routes.php</file>
+            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/includes/settings/academic-settings/subject.html</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Settings.js</file>
-            <file>file:/C:/xampp/htdocs/edugate/assets/app/views/templates/sidebar.html</file>
             <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Student.js</file>
-            <file>file:/C:/xampp/htdocs/edugate/assets/app/controllers/Employee.js</file>
+            <file>file:/C:/xampp/htdocs/edugate/application/models/ClassModel.php</file>
         </group>
     </open-files>
 </project-private>

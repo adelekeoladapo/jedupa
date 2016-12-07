@@ -145,6 +145,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.score_group_structures = Factory.getScoreGroupStructures();
     
+    $scope.subjects = Factory.getSubjects();
+    
     $scope.dept = {};
     
     $scope.classs = {};
@@ -160,6 +162,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.score_group = {};
     
     $scope.score_group_structure = {};
+    
+    $scope.subject = {};
      
     
     /** add department **/
@@ -218,6 +222,16 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     };
     /** end add class **/
+    
+    $scope.showClass = function(class_id){
+        $scope.classs = Factory.getClass(class_id);
+        console.log($scope.class);
+        showCard('class');
+    }
+    
+    $scope.showClasses = function(){
+        showCard('classes');
+    }
     
     
     
@@ -429,12 +443,33 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** end add score group structure **/
     
     
+    /*** subject ***/
     
-    $scope.t_id = 1;
-    
-    $scope.test = function(){
-        $scope.t_id++;
+    /** add subject **/
+    $scope.show_add_subject_overlay = function(){
+        $('#add-subject-overlay').show();
     }
+    $scope.addSubject = function(){
+        if($('#form-add-subject').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('add-subject-overlay', '');
+            $scope.subject.school_id = Factory.getSchoolID();
+            Service.addSubject($scope.subject).then(function(response){
+                Service.getSubjects().then(function(response){
+                    Factory.updateSubjects(response.data);
+                    $scope.subjects = response.data;
+                    clear_form_fields('form-add-subject');
+                    hide_loading_overlay();
+                    toast('Subject Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add subject **/
+    
+    
     
     
 });

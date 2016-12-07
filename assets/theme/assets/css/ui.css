@@ -72,6 +72,11 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     font-size: 16px;
 }
 
+.jd-content .jd-page .jd-inner-page-title > a {
+    color: #60bed1;
+    cursor: pointer;
+}
+
 /********** Form Custom Image Select ************/
 .img-placeholder {
     /*border: solid 1px #eee;*/
@@ -180,7 +185,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     display: none;
 }
 
-.jd-tab-container .jd-tab-content-block .jd-tab-pane.jd-info-pane {
+.jd-tab-container .jd-tab-content-block .jd-tab-pane.jd-info-pane, .jd-info-pane {
     padding: 25px 30px;
 }
 
@@ -198,7 +203,6 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 
 .jd-cards-container .jd-card {
-    width: 100%;
     display: none;
 }
 

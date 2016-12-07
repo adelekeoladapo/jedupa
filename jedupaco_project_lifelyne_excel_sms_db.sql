@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2016 at 06:51 PM
+-- Generation Time: Dec 07, 2016 at 06:49 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -88,6 +88,7 @@ CREATE TABLE `tb_class_basic_subject` (
   `session_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `subject_id` int(11) NOT NULL,
+  `score_group_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -679,11 +680,21 @@ CREATE TABLE `tb_subject` (
   `subject_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
+  `code` varchar(20) NOT NULL,
   `credit_unit` int(11) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
-  `date_created` datetime DEFAULT NULL,
-  `score_group_id` int(11) DEFAULT NULL
+  `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_subject`
+--
+
+INSERT INTO `tb_subject` (`subject_id`, `school_id`, `name`, `code`, `credit_unit`, `description`, `date_created`) VALUES
+(1, 1, 'Mathematics', 'Math', NULL, 'Just figures', '2016-12-07 15:23:52'),
+(2, 1, 'English Language', 'Eng', NULL, 'English Language', '2016-12-07 15:25:31'),
+(3, 1, 'Physics', 'Phy', NULL, 'Physics science', '2016-12-07 15:32:20'),
+(4, 1, 'Chemistry', 'Chem', NULL, 'Chemistry Science', '2016-12-07 15:33:08');
 
 -- --------------------------------------------------------
 
@@ -1540,7 +1551,7 @@ ALTER TABLE `tb_student_department`
 -- AUTO_INCREMENT for table `tb_subject`
 --
 ALTER TABLE `tb_subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_subject_assessment_timetable`
 --

@@ -70,9 +70,9 @@ $(document).ready(function(){
     
     /** jd Tab Layout script **/
     
-    $('body').on('click', '.jd-tab-container .jd-tab-title-block > ul > li > a', function(){
+    $('body').on('click', '.jd-tab-container >.jd-tab-title-block > ul > li > a', function(){
         var href = $(this).parent('li').data('href');
-        var panes = $(this).parents('.jd-tab-container').find('.jd-tab-content-block > div');
+        var panes = $(this).closest('.jd-tab-container').find('.jd-tab-content-block > div');
         panes.removeClass('active');
         panes.parent().find('#'+href).addClass('active');
         $(this).parent().addClass('active').siblings().removeClass('active');

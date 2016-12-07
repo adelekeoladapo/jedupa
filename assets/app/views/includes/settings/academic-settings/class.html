@@ -1,98 +1,168 @@
-                                            <div class="row"> 
-                                                
-                                                <div class="col-md-12">
-                                                    <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
-                                                        All Classes
-                                                        <span class="top-add-btn-container">
-                                                            <button class="btn jd-btn jd-btn-primary" ng-click="show_add_class_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
-                                                        </span>
-                                                    </h1>
-                                                    
-                                                </div>
-                                                
-                                                
-                                                <div class="col-md-2">
-                                                    
-                                                    <!-- class types list -->
-                                                    <div class="sidebar-container">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Types <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559"></i></span></h3>
-                                                        <ul class="class-level-list">
-                                                            <li ng-repeat="type in class_types">
-                                                                <a ng-init="id = type.class_type_id" href="" ng-click="setActiveClassType(id)">
-                                                                    {{ type.name }}
-                                                                    <!--<span class="counter">0</span>-->
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-class-type" name="form-add-class-type">
-                                                            <div class="form-group" style="margin: 0">
-                                                                <input type="text" ng-model="class_type.name" placeholder="New Type" name="name" class="form-control" required>
-                                                            </div>
-                                                            <div style="border: solid 1px red" ng-hide="true">
-                                                                <button type="submit" ng-click="addClassType()">Submit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!--/ class types list -->
-                                                    
-                                                    <!-- class levels list -->
-                                                    <div class="sidebar-container">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Levels <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559"></i></span></h3>
-                                                        <ul class="class-level-list">
-                                                            <li ng-repeat="level in active_class_type_levels">
-                                                                <a ng-init="id = level.class_level_id" href="" ng-click="setActiveLevel(id)">
-                                                                    {{ level.name }}
-                                                                    <!--<span class="counter">0</span>-->
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-class-level" name="form-add-class-level">
-                                                            <div class="form-group" style="margin: 0">
-                                                                <input type="text" ng-model="class_level.name" placeholder="New Level" name="name" class="form-control" required>
-                                                            </div>
-                                                            <div style="border: solid 1px red" ng-hide="true">
-                                                                <button type="submit" ng-click="addClassLevel()">Submit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!--/ class levels list -->
-                                                </div>
-                                                
-                                                
-                                                <div class="col-md-10 main-table-with-sidebar">
-                                                    <div class="sidebar-container">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
-                                                            {{ active_class_type.name+" / "+active_level.name }} 
-                                                            <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_class_overlay()"></i></span>
-                                                        </h3>
-                                                        <div style="padding: 10px">
-                                                            <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
-                                                                <thead class="table-bordered">
-                                                                    <tr>
-                                                                        <th>SN</th>
-                                                                        <th>Name</th>
-                                                                        <th>Code</th>
-                                                                        <th>Level</th>
-                                                                        <th>Department</th>
-                                                                        <th></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="table-bordered">
-                                                                    <tr ng-repeat="classs in active_level_classes">
-                                                                        <td>{{ $index + 1 }}</td>
-                                                                        <td>{{ classs.name }}</td>
-                                                                        <td>{{ classs.code }}</td>
-                                                                        <td>{{ classs.level_name }}</td>
-                                                                        <td>{{ classs.department_name }}</td>
-                                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
-                                                                    </tr>
+                                            <div class="jd-cards-container">
+                                                <!-- card classes -->
+                                                <div class="row jd-card active" id="classes"> 
 
-                                                                </tbody>
-                                                            </table>
+                                                    <div class="col-md-12">
+                                                        <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
+                                                            All Classes
+                                                            <span class="top-add-btn-container">
+                                                                <button class="btn jd-btn jd-btn-primary" ng-click="show_add_class_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
+                                                            </span>
+                                                        </h1>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+
+                                                        <!-- class types list -->
+                                                        <div class="sidebar-container">
+                                                            <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Types <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559"></i></span></h3>
+                                                            <ul class="class-level-list">
+                                                                <li ng-repeat="type in class_types">
+                                                                    <a ng-init="id = type.class_type_id" href="" ng-click="setActiveClassType(id)">
+                                                                        {{ type.name }}
+                                                                        <!--<span class="counter">0</span>-->
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                            <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-class-type" name="form-add-class-type">
+                                                                <div class="form-group" style="margin: 0">
+                                                                    <input type="text" ng-model="class_type.name" placeholder="New Type" name="name" class="form-control" required>
+                                                                </div>
+                                                                <div style="border: solid 1px red" ng-hide="true">
+                                                                    <button type="submit" ng-click="addClassType()">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!--/ class types list -->
+
+                                                        <!-- class levels list -->
+                                                        <div class="sidebar-container">
+                                                            <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Levels <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559"></i></span></h3>
+                                                            <ul class="class-level-list">
+                                                                <li ng-repeat="level in active_class_type_levels">
+                                                                    <a ng-init="id = level.class_level_id" href="" ng-click="setActiveLevel(id)">
+                                                                        {{ level.name }}
+                                                                        <!--<span class="counter">0</span>-->
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                            <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-class-level" name="form-add-class-level">
+                                                                <div class="form-group" style="margin: 0">
+                                                                    <input type="text" ng-model="class_level.name" placeholder="New Level" name="name" class="form-control" required>
+                                                                </div>
+                                                                <div style="border: solid 1px red" ng-hide="true">
+                                                                    <button type="submit" ng-click="addClassLevel()">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!--/ class levels list -->
+                                                    </div>
+
+
+                                                    <div class="col-md-10 main-table-with-sidebar">
+                                                        <div class="sidebar-container">
+                                                            <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                                {{ active_class_type.name+" / "+active_level.name }} 
+                                                                <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="New" aria-describedby="tooltip619559" ng-click="show_add_class_overlay()"></i></span>
+                                                            </h3>
+                                                            <div style="padding: 10px">
+                                                                <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
+                                                                    <thead class="table-bordered">
+                                                                        <tr>
+                                                                            <th>SN</th>
+                                                                            <th>Name</th>
+                                                                            <th>Code</th>
+                                                                            <th>Level</th>
+                                                                            <th>Department</th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="table-bordered">
+                                                                        <tr ng-repeat="classs in active_level_classes">
+                                                                            <td>{{ $index + 1 }}</td>
+                                                                            <td>{{ classs.name }}</td>
+                                                                            <td>{{ classs.code }}</td>
+                                                                            <td>{{ classs.level_name }}</td>
+                                                                            <td>{{ classs.department_name }}</td>
+                                                                            <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ng-click="showClass(classs.class_id)"></i></td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--/ card classes -->
+                                                
+                                                <!-- card class -->
+                                                <div class="row jd-card" id="class">
+                                                    <div class="col-md-12">
+                                                        <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
+                                                            <a ng-click="showClasses()">Classes /</a> {{ classs.name }}
+                                                            <span class="top-add-btn-container">
+                                                                <a ng-click="showClasses()" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                                            </span>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="jd-info-pane">
+                                                        <div class="row">
+                                                            <div class="col-md-4 jd-info-block">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr class="info-item">
+                                                                            <td class="info-item-title">
+                                                                               Name
+                                                                            </td>
+                                                                            <td class="info-item-descr">
+                                                                                {{ classs.name }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="info-item">
+                                                                            <td class="info-item-title">
+                                                                               Code
+                                                                            </td>
+                                                                            <td class="info-item-descr ng-binding">
+                                                                                {{ classs.code }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="info-item">
+                                                                            <td class="info-item-title">
+                                                                               Level
+                                                                            </td>
+                                                                            <td class="info-item-descr">
+                                                                                {{ classs.level_name }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="info-item">
+                                                                            <td class="info-item-title">
+                                                                               Type
+                                                                            </td>
+                                                                            <td class="info-item-descr ng-binding">
+                                                                                {{ classs.class_type }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="info-item">
+                                                                            <td class="info-item-title">
+                                                                               Department
+                                                                            </td>
+                                                                            <td class="info-item-descr ng-binding">
+                                                                                {{ classs.department_name }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/ card class -->
+                                                
                                             </div>
+
+
+
 
 
                                             <!-- New Class overlay -->
