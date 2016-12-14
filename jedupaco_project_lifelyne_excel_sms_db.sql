@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2016 at 06:49 PM
+-- Generation Time: Dec 14, 2016 at 11:26 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `jedupaco_project_lifelyne_excel_sms_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `command`
+--
+
+CREATE TABLE `command` (
+  `command_id` int(11) NOT NULL,
+  `device_id` varchar(50) NOT NULL,
+  `mode` varchar(50) NOT NULL,
+  `source` varchar(200) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -894,6 +908,22 @@ CREATE TABLE `tb_weekday_class_period` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `test_id` int(11) NOT NULL,
+  `device_id` varchar(50) NOT NULL,
+  `mode` varchar(200) NOT NULL,
+  `source` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `error` varchar(200) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_additional_details`
 --
 CREATE TABLE `vw_additional_details` (
@@ -1176,6 +1206,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `command`
+--
+ALTER TABLE `command`
+  ADD PRIMARY KEY (`command_id`);
+
+--
 -- Indexes for table `tb_assessment_timetable`
 --
 ALTER TABLE `tb_assessment_timetable`
@@ -1404,9 +1440,20 @@ ALTER TABLE `tb_weekday_class_period`
   ADD PRIMARY KEY (`weekday_class_period_id`);
 
 --
+-- Indexes for table `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`test_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `command`
+--
+ALTER TABLE `command`
+  MODIFY `command_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_assessment_timetable`
 --
@@ -1597,6 +1644,11 @@ ALTER TABLE `tb_weekday`
 --
 ALTER TABLE `tb_weekday_class_period`
   MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `test`
+--
+ALTER TABLE `test`
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
