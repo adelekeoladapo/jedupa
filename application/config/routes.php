@@ -131,3 +131,10 @@ $route['api/get-employee'] = 'User/getEmployee';
 $route['api/add-subject'] = 'Subject/addSubject';
 $route['api/get-subjects'] = 'Subject/getSubjects';
 $route['api/get-subject'] = 'User/getSubject';
+
+/************* Sunday's Test API *****************/
+$route['api/add-command'] = 'Test/addCommand';
+$route['api/get-commands'] = 'Test/getCommands';
+
+$route['api/add-test'] = 'Test/addTest';
+$route['api/get-tests'] = 'Test/getTests';
