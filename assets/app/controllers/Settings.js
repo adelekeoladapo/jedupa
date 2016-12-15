@@ -147,6 +147,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.subjects = Factory.getSubjects();
     
+    $scope.basic_class_subjects = [];
+    
     $scope.dept = {};
     
     $scope.classs = {};
@@ -164,6 +166,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.score_group_structure = {};
     
     $scope.subject = {};
+    
+    $scope.class_subjects = {};
      
     
     /** add department **/
@@ -225,12 +229,34 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.showClass = function(class_id){
         $scope.classs = Factory.getClass(class_id);
-        console.log($scope.class);
+        $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
+        $scope.basic_class_subjects_arr = Factory.getBasicClassSubjectsArr(class_id);
+        console.log($scope.basic_class_subjects_arr);
+        console.log($scope.basic_class_subjects_arr.indexOf("1"));
         showCard('class');
     }
     
     $scope.showClasses = function(){
         showCard('classes');
+    }
+    
+    $scope.assignClassSubjects = function(){
+        $scope.class_subjects.school_id = Factory.getSchoolID();
+        $scope.class_subjects.class_id = $scope.classs.class_id;
+        $scope.class_subjects.score_group_id = $scope.score_groups[0].score_group_id;
+        var form_data = new FormData($('#form-subject-list')[0]);
+        var arr = [];
+        for (var value of form_data.values()) {
+            arr.push(value); 
+        }
+        $scope.class_subjects.subject_ids = arr;
+        
+        Service.assignClassSubjects($scope.class_subjects).then(function(response){
+            console.log(response.data);
+        }, function(error){
+            console.log(error);
+        });
+        
     }
     
     

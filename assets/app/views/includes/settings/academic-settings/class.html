@@ -108,6 +108,7 @@
                                                     </div>
                                                     <div class="jd-info-pane">
                                                         <div class="row">
+                                                            <!-- class info -->
                                                             <div class="col-md-4 jd-info-block">
                                                                 <table class="table">
                                                                     <tbody>
@@ -154,6 +155,42 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                            <!--/ class info -->
+                                                            <!-- all subjects -->
+                                                            <div class="col-md-4">
+                                                                <div class="sidebar-container">
+                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-down-right jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Remove" onmouseenter="$(this).tooltip('show')" data-original-title="Save" aria-describedby="tooltip619559"></i></span></h3>
+                                                                    <ul class="class-level-list-2 class-subjects">
+                                                                        <li ng-repeat="basic_class_subject in basic_class_subjects">
+                                                                            {{ basic_class_subject.subject }}
+                                                                            <select>
+                                                                                <option ng-repeat="score_group in score_groups">{{ score_group.name }}</option>
+                                                                            </select>
+                                                                            <input type="checkbox" name="vehicle" value="Bike">
+                                                                        </li>
+                                                                        <li ng-hide=" basic_class_subjects.length > 0 ">
+                                                                            No subject 
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <!--/ all subjects -->
+                                                            <!-- class subjects -->
+                                                            <div class="col-md-4">
+                                                                <div class="sidebar-container">
+                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span></h3>
+                                                                    <form class="subjects-select" name="form-subject-list" id="form-subject-list">
+                                                                        <ul class="class-level-list-2">
+                                                                            <li ng-repeat="subject in subjects" ng-init=" show = (basic_class_subjects_arr.indexOf(subject.subject_id) == -1) ? true : false ">
+                                                                                {{ subject.name+" "+basic_class_subjects_arr.indexOf(subject.subject_id) }}
+                                                                                <input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">
+                                                                            </li>
+                                                                        </ul>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!--/ class subjects -->
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

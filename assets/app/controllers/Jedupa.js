@@ -49,6 +49,26 @@ app.factory('Factory', function(){
         return dt;
     };
     
+    data.getBasicClassSubjects = function(class_id){
+        var dt = [];
+        angular.forEach(app_data.classes_basic_subjects, function(value, key, obj){
+            if(value.class_id == class_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    };
+    
+    data.getBasicClassSubjectsArr = function(class_id){
+        var dt = [];
+        angular.forEach(app_data.classes_basic_subjects, function(value, key, obj){
+            if(value.class_id == class_id){
+                dt.push(obj[key].subject_id);
+            }
+        });
+        return dt;
+    };
+    
     /** class levels **/
     data.getClassLevels = function(){
         return app_data.class_levels;
@@ -655,6 +675,14 @@ app.service('Service', function($http){
             params : {'subject_id' : id}
         });
     };
+    
+    this.assignClassSubjects = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/assign-class-subjects",
+            data: data
+        });
+    }
     
 });
 

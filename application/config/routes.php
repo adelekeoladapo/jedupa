@@ -131,6 +131,7 @@ $route['api/get-employee'] = 'User/getEmployee';
 $route['api/add-subject'] = 'Subject/addSubject';
 $route['api/get-subjects'] = 'Subject/getSubjects';
 $route['api/get-subject'] = 'User/getSubject';
+$route['api/assign-class-subjects'] = 'Subject/assignClassSubjects';
 
 /************* Sunday's Test API *****************/
 $route['api/add-command'] = 'Test/addCommand';

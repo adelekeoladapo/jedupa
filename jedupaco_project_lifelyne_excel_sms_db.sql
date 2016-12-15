@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2016 at 11:26 AM
+-- Generation Time: Dec 15, 2016 at 06:31 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -33,6 +33,14 @@ CREATE TABLE `command` (
   `source` varchar(200) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `command`
+--
+
+INSERT INTO `command` (`command_id`, `device_id`, `mode`, `source`, `date`) VALUES
+(1, '01', 'write', 'phone', '0000-00-00 00:00:00'),
+(2, '02', 'read', 'laptop', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -99,12 +107,19 @@ INSERT INTO `tb_class` (`class_id`, `school_id`, `student_department_id`, `name`
 CREATE TABLE `tb_class_basic_subject` (
   `class_basic_subject_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `subject_id` int(11) NOT NULL,
   `score_group_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_basic_subject`
+--
+
+INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `class_id`, `subject_id`, `score_group_id`, `date_created`) VALUES
+(1, 1, 1, 1, 1, '2016-12-15 16:18:28'),
+(2, 1, 1, 4, 1, '2016-12-15 16:18:28');
 
 -- --------------------------------------------------------
 
@@ -508,7 +523,9 @@ CREATE TABLE `tb_score_group_structure` (
 INSERT INTO `tb_score_group_structure` (`score_group_structure_id`, `school_id`, `score_group_id`, `name`, `date_created`, `date_modified`, `description`) VALUES
 (1, 1, 1, 'Test 1', '2016-11-22 08:01:18', '0000-00-00 00:00:00', 'First Periodic Test'),
 (2, 1, 1, 'Test 2', '2016-11-22 08:01:36', '0000-00-00 00:00:00', 'Second Periodic Test'),
-(3, 1, 1, 'Exam', '2016-11-22 08:01:53', '0000-00-00 00:00:00', 'Examination');
+(3, 1, 1, 'Exam', '2016-11-22 08:01:53', '0000-00-00 00:00:00', 'Examination'),
+(4, 1, 2, 'Test', '2016-12-14 15:55:42', '0000-00-00 00:00:00', 'Periodic Test'),
+(5, 1, 2, 'Exam', '2016-12-14 15:56:01', '0000-00-00 00:00:00', 'Examination');
 
 -- --------------------------------------------------------
 
@@ -921,6 +938,13 @@ CREATE TABLE `test` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`test_id`, `device_id`, `mode`, `source`, `status`, `error`, `date`) VALUES
+(1, '419', 'the status', 'no error', '', '', '2016-12-14 16:37:22');
+
 -- --------------------------------------------------------
 
 --
@@ -956,6 +980,24 @@ CREATE TABLE `vw_class` (
 ,`department_code` varchar(20)
 ,`class_type_id` int(11)
 ,`class_type` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_class_basic_subject`
+--
+CREATE TABLE `vw_class_basic_subject` (
+`class_basic_subject_id` int(11)
+,`school_id` int(11)
+,`class_id` int(11)
+,`subject_id` int(11)
+,`score_group_id` int(11)
+,`class` varchar(100)
+,`class_code` varchar(200)
+,`subject` varchar(200)
+,`subject_code` varchar(20)
+,`score_group` varchar(30)
 );
 
 -- --------------------------------------------------------
@@ -1146,6 +1188,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_class`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class`  AS  select `tb_class`.`class_id` AS `class_id`,`tb_class`.`school_id` AS `school_id`,`tb_class`.`student_department_id` AS `student_department_id`,`tb_class`.`name` AS `name`,`tb_class`.`code` AS `code`,`tb_class_level`.`class_level_id` AS `level_id`,`tb_class_level`.`name` AS `level_name`,`tb_class`.`date_created` AS `date_created`,`tb_student_department`.`name` AS `department_name`,`tb_student_department`.`code` AS `department_code`,`tb_class_type`.`class_type_id` AS `class_type_id`,`tb_class_type`.`name` AS `class_type` from (((`tb_class` join `tb_student_department` on((`tb_class`.`student_department_id` = `tb_student_department`.`student_department_id`))) join `tb_class_level` on((`tb_class_level`.`class_level_id` = `tb_class`.`class_level_id`))) join `tb_class_type` on((`tb_class_type`.`class_type_id` = `tb_class`.`class_type_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_class_basic_subject`
+--
+DROP TABLE IF EXISTS `vw_class_basic_subject`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_basic_subject`  AS  select `tb_class_basic_subject`.`class_basic_subject_id` AS `class_basic_subject_id`,`tb_class_basic_subject`.`school_id` AS `school_id`,`tb_class_basic_subject`.`class_id` AS `class_id`,`tb_class_basic_subject`.`subject_id` AS `subject_id`,`tb_class_basic_subject`.`score_group_id` AS `score_group_id`,`tb_class`.`name` AS `class`,`tb_class`.`code` AS `class_code`,`tb_subject`.`name` AS `subject`,`tb_subject`.`code` AS `subject_code`,`tb_score_group`.`name` AS `score_group` from (((`tb_class_basic_subject` join `tb_class` on((`tb_class_basic_subject`.`class_id` = `tb_class`.`class_id`))) join `tb_subject` on((`tb_class_basic_subject`.`subject_id` = `tb_subject`.`subject_id`))) join `tb_score_group` on((`tb_class_basic_subject`.`score_group_id` = `tb_score_group`.`score_group_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1453,7 +1504,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `command`
 --
 ALTER TABLE `command`
-  MODIFY `command_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `command_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_assessment_timetable`
 --
@@ -1473,7 +1524,7 @@ ALTER TABLE `tb_class`
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
 ALTER TABLE `tb_class_basic_subject`
-  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_class_level`
 --
@@ -1563,7 +1614,7 @@ ALTER TABLE `tb_score_group`
 -- AUTO_INCREMENT for table `tb_score_group_structure`
 --
 ALTER TABLE `tb_score_group_structure`
-  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_session`
 --
@@ -1648,7 +1699,7 @@ ALTER TABLE `tb_weekday_class_period`
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

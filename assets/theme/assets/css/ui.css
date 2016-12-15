@@ -8,6 +8,15 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.subjects-select {
+    overflow: auto;
+    height: 200px;
+} 
+
+.subjects-select input {
+    float: right;
+} 
+
 .broken-horizontal-line {
     border: dashed 1px #eee;
     height: 1px;
@@ -327,6 +336,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     color: #fff;
 }
 
+
 .jd-btn-default {
     background-color: #f8f8f8;
     border: solid 1px #ccc;
@@ -436,7 +446,7 @@ table > tbody > tr > td.tb-btn {
 
 
 /********* class-level list *********/
-ul.class-level-list {
+ul.class-level-list, ul.class-level-list-2 {
     padding: 0;
     list-style-type: none;
     margin-bottom: -1px;
@@ -444,6 +454,26 @@ ul.class-level-list {
 
 ul.class-level-list > li {
     display: block;
+}
+
+ul.class-level-list-2 > li {
+    display: block;
+    border-bottom: solid 1px #eee;
+    padding: 8px 10px;
+    position: relative;
+}
+
+ul.class-level-list-2 > li select {
+    position: absolute;
+    right: 25px;
+    top: 8px;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+}
+
+ul.class-level-list-2.class-subjects > li input {
+    position: absolute;
+    right: 5px;
 }
 
 ul.class-level-list > li > a {

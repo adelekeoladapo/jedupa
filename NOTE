@@ -91,3 +91,24 @@ JOIN tb_employee_category ON tb_employee_category.employee_category_id = tb_empl
 JOIN tb_employee_position ON tb_employee_position.employee_position_id = tb_employee.employee_position_id 
 JOIN tb_employee_grade_level ON tb_employee_grade_level.employee_grade_level_id = tb_employee.employee_grade_level_id 
 
+
+
+
+CREATE VIEW vw_class_basic_subject AS SELECT 
+tb_class_basic_subject.class_basic_subject_id AS class_basic_subject_id, 
+tb_class_basic_subject.school_id AS school_id, 
+tb_class_basic_subject.class_id AS class_id, 
+tb_class_basic_subject.subject_id AS subject_id, 
+tb_class_basic_subject.score_group_id AS score_group_id, 
+tb_class.name AS class, 
+tb_class.code AS class_code, 
+tb_subject.name AS subject, 
+tb_subject.code AS subject_code, 
+tb_score_group.name AS score_group 
+FROM tb_class_basic_subject JOIN tb_class ON tb_class_basic_subject.class_id = tb_class.class_id 
+JOIN tb_subject ON tb_class_basic_subject.subject_id = tb_subject.subject_id JOIN tb_score_group ON tb_class_basic_subject.score_group_id = tb_score_group.score_group_id
+
+
+
+
+
