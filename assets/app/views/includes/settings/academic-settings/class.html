@@ -159,31 +159,42 @@
                                                             <!-- all subjects -->
                                                             <div class="col-md-6">
                                                                 <div class="sidebar-container">
-                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-down-right jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Remove" onmouseenter="$(this).tooltip('show')" data-original-title="Save" aria-describedby="tooltip619559"></i></span></h3>
-                                                                    <ul class="class-level-list-2 class-subjects">
-                                                                        <li ng-repeat="basic_class_subject in basic_class_subjects">
-                                                                            {{ basic_class_subject.subject }}
-                                                                            <select>
-                                                                                <option ng-repeat="score_group in score_groups">{{ score_group.name }}</option>
-                                                                            </select>
-                                                                            <input type="checkbox" name="vehicle" value="Bike">
-                                                                        </li>
-                                                                        <li ng-hide=" basic_class_subjects.length > 0 ">
-                                                                            No subject 
-                                                                        </li>
-                                                                    </ul>
+                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="New" onmouseenter="$(this).tooltip('show')" data-original-title="Save" ng-click="show_assign_subject_overlay()"></i></span></h3>
+                                                                    <div>
+                                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                                            <thead class="">
+                                                                                <tr>
+                                                                                    <th>SN</th>
+                                                                                    <th>Subject</th>
+                                                                                    <th>Score Group</th>
+                                                                                    <th>Teacher</th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="">
+                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects">
+                                                                                    <td>{{ $index + 1 }}</td>
+                                                                                    <td>{{ basic_class_subject.subject }}</td>
+                                                                                    <td>{{ basic_class_subject.score_group }}</td>
+                                                                                    <td>Adeleke Oladapo</td>
+                                                                                    <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <!--/ all subjects -->
                                                             <!-- class subjects -->
                                                             <div class="col-md-2">
                                                                 <div class="sidebar-container">
-                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span></h3>
+                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">All Subjects <!--<span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span>--></h3>
                                                                     <form class="subjects-select" name="form-subject-list" id="form-subject-list">
                                                                         <ul class="class-level-list-2">
-                                                                            <li ng-repeat="subject in subjects" ng-init=" show = (basic_class_subjects_arr.indexOf(subject.subject_id) == -1) ? true : false ">
-                                                                                {{ subject.code+" "+basic_class_subjects_arr.indexOf(subject.subject_id) }}
-                                                                                <input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">
+                                                                            <li ng-repeat="subject in subjects">
+                                                                                {{ subject.name }}
+                                                                                <!--<input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">-->
                                                                             </li>
                                                                         </ul>
                                                                     </form>
@@ -243,5 +254,56 @@
                                                 </div>
                                             </div>
                                             <!-- End New Class overlay -->
+                                            
+                                            
+                                            <!-- Assign subject overlay -->
+                                            <div class="transparent-overlay" id="assign-subject-overlay">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-md-offset-4">
+                                                        <div class="jd-modal">
+                                                            <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
+                                                                Assign Subject
+                                                            </h1>
+                                                            <div class="jd-modal-body">
+                                                                <form class="form-horizontal" name="form-add-class" id="form-add-class"  novalidate> 
+                                                                    <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Subject <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" required>
+                                                                                <option ng-repeat="subject in subjects">
+                                                                                    {{ subject.name }}
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="code" class="col-sm-4 control-label">Score Group <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" required>
+                                                                                <option ng-repeat="group in score_groups">
+                                                                                    {{ group.name }}
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="department_id" class="col-sm-4 control-label">Teacher </label>
+                                                                        <div class="col-sm-8">
+                                                                            <select name="department_id" class="form-control" ng-model="classs.student_department_id" required>
+                                                                                <option ng-repeat="employee in employees">{{ employee.firstname+" "+employee.lastname }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="jd-modal-footer">
+                                                                <button class="btn jd-modal-btn" onclick="hide_form_modal('assign-subject-overlay', '')">Cancel</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addClass()">OK</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Assign subject overlay -->
                                             
                                                

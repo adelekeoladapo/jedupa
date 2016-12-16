@@ -819,6 +819,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 sessions: function(Service, Factory){
                     return Service.getSessions(Factory.getSchoolID());
+                },
+                employees: function(Service, Factory){
+                    return Service.getEmployees(Factory.getSchoolID());
                 }
             }
         })

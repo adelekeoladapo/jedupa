@@ -119,7 +119,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
 
 /*******************Academic Settings Controller ***************/
 
-app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes, sessions){
+app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes, sessions, employees){
     
     $scope.factory = Factory;
     
@@ -146,6 +146,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.score_group_structures = Factory.getScoreGroupStructures();
     
     $scope.subjects = Factory.getSubjects();
+    
+    $scope.employees = employees.data;
     
     $scope.basic_class_subjects = [];
     
@@ -231,6 +233,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         $scope.classs = Factory.getClass(class_id);
         $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
         $scope.basic_class_subjects_arr = Factory.getBasicClassSubjectsArr(class_id);
+        alert($scope.basic_class_subjects_arr);
         console.log($scope.basic_class_subjects_arr);
         console.log($scope.basic_class_subjects_arr.indexOf("1"));
         showCard('class');
@@ -240,7 +243,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         showCard('classes');
     }
     
-    $scope.assignClassSubjects = function(){
+    /** multiple assignment. discarded for now **/
+    $scope.assignClassSubjectsX = function(){
         $scope.class_subjects.school_id = Factory.getSchoolID();
         $scope.class_subjects.class_id = $scope.classs.class_id;
         $scope.class_subjects.score_group_id = $scope.score_groups[0].score_group_id;
@@ -257,6 +261,11 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
             console.log(error);
         });
         
+    }
+    
+    /** assign subject to class **/
+    $scope.show_assign_subject_overlay = function(){
+        $('#assign-subject-overlay').show();
     }
     
     

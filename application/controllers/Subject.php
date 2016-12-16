@@ -45,4 +45,11 @@ class Subject extends CI_Controller {
         }
     }
     
+    function assignClassSubject(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        $data->date_created = $this->penguin->getTime();
+        echo $this->model->insertClassBasicSubject($data);
+    }
+    
 }
