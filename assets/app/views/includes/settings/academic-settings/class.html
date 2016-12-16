@@ -157,7 +157,7 @@
                                                             </div>
                                                             <!--/ class info -->
                                                             <!-- all subjects -->
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <div class="sidebar-container">
                                                                     <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-down-right jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Remove" onmouseenter="$(this).tooltip('show')" data-original-title="Save" aria-describedby="tooltip619559"></i></span></h3>
                                                                     <ul class="class-level-list-2 class-subjects">
@@ -176,13 +176,13 @@
                                                             </div>
                                                             <!--/ all subjects -->
                                                             <!-- class subjects -->
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-2">
                                                                 <div class="sidebar-container">
                                                                     <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Subjects <span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span></h3>
                                                                     <form class="subjects-select" name="form-subject-list" id="form-subject-list">
                                                                         <ul class="class-level-list-2">
                                                                             <li ng-repeat="subject in subjects" ng-init=" show = (basic_class_subjects_arr.indexOf(subject.subject_id) == -1) ? true : false ">
-                                                                                {{ subject.name+" "+basic_class_subjects_arr.indexOf(subject.subject_id) }}
+                                                                                {{ subject.code+" "+basic_class_subjects_arr.indexOf(subject.subject_id) }}
                                                                                 <input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">
                                                                             </li>
                                                                         </ul>
