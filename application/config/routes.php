@@ -135,3 +135,7 @@ $route['api/assign-class-subjects'] = 'Subject/assignClassSubjects';
 $route['api/assign-class-subject'] = 'Subject/assignClassSubject';
 $route['api/get-class-subjects'] = 'Subject/getClassBasicSubjects';
 $route['api/delete-class-subject'] = 'Subject/deleteClassBasicSubject';
+
+/************* ClassTimingSet APIs ****************/
+$route['api/add-class-timing-set'] = 'ClassTimingSet/addClassTimingSet';
+$route['api/get-class-timing-sets'] = 'ClassTimingSet/getClassTimingSets';

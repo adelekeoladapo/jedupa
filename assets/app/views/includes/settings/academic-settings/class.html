@@ -109,54 +109,124 @@
                                                     <div class="jd-info-pane">
                                                         <div class="row">
                                                             <!-- class info -->
-                                                            <div class="col-md-4 jd-info-block">
-                                                                <table class="table">
-                                                                    <tbody>
-                                                                        <tr class="info-item">
-                                                                            <td class="info-item-title">
-                                                                               Name
-                                                                            </td>
-                                                                            <td class="info-item-descr">
-                                                                                {{ classs.name }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr class="info-item">
-                                                                            <td class="info-item-title">
-                                                                               Code
-                                                                            </td>
-                                                                            <td class="info-item-descr ng-binding">
-                                                                                {{ classs.code }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr class="info-item">
-                                                                            <td class="info-item-title">
-                                                                               Level
-                                                                            </td>
-                                                                            <td class="info-item-descr">
-                                                                                {{ classs.level_name }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr class="info-item">
-                                                                            <td class="info-item-title">
-                                                                               Type
-                                                                            </td>
-                                                                            <td class="info-item-descr ng-binding">
-                                                                                {{ classs.class_type }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr class="info-item">
-                                                                            <td class="info-item-title">
-                                                                               Department
-                                                                            </td>
-                                                                            <td class="info-item-descr ng-binding">
-                                                                                {{ classs.department_name }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                            
+                                                            <div class="jd-h-tab-container">
+                                                                <div class="jd-h-tab-content-block">
+                                                                    <div class="jd-h-tab-pane active" id="tab_1">
+                                                                        <div class="col-md-6 jd-info-block">
+                                                                            <table class="table">
+                                                                                <tbody>
+                                                                                    <tr class="info-item">
+                                                                                        <td class="info-item-title">
+                                                                                           Name
+                                                                                        </td>
+                                                                                        <td class="info-item-descr">
+                                                                                            {{ classs.name }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr class="info-item">
+                                                                                        <td class="info-item-title">
+                                                                                           Code
+                                                                                        </td>
+                                                                                        <td class="info-item-descr ng-binding">
+                                                                                            {{ classs.code }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr class="info-item">
+                                                                                        <td class="info-item-title">
+                                                                                           Level
+                                                                                        </td>
+                                                                                        <td class="info-item-descr">
+                                                                                            {{ classs.level_name }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-4 jd-info-block">
+                                                                            <table class="table">
+                                                                                <tbody>
+                                                                                    <tr class="info-item">
+                                                                                        <td class="info-item-title">
+                                                                                           Type
+                                                                                        </td>
+                                                                                        <td class="info-item-descr ng-binding">
+                                                                                            {{ classs.class_type }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr class="info-item">
+                                                                                        <td class="info-item-title">
+                                                                                           Department
+                                                                                        </td>
+                                                                                        <td class="info-item-descr ng-binding">
+                                                                                            {{ classs.department_name }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="jd-h-tab-pane" id="tab_2">
+                                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                                            <thead class="table-bordered">
+                                                                                <tr>
+                                                                                    <th>SN</th>
+                                                                                    <th>Subject</th>
+                                                                                    <th>Score Group</th>
+                                                                                    <th>Teacher</th>
+                                                                                    <th><span class="jd-tiny-btn" style="padding: 0px 4px 1px 4px;"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="New" onmouseenter="$(this).tooltip('show')" data-original-title="Save" ng-click="show_assign_subject_overlay()"></i></span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="table-bordered">
+                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects">
+                                                                                    <td>{{ $index + 1 }}</td>
+                                                                                    <td>{{ basic_class_subject.subject }}</td>
+                                                                                    <td>{{ basic_class_subject.score_group }}</td>
+                                                                                    <td>{{ basic_class_subject.teacher }}</td>
+                                                                                    <td class="tb-btn">
+                                                                                        <i class="ion ion-edit jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Edit"></i>
+                                                                                        <i class="ion ion-close-round jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Delete" ng-click="deleteClassSubject(basic_class_subject)"></i>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="jd-h-tab-pane" id="tab_3">
+                                                                        Class Timing
+                                                                    </div>
+                                                                </div>
+                                                                <div class="jd-h-tab-title-block">
+                                                                    <ul>
+                                                                        <li class="active" data-href="tab_1">
+                                                                            <a href="">Basic Details</a>
+                                                                        </li>
+                                                                        <li data-href="tab_2">
+                                                                            <a href="">Subjects</a>
+                                                                        </li>
+                                                                        <li data-href="tab_3">
+                                                                            <a href="">Class Timing</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                            <!--/ class info -->
-                                                            <!-- all subjects -->
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            <!-- all subjects 
                                                             <div class="col-md-6">
                                                                 <div class="sidebar-container">
                                                                     <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="New" onmouseenter="$(this).tooltip('show')" data-original-title="Save" ng-click="show_assign_subject_overlay()"></i></span></h3>
@@ -188,16 +258,16 @@
                                                                 </div>
                                                             </div>
                                                             <!--/ all subjects -->
-                                                            <!-- class subjects -->
+                                                            <!-- class subjects 
                                                             <div class="col-md-2">
                                                                 <div class="sidebar-container">
                                                                     <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">All Subjects <!--<span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span>--></h3>
-                                                                    <form class="subjects-select" name="form-subject-list" id="form-subject-list">
+                                                                    <!--<form class="subjects-select" name="form-subject-list" id="form-subject-list">
                                                                         <ul class="class-level-list-2">
                                                                             <li ng-repeat="subject in subjects">
                                                                                 {{ subject.name }}
                                                                                 <!--<input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">-->
-                                                                            </li>
+                                                                            <!--</li>
                                                                         </ul>
                                                                     </form>
                                                                 </div>

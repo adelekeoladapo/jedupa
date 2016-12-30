@@ -145,6 +145,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.score_group_structures = Factory.getScoreGroupStructures();
     
+    $scope.class_timing_sets = Factory.getClassTimingSets();
+    
     $scope.subjects = Factory.getSubjects();
     
     $scope.employees = employees.data;
@@ -168,6 +170,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.score_group = {};
     
     $scope.score_group_structure = {};
+    
+    $scope.class_timing_set = {};
     
     $scope.subject = {};
     
@@ -511,6 +515,28 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     }
     /** end add score group structure **/
     
+    
+    /** CLASS TIMING SET **/
+    
+    /** add class timing set **/
+    $scope.addClassTimingSet = function(){
+        if($('#form-add-class-timing-set').smkValidate()){
+            show_loading_overlay();
+            $scope.class_timing_set.school_id = Factory.getSchoolID();
+            Service.addClassTimingSet($scope.class_timing_set).then(function(response){
+                Service.getClassTimingSets().then(function(response){
+                    Factory.updateClassTimingSets(response.data);
+                    $scope.class_timing_sets = response.data;
+                    clear_form_fields('form-add-class-timing-set');
+                    hide_loading_overlay();
+                    toast('Class Timing Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add score group **/
     
     /*** subject ***/
     

@@ -218,7 +218,6 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 
 .jd-h-tab-container .jd-h-tab-content-block {
-    border: solid 1px #ddd;
     display: inline-block;
     width: 85%;
     float: left;
@@ -252,7 +251,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 .jd-h-tab-container .jd-h-tab-content-block .jd-h-tab-pane {
     width: 100%;
-    padding: 10px 10px 10px;
+    padding: 0px 10px 0px 0px;
     display: none;
 }
 
@@ -487,7 +486,7 @@ table > tbody > tr > td.tb-btn {
 /********** Sidebar ************/
 .sidebar-container {
     border: solid 1px #ddd;
-    border-radius: 3px;
+    border-radius: 2px;
     margin-bottom: 10px;
 }
 

@@ -213,6 +213,15 @@ app.factory('Factory', function(){
         app_data.score_group_structures = dt;
     }
     
+    /** class timing set **/
+    data.getClassTimingSets = function(){
+        return app_data.class_timing_sets;
+    }
+    
+    data.updateClassTimingSets = function(dt){
+        app_data.class_timing_sets = dt;
+    }
+    
      /** student category **/
     data.getStudentCategories = function(){
         return app_data.student_categories;
@@ -707,6 +716,21 @@ app.service('Service', function($http){
             params : {'class-subject-id' : id}
         });
     }
+    
+    /** class timing set **/
+    this.addClassTimingSet = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-timing-set",
+            data: data
+        });
+    };
+    
+    this.getClassTimingSets = function(school_id){
+        return $http.get(base_url+"api/get-class-timing-sets", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
     
     
 });
