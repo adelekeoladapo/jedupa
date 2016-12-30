@@ -52,4 +52,19 @@ class Subject extends CI_Controller {
         echo $this->model->insertClassBasicSubject($data);
     }
     
+    function getClassBasicSubjects(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page_size = $this->input->get('page-size');
+        $page = $this->input->get('page');
+        echo json_encode($this->model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function deleteClassBasicSubject(){
+        $id = $this->input->get('class-subject-id');
+        $this->model->deleteClassBasicSubject($id);
+    }
+    
 }

@@ -205,7 +205,62 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 /******************** End jD Tab Layout **********/
 
 
+/******************** jD HTab Layout **********/
+.jd-h-tab-container {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block {
+    display: inline-block;
+    width: 15%;
+    border: solid 1px #ddd;
+}
+
+.jd-h-tab-container .jd-h-tab-content-block {
+    border: solid 1px #ddd;
+    display: inline-block;
+    width: 85%;
+    float: left;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block > ul > li {
+    display: block;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block > ul > li > a {
+    padding: 8px 8px;
+    display: block;
+    border-bottom: solid 1px #ddd;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block > ul > li.active > a {
+    background-color: #f8f8f8;
+}
+
+.jd-h-tab-container .jd-h-tab-title-block > ul > li > a:hover {
+}
+
+.jd-h-tab-container .jd-h-tab-content-block .jd-h-tab-pane.active {
+    display: block;
+}
+.jd-h-tab-container .jd-h-tab-content-block .jd-h-tab-pane {
+    width: 100%;
+    padding: 10px 10px 10px;
+    display: none;
+}
+
+/******************** End jD HTab Layout **********/
+
+
 /******************** jD Card Layout *************/
+
 
 .jd-cards-container {
     width: 100%;
@@ -336,6 +391,18 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
     color: #fff;
 }
 
+.jd-btn-error {
+    color: #fff;
+    background-color : #ff6c60;
+    border: solid 1px #ff6c60;
+}
+
+.jd-btn-error:hover, .jd-btn-error:focus {
+    background-color: #ff6c60;
+    border-color: #ff6c60;
+    color: #fff;
+}
+
 
 .jd-btn-default {
     background-color: #f8f8f8;
@@ -347,7 +414,7 @@ ul#menu-discover-music li ul.nav.sub-menu li>a>i {
 }
 
 table > tbody > tr > td.tb-btn i {
-    padding: 1px 4px 3px 4px;
+    padding: 2px 4px 3px 4px;
     border-radius: 3px;
     cursor: pointer;
     margin: auto;

@@ -151,6 +151,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.basic_class_subjects = [];
     
+    $scope.class_subject = {};
+    
     $scope.dept = {};
     
     $scope.classs = {};
@@ -169,7 +171,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.subject = {};
     
-    $scope.class_subjects = {};
+    $scope.class_subject = {};
      
     
     /** add department **/
@@ -232,10 +234,6 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.showClass = function(class_id){
         $scope.classs = Factory.getClass(class_id);
         $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
-        $scope.basic_class_subjects_arr = Factory.getBasicClassSubjectsArr(class_id);
-        alert($scope.basic_class_subjects_arr);
-        console.log($scope.basic_class_subjects_arr);
-        console.log($scope.basic_class_subjects_arr.indexOf("1"));
         showCard('class');
     }
     
@@ -245,9 +243,9 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** multiple assignment. discarded for now **/
     $scope.assignClassSubjectsX = function(){
-        $scope.class_subjects.school_id = Factory.getSchoolID();
-        $scope.class_subjects.class_id = $scope.classs.class_id;
-        $scope.class_subjects.score_group_id = $scope.score_groups[0].score_group_id;
+        $scope.class_subject.school_id = Factory.getSchoolID();
+        $scope.class_subject.class_id = $scope.classs.class_id;
+        $scope.class_subject.score_group_id = $scope.score_groups[0].score_group_id;
         var form_data = new FormData($('#form-subject-list')[0]);
         var arr = [];
         for (var value of form_data.values()) {
@@ -266,6 +264,42 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** assign subject to class **/
     $scope.show_assign_subject_overlay = function(){
         $('#assign-subject-overlay').show();
+    }
+    $scope.assignClassSubject = function(){
+        if($('#form-assign-subject').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('assign-subject-overlay', '');
+            $scope.class_subject.school_id = Factory.getSchoolID();
+            $scope.class_subject.class_id = $scope.classs.class_id;
+            Service.assignClassSubject($scope.class_subject).then(function(response){
+                Service.getClassSubjects($scope.class_subject.school_id).then(function(response){
+                    Factory.updateBasicClassSubjects(response.data);
+                    $scope.basic_class_subjects = Factory.getBasicClassSubjects($scope.class_subject.class_id);
+                    clear_form_fields('form-assign-subject');
+                    hide_loading_overlay();
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+        
+    }
+    
+    $scope.deleteClassSubject = function(basic_class_subject){
+        $d = confirm("Delete "+basic_class_subject.subject+"?");
+        if($d){
+            show_loading_overlay();
+            Service.deleteClassSubject(basic_class_subject.class_basic_subject_id).then(function(response){
+                Service.getClassSubjects(basic_class_subject.school_id).then(function(response){
+                    Factory.updateBasicClassSubjects(response.data);
+                    $scope.basic_class_subjects = Factory.getBasicClassSubjects(basic_class_subject.class_id);
+                    hide_loading_overlay();
+                    toast("Deleted Successfully")
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
     }
     
     

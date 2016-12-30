@@ -47,9 +47,14 @@ class Test extends CI_Controller {
         $data->mode = $this->input->get('mode');
         $data->source = $this->input->get('source');
         $data->status = $this->input->get('status');
-        $data->error = $this->input->get('error');
+        $data->name = $this->input->get('name');
+        $data->contact1 = $this->input->get('contact1');
+        $data->contact2 = $this->input->get('contact2');
         $data->date = $this->penguin->getTime();
-        echo $this->model->insertTest($data);
+        $this->model->insertTest($data);
+        
+        $command = $this->model->getCommandByDeviceID($data->device_id);
+        echo ($command) ? json_encode($command) : null;
     }
     
 }

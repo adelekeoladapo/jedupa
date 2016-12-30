@@ -59,6 +59,10 @@ app.factory('Factory', function(){
         return dt;
     };
     
+    data.updateBasicClassSubjects = function(dt){
+        app_data.classes_basic_subjects = dt;
+    };
+    
     data.getBasicClassSubjectsArr = function(class_id){
         var dt = [];
         angular.forEach(app_data.classes_basic_subjects, function(value, key, obj){
@@ -683,6 +687,27 @@ app.service('Service', function($http){
             data: data
         });
     }
+    
+    this.assignClassSubject = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/assign-class-subject",
+            data: data
+        });
+    }
+    
+    this.getClassSubjects = function(school_id){
+        return $http.get(base_url+"api/get-class-subjects", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.deleteClassSubject = function(id){
+        return $http.get(base_url+"api/delete-class-subject", {
+            params : {'class-subject-id' : id}
+        });
+    }
+    
     
 });
 

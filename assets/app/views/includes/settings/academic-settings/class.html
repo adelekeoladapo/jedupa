@@ -176,10 +176,12 @@
                                                                                     <td>{{ $index + 1 }}</td>
                                                                                     <td>{{ basic_class_subject.subject }}</td>
                                                                                     <td>{{ basic_class_subject.score_group }}</td>
-                                                                                    <td>Adeleke Oladapo</td>
-                                                                                    <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
+                                                                                    <td>{{ basic_class_subject.teacher }}</td>
+                                                                                    <td class="tb-btn">
+                                                                                        <i class="ion ion-edit jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Edit"></i>
+                                                                                        <i class="ion ion-close-round jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Delete" ng-click="deleteClassSubject(basic_class_subject)"></i>
+                                                                                    </td>
                                                                                 </tr>
-
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -265,12 +267,12 @@
                                                                 Assign Subject
                                                             </h1>
                                                             <div class="jd-modal-body">
-                                                                <form class="form-horizontal" name="form-add-class" id="form-add-class"  novalidate> 
+                                                                <form class="form-horizontal" name="form-assign-subject" id="form-assign-subject"  novalidate> 
                                                                     <div class="form-group">
                                                                         <label for="name" class="col-sm-4 control-label">Subject <span class="required-field"> *</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" required>
-                                                                                <option ng-repeat="subject in subjects">
+                                                                            <select class="form-control" ng-model="class_subject.subject_id" required>
+                                                                                <option value="{{ subject.subject_id }}" ng-repeat="subject in subjects">
                                                                                     {{ subject.name }}
                                                                                 </option>
                                                                             </select>
@@ -279,8 +281,8 @@
                                                                     <div class="form-group">
                                                                         <label for="code" class="col-sm-4 control-label">Score Group <span class="required-field"> *</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" required>
-                                                                                <option ng-repeat="group in score_groups">
+                                                                            <select class="form-control" ng-model="class_subject.score_group_id" required>
+                                                                                <option value="{{ group.score_group_id }}" ng-repeat="group in score_groups">
                                                                                     {{ group.name }}
                                                                                 </option>
                                                                             </select>
@@ -289,8 +291,8 @@
                                                                     <div class="form-group">
                                                                         <label for="department_id" class="col-sm-4 control-label">Teacher </label>
                                                                         <div class="col-sm-8">
-                                                                            <select name="department_id" class="form-control" ng-model="classs.student_department_id" required>
-                                                                                <option ng-repeat="employee in employees">{{ employee.firstname+" "+employee.lastname }}</option>
+                                                                            <select name="department_id" class="form-control" ng-model="class_subject.employee_id" required>
+                                                                                <option value="{{ employee.employee_id }}" ng-repeat="employee in employees">{{ employee.firstname+" "+employee.lastname }}</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -298,7 +300,7 @@
                                                             </div>
                                                             <div class="jd-modal-footer">
                                                                 <button class="btn jd-modal-btn" onclick="hide_form_modal('assign-subject-overlay', '')">Cancel</button>
-                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addClass()">OK</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="assignClassSubject()">OK</button>
                                                             </div>
                                                         </div>
                                                     </div>

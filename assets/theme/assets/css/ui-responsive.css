@@ -12,6 +12,15 @@
 @media (max-width: 768px) { 
     .jd-form-block {
     }
+    
+    .jd-h-tab-container .jd-h-tab-title-block {
+        width: 100%;
+    }
+
+    .jd-h-tab-container .jd-h-tab-content-block {
+        width: 100%;
+    }
+    
 }
 
 /* Small devices (tablets, 768px and up) */

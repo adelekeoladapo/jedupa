@@ -46,4 +46,9 @@ class SubjectModel extends CI_Model {
         return ($query->num_rows()) ? $query->result() : [];
     }
     
+    function deleteClassBasicSubject($id){
+        $this->db->where('class_basic_subject_id', $id);
+        $this->db->delete($this->table_basic_class_subject);
+    }
+    
 }

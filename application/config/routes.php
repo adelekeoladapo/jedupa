@@ -132,10 +132,6 @@ $route['api/add-subject'] = 'Subject/addSubject';
 $route['api/get-subjects'] = 'Subject/getSubjects';
 $route['api/get-subject'] = 'User/getSubject';
 $route['api/assign-class-subjects'] = 'Subject/assignClassSubjects';
-
-/************* Sunday's Test API *****************/
-$route['api/add-command'] = 'Test/addCommand';
-$route['api/get-commands'] = 'Test/getCommands';
-
-$route['api/add-test'] = 'Test/addTest';
-$route['api/get-tests'] = 'Test/getTests';
+$route['api/assign-class-subject'] = 'Subject/assignClassSubject';
+$route['api/get-class-subjects'] = 'Subject/getClassBasicSubjects';
+$route['api/delete-class-subject'] = 'Subject/deleteClassBasicSubject';
