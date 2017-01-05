@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model;
+    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model;
     
     function __construct() {
         parent::__construct();
@@ -21,6 +21,8 @@ class Jedupa extends CI_Controller {
         $this->load->model('EmpGradeLevelModel');
         $this->load->model('SubjectModel');
         $this->load->model('ClassTimingSetModel');
+        $this->load->model('ClassPeriodModel');
+        $this->load->model('WeekdayModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
@@ -35,6 +37,8 @@ class Jedupa extends CI_Controller {
         $this->employee_grade_level_model = new EmpGradeLevelModel();
         $this->subject_model = new SubjectModel();
         $this->class_timing_set_model = new ClassTimingSetModel();
+        $this->class_period_model = new ClassPeriodModel();
+        $this->weekday_model = new WeekdayModel();
     }
 
     public function index(){
@@ -67,6 +71,9 @@ class Jedupa extends CI_Controller {
         $data['subjects'] = $this->subject_model->getSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['classes_basic_subjects'] = $this->subject_model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['class_timing_sets'] = $this->class_timing_set_model->getClassTimingSets($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['class_periods'] = $this->class_period_model->getClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['weekdays'] = $this->weekday_model->getWeekdays($sort_field, $sort_order_mode, null, null, $page, $page_size);
+        $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }

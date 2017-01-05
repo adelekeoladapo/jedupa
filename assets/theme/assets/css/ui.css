@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.table-select {
+    width: 100%;
+    border: transparent;
+    background-color: transparent;
+}
+
 .subjects-select {
     overflow: auto;
     height: 200px;

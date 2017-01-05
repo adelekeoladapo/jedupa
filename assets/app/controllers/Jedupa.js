@@ -222,6 +222,16 @@ app.factory('Factory', function(){
         app_data.class_timing_sets = dt;
     }
     
+    data.getClassTimingSet = function(id){
+        var dt = {};
+        angular.forEach(app_data.class_timing_sets, function(value, key, obj){
+            if(value.class_timing_set_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
      /** student category **/
     data.getStudentCategories = function(){
         return app_data.student_categories;
@@ -350,7 +360,75 @@ app.factory('Factory', function(){
         app_data.subjects = dt;
     }
     
+    /**  students **/
+    data.getClassPeriods = function(){
+        return app_data.class_periods;
+    }
     
+    data.updateClassPeriods = function(dt){
+        app_data.class_periods = dt;
+    }
+    
+    data.getActiveClassPeriods = function(class_timing_set_ids){
+        var dt = [];
+        angular.forEach(app_data.class_periods, function(value, key, obj){
+            if(value.class_timing_set_id == class_timing_set_ids){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    /**  weekday **/
+    data.getWeekdays = function(){
+        return app_data.weekdays;
+    }
+    
+    data.updateWeekdays = function(dt){
+        app_data.weekdays = dt;
+    }
+    
+    /**  weekday_class_periods  **/
+    data.getWeekdayClassPeriods = function(){
+        return app_data.weekday_class_periods;
+    }
+    
+    data.updateWeekdayClassPeriods = function(dt){
+        app_data.weekday_class_periods = dt;
+    }
+    
+    data.getWeekdayClassWeekdayPeriod = function(class_id, weekday_id){
+        var dt = {};
+        angular.forEach(app_data.weekday_class_periods, function(value, key, obj){
+            if(value.class_id == class_id && value.weekday_id == weekday_id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    data.getClassWeekdayPeriods = function(class_id){
+        var dt = [];
+        angular.forEach(app_data.weekday_class_periods, function(value, key, obj){
+            if(value.class_id == class_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.getClassWeekdayPeriods_ = function(class_id){
+        var dt = [];
+        angular.forEach(app_data.weekdays, function(value, key, obj){
+            var d = {};
+            d.weekday = value;
+            var info = data.getWeekdayClassWeekdayPeriod(class_id, value.weekday_id);
+            d.info = (info) ? info : false;
+            info = false;
+            dt.push(d);
+        });
+        return dt;
+    }
     
     
     
@@ -732,6 +810,35 @@ app.service('Service', function($http){
         });
     };
     
+    /** class period **/
+    this.addClassPeriod = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-period",
+            data: data
+        });
+    };
+    
+    this.getClassPeriods = function(school_id){
+        return $http.get(base_url+"api/get-class-periods", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** add-weekday-class-period **/
+    this.addWeekdayClassPeriod = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-weekday-class-period",
+            data: data
+        });
+    };
+    
+    this.getWeekdayClassPeriods = function(school_id){
+        return $http.get(base_url+"api/get-weekday-class-period", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
     
 });
 

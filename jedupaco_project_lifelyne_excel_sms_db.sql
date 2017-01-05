@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2016 at 06:31 PM
--- Server version: 10.1.16-MariaDB
+-- Generation Time: Jan 05, 2017 at 05:08 PM
+-- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -40,7 +40,7 @@ CREATE TABLE `command` (
 
 INSERT INTO `command` (`command_id`, `device_id`, `mode`, `source`, `date`) VALUES
 (1, '01', 'write', 'phone', '0000-00-00 00:00:00'),
-(2, '02', 'read', 'laptop', '0000-00-00 00:00:00');
+(2, '404', 'read', 'laptop', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,10 @@ CREATE TABLE `tb_class` (
 INSERT INTO `tb_class` (`class_id`, `school_id`, `student_department_id`, `name`, `code`, `class_level_id`, `class_type_id`, `date_created`) VALUES
 (1, 1, 1, 'Junior Secondary School One (A)', 'J S S 1 A', 1, 1, '2016-11-21 13:45:00'),
 (2, 1, 1, 'Junior Secondary School One (B)', 'J S S 1B', 1, 1, '2016-11-21 13:45:40'),
-(3, 1, 1, 'J S S Two A', 'J S S 2 A', 2, 1, '2016-11-30 17:53:17');
+(3, 1, 1, 'J S S Two A', 'J S S 2 A', 2, 1, '2016-11-30 17:53:17'),
+(4, 1, 1, 'Junior Sec Sch Two B', 'J S S 2B', 2, 1, '2016-12-23 20:33:27'),
+(5, 1, 1, 'Junior Secondary School Three A', 'J S S 3A', 5, 1, '2016-12-31 01:00:31'),
+(6, 1, 1, 'Junior Secondary School Three B', 'J S S 3 B', 5, 1, '2016-12-31 01:01:11');
 
 -- --------------------------------------------------------
 
@@ -110,6 +113,7 @@ CREATE TABLE `tb_class_basic_subject` (
   `class_id` int(11) DEFAULT NULL,
   `subject_id` int(11) NOT NULL,
   `score_group_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -117,9 +121,33 @@ CREATE TABLE `tb_class_basic_subject` (
 -- Dumping data for table `tb_class_basic_subject`
 --
 
-INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `class_id`, `subject_id`, `score_group_id`, `date_created`) VALUES
-(1, 1, 1, 1, 1, '2016-12-15 16:18:28'),
-(2, 1, 1, 4, 1, '2016-12-15 16:18:28');
+INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `class_id`, `subject_id`, `score_group_id`, `employee_id`, `date_created`) VALUES
+(3, 1, 1, 0, 0, 0, '2016-12-17 00:51:07'),
+(4, 1, 1, 0, 0, 0, '2016-12-17 08:56:25'),
+(5, 1, 1, 0, 0, 0, '2016-12-17 09:15:50'),
+(6, 1, 1, 0, 0, 0, '2016-12-17 09:20:52'),
+(13, 1, 2, 4, 0, 0, '2016-12-18 09:39:14'),
+(14, 1, 2, 4, 0, 0, '2016-12-18 09:40:42'),
+(15, 1, 2, 0, 0, 0, '2016-12-18 09:41:01'),
+(18, 1, 2, 1, 0, 0, '2016-12-21 11:19:54'),
+(20, 1, 2, 1, 1, 2, '2016-12-21 11:20:41'),
+(21, 1, 2, 2, 1, 1, '2016-12-21 11:20:54'),
+(22, 1, 1, 1, 1, 0, '2016-12-21 11:23:16'),
+(24, 1, 1, 2, 1, 2, '2016-12-23 20:50:04'),
+(26, 1, 4, 1, 1, 2, '2016-12-28 09:01:56'),
+(27, 1, 4, 2, 1, 1, '2016-12-28 09:02:27'),
+(29, 1, 1, 6, 1, 1, '2016-12-28 09:03:55'),
+(30, 1, 3, 1, 1, 2, '2016-12-30 09:20:11'),
+(31, 1, 3, 2, 1, 2, '2016-12-30 09:21:27'),
+(32, 1, 3, 3, 1, 2, '2016-12-30 09:21:50'),
+(35, 1, 2, 3, 1, 2, '2016-12-30 23:16:36'),
+(36, 1, 2, 5, 1, 2, '2016-12-30 23:16:53'),
+(37, 1, 5, 1, 1, 2, '2016-12-31 01:01:44'),
+(38, 1, 5, 2, 1, 2, '2016-12-31 01:01:54'),
+(39, 1, 5, 3, 1, 2, '2016-12-31 01:02:03'),
+(40, 1, 5, 4, 1, 2, '2016-12-31 01:02:14'),
+(41, 1, 5, 5, 1, 2, '2016-12-31 01:02:21'),
+(42, 1, 6, 1, 1, 2, '2016-12-31 23:06:37');
 
 -- --------------------------------------------------------
 
@@ -143,7 +171,9 @@ INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `class_type_id`, `n
 (1, 1, 1, 'J S S 1', '2016-11-21 13:43:43'),
 (2, 1, 1, 'J S S 2', '2016-11-21 13:43:51'),
 (3, 1, 2, 'S S S 1', '2016-11-21 13:44:02'),
-(4, 1, 2, 'S S S 2', '2016-11-21 13:44:08');
+(4, 1, 2, 'S S S 2', '2016-11-21 13:44:08'),
+(5, 1, 1, 'J S S 3', '2016-12-23 20:31:44'),
+(6, 1, 2, 'S S 3', '2016-12-23 20:32:00');
 
 -- --------------------------------------------------------
 
@@ -154,13 +184,24 @@ INSERT INTO `tb_class_level` (`class_level_id`, `school_id`, `class_type_id`, `n
 CREATE TABLE `tb_class_period` (
   `class_period_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
   `class_timing_set_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time NOT NULL,
   `is_break` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_period`
+--
+
+INSERT INTO `tb_class_period` (`class_period_id`, `school_id`, `class_timing_set_id`, `name`, `start_time`, `end_time`, `is_break`) VALUES
+(1, 1, 1, 'Period 1', '07:00:00', '08:00:00', 0),
+(2, 1, 1, 'Period 2', '08:00:00', '09:00:00', 0),
+(3, 1, 1, 'Short Break', '09:00:00', '10:00:00', 1),
+(4, 1, 1, 'Period 3', '11:00:00', '12:00:00', 0),
+(5, 1, 1, 'Period 4', '11:00:00', '12:00:00', 0),
+(6, 1, 1, 'Period 5', '12:00:00', '13:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -171,11 +212,18 @@ CREATE TABLE `tb_class_period` (
 CREATE TABLE `tb_class_timing_set` (
   `class_timing_set_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_timing_set`
+--
+
+INSERT INTO `tb_class_timing_set` (`class_timing_set_id`, `school_id`, `name`, `description`, `date_created`) VALUES
+(1, 1, 'Default', NULL, '2016-12-31 00:27:59'),
+(2, 1, 'Fridays', NULL, '2016-12-31 00:34:54');
 
 -- --------------------------------------------------------
 
@@ -263,7 +311,8 @@ CREATE TABLE `tb_employee_category` (
 INSERT INTO `tb_employee_category` (`employee_category_id`, `school_id`, `name`, `description`, `date_created`, `code`) VALUES
 (1, 1, 'Teaching Staff', NULL, '2016-11-23 17:27:33', ''),
 (2, 1, 'Non Teaching Staff', NULL, '2016-11-23 17:28:39', ''),
-(3, 1, 'Library Staff', NULL, '2016-11-23 17:29:11', '');
+(3, 1, 'Library Staff', NULL, '2016-11-23 17:29:11', ''),
+(4, 1, 'Kitchen Staff', NULL, '2016-12-23 20:42:55', '');
 
 -- --------------------------------------------------------
 
@@ -333,7 +382,8 @@ CREATE TABLE `tb_employee_position` (
 
 INSERT INTO `tb_employee_position` (`employee_position_id`, `school_id`, `name`, `description`, `date_created`, `date_modified`, `employee_category_id`) VALUES
 (1, 1, 'Senior Teachers', 'Teachers with more than 10 years experience', '2016-11-23 17:30:40', '0000-00-00 00:00:00', 1),
-(2, 1, 'Cooks', 'Staff that work in the kitchen', '2016-11-23 17:31:14', '0000-00-00 00:00:00', 2);
+(2, 1, 'Cooks', 'Staff that work in the kitchen', '2016-11-23 17:31:14', '0000-00-00 00:00:00', 2),
+(3, 1, 'Junior Staff', 'Junior Staff', '2016-12-28 15:45:10', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -498,7 +548,8 @@ CREATE TABLE `tb_score_group` (
 
 INSERT INTO `tb_score_group` (`score_group_id`, `school_id`, `name`, `date_created`) VALUES
 (1, 1, 'Default', '2016-11-22 07:58:47'),
-(2, 1, 'Practicals', '2016-11-22 08:02:09');
+(2, 1, 'Practicals', '2016-11-22 08:02:09'),
+(3, 1, 'Theory', '2016-12-23 20:38:57');
 
 -- --------------------------------------------------------
 
@@ -525,7 +576,11 @@ INSERT INTO `tb_score_group_structure` (`score_group_structure_id`, `school_id`,
 (2, 1, 1, 'Test 2', '2016-11-22 08:01:36', '0000-00-00 00:00:00', 'Second Periodic Test'),
 (3, 1, 1, 'Exam', '2016-11-22 08:01:53', '0000-00-00 00:00:00', 'Examination'),
 (4, 1, 2, 'Test', '2016-12-14 15:55:42', '0000-00-00 00:00:00', 'Periodic Test'),
-(5, 1, 2, 'Exam', '2016-12-14 15:56:01', '0000-00-00 00:00:00', 'Examination');
+(5, 1, 2, 'Exam', '2016-12-14 15:56:01', '0000-00-00 00:00:00', 'Examination'),
+(6, 1, 3, 'First Test', '2016-12-23 20:39:25', '0000-00-00 00:00:00', 'First Periodic Test'),
+(7, 1, 3, 'Second Test', '2016-12-23 20:39:41', '0000-00-00 00:00:00', 'Second Periodic Test'),
+(8, 1, 3, 'Third Test', '2016-12-23 20:40:01', '0000-00-00 00:00:00', 'Third Periodic Test'),
+(9, 1, 3, 'Exam', '2016-12-23 20:40:11', '0000-00-00 00:00:00', 'Examination');
 
 -- --------------------------------------------------------
 
@@ -549,7 +604,8 @@ CREATE TABLE `tb_session` (
 --
 
 INSERT INTO `tb_session` (`session_id`, `school_id`, `grading_system_id`, `name`, `start_time`, `end_time`, `description`, `date_created`) VALUES
-(1, 1, 1, '2013/2014 Session', '2016-11-01', '2017-12-02', '', '2016-11-21 13:46:33');
+(1, 1, 1, '2013/2014 Session', '2016-11-01', '2017-12-02', '', '2016-11-21 13:46:33'),
+(2, 1, 1, '2014/2015 Session', '2014-01-23', '2015-11-11', '', '2016-12-23 20:35:27');
 
 -- --------------------------------------------------------
 
@@ -658,7 +714,8 @@ CREATE TABLE `tb_student_category` (
 
 INSERT INTO `tb_student_category` (`student_category_id`, `school_id`, `name`, `description`, `date_created`, `code`) VALUES
 (1, 1, 'Default', 'The default category for all students', '2016-11-22 13:04:15', 'DFT'),
-(2, 1, 'Staff Kids', 'Children of staff', '2016-11-29 09:34:10', 'STK');
+(2, 1, 'Staff Kids', 'Children of staff', '2016-11-29 09:34:10', 'STK'),
+(3, 1, 'Other States', 'Students from other states', '2016-12-23 20:26:37', 'OSS');
 
 -- --------------------------------------------------------
 
@@ -725,7 +782,9 @@ INSERT INTO `tb_subject` (`subject_id`, `school_id`, `name`, `code`, `credit_uni
 (1, 1, 'Mathematics', 'Math', NULL, 'Just figures', '2016-12-07 15:23:52'),
 (2, 1, 'English Language', 'Eng', NULL, 'English Language', '2016-12-07 15:25:31'),
 (3, 1, 'Physics', 'Phy', NULL, 'Physics science', '2016-12-07 15:32:20'),
-(4, 1, 'Chemistry', 'Chem', NULL, 'Chemistry Science', '2016-12-07 15:33:08');
+(4, 1, 'Chemistry', 'Chem', NULL, 'Chemistry Science', '2016-12-07 15:33:08'),
+(5, 1, 'Biology', 'BIO', NULL, 'Study of life', '2016-12-23 20:41:04'),
+(6, 1, 'Agricultural Science', 'AGRIC', NULL, 'Agricultural Science', '2016-12-28 09:03:27');
 
 -- --------------------------------------------------------
 
@@ -873,7 +932,12 @@ CREATE TABLE `tb_user_additional_field` (
 INSERT INTO `tb_user_additional_field` (`user_additional_field_id`, `school_id`, `name`, `description`, `type`, `required`, `date_created`) VALUES
 (1, 1, 'Height', 'The height of each student in cm', 'student', 0, '2016-11-22 15:00:56'),
 (3, 1, 'Bank Name', 'Bank name of all our staff', 'employee', 0, '2016-11-22 15:02:29'),
-(4, 1, 'Religion', 'The religion of student', 'student', 0, '2016-11-29 07:20:15');
+(4, 1, 'Religion', 'The religion of student', 'student', 0, '2016-11-29 07:20:15'),
+(5, 1, 'Weight', 'Weight of student', 'student', 0, '2016-12-23 20:29:06'),
+(6, 1, 'Eye Color', 'Eye Color', 'employee', 0, '2016-12-23 20:48:40'),
+(7, 1, 'Blood Group', 'Blood Group', 'student', 1, '2016-12-28 15:37:46'),
+(8, 1, 'Acc No', 'Account Number', 'employee', 1, '2016-12-28 15:49:36'),
+(9, 1, 'BVN No', 'Bank Verification No', 'employee', 1, '2016-12-30 13:06:05');
 
 -- --------------------------------------------------------
 
@@ -901,9 +965,22 @@ INSERT INTO `tb_user_privilege` (`user_privilege_id`, `name`, `description`) VAL
 --
 
 CREATE TABLE `tb_weekday` (
-  `weekday` int(11) NOT NULL,
+  `weekday_id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_weekday`
+--
+
+INSERT INTO `tb_weekday` (`weekday_id`, `name`) VALUES
+(1, 'Sunday'),
+(2, 'Monday'),
+(3, 'Tuesday'),
+(4, 'Wednesday'),
+(5, 'Thursday'),
+(6, 'Friday'),
+(7, 'Saturday');
 
 -- --------------------------------------------------------
 
@@ -914,13 +991,19 @@ CREATE TABLE `tb_weekday` (
 CREATE TABLE `tb_weekday_class_period` (
   `weekday_class_period_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
-  `session_id` int(11) DEFAULT NULL,
-  `quota_id` int(11) DEFAULT NULL,
   `weekday_id` int(11) DEFAULT NULL,
   `class_timing_id` int(11) DEFAULT NULL,
   `class_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_weekday_class_period`
+--
+
+INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `weekday_id`, `class_timing_id`, `class_id`, `date_created`) VALUES
+(1, 1, 2, 1, 1, '0000-00-00 00:00:00'),
+(2, 1, 3, 2, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -931,10 +1014,12 @@ CREATE TABLE `tb_weekday_class_period` (
 CREATE TABLE `test` (
   `test_id` int(11) NOT NULL,
   `device_id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
   `mode` varchar(200) NOT NULL,
   `source` varchar(200) NOT NULL,
   `status` varchar(200) NOT NULL,
-  `error` varchar(200) NOT NULL,
+  `contact1` varchar(200) NOT NULL,
+  `contact2` varchar(200) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -942,8 +1027,9 @@ CREATE TABLE `test` (
 -- Dumping data for table `test`
 --
 
-INSERT INTO `test` (`test_id`, `device_id`, `mode`, `source`, `status`, `error`, `date`) VALUES
-(1, '419', 'the status', 'no error', '', '', '2016-12-14 16:37:22');
+INSERT INTO `test` (`test_id`, `device_id`, `name`, `mode`, `source`, `status`, `contact1`, `contact2`, `date`) VALUES
+(1, '419', '', 'the status', 'no error', '', '', '', '2016-12-14 16:37:22'),
+(2, '404', 'AdelekeOladapo', 'sleepMode', 'mobile', 'write', 'akure', 'ijare', '2016-12-19 20:58:49');
 
 -- --------------------------------------------------------
 
@@ -998,6 +1084,23 @@ CREATE TABLE `vw_class_basic_subject` (
 ,`subject` varchar(200)
 ,`subject_code` varchar(20)
 ,`score_group` varchar(30)
+,`teacher` varchar(201)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_class_period`
+--
+CREATE TABLE `vw_class_period` (
+`class_period_id` int(11)
+,`school_id` int(11)
+,`class_timing_set_id` int(11)
+,`name` varchar(100)
+,`start_time` time
+,`end_time` time
+,`is_break` int(11)
+,`class_timing_set` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -1174,6 +1277,22 @@ CREATE TABLE `vw_student` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_weekday_class_period`
+--
+CREATE TABLE `vw_weekday_class_period` (
+`weekday_class_period_id` int(11)
+,`school_id` int(11)
+,`weekday_id` int(11)
+,`class_timing_id` int(11)
+,`class_id` int(11)
+,`weekday` varchar(100)
+,`class_timing_set` varchar(100)
+,`class` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_additional_details`
 --
 DROP TABLE IF EXISTS `vw_additional_details`;
@@ -1196,7 +1315,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_class_basic_subject`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_basic_subject`  AS  select `tb_class_basic_subject`.`class_basic_subject_id` AS `class_basic_subject_id`,`tb_class_basic_subject`.`school_id` AS `school_id`,`tb_class_basic_subject`.`class_id` AS `class_id`,`tb_class_basic_subject`.`subject_id` AS `subject_id`,`tb_class_basic_subject`.`score_group_id` AS `score_group_id`,`tb_class`.`name` AS `class`,`tb_class`.`code` AS `class_code`,`tb_subject`.`name` AS `subject`,`tb_subject`.`code` AS `subject_code`,`tb_score_group`.`name` AS `score_group` from (((`tb_class_basic_subject` join `tb_class` on((`tb_class_basic_subject`.`class_id` = `tb_class`.`class_id`))) join `tb_subject` on((`tb_class_basic_subject`.`subject_id` = `tb_subject`.`subject_id`))) join `tb_score_group` on((`tb_class_basic_subject`.`score_group_id` = `tb_score_group`.`score_group_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_basic_subject`  AS  select `tb_class_basic_subject`.`class_basic_subject_id` AS `class_basic_subject_id`,`tb_class_basic_subject`.`school_id` AS `school_id`,`tb_class_basic_subject`.`class_id` AS `class_id`,`tb_class_basic_subject`.`subject_id` AS `subject_id`,`tb_class_basic_subject`.`score_group_id` AS `score_group_id`,`tb_class`.`name` AS `class`,`tb_class`.`code` AS `class_code`,`tb_subject`.`name` AS `subject`,`tb_subject`.`code` AS `subject_code`,`tb_score_group`.`name` AS `score_group`,concat(`vw_employee`.`firstname`,' ',`vw_employee`.`lastname`) AS `teacher` from ((((`tb_class_basic_subject` join `tb_class` on((`tb_class_basic_subject`.`class_id` = `tb_class`.`class_id`))) join `tb_subject` on((`tb_class_basic_subject`.`subject_id` = `tb_subject`.`subject_id`))) join `tb_score_group` on((`tb_class_basic_subject`.`score_group_id` = `tb_score_group`.`score_group_id`))) left join `vw_employee` on((`tb_class_basic_subject`.`employee_id` = `vw_employee`.`employee_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_class_period`
+--
+DROP TABLE IF EXISTS `vw_class_period`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_period`  AS  select `tb_class_period`.`class_period_id` AS `class_period_id`,`tb_class_period`.`school_id` AS `school_id`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `name`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`tb_class_timing_set`.`name` AS `class_timing_set` from (`tb_class_period` join `tb_class_timing_set` on((`tb_class_timing_set`.`class_timing_set_id` = `tb_class_period`.`class_timing_set_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1251,6 +1379,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_student`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_student`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_student`.`student_id` AS `student_id`,`tb_student`.`student_department_id` AS `department_id`,`tb_student`.`registration_number` AS `registration_number`,`tb_student`.`admission_date` AS `admission_date`,`tb_student`.`date_created` AS `date_created`,`tb_student`.`batch_id` AS `batch_id`,`tb_student`.`student_category_id` AS `category_id`,`tb_student`.`parent_id` AS `parent_id`,`tb_student`.`parent_relationship` AS `parent_relationship`,`tb_student`.`class_type_id` AS `class_type_id`,`tb_student`.`class_level_id` AS `class_level_id`,`tb_student`.`class_id` AS `class_id`,`vw_class`.`name` AS `class`,`vw_class`.`code` AS `class_code`,`vw_class`.`level_name` AS `level`,`vw_class`.`department_name` AS `department`,`vw_class`.`department_code` AS `department_code`,`vw_class`.`class_type` AS `class_type`,`tb_student_category`.`name` AS `category`,`tb_student_category`.`code` AS `category_code`,`tb_state`.`name` AS `state`,`vw_parent`.`fullname` AS `parent_name`,`vw_parent`.`username` AS `parent_username`,`vw_parent`.`address` AS `parent_address`,`vw_parent`.`city` AS `parent_city`,`vw_parent`.`phone1` AS `parent_phone1`,`vw_parent`.`phone2` AS `parent_phone2`,`vw_parent`.`email` AS `parent_email`,`vw_parent`.`photo` AS `parent_photo` from (((((`tb_user` join `tb_student` on((`tb_user`.`user_id` = `tb_student`.`user_id`))) join `vw_class` on((`tb_student`.`class_id` = `vw_class`.`class_id`))) join `tb_student_category` on((`tb_student_category`.`student_category_id` = `tb_student`.`student_category_id`))) join `tb_state` on((`tb_user`.`state_id` = `tb_state`.`id`))) join `vw_parent` on((`tb_student`.`parent_id` = `vw_parent`.`parent_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_weekday_class_period`
+--
+DROP TABLE IF EXISTS `vw_weekday_class_period`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_weekday_class_period`  AS  select `tb_weekday_class_period`.`weekday_class_period_id` AS `weekday_class_period_id`,`tb_weekday_class_period`.`school_id` AS `school_id`,`tb_weekday_class_period`.`weekday_id` AS `weekday_id`,`tb_weekday_class_period`.`class_timing_id` AS `class_timing_id`,`tb_weekday_class_period`.`class_id` AS `class_id`,`tb_weekday`.`name` AS `weekday`,`tb_class_timing_set`.`name` AS `class_timing_set`,`tb_class`.`name` AS `class` from (((`tb_weekday_class_period` join `tb_weekday` on((`tb_weekday_class_period`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_timing_set` on((`tb_class_timing_set`.`class_timing_set_id` = `tb_weekday_class_period`.`class_timing_id`))) join `tb_class` on((`tb_weekday_class_period`.`class_id` = `tb_class`.`class_id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -1482,7 +1619,7 @@ ALTER TABLE `tb_user_privilege`
 -- Indexes for table `tb_weekday`
 --
 ALTER TABLE `tb_weekday`
-  ADD PRIMARY KEY (`weekday`);
+  ADD PRIMARY KEY (`weekday_id`);
 
 --
 -- Indexes for table `tb_weekday_class_period`
@@ -1519,27 +1656,27 @@ ALTER TABLE `tb_batch`
 -- AUTO_INCREMENT for table `tb_class`
 --
 ALTER TABLE `tb_class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
 ALTER TABLE `tb_class_basic_subject`
-  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `tb_class_level`
 --
 ALTER TABLE `tb_class_level`
-  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `class_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_class_period`
 --
 ALTER TABLE `tb_class_period`
-  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
 ALTER TABLE `tb_class_timing_set`
-  MODIFY `class_timing_set_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_timing_set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_class_type`
 --
@@ -1559,7 +1696,7 @@ ALTER TABLE `tb_employee`
 -- AUTO_INCREMENT for table `tb_employee_category`
 --
 ALTER TABLE `tb_employee_category`
-  MODIFY `employee_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `employee_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_employee_department`
 --
@@ -1574,7 +1711,7 @@ ALTER TABLE `tb_employee_grade_level`
 -- AUTO_INCREMENT for table `tb_employee_position`
 --
 ALTER TABLE `tb_employee_position`
-  MODIFY `employee_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `employee_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_employee_subject`
 --
@@ -1609,17 +1746,17 @@ ALTER TABLE `tb_school`
 -- AUTO_INCREMENT for table `tb_score_group`
 --
 ALTER TABLE `tb_score_group`
-  MODIFY `score_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `score_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_score_group_structure`
 --
 ALTER TABLE `tb_score_group_structure`
-  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_session`
 --
 ALTER TABLE `tb_session`
-  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_state`
 --
@@ -1634,7 +1771,7 @@ ALTER TABLE `tb_student`
 -- AUTO_INCREMENT for table `tb_student_category`
 --
 ALTER TABLE `tb_student_category`
-  MODIFY `student_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_student_category_subject`
 --
@@ -1649,7 +1786,7 @@ ALTER TABLE `tb_student_department`
 -- AUTO_INCREMENT for table `tb_subject`
 --
 ALTER TABLE `tb_subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_subject_assessment_timetable`
 --
@@ -1679,7 +1816,7 @@ ALTER TABLE `tb_user_additional_details`
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --
 ALTER TABLE `tb_user_additional_field`
-  MODIFY `user_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_user_privilege`
 --
@@ -1689,17 +1826,17 @@ ALTER TABLE `tb_user_privilege`
 -- AUTO_INCREMENT for table `tb_weekday`
 --
 ALTER TABLE `tb_weekday`
-  MODIFY `weekday` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `weekday_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

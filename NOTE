@@ -112,5 +112,31 @@ LEFT JOIN vw_employee ON tb_class_basic_subject.employee_id = vw_employee.employ
 
 
 
+CREATE VIEW vw_class_period AS SELECT 
+	tb_class_period.class_period_id,
+	tb_class_period.school_id,
+	tb_class_period.class_timing_set_id,
+	tb_class_period.name,
+	tb_class_period.start_time,
+	tb_class_period.end_time,
+	tb_class_period.is_break,
+	tb_class_timing_set.name AS class_timing_set
+FROM tb_class_period 
+JOIN tb_class_timing_set ON tb_class_timing_set.class_timing_set_id = tb_class_period.class_timing_set_id
 
 
+
+
+CREATE VIEW vw_weekday_class_period AS SELECT 
+	tb_weekday_class_period.weekday_class_period_id,
+	tb_weekday_class_period.school_id AS school_id,
+	tb_weekday_class_period.weekday_id AS weekday_id,
+	tb_weekday_class_period.class_timing_id AS class_timing_id,
+	tb_weekday_class_period.class_id AS class_id,
+	tb_weekday.name AS weekday,
+	tb_class_timing_set.name AS class_timing_set,
+	tb_class.name AS class
+FROM tb_weekday_class_period 
+	JOIN tb_weekday ON tb_weekday_class_period.weekday_id = tb_weekday.weekday_id 
+	JOIN tb_class_timing_set ON tb_class_timing_set.class_timing_set_id = tb_weekday_class_period.class_timing_id 
+	JOIN tb_class ON tb_weekday_class_period.class_id = tb_class.class_id

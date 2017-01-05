@@ -192,7 +192,28 @@
                                                                         </table>
                                                                     </div>
                                                                     <div class="jd-h-tab-pane" id="tab_3">
-                                                                        Class Timing
+                                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                                            <thead class="table-bordered">
+                                                                                <tr>
+                                                                                    <th>
+                                                                                        <input type="checkbox">
+                                                                                    </th>
+                                                                                    <th>Weekday</th>
+                                                                                    <th>Class Timing Set</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="table-bordered">
+                                                                                <tr ng-repeat="data in class_weekday_periods">
+                                                                                    <td><input type="checkbox" ng-true-value="{{ data.weekday.weekday_id }}" ng-false-value="'NO'" ng-model="weekday_class_period.weekday_id" ng-change="toggleWeekdayClassPeriod(weekday_class_period)" ng-checked="data.info.weekday"></td>
+                                                                                    <td>{{ data.weekday.name }}</td>
+                                                                                    <td>
+                                                                                        <select class="table-select" id="class_timing_{{ data.weekday.weekday_id }}">
+                                                                                            <option value="{{ d.class_timing_set_id }}" ng-selected="data.info.class_timing_id == d.class_timing_set_id" ng-repeat="d in class_timing_sets">{{ d.name }}</option>
+                                                                                        </select>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                                 <div class="jd-h-tab-title-block">
@@ -204,7 +225,7 @@
                                                                             <a href="">Subjects</a>
                                                                         </li>
                                                                         <li data-href="tab_3">
-                                                                            <a href="">Class Timing</a>
+                                                                            <a href="">Weekday Timing</a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>

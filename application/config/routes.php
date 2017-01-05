@@ -139,3 +139,11 @@ $route['api/delete-class-subject'] = 'Subject/deleteClassBasicSubject';
 /************* ClassTimingSet APIs ****************/
 $route['api/add-class-timing-set'] = 'ClassTimingSet/addClassTimingSet';
 $route['api/get-class-timing-sets'] = 'ClassTimingSet/getClassTimingSets';
+
+/************* ClassPeriod APIs ****************/
+$route['api/add-class-period'] = 'ClassPeriod/addClassPeriod';
+$route['api/get-class-periods'] = 'ClassPeriod/getClassPeriods';
+
+/************* WeekdayClassPeriod APIs ****************/
+$route['api/add-weekday-class-period'] = 'ClassPeriod/addWeekdayClassPeriod';
+$route['api/get-weekday-class-periods'] = 'ClassPeriod/getWeekdayClassPeriods';

@@ -147,9 +147,15 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.class_timing_sets = Factory.getClassTimingSets();
     
+    $scope.class_periods = Factory.getClassPeriods();
+    
     $scope.subjects = Factory.getSubjects();
     
     $scope.employees = employees.data;
+    
+    $scope.weekdays = Factory.getWeekdays();
+    
+    $scope.weekday_class_periods = Factory.getWeekdayClassPeriods();
     
     $scope.basic_class_subjects = [];
     
@@ -176,6 +182,10 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.subject = {};
     
     $scope.class_subject = {};
+    
+    $scope.class_period = {};
+    
+    $scope.weekday_class_period = {};
      
     
     /** add department **/
@@ -234,10 +244,10 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     };
     /** end add class **/
-    
     $scope.showClass = function(class_id){
         $scope.classs = Factory.getClass(class_id);
         $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
+        $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_(class_id);
         showCard('class');
     }
     
@@ -564,8 +574,59 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     }
     /** end add subject **/
     
+    /** CLASS PERIOD **/
     
+    /** set active class period **/
+    $scope.setActiveClassTimingSet = function(class_timing_set_id){
+        $scope.active_class_timing_set = Factory.getClassTimingSet(class_timing_set_id);
+        $scope.active_class_periods = Factory.getActiveClassPeriods(class_timing_set_id);
+    }
+    try{
+        $scope.setActiveClassTimingSet($scope.class_timing_sets[0].class_timing_set_id);
+    }catch(e){
+        console.log(e.message);
+    }
+    /** end set active score group **/
     
+    /** add score group structure **/
+    $scope.show_add_class_period_overlay = function(){
+        $('#add-class-period-overlay').show();
+    }
+    $scope.addClassPeriod = function(){
+        if($('#form-add-class-period').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('add-class-period-overlay', '');
+            $scope.class_period.school_id = Factory.getSchoolID();
+            $scope.class_period.class_timing_set_id = $scope.active_class_timing_set.class_timing_set_id;//$scope.active_score_group.score_group_id;
+            Service.addClassPeriod($scope.class_period).then(function(response){
+                Service.getClassPeriods().then(function(response){
+                    Factory.updateClassPeriods(response.data);
+                    $scope.class_periods = response.data;
+                    $scope.setActiveClassTimingSet($scope.active_class_timing_set.class_timing_set_id);
+                    clear_form_fields('form-add-class-period');
+                    hide_loading_overlay();
+                    toast('Period Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add score group structure **/
+    
+    /** WEEKDAY CLASS PERIODS **/
+    
+    /*** add/remove weekday class period **/
+    $scope.toggleWeekdayClassPeriod = function(weekday_class_period){
+        //show_loading_overlay();
+        if(weekday_class_period.weekday_id == "NO"){
+            console.log("Delete Jor");
+        }else{
+            $scope.weekday_class_period.class_timing_id = $('#class_timing_'+weekday_class_period.weekday_id).val();
+            $scope.weekday_class_period.class_id = $scope.classs.class_id;
+            console.log(weekday_class_period);
+        }
+    }
     
 });
 
