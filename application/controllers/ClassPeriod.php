@@ -30,7 +30,7 @@ class ClassPeriod extends CI_Controller {
     function addWeekdayClassPeriod(){
         $data = new stdClass();
         $data = json_decode(file_get_contents('php://input'));
-        echo $this->model->insertClassPeriod($data);
+        echo $this->model->insertWeekdayClassPeriod($data);
     }
     
     function getWeekdayClassPeriods(){
@@ -40,7 +40,12 @@ class ClassPeriod extends CI_Controller {
         $filter_value = $this->input->get('filter-value');
         $page = $this->input->get('page');
         $page_size = $this->input->get('page-size');
-        echo json_encode($this->model->getClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+        echo json_encode($this->model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function deleteWeekdayClassPeriod(){
+        $id = $this->input->get('weekday-class-period-id');
+        $this->model->deleteWeekdayClassPeriod($id);
     }
     
 }

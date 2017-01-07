@@ -835,10 +835,16 @@ app.service('Service', function($http){
     };
     
     this.getWeekdayClassPeriods = function(school_id){
-        return $http.get(base_url+"api/get-weekday-class-period", {
+        return $http.get(base_url+"api/get-weekday-class-periods", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
+    
+    this.deleteWeekdayClassPeriod = function(id){
+        return $http.get(base_url+"api/delete-weekday-class-period", {
+            params : {'weekday-class-period-id' : id}
+        });
+    }
     
 });
 

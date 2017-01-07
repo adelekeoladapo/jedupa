@@ -55,4 +55,9 @@ class ClassPeriodModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function deleteWeekdayClassPeriod($id){
+        $this->db->where('weekday_class_period_id', $id);
+        $query = $this->db->delete($this->table_weekday_class_period);
+    }
+    
 }

@@ -204,7 +204,10 @@
                                                                             </thead>
                                                                             <tbody class="table-bordered">
                                                                                 <tr ng-repeat="data in class_weekday_periods">
-                                                                                    <td><input type="checkbox" ng-true-value="{{ data.weekday.weekday_id }}" ng-false-value="'NO'" ng-model="weekday_class_period.weekday_id" ng-change="toggleWeekdayClassPeriod(weekday_class_period)" ng-checked="data.info.weekday"></td>
+                                                                                    <td>
+                                                                                        <input type="text" ng-model="weekday_class_period.weekday_id" value="{{ data.weekday.weekday_id }}">
+                                                                                        <input name="{{ data.weekday.weekday_id }}" type="checkbox" ng-true-value=" 'YES'" ng-false-value="'NO'" ng-model="weekday_class_period.weekday_id" ng-change="toggleWeekdayClassPeriod(weekday_class_period, data.weekday.weekday_id)" ng-checked="data.info.weekday">
+                                                                                    </td>
                                                                                     <td>{{ data.weekday.name }}</td>
                                                                                     <td>
                                                                                         <select class="table-select" id="class_timing_{{ data.weekday.weekday_id }}">

@@ -147,3 +147,4 @@ $route['api/get-class-periods'] = 'ClassPeriod/getClassPeriods';
 /************* WeekdayClassPeriod APIs ****************/
 $route['api/add-weekday-class-period'] = 'ClassPeriod/addWeekdayClassPeriod';
 $route['api/get-weekday-class-periods'] = 'ClassPeriod/getWeekdayClassPeriods';
+$route['api/delete-weekday-class-period'] = 'ClassPeriod/deleteWeekdayClassPeriod';
