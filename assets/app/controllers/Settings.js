@@ -651,6 +651,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     }
     
+    
+    
 });
 
 

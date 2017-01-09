@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/jedupa/application/controllers/ClassPeriod.php</file>
+            <file>file:/C:/xampp/htdocs/jedupa/assets/app/controllers/Settings.js</file>
+            <file>file:/C:/xampp/htdocs/jedupa/assets/theme/assets/css/ui.css</file>
+            <file>file:/C:/xampp/htdocs/jedupa/assets/app/controllers/Jedupa.js</file>
+            <file>file:/C:/xampp/htdocs/jedupa/assets/theme/assets/js/ui.js</file>
+            <file>file:/C:/xampp/htdocs/jedupa/application/controllers/Jedupa.php</file>
+            <file>file:/C:/xampp/htdocs/jedupa/application/controllers/ClassTimetable.php</file>
+            <file>file:/C:/xampp/htdocs/jedupa/assets/app/views/includes/settings/academic-settings/class.html</file>
+            <file>file:/C:/xampp/htdocs/jedupa/application/models/ClassPeriodModel.php</file>
+            <file>file:/C:/xampp/htdocs/jedupa/application/config/routes.php</file>
+            <file>file:/C:/xampp/htdocs/jedupa/application/models/ClassTimetableModel.php</file>
+        </group>
     </open-files>
 </project-private>

@@ -666,6 +666,44 @@ ul.class-level-list > li > a:hover {
 
 /********** end jd checkbox **************/
 
+/********** jd table-timetable ***********/
+
+.jd-tb-timetable-wrapper{
+    border: solid 1px #ddd;
+    background-color: #f5f5f5;
+}
+
+.jd-tb-timetable {
+    width: 100%;
+    margin: -1px -1px -1px -1px;
+}
+
+.jd-tb-timetable .weekday-title {
+    width: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #f8f8f8;
+}
+
+.jd-tb-timetable .period {
+    border: solid 1px #ddd;
+    background-color: #fff;
+}
+
+.jd-tb-timetable .period .subject {
+    font-weight: bold;
+}
+
+.jd-tb-timetable .period .teacher {
+    font-weight: lighter;
+}
+
+table.jd-tb-timetable td:last-child {
+    border-right-width: 1px;
+}
+
+/********** end jd table-timetable ***********/
+
 
 
 /***********MISC**********/

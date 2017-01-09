@@ -218,6 +218,61 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                    <div class="jd-h-tab-pane" id="tab_4">
+                                                                        <div class="jd-tb-timetable-wrapper">
+                                                                            <table class="table table-bordered jd-tb-timetable">
+                                                                                <tr ng-repeat="weekday in class_weekday_periods" ng-if="weekday.info.class_timing_id">
+                                                                                    <td class="weekday-title">{{ factory.break_str(factory.abr_week_day(weekday.weekday.name)) }}</td>
+                                                                                    <!--<td ng-repeat="period in factory.getClassTimingSetPeriods(weekday.info.class_timing_id)">{{ period.name }}</td> --><td>Periods</td>
+                                                                                </tr>
+                                                                                
+                                                                                <!--<tr>
+                                                                                    <td class="weekday-title">M<br />o<br />n</td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods <br />
+                                                                                        <span class="subject">Maths</span> <br />
+                                                                                        <span class="teacher">Adeleke Oladapo</span>
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="weekday-title">T<br />u<br />e</td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="weekday-title">W<br />e<br />d</td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                    <td class="period">
+                                                                                        <input type="checkbox">Periods
+                                                                                    </td>
+                                                                                </tr>-->
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="jd-h-tab-title-block">
                                                                     <ul>
@@ -229,6 +284,9 @@
                                                                         </li>
                                                                         <li data-href="tab_3">
                                                                             <a href="">Weekday Timing</a>
+                                                                        </li>
+                                                                        <li data-href="tab_4">
+                                                                            <a href="">Timetable</a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>

@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2017 at 05:08 PM
--- Server version: 10.1.19-MariaDB
+-- Generation Time: Jan 09, 2017 at 06:07 PM
+-- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,28 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `jedupaco_project_lifelyne_excel_sms_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `command`
---
-
-CREATE TABLE `command` (
-  `command_id` int(11) NOT NULL,
-  `device_id` varchar(50) NOT NULL,
-  `mode` varchar(50) NOT NULL,
-  `source` varchar(200) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `command`
---
-
-INSERT INTO `command` (`command_id`, `device_id`, `mode`, `source`, `date`) VALUES
-(1, '01', 'write', 'phone', '0000-00-00 00:00:00'),
-(2, '404', 'read', 'laptop', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -141,7 +119,6 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 (31, 1, 3, 2, 1, 2, '2016-12-30 09:21:27'),
 (32, 1, 3, 3, 1, 2, '2016-12-30 09:21:50'),
 (35, 1, 2, 3, 1, 2, '2016-12-30 23:16:36'),
-(36, 1, 2, 5, 1, 2, '2016-12-30 23:16:53'),
 (37, 1, 5, 1, 1, 2, '2016-12-31 01:01:44'),
 (38, 1, 5, 2, 1, 2, '2016-12-31 01:01:54'),
 (39, 1, 5, 3, 1, 2, '2016-12-31 01:02:03'),
@@ -201,7 +178,23 @@ INSERT INTO `tb_class_period` (`class_period_id`, `school_id`, `class_timing_set
 (3, 1, 1, 'Short Break', '09:00:00', '10:00:00', 1),
 (4, 1, 1, 'Period 3', '11:00:00', '12:00:00', 0),
 (5, 1, 1, 'Period 4', '11:00:00', '12:00:00', 0),
-(6, 1, 1, 'Period 5', '12:00:00', '13:00:00', 0);
+(6, 1, 1, 'Period 5', '12:00:00', '13:00:00', 0),
+(7, 1, 2, 'Period 1', '07:00:00', '08:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_class_timetable`
+--
+
+CREATE TABLE `tb_class_timetable` (
+  `class_timetable_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `weekday_id` int(11) NOT NULL,
+  `class_period_id` int(11) NOT NULL,
+  `class_basic_subject_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1002,34 +995,24 @@ CREATE TABLE `tb_weekday_class_period` (
 --
 
 INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `weekday_id`, `class_timing_id`, `class_id`, `date_created`) VALUES
-(1, 1, 2, 1, 1, '0000-00-00 00:00:00'),
-(2, 1, 3, 2, 1, '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `test`
---
-
-CREATE TABLE `test` (
-  `test_id` int(11) NOT NULL,
-  `device_id` varchar(50) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `mode` varchar(200) NOT NULL,
-  `source` varchar(200) NOT NULL,
-  `status` varchar(200) NOT NULL,
-  `contact1` varchar(200) NOT NULL,
-  `contact2` varchar(200) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`test_id`, `device_id`, `name`, `mode`, `source`, `status`, `contact1`, `contact2`, `date`) VALUES
-(1, '419', '', 'the status', 'no error', '', '', '', '2016-12-14 16:37:22'),
-(2, '404', 'AdelekeOladapo', 'sleepMode', 'mobile', 'write', 'akure', 'ijare', '2016-12-19 20:58:49');
+(8, 1, 3, 1, 1, '0000-00-00 00:00:00'),
+(9, 1, 4, 1, 1, '0000-00-00 00:00:00'),
+(10, 1, 5, 1, 1, '0000-00-00 00:00:00'),
+(11, 1, 6, 2, 1, '0000-00-00 00:00:00'),
+(16, 1, 6, 2, 2, '0000-00-00 00:00:00'),
+(19, 1, 2, 1, 5, '0000-00-00 00:00:00'),
+(20, 1, 3, 1, 5, '0000-00-00 00:00:00'),
+(21, 1, 4, 1, 5, '0000-00-00 00:00:00'),
+(22, 1, 5, 1, 5, '0000-00-00 00:00:00'),
+(25, 1, 6, 2, 5, '0000-00-00 00:00:00'),
+(27, 1, 7, 1, 2, '0000-00-00 00:00:00'),
+(28, 1, 1, 1, 2, '0000-00-00 00:00:00'),
+(29, 1, 2, 1, 4, '0000-00-00 00:00:00'),
+(30, 1, 3, 1, 4, '0000-00-00 00:00:00'),
+(31, 1, 4, 1, 4, '0000-00-00 00:00:00'),
+(32, 1, 5, 1, 4, '0000-00-00 00:00:00'),
+(33, 1, 6, 1, 4, '0000-00-00 00:00:00'),
+(35, 1, 2, 1, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1394,12 +1377,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indexes for table `command`
---
-ALTER TABLE `command`
-  ADD PRIMARY KEY (`command_id`);
-
---
 -- Indexes for table `tb_assessment_timetable`
 --
 ALTER TABLE `tb_assessment_timetable`
@@ -1434,6 +1411,12 @@ ALTER TABLE `tb_class_level`
 --
 ALTER TABLE `tb_class_period`
   ADD PRIMARY KEY (`class_period_id`);
+
+--
+-- Indexes for table `tb_class_timetable`
+--
+ALTER TABLE `tb_class_timetable`
+  ADD PRIMARY KEY (`class_timetable_id`);
 
 --
 -- Indexes for table `tb_class_timing_set`
@@ -1628,20 +1611,9 @@ ALTER TABLE `tb_weekday_class_period`
   ADD PRIMARY KEY (`weekday_class_period_id`);
 
 --
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`test_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `command`
---
-ALTER TABLE `command`
-  MODIFY `command_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_assessment_timetable`
 --
@@ -1671,7 +1643,12 @@ ALTER TABLE `tb_class_level`
 -- AUTO_INCREMENT for table `tb_class_period`
 --
 ALTER TABLE `tb_class_period`
-  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tb_class_timetable`
+--
+ALTER TABLE `tb_class_timetable`
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -1831,12 +1808,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `test`
---
-ALTER TABLE `test`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

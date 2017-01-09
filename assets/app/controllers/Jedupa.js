@@ -360,7 +360,7 @@ app.factory('Factory', function(){
         app_data.subjects = dt;
     }
     
-    /**  students **/
+    /**  Class Periods **/
     data.getClassPeriods = function(){
         return app_data.class_periods;
     }
@@ -378,6 +378,16 @@ app.factory('Factory', function(){
         });
         return dt;
     }
+    
+    data.getClassTimingSetPeriods = function(id){
+        var dt = [];
+        angular.forEach(app_data.class_periods, function(value, key, obj){
+            if(value.class_timing_set_id == id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    };
     
     /**  weekday **/
     data.getWeekdays = function(){
@@ -450,6 +460,21 @@ app.factory('Factory', function(){
         date = d[0].split("-");
         return months[date[1]-1]+" "+date[2]+", "+date[0]+" at "+d[1];
     }
+    
+    /** Abbreviate weekday eg Monday = Mon **/
+    data.abr_week_day = function(weekday){
+        return weekday.substring(0, 3);
+    }
+    
+    data.break_str = function(str){
+        var d = "";
+        var arr = str.split("");
+        for(s of arr){
+            d += s+"\n";
+        }
+        return d;
+    }
+
     
     
     return data;
