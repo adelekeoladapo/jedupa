@@ -44,8 +44,9 @@ class ClassPeriod extends CI_Controller {
     }
     
     function deleteWeekdayClassPeriod(){
-        $id = $this->input->get('weekday-class-period-id');
-        $this->model->deleteWeekdayClassPeriod($id);
+        $weekday_id = $this->input->get('weekday-id');
+        $class_id = $this->input->get('class-id');
+        $this->model->deleteWeekdayClassPeriod_($class_id, $weekday_id);
     }
     
 }

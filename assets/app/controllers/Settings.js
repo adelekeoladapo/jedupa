@@ -617,23 +617,35 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** WEEKDAY CLASS PERIODS **/
     
     /*** add/remove weekday class period **/
-    $scope.toggleWeekdayClassPeriod = function(weekday_class_period, data){
-        //show_loading_overlay();
-        if(weekday_class_period.weekday_id == "NO"){ console.log(data);
-//            Service.deleteWeekdayClassPeriod(data.info.weekday_class_period_id).then(function(response){
-//                Service.getWeekdayClassPeriods().then(function(response){
-//                    Factory.updateWeekdayClassPeriods(response.data);
-//                    $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
-//                }, function(error){});
-//            }, function(error){});
-        }else{
-            $scope.weekday_class_period.class_timing_id = $('#class_timing_'+weekday_class_period.weekday_id).val();
-            $scope.weekday_class_period.class_id = $scope.classs.class_id;
-            $scope.weekday_class_period.school_id = Factory.getSchoolID();
-            Service.addWeekdayClassPeriod(weekday_class_period).then(function(response){
+    $scope.toggleWeekdayClassPeriod = function(weekday_class_period, status){
+        var data = {};
+        show_loading_overlay();
+        if(status){
+            data.class_timing_id = $('#class_timing_'+weekday_class_period.weekday.weekday_id).val();
+            if(data.class_timing_id == "? undefined:undefined ?"){
+                toast("Select Class Timing Set");
+                hide_loading_overlay();
+                return;
+            } 
+            data.class_id = $scope.classs.class_id;
+            data.school_id = Factory.getSchoolID();
+            data.weekday_id = weekday_class_period.weekday.weekday_id;
+            Service.addWeekdayClassPeriod(data).then(function(response){
                 Service.getWeekdayClassPeriods().then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                    hide_loading_overlay();
+                }, function(error){});
+            }, function(error){});
+        }else{
+            data.class_id = $scope.classs.class_id;
+            data.school_id = Factory.getSchoolID();
+            data.weekday_id = weekday_class_period.weekday.weekday_id;
+            Service.deleteWeekdayClassPeriod(data.class_id, data.weekday_id).then(function(response){
+                Service.getWeekdayClassPeriods().then(function(response){
+                    Factory.updateWeekdayClassPeriods(response.data);
+                    $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                    hide_loading_overlay();
                 }, function(error){});
             }, function(error){});
         }

@@ -651,7 +651,20 @@ ul.class-level-list > li > a:hover {
 
 /************** jd info block ***********/
 
+/********** jd checkbox **************/
 
+.jd-checkbox {
+    border: solid 1px #ccc;
+    padding: 0px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.jd-checkbox i {
+    
+}
+
+/********** end jd checkbox **************/
 
 
 

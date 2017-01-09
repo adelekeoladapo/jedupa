@@ -840,9 +840,9 @@ app.service('Service', function($http){
         });
     };
     
-    this.deleteWeekdayClassPeriod = function(id){
+    this.deleteWeekdayClassPeriod = function(class_id, weekday_id){
         return $http.get(base_url+"api/delete-weekday-class-period", {
-            params : {'weekday-class-period-id' : id}
+            params : {'weekday-id' : weekday_id, 'class-id' : class_id}
         });
     }
     

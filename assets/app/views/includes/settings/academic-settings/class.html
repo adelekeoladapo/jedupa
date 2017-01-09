@@ -195,24 +195,24 @@
                                                                         <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
                                                                             <thead class="table-bordered">
                                                                                 <tr>
-                                                                                    <th>
-                                                                                        <input type="checkbox">
-                                                                                    </th>
+                                                                                    <th>SN</th>
                                                                                     <th>Weekday</th>
                                                                                     <th>Class Timing Set</th>
+                                                                                    <th></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody class="table-bordered">
                                                                                 <tr ng-repeat="data in class_weekday_periods">
-                                                                                    <td>
-                                                                                        <input type="text" ng-model="weekday_class_period.weekday_id" value="{{ data.weekday.weekday_id }}">
-                                                                                        <input name="{{ data.weekday.weekday_id }}" type="checkbox" ng-true-value=" 'YES'" ng-false-value="'NO'" ng-model="weekday_class_period.weekday_id" ng-change="toggleWeekdayClassPeriod(weekday_class_period, data.weekday.weekday_id)" ng-checked="data.info.weekday">
-                                                                                    </td>
+                                                                                    <td>{{ $index + 1 }}</td>
                                                                                     <td>{{ data.weekday.name }}</td>
                                                                                     <td>
-                                                                                        <select class="table-select" id="class_timing_{{ data.weekday.weekday_id }}">
+                                                                                        <select class="table-select" id="class_timing_{{ data.weekday.weekday_id }}" ng-model="data.info.class_timing_id" ng-change="toggleWeekdayClassPeriod(data, true)">
                                                                                             <option value="{{ d.class_timing_set_id }}" ng-selected="data.info.class_timing_id == d.class_timing_set_id" ng-repeat="d in class_timing_sets">{{ d.name }}</option>
                                                                                         </select>
+                                                                                    </td>
+                                                                                    <td class="tb-btn">
+                                                                                        <i ng-hide="data.info.weekday" class="ion ion-checkmark-circled jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Activate" ng-click="toggleWeekdayClassPeriod(data, true)"></i>
+                                                                                        <i ng-show="data.info.weekday" class="ion ion-close-circled jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="De-activate" ng-click="toggleWeekdayClassPeriod(data, false)"></i>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
