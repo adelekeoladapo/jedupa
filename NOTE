@@ -1,7 +1,60 @@
+JEDUPA
+1. Sessions & Quota
+2. Score Group
+3. Subject
+4. Student Category
+5. Additional Details
+6. HR Settings - Department
+7. HR Settings - Categories&Positions
+8. HR Settings - Grade Levels
+10. Student Module
+11. Parent Module
+12. Employee Module
+13. Timetable Module
+14. Exam&Result Module
+15. Event/Calendar Module
+16. Library Module
+17. Mail&SMS Module
+18. Privileges
+19. Users Login
+20. Website
+21. Testing
+22. Documentation
 
-Student
-- Category
-- Additional details
+Future Features
+1. Fees Payment
+2. Finance(Income&Expenses)
+3. Inventory(Stock keeping)
+4. Payroll System
+
+
+ONGOING TASKS
+1. Class Timetables
+Unresolved Issues
+- break periods
+- deleting subjects
+- deleting weekday timing
+- deleting period  
+- reset timetable
+
+2. Exam Module
+   - Grading Level
+   - Class Designation
+   - Class Exams
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -140,3 +193,26 @@ FROM tb_weekday_class_period
 	JOIN tb_weekday ON tb_weekday_class_period.weekday_id = tb_weekday.weekday_id 
 	JOIN tb_class_timing_set ON tb_class_timing_set.class_timing_set_id = tb_weekday_class_period.class_timing_id 
 	JOIN tb_class ON tb_weekday_class_period.class_id = tb_class.class_id
+
+
+
+CREATE VIEW vw_class_timetable AS SELECT 
+	tb_class_timetable.class_timetable_id,
+	tb_class_timetable.class_id AS class_id,
+	tb_class_timetable.school_id AS school_id,
+	tb_class_timetable.weekday_id AS weekday_id,
+	tb_class_timetable.class_period_id AS class_period_id,
+	tb_class_timetable.class_basic_subject_id AS class_basic_subject_id,
+	tb_weekday.name AS weekday,
+	tb_class_period.class_timing_set_id AS class_timing_set_id,
+	tb_class_period.name AS class_period,
+	tb_class_period.start_time AS start_time,
+	tb_class_period.end_time AS end_time,
+	tb_class_period.is_break AS is_break,
+	vw_class_basic_subject.subject_id AS subject_id,
+	vw_class_basic_subject.subject AS subject,
+	vw_class_basic_subject.teacher AS teacher
+FROM tb_class_timetable 
+JOIN tb_weekday ON tb_class_timetable.weekday_id = tb_weekday.weekday_id 
+JOIN tb_class_period ON tb_class_timetable.class_period_id = tb_class_period.class_period_id 
+JOIN vw_class_basic_subject ON tb_class_timetable.class_basic_subject_id = vw_class_basic_subject.class_basic_subject_id

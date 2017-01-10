@@ -434,12 +434,35 @@ app.factory('Factory', function(){
             d.weekday = value;
             var info = data.getWeekdayClassWeekdayPeriod(class_id, value.weekday_id);
             d.info = (info) ? info : false;
+            if(info){
+                d.periods = data.getClassTimingSetPeriods(info.class_timing_id);
+            }
             info = false;
             dt.push(d);
         });
         return dt;
     }
     
+    /** class timetable **/
+    data.getClassTimeTables = function(){
+        return app_data.class_timetables;
+    }
+    
+    data.updateClassTimeTables = function(dt){
+        app_data.class_timetables = dt;
+    }
+    
+    data.getClassWeekdayPeriodTimetable = function(class_id, weekday_id, class_period_id){
+        dt = {};
+        angular.forEach(app_data.class_timetables, function(value, key, obj){
+            if((value.class_id == class_id)&&(value.weekday_id == weekday_id)&&(value.class_period_id == class_period_id)){
+                dt = angular.copy(obj[key]);
+            }else{
+                return false
+            }
+        });
+        return dt;
+    }
     
     
     /** 
@@ -870,6 +893,21 @@ app.service('Service', function($http){
             params : {'weekday-id' : weekday_id, 'class-id' : class_id}
         });
     }
+    
+    /** class timetables **/
+    this.addClassWeekdaysPeriodsSubjects = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-weekdays-periods-subjects",
+            data: data
+        });
+    };
+    
+    this.getClassTimetables = function(school_id){
+        return $http.get(base_url+"api/get-class-timetable", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
     
 });
 

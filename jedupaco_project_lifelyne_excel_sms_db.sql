@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2017 at 06:07 PM
+-- Generation Time: Jan 10, 2017 at 06:23 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -110,7 +110,6 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 (18, 1, 2, 1, 0, 0, '2016-12-21 11:19:54'),
 (20, 1, 2, 1, 1, 2, '2016-12-21 11:20:41'),
 (21, 1, 2, 2, 1, 1, '2016-12-21 11:20:54'),
-(22, 1, 1, 1, 1, 0, '2016-12-21 11:23:16'),
 (24, 1, 1, 2, 1, 2, '2016-12-23 20:50:04'),
 (26, 1, 4, 1, 1, 2, '2016-12-28 09:01:56'),
 (27, 1, 4, 2, 1, 1, '2016-12-28 09:02:27'),
@@ -124,7 +123,13 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 (39, 1, 5, 3, 1, 2, '2016-12-31 01:02:03'),
 (40, 1, 5, 4, 1, 2, '2016-12-31 01:02:14'),
 (41, 1, 5, 5, 1, 2, '2016-12-31 01:02:21'),
-(42, 1, 6, 1, 1, 2, '2016-12-31 23:06:37');
+(42, 1, 6, 1, 1, 2, '2016-12-31 23:06:37'),
+(43, 1, 1, 3, 1, 2, '2017-01-10 10:44:18'),
+(44, 1, 1, 4, 1, 1, '2017-01-10 18:05:54'),
+(45, 1, 1, 5, 1, 1, '2017-01-10 18:06:52'),
+(46, 1, 2, 5, 1, 1, '2017-01-10 18:07:44'),
+(47, 1, 2, 6, 1, 2, '2017-01-10 18:07:56'),
+(48, 1, 1, 1, 1, 2, '2017-01-10 18:14:30');
 
 -- --------------------------------------------------------
 
@@ -195,6 +200,49 @@ CREATE TABLE `tb_class_timetable` (
   `class_period_id` int(11) NOT NULL,
   `class_basic_subject_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_timetable`
+--
+
+INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `weekday_id`, `class_period_id`, `class_basic_subject_id`) VALUES
+(1, 1, 1, 2, 1, 22),
+(2, 1, 1, 3, 1, 22),
+(3, 1, 1, 4, 1, 22),
+(4, 1, 1, 5, 1, 22),
+(5, 1, 1, 2, 2, 24),
+(6, 1, 1, 3, 3, 24),
+(7, 1, 1, 5, 2, 24),
+(8, 1, 1, 4, 4, 24),
+(9, 1, 1, 3, 2, 43),
+(10, 1, 1, 2, 3, 43),
+(11, 1, 1, 5, 6, 43),
+(12, 1, 1, 6, 7, 43),
+(13, 1, 1, 2, 4, 29),
+(14, 1, 1, 5, 3, 29),
+(15, 1, 1, 5, 4, 29),
+(16, 1, 1, 3, 4, 29),
+(17, 1, 1, 2, 5, 44),
+(18, 1, 1, 2, 6, 44),
+(19, 1, 1, 5, 5, 44),
+(20, 1, 1, 4, 2, 44),
+(21, 1, 1, 4, 3, 44),
+(22, 1, 1, 3, 6, 45),
+(23, 1, 1, 3, 5, 45),
+(24, 1, 1, 4, 5, 45),
+(25, 1, 1, 4, 6, 45),
+(26, 2, 1, 1, 7, 20),
+(27, 2, 1, 6, 1, 20),
+(28, 2, 1, 6, 2, 20),
+(29, 2, 1, 7, 7, 20),
+(30, 2, 1, 6, 3, 21),
+(31, 2, 1, 6, 4, 35),
+(32, 2, 1, 6, 5, 46),
+(33, 2, 1, 6, 6, 47),
+(34, 1, 1, 2, 1, 48),
+(35, 1, 1, 3, 1, 48),
+(36, 1, 1, 4, 1, 48),
+(37, 1, 1, 5, 1, 48);
 
 -- --------------------------------------------------------
 
@@ -995,24 +1043,24 @@ CREATE TABLE `tb_weekday_class_period` (
 --
 
 INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `weekday_id`, `class_timing_id`, `class_id`, `date_created`) VALUES
-(8, 1, 3, 1, 1, '0000-00-00 00:00:00'),
-(9, 1, 4, 1, 1, '0000-00-00 00:00:00'),
-(10, 1, 5, 1, 1, '0000-00-00 00:00:00'),
-(11, 1, 6, 2, 1, '0000-00-00 00:00:00'),
-(16, 1, 6, 2, 2, '0000-00-00 00:00:00'),
 (19, 1, 2, 1, 5, '0000-00-00 00:00:00'),
 (20, 1, 3, 1, 5, '0000-00-00 00:00:00'),
 (21, 1, 4, 1, 5, '0000-00-00 00:00:00'),
 (22, 1, 5, 1, 5, '0000-00-00 00:00:00'),
 (25, 1, 6, 2, 5, '0000-00-00 00:00:00'),
-(27, 1, 7, 1, 2, '0000-00-00 00:00:00'),
-(28, 1, 1, 1, 2, '0000-00-00 00:00:00'),
 (29, 1, 2, 1, 4, '0000-00-00 00:00:00'),
 (30, 1, 3, 1, 4, '0000-00-00 00:00:00'),
 (31, 1, 4, 1, 4, '0000-00-00 00:00:00'),
 (32, 1, 5, 1, 4, '0000-00-00 00:00:00'),
 (33, 1, 6, 1, 4, '0000-00-00 00:00:00'),
-(35, 1, 2, 1, 1, '0000-00-00 00:00:00');
+(39, 1, 3, 1, 1, '0000-00-00 00:00:00'),
+(40, 1, 4, 1, 1, '0000-00-00 00:00:00'),
+(41, 1, 5, 1, 1, '0000-00-00 00:00:00'),
+(42, 1, 6, 2, 1, '0000-00-00 00:00:00'),
+(44, 1, 2, 1, 1, '0000-00-00 00:00:00'),
+(51, 1, 7, 2, 2, '0000-00-00 00:00:00'),
+(52, 1, 1, 2, 2, '0000-00-00 00:00:00'),
+(56, 1, 6, 1, 2, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1084,6 +1132,29 @@ CREATE TABLE `vw_class_period` (
 ,`end_time` time
 ,`is_break` int(11)
 ,`class_timing_set` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_class_timetable`
+--
+CREATE TABLE `vw_class_timetable` (
+`class_timetable_id` int(11)
+,`class_id` int(11)
+,`school_id` int(11)
+,`weekday_id` int(11)
+,`class_period_id` int(11)
+,`class_basic_subject_id` int(11)
+,`weekday` varchar(100)
+,`class_timing_set_id` int(11)
+,`class_period` varchar(100)
+,`start_time` time
+,`end_time` time
+,`is_break` int(11)
+,`subject_id` int(11)
+,`subject` varchar(200)
+,`teacher` varchar(201)
 );
 
 -- --------------------------------------------------------
@@ -1308,6 +1379,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_class_period`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_period`  AS  select `tb_class_period`.`class_period_id` AS `class_period_id`,`tb_class_period`.`school_id` AS `school_id`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `name`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`tb_class_timing_set`.`name` AS `class_timing_set` from (`tb_class_period` join `tb_class_timing_set` on((`tb_class_timing_set`.`class_timing_set_id` = `tb_class_period`.`class_timing_set_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_class_timetable`
+--
+DROP TABLE IF EXISTS `vw_class_timetable`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_timetable`  AS  select `tb_class_timetable`.`class_timetable_id` AS `class_timetable_id`,`tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`weekday_id` AS `weekday_id`,`tb_class_timetable`.`class_period_id` AS `class_period_id`,`tb_class_timetable`.`class_basic_subject_id` AS `class_basic_subject_id`,`tb_weekday`.`name` AS `weekday`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `class_period`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`vw_class_basic_subject`.`subject_id` AS `subject_id`,`vw_class_basic_subject`.`subject` AS `subject`,`vw_class_basic_subject`.`teacher` AS `teacher` from (((`tb_class_timetable` join `tb_weekday` on((`tb_class_timetable`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_period` on((`tb_class_timetable`.`class_period_id` = `tb_class_period`.`class_period_id`))) join `vw_class_basic_subject` on((`tb_class_timetable`.`class_basic_subject_id` = `vw_class_basic_subject`.`class_basic_subject_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1633,7 +1713,7 @@ ALTER TABLE `tb_class`
 -- AUTO_INCREMENT for table `tb_class_basic_subject`
 --
 ALTER TABLE `tb_class_basic_subject`
-  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tb_class_level`
 --
@@ -1648,7 +1728,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -1808,7 +1888,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

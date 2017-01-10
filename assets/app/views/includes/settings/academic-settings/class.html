@@ -223,7 +223,15 @@
                                                                             <table class="table table-bordered jd-tb-timetable">
                                                                                 <tr ng-repeat="weekday in class_weekday_periods" ng-if="weekday.info.class_timing_id">
                                                                                     <td class="weekday-title">{{ factory.break_str(factory.abr_week_day(weekday.weekday.name)) }}</td>
-                                                                                    <!--<td ng-repeat="period in factory.getClassTimingSetPeriods(weekday.info.class_timing_id)">{{ period.name }}</td> --><td>Periods</td>
+                                                                                    <td class="period" ng-repeat="period in weekday.periods">
+                                                                                        {{ period.start_time+" - "+period.end_time }} <input class="check" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
+                                                                                        <!--<br />{{ factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id) }}
+                                                                                        <!--<br />{{ 'ClassID: '+classs.class_id+" WeekdayID: "+weekday.weekday.weekday_id+" PeriodID: "+period.class_period_id }}-->
+                                                                                        <span ng-init="timetable = factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id)">
+                                                                                            <span class="subject"><br />{{ timetable.subject }}</span>
+                                                                                            <span class="teacher"><br />{{ timetable.teacher }}</span>
+                                                                                        </span>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 
                                                                                 <!--<tr>
@@ -272,6 +280,18 @@
                                                                                 </tr>-->
                                                                             </table>
                                                                         </div>
+                                                                        <!--/ timetable controls -->
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <form class="form-inline">
+                                                                                    <select class="form-control" ng-model="new_periods.class_basic_subject_id">
+                                                                                        <option value="{{ basic_class_subject.class_basic_subject_id }}" ng-repeat="basic_class_subject in basic_class_subjects">{{ basic_class_subject.subject  }}</option>
+                                                                                    </select>
+                                                                                    <button class="btn jd-btn jd-btn-primary" ng-click="addClassWeekdaysPeriodsSubjects()">Assign</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--/ timetable controls -->
                                                                     </div>
                                                                 </div>
                                                                 <div class="jd-h-tab-title-block">

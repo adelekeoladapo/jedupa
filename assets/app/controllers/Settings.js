@@ -651,7 +651,49 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     }
     
+    /** CLASS TIMETABLES **/
     
+    /*** add class weekdays periods subjects **/
+    $scope.new_periods = {};
+    $scope.addClassWeekdaysPeriodsSubjects = function(){
+        $scope.new_periods.class_id = $scope.classs.class_id;
+        $scope.new_periods.school_id = Factory.getSchoolID();
+        $scope.new_periods.periods = period_tray;
+        if(!$scope.new_periods.class_basic_subject_id){
+            toast("Kindly select a subject");
+        }else if($scope.new_periods.periods.length < 1){
+            toast("No period selected");
+        }else{
+            show_loading_overlay();
+            Service.addClassWeekdaysPeriodsSubjects($scope.new_periods).then(function(response){
+                Service.getClassTimetables().then(function(response){
+                    Factory.updateClassTimeTables(response.data);
+                    $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                    period_tray = [];
+                    hide_loading_overlay();
+                    toast($scope.new_periods.periods.length+" periods added successfully");
+                }, function(error){});
+            }, function(error){});
+        }
+    }
+    
+    /** add/remove period from period tray while making timetable **/
+    var period_tray = [];
+    $scope.togglePeriods = function(data, status){
+        if(status){
+            period_tray.push(data);
+        }else{
+            $scope.remove_period_from_tray(data);
+        }
+    }
+    
+    $scope.remove_period_from_tray = function(period){
+        for(d in period_tray){
+            if((period_tray[d].weekday_id == period.weekday_id)&&(period_tray[d].class_period_id == period.class_period_id)){
+                period_tray.splice(d, 1);
+            }
+        }
+    }
     
 });
 

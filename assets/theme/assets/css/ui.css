@@ -671,11 +671,12 @@ ul.class-level-list > li > a:hover {
 .jd-tb-timetable-wrapper{
     border: solid 1px #ddd;
     background-color: #f5f5f5;
+    margin-bottom: 10px;
 }
 
 .jd-tb-timetable {
     width: 100%;
-    margin: -1px -1px -1px -1px;
+    margin: -1px -1px -1px 0px;
 }
 
 .jd-tb-timetable .weekday-title {
@@ -688,6 +689,10 @@ ul.class-level-list > li > a:hover {
 .jd-tb-timetable .period {
     border: solid 1px #ddd;
     background-color: #fff;
+}
+
+.jd-tb-timetable .period .check {
+    float: right;
 }
 
 .jd-tb-timetable .period .subject {
