@@ -2,12 +2,14 @@
 
 class ClassPeriod extends CI_Controller {
     
-    private $model;
+    private $model, $class_timetable_model;
     
     function __construct() {
         parent::__construct();
         $this->load->model('ClassPeriodModel');
+        $this->load->model('ClassTimetableModel');
         $this->model = new ClassPeriodModel();
+        $this->class_timetable_model = new ClassTimetableModel();
     }
     
     function addClassPeriod(){
@@ -47,6 +49,7 @@ class ClassPeriod extends CI_Controller {
         $weekday_id = $this->input->get('weekday-id');
         $class_id = $this->input->get('class-id');
         $this->model->deleteWeekdayClassPeriod_($class_id, $weekday_id);
+        $this->class_timetable_model->clearWeekdayClassTimetable($class_id, $weekday_id);
     }
     
 }

@@ -172,7 +172,6 @@
                                                                                 <tr>
                                                                                     <th>SN</th>
                                                                                     <th>Subject</th>
-                                                                                    <th>Score Group</th>
                                                                                     <th>Teacher</th>
                                                                                     <th><span class="jd-tiny-btn" style="padding: 0px 4px 1px 4px;"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="New" onmouseenter="$(this).tooltip('show')" data-original-title="Save" ng-click="show_assign_subject_overlay()"></i></span></th>
                                                                                 </tr>
@@ -181,11 +180,15 @@
                                                                                 <tr ng-repeat="basic_class_subject in basic_class_subjects">
                                                                                     <td>{{ $index + 1 }}</td>
                                                                                     <td>{{ basic_class_subject.subject }}</td>
-                                                                                    <td>{{ basic_class_subject.score_group }}</td>
-                                                                                    <td>{{ basic_class_subject.teacher }}</td>
+                                                                                    <td>{{ basic_class_subject.teacher }}</td> 
+                                                                                    <!-- Not working properly. Teachers' names dont get updated on timetable
+                                                                                    <td>
+                                                                                        <select ng-model="basic_class_subject.employee_id" class="table-select" ng-change="updateClassSubject(basic_class_subject)">
+                                                                                            <option value="{{ employee.employee_id }}" ng-repeat="employee in employees">{{ employee.firstname+" "+employee.lastname }}</option>
+                                                                                        </select>
+                                                                                    </td>-->
                                                                                     <td class="tb-btn">
-                                                                                        <i class="ion ion-edit jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Edit"></i>
-                                                                                        <i class="ion ion-close-round jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Delete" ng-click="deleteClassSubject(basic_class_subject)"></i>
+                                                                                        <i class="ion ion-close-circled jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Delete" ng-click="deleteClassSubject(basic_class_subject)"></i>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -223,72 +226,30 @@
                                                                             <table class="table table-bordered jd-tb-timetable">
                                                                                 <tr ng-repeat="weekday in class_weekday_periods" ng-if="weekday.info.class_timing_id">
                                                                                     <td class="weekday-title">{{ factory.break_str(factory.abr_week_day(weekday.weekday.name)) }}</td>
-                                                                                    <td class="period" ng-repeat="period in weekday.periods">
-                                                                                        {{ period.start_time+" - "+period.end_time }} <input class="check" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
-                                                                                        <!--<br />{{ factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id) }}
-                                                                                        <!--<br />{{ 'ClassID: '+classs.class_id+" WeekdayID: "+weekday.weekday.weekday_id+" PeriodID: "+period.class_period_id }}-->
-                                                                                        <span ng-init="timetable = factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id)">
+                                                                                    <td class="period {{ (is_break == 1) ? 'break' : ''; }}" ng-init="is_break = period.is_break" ng-repeat="period in weekday.periods">
+                                                                                        {{ period.start_time+" - "+period.end_time }} <input ng-if="is_break == 0" class="check" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
+                                                                                        <span ng-if="is_break == 0" ng-init="timetable = factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id)">
                                                                                             <span class="subject"><br />{{ timetable.subject }}</span>
                                                                                             <span class="teacher"><br />{{ timetable.teacher }}</span>
                                                                                         </span>
+                                                                                        <span class="subject" ng-if="is_break == 1">
+                                                                                            <br />{{ period.name }}
+                                                                                        </span>
                                                                                     </td>
                                                                                 </tr>
-                                                                                
-                                                                                <!--<tr>
-                                                                                    <td class="weekday-title">M<br />o<br />n</td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods <br />
-                                                                                        <span class="subject">Maths</span> <br />
-                                                                                        <span class="teacher">Adeleke Oladapo</span>
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="weekday-title">T<br />u<br />e</td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="weekday-title">W<br />e<br />d</td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                    <td class="period">
-                                                                                        <input type="checkbox">Periods
-                                                                                    </td>
-                                                                                </tr>-->
                                                                             </table>
                                                                         </div>
                                                                         <!--/ timetable controls -->
                                                                         <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <form class="form-inline">
+                                                                            <div class="col-md-12">
+                                                                                <form class="form-inline" style="display: inline-block;">
                                                                                     <select class="form-control" ng-model="new_periods.class_basic_subject_id">
                                                                                         <option value="{{ basic_class_subject.class_basic_subject_id }}" ng-repeat="basic_class_subject in basic_class_subjects">{{ basic_class_subject.subject  }}</option>
                                                                                     </select>
                                                                                     <button class="btn jd-btn jd-btn-primary" ng-click="addClassWeekdaysPeriodsSubjects()">Assign</button>
                                                                                 </form>
+                                                                                <button class="btn jd-btn jd-btn-default" ng-click="resetClassTimetablePeriods()">Reset</button>
+                                                                                <button class="btn jd-btn jd-btn-error" ng-click="resetClassWeekdaysPeriodsSubjects()">Reset Timetable</button>
                                                                             </div>
                                                                         </div>
                                                                         <!--/ timetable controls -->
@@ -311,70 +272,6 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            <!-- all subjects 
-                                                            <div class="col-md-6">
-                                                                <div class="sidebar-container">
-                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects <span class="jd-tiny-btn"><i class="ion ion-plus-round jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="New" onmouseenter="$(this).tooltip('show')" data-original-title="Save" ng-click="show_assign_subject_overlay()"></i></span></h3>
-                                                                    <div>
-                                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
-                                                                            <thead class="">
-                                                                                <tr>
-                                                                                    <th>SN</th>
-                                                                                    <th>Subject</th>
-                                                                                    <th>Score Group</th>
-                                                                                    <th>Teacher</th>
-                                                                                    <th></th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody class="">
-                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects">
-                                                                                    <td>{{ $index + 1 }}</td>
-                                                                                    <td>{{ basic_class_subject.subject }}</td>
-                                                                                    <td>{{ basic_class_subject.score_group }}</td>
-                                                                                    <td>{{ basic_class_subject.teacher }}</td>
-                                                                                    <td class="tb-btn">
-                                                                                        <i class="ion ion-edit jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Edit"></i>
-                                                                                        <i class="ion ion-close-round jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Delete" ng-click="deleteClassSubject(basic_class_subject)"></i>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/ all subjects -->
-                                                            <!-- class subjects 
-                                                            <div class="col-md-2">
-                                                                <div class="sidebar-container">
-                                                                    <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">All Subjects <!--<span class="jd-tiny-btn"><i class="ion ion-arrow-graph-up-left jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Assign" aria-describedby="tooltip619559" ng-click="assignClassSubjects()"></i></span>--></h3>
-                                                                    <!--<form class="subjects-select" name="form-subject-list" id="form-subject-list">
-                                                                        <ul class="class-level-list-2">
-                                                                            <li ng-repeat="subject in subjects">
-                                                                                {{ subject.name }}
-                                                                                <!--<input type="checkbox" name="{{ $index }}" value="{{ subject.subject_id }}">-->
-                                                                            <!--</li>
-                                                                        </ul>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <!--/ class subjects -->
                                                             
                                                         </div>
                                                     </div>
@@ -446,16 +343,6 @@
                                                                             <select class="form-control" ng-model="class_subject.subject_id" required>
                                                                                 <option value="{{ subject.subject_id }}" ng-repeat="subject in subjects">
                                                                                     {{ subject.name }}
-                                                                                </option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="code" class="col-sm-4 control-label">Score Group <span class="required-field"> *</span></label>
-                                                                        <div class="col-sm-8">
-                                                                            <select class="form-control" ng-model="class_subject.score_group_id" required>
-                                                                                <option value="{{ group.score_group_id }}" ng-repeat="group in score_groups">
-                                                                                    {{ group.name }}
                                                                                 </option>
                                                                             </select>
                                                                         </div>

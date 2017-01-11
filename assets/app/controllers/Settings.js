@@ -299,6 +299,33 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         
     }
     
+    /** not working properly. Teachers' names on the timetable dont get updated **/
+    $scope.updateClassSubject = function(basic_class_subject){
+        $d = confirm("Update "+basic_class_subject.subject+"?");
+        if($d){
+            show_loading_overlay();
+            var data = {};
+            data.class_basic_subject_id = basic_class_subject.class_basic_subject_id;
+            data.employee_id = basic_class_subject.employee_id;
+            Service.assignClassSubject(data).then(function(response){
+                Service.getClassSubjects(basic_class_subject.school_id).then(function(response){
+                    Factory.updateBasicClassSubjects(response.data);
+                    $scope.basic_class_subjects = Factory.getBasicClassSubjects(basic_class_subject.class_id);
+                    Service.getWeekdayClassPeriods().then(function(response){
+                        Factory.updateWeekdayClassPeriods(response.data);
+                        $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                        Service.getClassTimetables().then(function(response){
+                            Factory.updateClassTimeTables(response.data);
+                            hide_loading_overlay();
+                        }, function(error){});
+                    }, function(error){});
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    
     $scope.deleteClassSubject = function(basic_class_subject){
         $d = confirm("Delete "+basic_class_subject.subject+"?");
         if($d){
@@ -617,7 +644,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** WEEKDAY CLASS PERIODS **/
     
     /*** add/remove weekday class period **/
-    $scope.toggleWeekdayClassPeriod = function(weekday_class_period, status){
+    $scope.toggleWeekdayClassPeriod = function(weekday_class_period, status){ 
         var data = {};
         show_loading_overlay();
         if(status){
@@ -645,7 +672,10 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                 Service.getWeekdayClassPeriods().then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
-                    hide_loading_overlay();
+                    Service.getClassTimetables().then(function(response){
+                        Factory.updateClassTimeTables(response.data);
+                        hide_loading_overlay();
+                    }, function(error){});
                 }, function(error){});
             }, function(error){});
         }
@@ -655,7 +685,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /*** add class weekdays periods subjects **/
     $scope.new_periods = {};
-    $scope.addClassWeekdaysPeriodsSubjects = function(){
+    $scope.addClassWeekdaysPeriodsSubjects = function(){ 
         $scope.new_periods.class_id = $scope.classs.class_id;
         $scope.new_periods.school_id = Factory.getSchoolID();
         $scope.new_periods.periods = period_tray;
@@ -677,6 +707,27 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }
     }
     
+    $scope.resetClassTimetablePeriods = function(){ 
+        var periods = period_tray;
+        if(periods.length < 1){
+            toast("No period selected");
+        }else{
+            var c = confirm("Reset Periods?");
+            if(c){
+                show_loading_overlay();
+                Service.removeClassWeekdaysPeriodsSubjects(periods).then(function(response){
+                    Service.getClassTimetables().then(function(response){
+                        Factory.updateClassTimeTables(response.data);
+                        $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                        period_tray = [];
+                        hide_loading_overlay();
+                        toast(periods.length+" periods reset successfully");
+                    }, function(error){});
+                }, function(error){});
+            }
+        }
+    }
+    
     /** add/remove period from period tray while making timetable **/
     var period_tray = [];
     $scope.togglePeriods = function(data, status){
@@ -692,6 +743,22 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
             if((period_tray[d].weekday_id == period.weekday_id)&&(period_tray[d].class_period_id == period.class_period_id)){
                 period_tray.splice(d, 1);
             }
+        }
+    }
+    
+    /** reset class timetable **/
+    $scope.resetClassWeekdaysPeriodsSubjects = function(){ 
+        var c = confirm("Reset Timetable?")
+        if(c){
+            show_loading_overlay();
+            Service.resetClassTimetable($scope.classs.class_id).then(function(response){
+                Service.getClassTimetables().then(function(response){
+                    Factory.updateClassTimeTables(response.data);
+                    $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                    hide_loading_overlay();
+                    toast("Timetable reset successfully");
+                }, function(error){});
+            }, function(error){});
         }
     }
     

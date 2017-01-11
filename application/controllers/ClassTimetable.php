@@ -31,6 +31,16 @@ class ClassTimetable extends CI_Controller {
         }
     }
     
+    function removeClassWeekdaysPeriodsSubjects(){
+        $periods = new stdClass();
+        $periods = json_decode(file_get_contents('php://input'));
+        foreach ($periods as $period) {
+            $timetable->weekday_id = $period->weekday_id;
+            $timetable->class_period_id = $period->class_period_id;
+            $this->model->removeClassTimetablePeriod($timetable);
+        }
+    }
+    
     function getClassTimetables(){
         $sort_field = $this->input->get('sort-field');
         $sort_order_mode = $this->input->get('sort-order-mode');
@@ -39,6 +49,11 @@ class ClassTimetable extends CI_Controller {
         $page = $this->input->get('page');
         $page_size = $this->input->get('page-size');
         echo json_encode($this->model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+    }
+    
+    function resetClassTimetable(){
+        $class_id = $this->input->get('class-id');
+        $this->model->clearClassTimetable($class_id);
     }
     
 }

@@ -151,16 +151,15 @@ CREATE VIEW vw_class_basic_subject AS SELECT
 tb_class_basic_subject.class_basic_subject_id AS class_basic_subject_id, 
 tb_class_basic_subject.school_id AS school_id, 
 tb_class_basic_subject.class_id AS class_id, 
+tb_class_basic_subject.employee_id AS employee_id,
 tb_class_basic_subject.subject_id AS subject_id, 
-tb_class_basic_subject.score_group_id AS score_group_id, 
 tb_class.name AS class, 
 tb_class.code AS class_code, 
 tb_subject.name AS subject, 
 tb_subject.code AS subject_code, 
-tb_score_group.name AS score_group,
 CONCAT(vw_employee.firstname," ",vw_employee.lastname) AS teacher  
 FROM tb_class_basic_subject JOIN tb_class ON tb_class_basic_subject.class_id = tb_class.class_id 
-JOIN tb_subject ON tb_class_basic_subject.subject_id = tb_subject.subject_id JOIN tb_score_group ON tb_class_basic_subject.score_group_id = tb_score_group.score_group_id 
+JOIN tb_subject ON tb_class_basic_subject.subject_id = tb_subject.subject_id  
 LEFT JOIN vw_employee ON tb_class_basic_subject.employee_id = vw_employee.employee_id
 
 

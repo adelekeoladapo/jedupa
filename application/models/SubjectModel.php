@@ -33,8 +33,17 @@ class SubjectModel extends CI_Model {
     
     /** Assign subject to class || insert class basic subject **/
     function insertClassBasicSubject($data){
-        $this->db->insert($this->table_basic_class_subject, $data);
-        return $this->db->insert_id();
+        if($data->class_basic_subject_id){
+            $this->updateClassBasicSubject($data);
+        }else{
+            $this->db->insert($this->table_basic_class_subject, $data);
+            return $this->db->insert_id();
+        }
+    }
+    
+    function updateClassBasicSubject($data){
+        $this->db->where('class_basic_subject_id', $data->class_basic_subject_id);
+        $this->db->update($this->table_basic_class_subject, $data);
     }
     
     function getClassesBasicSubjects($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){

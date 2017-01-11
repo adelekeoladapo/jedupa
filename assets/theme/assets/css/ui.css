@@ -691,6 +691,10 @@ ul.class-level-list > li > a:hover {
     background-color: #fff;
 }
 
+.jd-tb-timetable .period.break {
+    background-color: #f8f8f8;
+}
+
 .jd-tb-timetable .period .check {
     float: right;
 }

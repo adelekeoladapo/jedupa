@@ -909,6 +909,20 @@ app.service('Service', function($http){
         });
     };
     
+    this.resetClassTimetable = function(class_id){
+        return $http.get(base_url+"api/reset-class-timetable", {
+            params : {'class-id' : class_id}
+        });
+    }
+    
+    this.removeClassWeekdaysPeriodsSubjects = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/remove-class-timetable-periods",
+            data: data
+        });
+    };
+    
 });
 
 
