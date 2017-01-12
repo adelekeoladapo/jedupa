@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2017 at 02:47 PM
+-- Generation Time: Jan 12, 2017 at 06:16 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -136,6 +136,52 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_class_designation`
+--
+
+CREATE TABLE `tb_class_designation` (
+  `class_designation_id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_designation`
+--
+
+INSERT INTO `tb_class_designation` (`class_designation_id`, `school_id`, `name`, `date_created`) VALUES
+(1, 1, 'Default', '2017-01-12 18:02:49'),
+(2, 1, 'Desig_2', '2017-01-12 18:15:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_class_designation_structure`
+--
+
+CREATE TABLE `tb_class_designation_structure` (
+  `class_designation_structure_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `class_designation_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `min_score` double NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `description` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_designation_structure`
+--
+
+INSERT INTO `tb_class_designation_structure` (`class_designation_structure_id`, `school_id`, `class_designation_id`, `name`, `min_score`, `date_created`, `date_modified`, `description`) VALUES
+(1, 1, 1, 'First Class', 70, '2017-01-12 18:14:39', '0000-00-00 00:00:00', 'First Class'),
+(2, 1, 1, 'Second Class Upper', 60, '2017-01-12 18:15:04', '0000-00-00 00:00:00', 'Second Class Upper Students');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_class_level`
 --
 
@@ -202,6 +248,26 @@ CREATE TABLE `tb_class_timetable` (
   `class_period_id` int(11) NOT NULL,
   `class_basic_subject_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_class_timetable`
+--
+
+INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `weekday_id`, `class_period_id`, `class_basic_subject_id`) VALUES
+(49, 1, 1, 2, 1, 62),
+(50, 1, 1, 3, 1, 62),
+(52, 1, 1, 5, 1, 62),
+(53, 1, 1, 4, 1, 24),
+(54, 1, 1, 2, 2, 24),
+(55, 1, 1, 5, 4, 24),
+(56, 1, 1, 2, 6, 43),
+(58, 1, 1, 2, 4, 44),
+(59, 1, 1, 2, 5, 44),
+(60, 1, 1, 5, 2, 44),
+(62, 1, 1, 4, 2, 29),
+(63, 1, 1, 3, 4, 43),
+(64, 1, 1, 4, 6, 43),
+(65, 1, 1, 5, 5, 43);
 
 -- --------------------------------------------------------
 
@@ -418,6 +484,54 @@ CREATE TABLE `tb_grade_level_payroll` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_grading_level`
+--
+
+CREATE TABLE `tb_grading_level` (
+  `grading_level_id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_grading_level`
+--
+
+INSERT INTO `tb_grading_level` (`grading_level_id`, `school_id`, `name`, `date_created`) VALUES
+(1, 1, 'Default', '2017-01-12 14:56:30'),
+(2, 1, 'G Level_2', '2017-01-12 15:31:59'),
+(3, 1, 'G Level_3', '2017-01-12 15:32:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_grading_level_structure`
+--
+
+CREATE TABLE `tb_grading_level_structure` (
+  `tb_grading_level_structure_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `grading_level_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `min_score` double NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `description` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_grading_level_structure`
+--
+
+INSERT INTO `tb_grading_level_structure` (`tb_grading_level_structure_id`, `school_id`, `grading_level_id`, `name`, `min_score`, `date_created`, `date_modified`, `description`) VALUES
+(1, 1, 1, 'A', 70, '2017-01-12 15:24:17', '0000-00-00 00:00:00', 'Distinction'),
+(2, 1, 1, 'B', 60, '2017-01-12 15:26:41', '0000-00-00 00:00:00', 'Good'),
+(3, 1, 1, 'C', 50, '2017-01-12 16:09:50', '0000-00-00 00:00:00', 'Average');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_grading_system`
 --
 
@@ -528,59 +642,6 @@ CREATE TABLE `tb_school` (
 
 INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `address1`, `address2`, `phone1`, `phone2`, `status_id`, `country_id`, `state_id`, `language_id`, `auto_gen_student_id`, `email`, `website`, `password`, `auto_gen_employee_id`, `auto_gen_parent_id`, `motto`, `rc_number`, `time_zone_id`) VALUES
 (1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 1, 'info@oxfordcollege.com', 'www.oxfordcollege.com', '', 1, 1, 'Up And On', '', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_score_group`
---
-
-CREATE TABLE `tb_score_group` (
-  `score_group_id` int(11) NOT NULL,
-  `school_id` int(11) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_score_group`
---
-
-INSERT INTO `tb_score_group` (`score_group_id`, `school_id`, `name`, `date_created`) VALUES
-(1, 1, 'Default', '2016-11-22 07:58:47'),
-(2, 1, 'Practicals', '2016-11-22 08:02:09'),
-(3, 1, 'Theory', '2016-12-23 20:38:57');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_score_group_structure`
---
-
-CREATE TABLE `tb_score_group_structure` (
-  `score_group_structure_id` int(11) NOT NULL,
-  `school_id` int(11) NOT NULL,
-  `score_group_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  `description` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_score_group_structure`
---
-
-INSERT INTO `tb_score_group_structure` (`score_group_structure_id`, `school_id`, `score_group_id`, `name`, `date_created`, `date_modified`, `description`) VALUES
-(1, 1, 1, 'Test 1', '2016-11-22 08:01:18', '0000-00-00 00:00:00', 'First Periodic Test'),
-(2, 1, 1, 'Test 2', '2016-11-22 08:01:36', '0000-00-00 00:00:00', 'Second Periodic Test'),
-(3, 1, 1, 'Exam', '2016-11-22 08:01:53', '0000-00-00 00:00:00', 'Examination'),
-(4, 1, 2, 'Test', '2016-12-14 15:55:42', '0000-00-00 00:00:00', 'Periodic Test'),
-(5, 1, 2, 'Exam', '2016-12-14 15:56:01', '0000-00-00 00:00:00', 'Examination'),
-(6, 1, 3, 'First Test', '2016-12-23 20:39:25', '0000-00-00 00:00:00', 'First Periodic Test'),
-(7, 1, 3, 'Second Test', '2016-12-23 20:39:41', '0000-00-00 00:00:00', 'Second Periodic Test'),
-(8, 1, 3, 'Third Test', '2016-12-23 20:40:01', '0000-00-00 00:00:00', 'Third Periodic Test'),
-(9, 1, 3, 'Exam', '2016-12-23 20:40:11', '0000-00-00 00:00:00', 'Examination');
 
 -- --------------------------------------------------------
 
@@ -1008,7 +1069,6 @@ INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `
 (31, 1, 4, 1, 4, '0000-00-00 00:00:00'),
 (32, 1, 5, 1, 4, '0000-00-00 00:00:00'),
 (33, 1, 6, 1, 4, '0000-00-00 00:00:00'),
-(42, 1, 6, 2, 1, '0000-00-00 00:00:00'),
 (56, 1, 6, 1, 2, '0000-00-00 00:00:00'),
 (57, 1, 6, 2, 4, '0000-00-00 00:00:00'),
 (58, 1, 2, 1, 3, '0000-00-00 00:00:00'),
@@ -1025,7 +1085,9 @@ INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `
 (81, 1, 7, 2, 2, '0000-00-00 00:00:00'),
 (82, 1, 4, 1, 1, '0000-00-00 00:00:00'),
 (84, 1, 5, 1, 1, '0000-00-00 00:00:00'),
-(85, 1, 2, 1, 1, '0000-00-00 00:00:00');
+(85, 1, 2, 1, 1, '0000-00-00 00:00:00'),
+(87, 1, 6, 1, 1, '0000-00-00 00:00:00'),
+(88, 1, 6, 2, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1226,14 +1288,6 @@ CREATE TABLE `vw_quota` (
 -- Stand-in structure for view `vw_score_group_structure`
 --
 CREATE TABLE `vw_score_group_structure` (
-`score_group_structure_id` int(11)
-,`school_id` int(11)
-,`name` varchar(100)
-,`date_created` datetime
-,`date_modified` datetime
-,`description` varchar(300)
-,`score_group_id` int(11)
-,`score_group` varchar(30)
 );
 
 -- --------------------------------------------------------
@@ -1445,6 +1499,18 @@ ALTER TABLE `tb_class_basic_subject`
   ADD PRIMARY KEY (`class_basic_subject_id`);
 
 --
+-- Indexes for table `tb_class_designation`
+--
+ALTER TABLE `tb_class_designation`
+  ADD PRIMARY KEY (`class_designation_id`);
+
+--
+-- Indexes for table `tb_class_designation_structure`
+--
+ALTER TABLE `tb_class_designation_structure`
+  ADD PRIMARY KEY (`class_designation_structure_id`);
+
+--
 -- Indexes for table `tb_class_level`
 --
 ALTER TABLE `tb_class_level`
@@ -1523,6 +1589,18 @@ ALTER TABLE `tb_grade_level_payroll`
   ADD PRIMARY KEY (`tb_grade_level_payroll_id`);
 
 --
+-- Indexes for table `tb_grading_level`
+--
+ALTER TABLE `tb_grading_level`
+  ADD PRIMARY KEY (`grading_level_id`);
+
+--
+-- Indexes for table `tb_grading_level_structure`
+--
+ALTER TABLE `tb_grading_level_structure`
+  ADD PRIMARY KEY (`tb_grading_level_structure_id`);
+
+--
 -- Indexes for table `tb_grading_system`
 --
 ALTER TABLE `tb_grading_system`
@@ -1545,18 +1623,6 @@ ALTER TABLE `tb_quota`
 --
 ALTER TABLE `tb_school`
   ADD PRIMARY KEY (`school_id`);
-
---
--- Indexes for table `tb_score_group`
---
-ALTER TABLE `tb_score_group`
-  ADD PRIMARY KEY (`score_group_id`);
-
---
--- Indexes for table `tb_score_group_structure`
---
-ALTER TABLE `tb_score_group_structure`
-  ADD PRIMARY KEY (`score_group_structure_id`);
 
 --
 -- Indexes for table `tb_session`
@@ -1679,6 +1745,16 @@ ALTER TABLE `tb_class`
 ALTER TABLE `tb_class_basic_subject`
   MODIFY `class_basic_subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
+-- AUTO_INCREMENT for table `tb_class_designation`
+--
+ALTER TABLE `tb_class_designation`
+  MODIFY `class_designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_class_designation_structure`
+--
+ALTER TABLE `tb_class_designation_structure`
+  MODIFY `class_designation_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tb_class_level`
 --
 ALTER TABLE `tb_class_level`
@@ -1692,7 +1768,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -1744,6 +1820,16 @@ ALTER TABLE `tb_employee_subject`
 ALTER TABLE `tb_grade_level_payroll`
   MODIFY `tb_grade_level_payroll_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tb_grading_level`
+--
+ALTER TABLE `tb_grading_level`
+  MODIFY `grading_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tb_grading_level_structure`
+--
+ALTER TABLE `tb_grading_level_structure`
+  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `tb_grading_system`
 --
 ALTER TABLE `tb_grading_system`
@@ -1763,16 +1849,6 @@ ALTER TABLE `tb_quota`
 --
 ALTER TABLE `tb_school`
   MODIFY `school_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tb_score_group`
---
-ALTER TABLE `tb_score_group`
-  MODIFY `score_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `tb_score_group_structure`
---
-ALTER TABLE `tb_score_group_structure`
-  MODIFY `score_group_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_session`
 --
@@ -1852,7 +1928,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

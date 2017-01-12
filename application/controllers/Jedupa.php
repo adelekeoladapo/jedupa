@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $score_group_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
+    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
     
     function __construct() {
         parent::__construct();
@@ -12,7 +12,7 @@ class Jedupa extends CI_Controller {
         $this->load->model('ClassModel');
         $this->load->model('SessionModel');
         $this->load->model('QuotaModel');
-        $this->load->model('ScoreGroupModel');
+        $this->load->model('GradingLevelModel');
         $this->load->model('StudentCategoryModel');
         $this->load->model('AdditionalFieldModel');
         $this->load->model('EmpDepartmentModel');
@@ -24,12 +24,13 @@ class Jedupa extends CI_Controller {
         $this->load->model('ClassPeriodModel');
         $this->load->model('WeekdayModel');
         $this->load->model('ClassTimetableModel');
+        $this->load->model('ClassDesignationModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
         $this->session_model = new SessionModel();
         $this->quota_model = new QuotaModel();
-        $this->score_group_model = new ScoreGroupModel();
+        $this->grading_level_model = new GradingLevelModel();
         $this->student_category_model = new StudentCategoryModel();
         $this->additional_field_model = new AdditionalFieldModel();
         $this->employee_department_model = new EmpDepartmentModel();
@@ -41,6 +42,7 @@ class Jedupa extends CI_Controller {
         $this->class_period_model = new ClassPeriodModel();
         $this->weekday_model = new WeekdayModel();
         $this->class_timetable_model = new ClassTimetableModel();
+        $this->class_designation_model = new ClassDesignationModel();
     }
 
     public function index(){
@@ -62,8 +64,10 @@ class Jedupa extends CI_Controller {
         $data['class_types'] = $this->class_model->getTypes($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['sessions'] = $this->session_model->getSessions($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['quotas'] = $this->quota_model->getQuotas($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-        $data['score_groups'] = $this->score_group_model->getScoreGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-        $data['score_group_structures'] = $this->score_group_model->getScoreGroupStructures($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['grading_levels'] = $this->grading_level_model->getGradingLevels($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['grading_level_structures'] = $this->grading_level_model->getGradingLevelStructures($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['class_designations'] = $this->class_designation_model->getClassDesignations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['class_designation_structures'] = $this->class_designation_model->getClassDesignationStructures($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['student_categories'] = $this->student_category_model->getStudentCategories($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['additional_fields'] = $this->additional_field_model->getAdditionalFields($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['employee_departments'] = $this->employee_department_model->getEmpDepartments($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);

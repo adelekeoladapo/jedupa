@@ -119,7 +119,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
 
 /*******************Academic Settings Controller ***************/
 
-app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes, sessions, employees){
+app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, departments, classes, sessions, employees, levels, class_types, grading_levels, class_designations, class_timing_sets){
     
     $scope.factory = Factory;
     
@@ -128,6 +128,16 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     Factory.updateClasses(classes.data);
     
     Factory.updateSessions(sessions.data);
+    
+    Factory.updateLevels(levels.data);
+    
+    Factory.updateClassTypes(class_types.data);
+    
+    Factory.updateGradingLevels(grading_levels.data);
+    
+    Factory.updateClassDesignations(class_designations.data);
+    
+    Factory.updateClassTimingSets(class_timing_sets.data);
     
     $scope.departments = Factory.getStudentDepartments();
     
@@ -141,9 +151,13 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.quotas = Factory.getQuotas();
     
-    $scope.score_groups = Factory.getScoreGroups();
+    $scope.grading_levels = Factory.getGradingLevels();
     
-    $scope.score_group_structures = Factory.getScoreGroupStructures();
+    $scope.grading_level_structures = Factory.getGradingLevelStructures();
+    
+    $scope.class_designations = Factory.getClassDesignations();
+    
+    $scope.class_designation_structures = Factory.getClassDesignationStructures();
     
     $scope.class_timing_sets = Factory.getClassTimingSets();
     
@@ -173,9 +187,13 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     $scope.quota = {};
     
-    $scope.score_group = {};
+    $scope.grading_level = {};
     
-    $scope.score_group_structure = {};
+    $scope.grading_level_structure = {};
+    
+    $scope.class_designation = {};
+    
+    $scope.class_designation_structure = {};
     
     $scope.class_timing_set = {};
     
@@ -259,7 +277,6 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.assignClassSubjectsX = function(){
         $scope.class_subject.school_id = Factory.getSchoolID();
         $scope.class_subject.class_id = $scope.classs.class_id;
-        $scope.class_subject.score_group_id = $scope.score_groups[0].score_group_id;
         var form_data = new FormData($('#form-subject-list')[0]);
         var arr = [];
         for (var value of form_data.values()) {
@@ -492,55 +509,55 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** end add quota **/
     
     
-    /** SCORE GROUP **/
+    /** GRADING LEVELS **/
     
-    /** add score group **/
-    $scope.addScoreGroup = function(){
+    /** add grading level **/
+    $scope.addGradingLevel = function(){
         if($('#form-add-score-group').smkValidate()){
             show_loading_overlay();
-            $scope.score_group.school_id = Factory.getSchoolID();
-            Service.addScoreGroup($scope.score_group).then(function(response){
-                Service.getScoreGroups().then(function(response){
-                    Factory.updateScoreGroups(response.data);
-                    $scope.score_groups = response.data;
+            $scope.grading_level.school_id = Factory.getSchoolID();
+            Service.addGradingLevel($scope.grading_level).then(function(response){
+                Service.getGradingLevels().then(function(response){
+                    Factory.updateGradingLevels(response.data);
+                    $scope.grading_levels = response.data;
                     clear_form_fields('form-add-score-group');
                     hide_loading_overlay();
-                    toast('Score Group Successfully Added');
+                    toast('Grading Level Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
             });
         }
     }
-    /** end add score group **/
+    /** end add grading level **/
     
-    /** set active score group **/
-    $scope.setActiveScoreGroup = function(score_group_id){
-        $scope.active_score_group = Factory.getScoreGroup(score_group_id);
-        $scope.active_score_group_structures = Factory.getScoreGroupStructures_(score_group_id);
+    /** set active grading level **/
+    $scope.setActiveGradingLevel = function(grading_level_id){
+        $scope.active_grading_level = Factory.getGradingLevel(grading_level_id);
+        $scope.active_grading_level_structures = Factory.getGradingLevelStructures_(grading_level_id);
     }
     try{
-        $scope.setActiveScoreGroup($scope.score_groups[0].score_group_id);
+        $scope.setActiveGradingLevel($scope.grading_levels[0].grading_level_id);
     }catch(e){
         console.log(e.message);
     }
-    /** end set active score group **/
+    /** end set active grading level **/
     
-    /** add score group structure **/
+    /** add grading level structure **/
     $scope.show_add_score_group_structure_overlay = function(){
         $('#add-score-group-structure-overlay').show();
     }
-    $scope.addScoreGroupStructure = function(){
+    $scope.addGradingLevelStructure = function(){
         if($('#form-add-score-group-structure').smkValidate()){
             show_loading_overlay();
             hide_form_modal('add-score-group-structure-overlay', '');
-            $scope.score_group_structure.school_id = Factory.getSchoolID();
-            $scope.score_group_structure.score_group_id = $scope.active_score_group.score_group_id;
-            Service.addScoreGroupStructure($scope.score_group_structure).then(function(response){
-                Service.getScoreGroupStructures().then(function(response){
-                    Factory.updateScoreGroupStructures(response.data);
-                    $scope.score_group_structures = response.data;
-                    $scope.setActiveScoreGroup($scope.active_score_group.score_group_id);
+            $scope.grading_level_structure.school_id = Factory.getSchoolID();
+            $scope.grading_level_structure.grading_level_id = $scope.active_grading_level.grading_level_id;
+            Service.addGradingLevelStructure($scope.grading_level_structure).then(function(response){
+                Service.getGradingLevelStructures().then(function(response){
+                    Factory.updateGradingLevelStructures(response.data);
+                    $scope.grading_level_structures = response.data;
+                    $scope.setActiveGradingLevel($scope.active_grading_level.grading_level_id);
                     clear_form_fields('form-add-score-group-structure');
                     hide_loading_overlay();
                     toast('Pattern Successfully Added');
@@ -550,7 +567,71 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
             });
         }
     }
-    /** end add score group structure **/
+    /** end add grading level structure **/
+    
+    
+    /** CLASS DESIGNATION **/
+    
+    /** add Class Designation **/
+    $scope.addClassDesignation = function(){
+        if($('#form-add-class-designation').smkValidate()){
+            show_loading_overlay();
+            $scope.class_designation.school_id = Factory.getSchoolID();
+            Service.addClassDesignation($scope.class_designation).then(function(response){
+                Service.getClassDesignations().then(function(response){
+                    Factory.updateClassDesignations(response.data);
+                    $scope.class_designations = response.data;
+                    clear_form_fields('form-add-class-designation');
+                    hide_loading_overlay();
+                    toast('Class Designation Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add Class Designation **/
+    
+    /** set active Class Designation **/
+    $scope.setActiveClassDesignation = function(class_designation_id){
+        $scope.active_class_designation = Factory.getClassDesignation(class_designation_id);
+        $scope.active_class_designation_structures = Factory.getClassDesignationStructures_(class_designation_id);
+    }
+    try{
+        $scope.setActiveClassDesignation($scope.class_designations[0].class_designation_id);
+    }catch(e){
+        console.log(e.message);
+    }
+    /** end set active Class Designation **/
+    
+    /** add Class Designation structure **/
+    $scope.show_add_class_designation_structure_overlay = function(){
+        $('#add-class-designation-structure-overlay').show();
+    }
+    $scope.addClassDesignationStructure = function(){
+        if($('#form-add-class-designation-structure').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('add-class-designation-structure-overlay', '');
+            $scope.class_designation_structure.school_id = Factory.getSchoolID();
+            $scope.class_designation_structure.class_designation_id = $scope.active_class_designation.class_designation_id;
+            Service.addClassDesignationStructure($scope.class_designation_structure).then(function(response){
+                Service.getClassDesignationStructures().then(function(response){
+                    Factory.updateClassDesignationStructures(response.data);
+                    $scope.class_designation_structures = response.data;
+                    $scope.setActiveClassDesignation($scope.active_class_designation.class_designation_id);
+                    clear_form_fields('form-add-class-designation-structure');
+                    $scope.class_designation_structures = {};
+                    hide_loading_overlay();
+                    toast('Pattern Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add Class Designation structure **/
+    
+    
     
     
     /** CLASS TIMING SET **/

@@ -83,11 +83,17 @@ $route['api/get-sessions'] = 'Session/getSessions';
 $route['api/add-quota'] = 'Quota/addQuota';
 $route['api/get-quotas'] = 'Quota/getQuotas';
 
-/*********** Score Group APIs ****************/
-$route['api/add-score-group'] = 'ScoreGroup/addScoreGroup';
-$route['api/get-score-groups'] = 'ScoreGroup/getScoreGroups';
-$route['api/add-score-group-structure'] = 'ScoreGroup/addScoreGroupStructure';
-$route['api/get-score-group-structures'] = 'ScoreGroup/getScoreGroupStructures';
+/*********** Grading Levels APIs ****************/
+$route['api/add-grading-level'] = 'GradingLevel/addGradingLevel';
+$route['api/get-grading-levels'] = 'GradingLevel/getGradingLevels';
+$route['api/add-grading-level-structure'] = 'GradingLevel/addGradingLevelStructure';
+$route['api/get-grading-level-structures'] = 'GradingLevel/getGradingLevelStructures';
+
+/*********** Class Designation APIs ****************/
+$route['api/add-class-designation'] = 'ClassDesignation/addClassDesignation';
+$route['api/get-class-designations'] = 'ClassDesignation/getClassDesignations';
+$route['api/add-class-designation-structure'] = 'ClassDesignation/addClassDesignationStructure';
+$route['api/get-class-designation-structures'] = 'ClassDesignation/getClassDesignationStructures';
 
 /************* Student Category APIs ***************/
 $route['api/add-student-category'] = 'StudentCategory/addStudentCategory';

@@ -176,41 +176,78 @@ app.factory('Factory', function(){
         return dt;
     }
     
-    /** score group **/
-    data.getScoreGroups = function(){
-        return app_data.score_groups;
+    /** grading level **/
+    data.getGradingLevels = function(){
+        return app_data.grading_levels;
     }
     
-    data.updateScoreGroups = function(dt){
-        app_data.score_groups = dt;
+    data.updateGradingLevels = function(dt){
+        app_data.grading_levels = dt;
     }
     
-    data.getScoreGroup = function(id){
+    data.getGradingLevel = function(id){
         var dt = {};
-        angular.forEach(app_data.score_groups, function(value, key, obj){
-            if(value.score_group_id == id){
+        angular.forEach(app_data.grading_levels, function(value, key, obj){
+            if(value.grading_level_id == id){
                 dt = angular.copy(obj[key]);
             }
         });
         return dt;
     };
     
-    data.getScoreGroupStructures_ = function(score_group_id){
+    data.getGradingLevelStructures_ = function(grading_level_id){
         var dt = [];
-        angular.forEach(app_data.score_group_structures, function(value, key, obj){
-            if(value.score_group_id == score_group_id){
+        angular.forEach(app_data.grading_level_structures, function(value, key, obj){
+            if(value.grading_level_id == grading_level_id){
                 dt.push(angular.copy(obj[key]));
             }
         });
         return dt;
     }
     
-    data.getScoreGroupStructures = function(){
-        return app_data.score_group_structures;
+    data.getGradingLevelStructures = function(){
+        return app_data.grading_level_structures;
     }
     
-    data.updateScoreGroupStructures = function(dt){
-        app_data.score_group_structures = dt;
+    data.updateGradingLevelStructures = function(dt){
+        app_data.grading_level_structures = dt;
+    }
+    
+    /** class designation **/
+    data.getClassDesignations = function(){
+        return app_data.class_designations;
+    }
+    
+    data.updateClassDesignations = function(dt){
+        app_data.class_designations = dt;
+    }
+    
+    data.getClassDesignation = function(id){
+        var dt = {};
+        angular.forEach(app_data.class_designations, function(value, key, obj){
+            if(value.class_designation_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    };
+    
+    data.getClassDesignationStructures_ = function(class_designation_id){
+        var dt = [];
+        angular.forEach(app_data.class_designation_structures, function(value, key, obj){
+            if(value.class_designation_id == class_designation_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.getClassDesignationStructures = function(){
+        return app_data.class_designation_structures;
+    }
+    
+    data.updateClassDesignationStructures = function(dt){
+        app_data.class_designation_structures = dt;
     }
     
     /** class timing set **/
@@ -631,30 +668,59 @@ app.service('Service', function($http){
     };
     
     /** score group **/
-    this.addScoreGroup = function(data){
+    this.addGradingLevel = function(data){
         return $http({
             method: "POST",
-            url: base_url+"api/add-score-group",
+            url: base_url+"api/add-grading-level",
             data: data
         });
     };
     
-    this.getScoreGroups = function(school_id){
-        return $http.get(base_url+"api/get-score-groups", {
+    this.getGradingLevels = function(school_id){
+        return $http.get(base_url+"api/get-grading-levels", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
     
-    this.addScoreGroupStructure = function(data){
+    this.addGradingLevelStructure = function(data){
         return $http({
             method: "POST",
-            url: base_url+"api/add-score-group-structure",
+            url: base_url+"api/add-grading-level-structure",
             data: data
         });
     };
     
-    this.getScoreGroupStructures = function(school_id){
-        return $http.get(base_url+"api/get-score-group-structures", {
+    this.getGradingLevelStructures = function(school_id){
+        return $http.get(base_url+"api/get-grading-level-structures", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** class designation **/
+    this.addClassDesignation = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-designation",
+            data: data
+        });
+    };
+    
+    this.getClassDesignations = function(school_id){
+        return $http.get(base_url+"api/get-class-designations", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.addClassDesignationStructure = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-designation-structure",
+            data: data
+        });
+    };
+    
+    this.getClassDesignationStructures = function(school_id){
+        return $http.get(base_url+"api/get-class-designation-structures", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
@@ -1061,6 +1127,21 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 employees: function(Service, Factory){
                     return Service.getEmployees(Factory.getSchoolID());
+                },
+                levels: function(Service, Factory){
+                    return Service.getLevels(Factory.getSchoolID());
+                },
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                },
+                grading_levels: function(Service, Factory){
+                    return Service.getGradingLevels(Factory.getSchoolID());
+                },
+                class_designations: function(Service, Factory){
+                    return Service.getClassDesignations(Factory.getSchoolID());
+                },
+                class_timing_sets: function(Service, Factory){
+                    return Service.getClassTimingSets(Factory.getSchoolID());
                 }
             }
         })
