@@ -8,6 +8,20 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.min-max-form {
+    float: right;
+    margin-top: -3px;
+    margin-right: -5px;
+}
+
+.min-max-form input {
+    width: 50px;
+    border: solid 1px #ccc;
+    border-radius: 2px;
+    font-size: 15px;
+    padding: 3px;
+}
+
 .table-select {
     width: 100%;
     border: transparent;
@@ -712,6 +726,17 @@ table.jd-tb-timetable td:last-child {
 }
 
 /********** end jd table-timetable ***********/
+
+/**** class examination *****/
+.exam-settings-wrapper {
+    
+}
+
+.exam-settings-wrapper .quota {
+    padding-bottom: 3px;
+}
+
+/**** end class examination *****/
 
 
 

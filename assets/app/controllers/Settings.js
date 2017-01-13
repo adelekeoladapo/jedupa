@@ -266,6 +266,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         $scope.classs = Factory.getClass(class_id);
         $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
         $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_(class_id);
+        $scope.active_exams = []; $scope.quota = $scope.new_examination = {};
         showCard('class');
     }
     
@@ -472,6 +473,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.setActiveSession = function(session_id){
         $scope.active_session = Factory.getSession(session_id);
         $scope.active_session_quota = Factory.getSessionQuotas(session_id);
+        $scope.active_exams = [];
     }
     try{
         $scope.setActiveSession($scope.sessions[0].session_id);
@@ -841,6 +843,50 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                 }, function(error){});
             }, function(error){});
         }
+    }
+    
+    /** CLASS EXAMINATION **/
+    
+    /** add examination **/
+    $scope.show_add_examination_overlay = function(){
+        $('#add-examination-overlay').show();
+    }
+    $scope.new_examination = {};
+    $scope.addExamination = function(){
+        if($('#form-add-examination').smkValidate()){
+            show_loading_overlay();
+            hide_form_modal('add-examination-overlay', '');
+            $scope.new_examination.class_id = $scope.classs.class_id;
+            $scope.new_examination.school_id = Factory.getSchoolID();
+            Service.addExamination($scope.new_examination).then(function(response){
+                Service.getExaminations().then(function(response){
+                    Factory.updateExaminations(response.data);
+                    $scope.setActiveClassQuotaExams($scope.classs.class_id, $scope.new_examination.quota_id);
+                    $scope.new_examination.name = $scope.new_examination.description = "";
+                    hide_loading_overlay();
+                    toast("Examination added successfully");
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add examination **/
+    $scope.active_exams = [];
+    $scope.setActiveClassQuotaExams = function(class_id, quota_id){
+        $scope.quota = Factory.getQuota(quota_id);
+        $scope.active_exams = Factory.getClassQuotaExams(class_id, quota_id);
+    }
+    
+    /** show ALL class exams**/
+    $scope.showClassExams = function(){
+        showCard_('card-exam-settings', 'card-class-exams');
+    }
+    
+    /** show class exam. set timetable **/
+    $scope.showClassExam = function(exam_id){
+        showCard_('card-exam-settings', 'card-class-exam');
+        console.log(exam_id);
     }
     
 });

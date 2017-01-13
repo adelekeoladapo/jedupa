@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
+    private $school_model, $examination_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
     
     function __construct() {
         parent::__construct();
@@ -25,6 +25,7 @@ class Jedupa extends CI_Controller {
         $this->load->model('WeekdayModel');
         $this->load->model('ClassTimetableModel');
         $this->load->model('ClassDesignationModel');
+        $this->load->model('ExaminationModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
@@ -43,6 +44,7 @@ class Jedupa extends CI_Controller {
         $this->weekday_model = new WeekdayModel();
         $this->class_timetable_model = new ClassTimetableModel();
         $this->class_designation_model = new ClassDesignationModel();
+        $this->examination_model = new ExaminationModel();
     }
 
     public function index(){
@@ -81,6 +83,7 @@ class Jedupa extends CI_Controller {
         $data['weekdays'] = $this->weekday_model->getWeekdays($sort_field, $sort_order_mode, null, null, $page, $page_size);
         $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }

@@ -136,8 +136,14 @@ function hide_loading_overlay(){
     
 function showCard(id){
     var container = $('.jd-cards-container');
-    container.children('.jd-card').removeClass('active');
-    container.find('.jd-card#'+id).addClass('active');
+    container.children('.jd-card:first').removeClass('active');
+    container.find('.jd-card#'+id+':first').addClass('active');
+}
+
+function showCard_(container_id, card_id){
+    var container = $('.jd-cards-container#'+container_id);
+    container.children('.jd-card:first').removeClass('active');
+    container.find('.jd-card#'+card_id+':first').addClass('active');
 }
 
 /** End jD Card Layout Script **/

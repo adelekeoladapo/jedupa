@@ -254,6 +254,91 @@
                                                                         </div>
                                                                         <!--/ timetable controls -->
                                                                     </div>
+                                                                    <div class="jd-h-tab-pane" id="tab_5">
+                                                                        <!-- exam settings cards -->
+                                                                        <div class="jd-cards-container" id="card-exam-settings">
+                                                                            <div class="jd-card active" id="card-class-exams">
+                                                                                <div class="exam-settings-wrapper">
+                                                                                    <div class="row quota">
+                                                                                        <form class="col-md-6 form-inline" style="float: left">
+                                                                                            <select class="form-control" ng-change="setActiveSession(new_examination.session_id);" ng-model="new_examination.session_id">
+                                                                                                <option value="{{ session.session_id }}" ng-repeat="session in sessions">{{ session.name }}</option>
+                                                                                            </select>
+                                                                                            <select class="form-control" ng-model="new_examination.quota_id" ng-change="setActiveClassQuotaExams(classs.class_id, new_examination.quota_id)">
+                                                                                                <option value="{{ quota.quota_id }}" ng-repeat="quota in active_session_quota">{{ quota.name }}</option>
+                                                                                            </select>
+                                                                                        </form>
+                                                                                        <div class="col-md-6" style="text-align: right">
+                                                                                            <button class="btn jd-btn jd-btn-default">Connect Exams</button>
+                                                                                            <button class="btn jd-btn jd-btn-primary" ng-click="show_add_examination_overlay()">New</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="sidebar-container" ng-show="quota.name">
+                                                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title ng-binding">
+                                                                                            {{ quota.session+' / '+quota.name }}
+                                                                                        </h3>
+                                                                                        <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
+                                                                                            <thead class="">
+                                                                                                <tr>
+                                                                                                    <th>SN</th>
+                                                                                                    <th>Name</th>
+                                                                                                    <th>Description</th>
+                                                                                                    <th>Weightage(%)</th>
+                                                                                                    <th></th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody class="">
+                                                                                                <tr ng-repeat="exam in active_exams">
+                                                                                                    <td>{{ $index + 1 }}</td>
+                                                                                                    <td>{{ exam.name }}</td>
+                                                                                                    <td>{{ exam.description }}</td>
+                                                                                                    <td>{{ (exam.weightage == 0) ? 'Not Set' : exam.weightage; }}</td>
+                                                                                                    <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ng-click="showClassExam(exam.examination_id)"></i></td>
+                                                                                                </tr>
+                                                                                                <tr ng-show="active_exams.length == 0"><td colspan="5">No exams added yet</td></tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="jd-card" id="card-class-exam">
+                                                                                <div class="exam-settings-wrapper">
+                                                                                    <div class="sidebar-container">
+                                                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                                                            Exam Title ({{ quota.session+' / '+quota.name }})
+                                                                                            <div class="min-max-form">
+                                                                                                <input type="number" placeholder="Max">
+                                                                                            </div>
+                                                                                        </h3>
+                                                                                        <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
+                                                                                            <thead class="">
+                                                                                                <tr>
+                                                                                                    <th>SN</th>
+                                                                                                    <th>Subject</th>
+                                                                                                    <th>Max Score</th>
+                                                                                                    <th>Start Time</th>
+                                                                                                    <th>Finish Time</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody class="">
+                                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects">
+                                                                                                    <td>{{ $index + 1 }}</td>
+                                                                                                    <td>{{ basic_class_subject.subject }}</td>
+                                                                                                    <td><input type="number"></td>
+                                                                                                    <td><input type="datetime-local"></td>
+                                                                                                    <td><input type="datetime-local"></td>
+                                                                                                </tr>
+                                                                                                <!--<tr ng-show="active_exams.length == 0"><td colspan="5">No exams added yet</td></tr>-->
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <button ng-click="showClassExams()">test</button>
+                                                                            </div>
+                                                                            <div class="jd-card" id="card-3">Card 3</div>
+                                                                        </div>
+                                                                        <!--/ exam settings cards -->
+                                                                    </div>
                                                                 </div>
                                                                 <div class="jd-h-tab-title-block">
                                                                     <ul>
@@ -268,6 +353,9 @@
                                                                         </li>
                                                                         <li data-href="tab_4">
                                                                             <a href="">Timetable</a>
+                                                                        </li>
+                                                                        <li data-href="tab_5">
+                                                                            <a href="">Examination</a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -366,5 +454,41 @@
                                                 </div>
                                             </div>
                                             <!-- End Assign subject overlay -->
+                                            
+                                            
+                                            
+                                            <!-- New Examination overlay -->
+                                            <div class="transparent-overlay" id="add-examination-overlay">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-md-offset-4">
+                                                        <div class="jd-modal">
+                                                            <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
+                                                                New Examination 
+                                                            </h1>
+                                                            <div class="jd-modal-body">
+                                                                <form class="form-horizontal" name="form-add-examination" id="form-add-examination"  novalidate> 
+                                                                    <div class="form-group">
+                                                                        <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input ng-model="new_examination.name" type="text" name="name" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="descr" class="col-sm-4 control-label">Description <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" ng-model="new_examination.description" name="descr" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="jd-modal-footer">
+                                                                <button class="btn jd-modal-btn" onclick="hide_form_modal('add-examination-overlay', '')">Cancel</button>
+                                                                <button class="btn jd-modal-btn btn-ok" ng-click="addExamination()">OK</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End New Examination overlay -->
                                             
                                                

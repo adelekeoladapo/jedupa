@@ -176,6 +176,17 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    data.getQuota = function(id){
+        var dt = {};
+        angular.forEach(app_data.quotas, function(value, key, obj){
+            if(value.quota_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    
     /** grading level **/
     data.getGradingLevels = function(){
         return app_data.grading_levels;
@@ -501,6 +512,21 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** class examination **/
+    data.getClassQuotaExams = function(class_id, quota_id){
+        var dt = [];
+        angular.forEach(app_data.examinations, function(value, key, obj){
+            if((value.quota_id == quota_id) && (value.class_id == class_id)){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.updateExaminations = function(dt){
+        app_data.examinations = dt;
+    }
+    
     
     /** 
      *  UTILITIES
@@ -667,7 +693,7 @@ app.service('Service', function($http){
         });
     };
     
-    /** score group **/
+    /** grading level **/
     this.addGradingLevel = function(data){
         return $http({
             method: "POST",
@@ -986,6 +1012,21 @@ app.service('Service', function($http){
             method: "POST",
             url: base_url+"api/remove-class-timetable-periods",
             data: data
+        });
+    };
+    
+    /** class examination **/
+    this.addExamination = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-examination",
+            data: data
+        });
+    };
+    
+    this.getExaminations = function(school_id){
+        return $http.get(base_url+"api/get-examinations", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
     
