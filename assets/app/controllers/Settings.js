@@ -886,8 +886,26 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** show class exam. set timetable **/
     $scope.showClassExam = function(exam_id){
         showCard_('card-exam-settings', 'card-class-exam');
-        console.log(exam_id);
+        $scope.examination = Factory.getExamination(exam_id);
     }
+    
+    /** create class exam timetable **/
+    $scope.new_timetable = [];
+    $scope.createClassTimetable = function(){
+        if($('#exam-timetable-form').smkValidate()){
+            show_loading_overlay(); 
+            Service.createClassExamTimetable({'timetable': $scope.new_timetable, 'examination': $scope.examination}).then(function(response){
+                hide_loading_overlay();
+                toast('Done!');
+            }, function(error){
+                console.log(error);
+            });
+        }else{
+            toast('Kindly set timetable correctly');
+        }
+    }
+
+
     
 });
 

@@ -165,3 +165,5 @@ $route['api/remove-class-timetable-periods'] = 'ClassTimetable/removeClassWeekda
 /************* Examination APIs ****************/
 $route['api/add-examination'] = 'Examination/addExamination';
 $route['api/get-examinations'] = 'Examination/getExaminations';
+$route['api/create-class-exam-timetable'] = 'Examination/createClassExamTimetable';
+$route['api/get-class-exam-timetables'] = 'Examination/getExamTimetables';

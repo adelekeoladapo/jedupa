@@ -303,11 +303,11 @@
                                                                             </div>
                                                                             <div class="jd-card" id="card-class-exam">
                                                                                 <div class="exam-settings-wrapper">
-                                                                                    <div class="sidebar-container">
+                                                                                    <div class="sidebar-container" ng-init="info.quota_id = examination.quota_id">
                                                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
-                                                                                            Exam Title ({{ quota.session+' / '+quota.name }})
+                                                                                             {{ examination.name }} ({{ quota.session+' / '+quota.name }})
                                                                                             <div class="min-max-form">
-                                                                                                <input type="number" placeholder="Max">
+                                                                                                <input type="number" placeholder="Max" onchange="setExamMaxScores(this.value)">
                                                                                             </div>
                                                                                         </h3>
                                                                                         <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
@@ -320,20 +320,23 @@
                                                                                                     <th>Finish Time</th>
                                                                                                 </tr>
                                                                                             </thead>
-                                                                                            <tbody class="">
-                                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects">
+                                                                                            <tbody class="" id="exam-timetable-form">
+                                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects" ng-init="new_timetable[$index].subject_id = basic_class_subject.subject_id">
                                                                                                     <td>{{ $index + 1 }}</td>
                                                                                                     <td>{{ basic_class_subject.subject }}</td>
-                                                                                                    <td><input type="number"></td>
-                                                                                                    <td><input type="datetime-local"></td>
-                                                                                                    <td><input type="datetime-local"></td>
+                                                                                                    <td><input type="number" id="max_score" ng-model="new_timetable[$index].max_score" required></td>
+                                                                                                    <td><input type="datetime-local" ng-model="new_timetable[$index].start_time" required></td>
+                                                                                                    <td><input type="datetime-local" ng-model="new_timetable[$index].end_time" required></td>
                                                                                                 </tr>
-                                                                                                <!--<tr ng-show="active_exams.length == 0"><td colspan="5">No exams added yet</td></tr>-->
+                                                                                                <tr ng-show="basic_class_subjects.length == 0"><td colspan="5">No subject added yet</td></tr>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </div>
+                                                                                    <div class="">
+                                                                                        <button class="btn jd-btn jd-btn-default" ng-click="showClassExams()">Back</button>
+                                                                                        <button class="btn jd-btn jd-btn-primary" ng-click="createClassTimetable()">Save</button>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <button ng-click="showClassExams()">test</button>
                                                                             </div>
                                                                             <div class="jd-card" id="card-3">Card 3</div>
                                                                         </div>

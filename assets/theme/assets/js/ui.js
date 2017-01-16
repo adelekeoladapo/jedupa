@@ -142,7 +142,7 @@ function showCard(id){
 
 function showCard_(container_id, card_id){
     var container = $('.jd-cards-container#'+container_id);
-    container.children('.jd-card:first').removeClass('active');
+    container.children('.jd-card').removeClass('active');
     container.find('.jd-card#'+card_id+':first').addClass('active');
 }
 
@@ -156,4 +156,7 @@ function hide_form_modal(modal_id, obj = false){
 }
 /** end hide form modal **/
 
-
+/** set default max exam score **/
+    function setExamMaxScores(val){
+        $('#max_score').val(val);
+    }

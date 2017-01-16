@@ -527,6 +527,37 @@ app.factory('Factory', function(){
         app_data.examinations = dt;
     }
     
+    data.getExamination = function(id){
+        var dt = {};
+        angular.forEach(app_data.examinations, function(value, key, obj){
+            if(value.examination_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    /** class exam timetables **/
+    this.getClassQuotaExamTimetable = function(class_id, quota_id, exam_id){
+        var dt = [];
+        angular.forEach(app_data.basic_class_subjects , function(value, key, obj){
+            var d = {};
+            d.subject = value;
+            var info = data.getWeekdayClassWeekdayPeriod(class_id, value.weekday_id);
+            d.info = (info) ? info : false;
+            if(info){
+                d.periods = data.getClassTimingSetPeriods(info.class_timing_id);
+            }
+            info = false;
+            dt.push(d);
+        });
+        return dt;
+    }
+    
+    this.getQuotaClassSubjectTimetable = function(){
+        
+    }
+    
     
     /** 
      *  UTILITIES
@@ -1030,7 +1061,17 @@ app.service('Service', function($http){
         });
     };
     
+    this.createClassExamTimetable = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/create-class-exam-timetable",
+            data: data
+        });
+    };
+    
 });
+
+
 
 
 /*
