@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2017 at 08:33 AM
--- Server version: 10.1.16-MariaDB
+-- Generation Time: Jan 16, 2017 at 06:33 PM
+-- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -106,18 +106,14 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 (15, 1, 2, 0, 0, '2016-12-18 09:41:01'),
 (20, 1, 2, 1, 2, '2016-12-21 11:20:41'),
 (21, 1, 2, 2, 1, '2016-12-21 11:20:54'),
-(24, 1, 1, 2, 2, '2017-01-11 08:43:57'),
 (26, 1, 4, 1, 2, '2016-12-28 09:01:56'),
 (27, 1, 4, 2, 1, '2016-12-28 09:02:27'),
-(29, 1, 1, 6, 2, '2017-01-11 08:27:54'),
 (30, 1, 3, 1, 2, '2016-12-30 09:20:11'),
 (31, 1, 3, 2, 2, '2016-12-30 09:21:27'),
 (32, 1, 3, 3, 2, '2016-12-30 09:21:50'),
 (35, 1, 2, 3, 2, '2016-12-30 23:16:36'),
 (42, 1, 6, 1, 2, '2016-12-31 23:06:37'),
-(43, 1, 1, 3, 2, '2017-01-10 10:44:18'),
 (44, 1, 1, 4, 1, '2017-01-10 18:05:54'),
-(45, 1, 1, 5, 1, '2017-01-10 18:06:52'),
 (46, 1, 2, 5, 1, '2017-01-10 18:07:44'),
 (47, 1, 2, 6, 2, '2017-01-10 18:07:56'),
 (49, 1, 4, 3, 2, '2017-01-11 06:51:29'),
@@ -125,7 +121,6 @@ INSERT INTO `tb_class_basic_subject` (`class_basic_subject_id`, `school_id`, `cl
 (51, 1, 4, 5, 2, '2017-01-11 06:52:55'),
 (52, 1, 3, 4, 1, '2017-01-11 06:55:15'),
 (53, 1, 3, 5, 1, '2017-01-11 06:55:26'),
-(56, 1, 1, 7, 1, '2017-01-11 07:56:14'),
 (57, 1, 5, 1, 2, '2017-01-11 09:03:42'),
 (58, 1, 5, 2, 2, '2017-01-11 09:04:04'),
 (59, 1, 5, 3, 2, '2017-01-11 09:04:10'),
@@ -499,6 +494,38 @@ INSERT INTO `tb_examination` (`examination_id`, `school_id`, `session_id`, `quot
 (7, 1, 2, 4, 'C A 1', 'First C A', 0, 1, '2017-01-13 14:37:32'),
 (8, 1, 1, 1, 'Test One', 'Test One', 0, 2, '2017-01-13 14:51:57'),
 (9, 1, 1, 1, 'Test Two', 'Test Two', 0, 2, '2017-01-13 14:53:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_examination_timetable`
+--
+
+CREATE TABLE `tb_examination_timetable` (
+  `examination_timetable_id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `session_id` int(11) DEFAULT NULL,
+  `examination_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `date_created` datetime NOT NULL,
+  `max_score` float NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `quota_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_examination_timetable`
+--
+
+INSERT INTO `tb_examination_timetable` (`examination_timetable_id`, `school_id`, `session_id`, `examination_id`, `subject_id`, `start_time`, `end_time`, `date_created`, `max_score`, `date_modified`, `quota_id`) VALUES
+(1, 1, 1, 1, 4, '2001-12-22 09:00:00', '2001-10-23 09:00:00', '0000-00-00 00:00:00', 10, '0000-00-00 00:00:00', 1),
+(2, 1, 1, 1, 1, '2005-12-23 09:00:00', '2004-10-21 23:00:00', '0000-00-00 00:00:00', 10, '0000-00-00 00:00:00', 1),
+(3, 1, 1, 1, 4, '2014-10-02 09:00:00', '2014-10-02 10:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 1),
+(4, 1, 1, 1, 1, '2014-10-02 10:00:00', '2014-10-02 22:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 1),
+(5, 1, 2, 7, 4, '2014-10-02 09:00:00', '2014-10-02 10:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 4),
+(6, 1, 2, 7, 1, '2014-10-02 10:00:00', '2014-10-02 22:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -1607,6 +1634,12 @@ ALTER TABLE `tb_examination`
   ADD PRIMARY KEY (`examination_id`);
 
 --
+-- Indexes for table `tb_examination_timetable`
+--
+ALTER TABLE `tb_examination_timetable`
+  ADD PRIMARY KEY (`examination_timetable_id`);
+
+--
 -- Indexes for table `tb_grade_level_payroll`
 --
 ALTER TABLE `tb_grade_level_payroll`
@@ -1844,6 +1877,11 @@ ALTER TABLE `tb_employee_subject`
 ALTER TABLE `tb_examination`
   MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT for table `tb_examination_timetable`
+--
+ALTER TABLE `tb_examination_timetable`
+  MODIFY `examination_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `tb_grade_level_payroll`
 --
 ALTER TABLE `tb_grade_level_payroll`
@@ -1857,7 +1895,7 @@ ALTER TABLE `tb_grading_level`
 -- AUTO_INCREMENT for table `tb_grading_level_structure`
 --
 ALTER TABLE `tb_grading_level_structure`
-  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_grading_system`
 --
