@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2017 at 06:33 PM
--- Server version: 10.1.19-MariaDB
+-- Generation Time: Jan 17, 2017 at 07:02 PM
+-- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -507,6 +507,7 @@ CREATE TABLE `tb_examination_timetable` (
   `session_id` int(11) DEFAULT NULL,
   `examination_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
+  `subject` varchar(50) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `date_created` datetime NOT NULL,
@@ -519,13 +520,9 @@ CREATE TABLE `tb_examination_timetable` (
 -- Dumping data for table `tb_examination_timetable`
 --
 
-INSERT INTO `tb_examination_timetable` (`examination_timetable_id`, `school_id`, `session_id`, `examination_id`, `subject_id`, `start_time`, `end_time`, `date_created`, `max_score`, `date_modified`, `quota_id`) VALUES
-(1, 1, 1, 1, 4, '2001-12-22 09:00:00', '2001-10-23 09:00:00', '0000-00-00 00:00:00', 10, '0000-00-00 00:00:00', 1),
-(2, 1, 1, 1, 1, '2005-12-23 09:00:00', '2004-10-21 23:00:00', '0000-00-00 00:00:00', 10, '0000-00-00 00:00:00', 1),
-(3, 1, 1, 1, 4, '2014-10-02 09:00:00', '2014-10-02 10:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 1),
-(4, 1, 1, 1, 1, '2014-10-02 10:00:00', '2014-10-02 22:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 1),
-(5, 1, 2, 7, 4, '2014-10-02 09:00:00', '2014-10-02 10:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 4),
-(6, 1, 2, 7, 1, '2014-10-02 10:00:00', '2014-10-02 22:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 4);
+INSERT INTO `tb_examination_timetable` (`examination_timetable_id`, `school_id`, `session_id`, `examination_id`, `subject_id`, `subject`, `start_time`, `end_time`, `date_created`, `max_score`, `date_modified`, `quota_id`) VALUES
+(1, 1, 1, 1, 4, 'Chemistry', '2017-01-17 00:00:00', '2017-01-17 01:00:00', '0000-00-00 00:00:00', 50, '0000-00-00 00:00:00', 1),
+(2, 1, 1, 1, 1, 'Mathematics', '2017-01-17 02:00:00', '2017-01-17 03:00:00', '0000-00-00 00:00:00', 100, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -1880,7 +1877,7 @@ ALTER TABLE `tb_examination`
 -- AUTO_INCREMENT for table `tb_examination_timetable`
 --
 ALTER TABLE `tb_examination_timetable`
-  MODIFY `examination_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `examination_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_grade_level_payroll`
 --

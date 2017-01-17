@@ -42,6 +42,7 @@ class Examination extends CI_Controller {
             $timetable->max_score = $tt->max_score;
             $timetable->start_time = $tt->start_time;
             $timetable->end_time = $tt->end_time;
+            $timetable->subject = $tt->subject;
             $this->model->insertExaminationTimetable($timetable);
         }
     }

@@ -538,24 +538,39 @@ app.factory('Factory', function(){
     }
     
     /** class exam timetables **/
-    this.getClassQuotaExamTimetable = function(class_id, quota_id, exam_id){
+    data.getClassQuotaExamTimetable = function(class_id, exam_id){
         var dt = [];
-        angular.forEach(app_data.basic_class_subjects , function(value, key, obj){
-            var d = {};
-            d.subject = value;
-            var info = data.getWeekdayClassWeekdayPeriod(class_id, value.weekday_id);
-            d.info = (info) ? info : false;
-            if(info){
-                d.periods = data.getClassTimingSetPeriods(info.class_timing_id);
+        angular.forEach(app_data.classes_basic_subjects , function(value, key, obj){
+            if(value.class_id == class_id){
+                var d = {};
+                d.subject = value;
+                var timetable_info = data.getQuotaClassSubjectExamTimetable(value.subject_id, exam_id);
+                d.timetable_info = (timetable_info) ? timetable_info : false;
+                dt.push(d);
             }
-            info = false;
-            dt.push(d);
         });
         return dt;
     }
     
-    this.getQuotaClassSubjectTimetable = function(){
-        
+    data.getQuotaClassSubjectExamTimetable = function(subject_id, examination_id){
+        var dt = false;
+        angular.forEach(app_data.examination_timetables, function(value, key, obj){
+            if((value.subject_id == subject_id) && (value.examination_id == examination_id)){
+                dt = {};
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    data.getExamTimetable = function(examination_id){
+        var dt = [];
+        angular.forEach(app_data.examination_timetables, function(value, key, obj){
+            if(value.examination_id == examination_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
     }
     
     

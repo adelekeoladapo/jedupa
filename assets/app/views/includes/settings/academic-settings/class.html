@@ -293,7 +293,10 @@
                                                                                                     <td>{{ exam.name }}</td>
                                                                                                     <td>{{ exam.description }}</td>
                                                                                                     <td>{{ (exam.weightage == 0) ? 'Not Set' : exam.weightage; }}</td>
-                                                                                                    <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ng-click="showClassExam(exam.examination_id)"></i></td>
+                                                                                                    <td class="tb-btn">
+                                                                                                        <!--<i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Create timetable" ng-click="createClassExam(exam.examination_id)" ng-init="has_timetable = (factory.getExamTimetable(exam.examination_id).length > 0) ? true : false " ng-hide="has_timetable"></i>-->
+                                                                                                        <i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View Timetable" ng-click="viewClassExam(exam.examination_id)"></i>
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                                 <tr ng-show="active_exams.length == 0"><td colspan="5">No exams added yet</td></tr>
                                                                                             </tbody>
@@ -301,7 +304,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="jd-card" id="card-class-exam">
+                                                                            <div class="jd-card" id="card-create-class-exam">
                                                                                 <div class="exam-settings-wrapper">
                                                                                     <div class="sidebar-container" ng-init="info.quota_id = examination.quota_id">
                                                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
@@ -321,9 +324,9 @@
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody class="" id="exam-timetable-form">
-                                                                                                <tr ng-repeat="basic_class_subject in basic_class_subjects" ng-init="new_timetable[$index].subject_id = basic_class_subject.subject_id">
+                                                                                                <tr ng-repeat="data in class_exam_subject_timetable" ng-init="new_timetable[$index].subject_id = data.subject.subject_id">
                                                                                                     <td>{{ $index + 1 }}</td>
-                                                                                                    <td>{{ basic_class_subject.subject }}</td>
+                                                                                                    <td ng-init="new_timetable[$index].subject = data.subject.subject">{{ data.subject.subject }}</td>
                                                                                                     <td><input type="number" id="max_score" ng-model="new_timetable[$index].max_score" required></td>
                                                                                                     <td><input type="datetime-local" ng-model="new_timetable[$index].start_time" required></td>
                                                                                                     <td><input type="datetime-local" ng-model="new_timetable[$index].end_time" required></td>
@@ -338,7 +341,43 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="jd-card" id="card-3">Card 3</div>
+                                                                            <div class="jd-card" id="card-view-class-exam">
+                                                                                <div class="exam-settings-wrapper">
+                                                                                    <div class="sidebar-container" ng-init="info.quota_id = examination.quota_id">
+                                                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                                                             {{ examination.name }} ({{ quota.session+' / '+quota.name }})
+                                                                                            <div class="min-max-form">
+                                                                                                <input type="number" placeholder="Max" onchange="setExamMaxScores(this.value)">
+                                                                                            </div>
+                                                                                        </h3>
+                                                                                        <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
+                                                                                            <thead class="">
+                                                                                                <tr>
+                                                                                                    <th>SN</th>
+                                                                                                    <th>Subject</th>
+                                                                                                    <th>Max Score</th>
+                                                                                                    <th>Start Time</th>
+                                                                                                    <th>Finish Time</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody class="" id="exam-timetable-form">
+                                                                                                <tr ng-repeat="data in class_exam_timetable" ng-init="new_timetable[$index].subject_id = data.subject.subject_id">
+                                                                                                    <td>{{ $index + 1 }}</td>
+                                                                                                    <td>{{ data.subject }}</td>
+                                                                                                    <td>{{ data.max_score }}</td>
+                                                                                                    <td>{{ factory.formatDate_2(data.start_time) }}</td>
+                                                                                                    <td>{{ factory.formatDate_2(data.end_time) }}</td>
+                                                                                                </tr>
+                                                                                                <tr ng-show="class_exam_timetable.length == 0"><td colspan="5">No timetable created yet</td></tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                    <div class="">
+                                                                                        <button class="btn jd-btn jd-btn-default" ng-click="showClassExams()">Back</button>
+                                                                                        <button ng-show="class_exam_timetable.length == 0" class="btn jd-btn jd-btn-primary" ng-click="createClassExam(examination.examination_id)">Create Timetable</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                         <!--/ exam settings cards -->
                                                                     </div>

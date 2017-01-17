@@ -40,7 +40,7 @@ class ExaminationModel extends CI_Model {
         $this->db->order_by($sort_field, $sort_order_mode);
         ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
         ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
-        $query = $this->db->get($this->table_name);
+        $query = $this->db->get($this->table_exam_timetable);
         return ($query->num_rows()) ? $query->result() : [];
     }
 }

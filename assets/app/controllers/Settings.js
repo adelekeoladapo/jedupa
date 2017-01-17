@@ -883,10 +883,18 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         showCard_('card-exam-settings', 'card-class-exams');
     }
     
-    /** show class exam. set timetable **/
-    $scope.showClassExam = function(exam_id){
-        showCard_('card-exam-settings', 'card-class-exam');
+    /** create class exam. set timetable **/
+    $scope.createClassExam = function(exam_id){
         $scope.examination = Factory.getExamination(exam_id);
+        $scope.class_exam_subject_timetable = Factory.getClassQuotaExamTimetable($scope.classs.class_id, exam_id);
+        showCard_('card-exam-settings', 'card-create-class-exam');
+    }
+    
+    /** show class exam. set timetable **/
+    $scope.viewClassExam = function(exam_id){
+        $scope.examination = Factory.getExamination(exam_id);
+        $scope.class_exam_timetable = Factory.getExamTimetable(exam_id);
+        showCard_('card-exam-settings', 'card-view-class-exam');
     }
     
     /** create class exam timetable **/
