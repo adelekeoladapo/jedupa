@@ -267,11 +267,12 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
         $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_(class_id);
         $scope.active_exams = []; $scope.quota = $scope.new_examination = {};
-        showCard('class');
+        showCard_('card-class', 'class');
+        showHTab('class-h-container', 'tab_1');
     }
     
     $scope.showClasses = function(){
-        showCard('classes');
+        showCard_('card-class', 'classes');
     }
     
     /** multiple assignment. discarded for now **/
@@ -911,6 +912,11 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         }else{
             toast('Kindly set timetable correctly');
         }
+    }
+    
+    /**connect exams **/
+    $scope.showConnectExams = function(){
+        showCard_('card-exam-settings', 'card-connect-exams');
     }
 
 

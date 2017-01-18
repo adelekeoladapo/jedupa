@@ -105,6 +105,15 @@ $(document).ready(function(){
     
 });
 
+function showHTab(container_id, tab_id){
+    var container = $('.jd-h-tab-container#'+container_id);
+    container.find('.jd-h-tab-pane').removeClass('active');
+    //$('.jd-h-tab-container#'+container_id+' > .jd-h-tab-pane').removeClass('active');
+    container.find('.jd-h-tab-pane#'+tab_id+':first').addClass('active');
+    $('.jd-h-tab-container#'+container_id+' .jd-h-tab-title-block ul li').removeClass('active');
+    $('.jd-h-tab-container#'+container_id+' .jd-h-tab-title-block ul li:first').addClass('active');
+}
+
 
 function toast(message){
     $('.toast').slideUp(150);
@@ -142,7 +151,8 @@ function showCard(id){
 
 function showCard_(container_id, card_id){
     var container = $('.jd-cards-container#'+container_id);
-    container.children('.jd-card').removeClass('active');
+    //container.children('.jd-card').removeClass('active');
+    $('.jd-cards-container#'+container_id+' > .jd-card').removeClass('active');
     container.find('.jd-card#'+card_id+':first').addClass('active');
 }
 

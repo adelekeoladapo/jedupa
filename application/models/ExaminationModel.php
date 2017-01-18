@@ -29,6 +29,11 @@ class ExaminationModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function updateExamination($data){
+        $this->db->where('examination_id', $data->examination_id);
+        $this->db->update($this->table_name, $data);
+    }
+    
     /** Class Examination Timetable **/
     function insertExaminationTimetable($data){
         $this->db->insert($this->table_exam_timetable, $data);

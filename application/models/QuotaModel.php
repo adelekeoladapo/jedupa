@@ -31,4 +31,9 @@ class QuotaModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function updateQuota($data){
+        $this->db->where('quota_id', $data->examination_id);
+        $this->db->update($this->table_name, $data);
+    }
+    
 }

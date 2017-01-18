@@ -82,6 +82,7 @@ $route['api/get-sessions'] = 'Session/getSessions';
 /************ Quota APIs **********************/
 $route['api/add-quota'] = 'Quota/addQuota';
 $route['api/get-quotas'] = 'Quota/getQuotas';
+$route['api/update-quota'] = 'Quota/updateQuota';
 
 /*********** Grading Levels APIs ****************/
 $route['api/add-grading-level'] = 'GradingLevel/addGradingLevel';
@@ -165,5 +166,6 @@ $route['api/remove-class-timetable-periods'] = 'ClassTimetable/removeClassWeekda
 /************* Examination APIs ****************/
 $route['api/add-examination'] = 'Examination/addExamination';
 $route['api/get-examinations'] = 'Examination/getExaminations';
+$route['api/update-examinations'] = 'Examination/updateExaminations';
 $route['api/create-class-exam-timetable'] = 'Examination/createClassExamTimetable';
 $route['api/get-class-exam-timetables'] = 'Examination/getExamTimetables';

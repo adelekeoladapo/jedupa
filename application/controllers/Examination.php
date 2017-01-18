@@ -27,6 +27,12 @@ class Examination extends CI_Controller {
         echo json_encode($this->model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
     }
     
+    function updateExamination(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        echo $this->model->updateExamination($data);
+    }
+    
     /** Create Class Examination Timetable **/
     
     function createClassExamTimetable(){

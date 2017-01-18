@@ -1,4 +1,4 @@
-                                            <div class="jd-cards-container">
+                                            <div class="jd-cards-container" id="card-class">
                                                 <!-- card classes -->
                                                 <div class="row jd-card active" id="classes"> 
 
@@ -110,7 +110,7 @@
                                                         <div class="row">
                                                             <!-- class info -->
                                                             
-                                                            <div class="jd-h-tab-container">
+                                                            <div class="jd-h-tab-container" id="class-h-container">
                                                                 <div class="jd-h-tab-content-block">
                                                                     <div class="jd-h-tab-pane active" id="tab_1">
                                                                         <div class="col-md-6 jd-info-block">
@@ -269,7 +269,7 @@
                                                                                             </select>
                                                                                         </form>
                                                                                         <div class="col-md-6" style="text-align: right">
-                                                                                            <button class="btn jd-btn jd-btn-default">Connect Exams</button>
+                                                                                            <button class="btn jd-btn jd-btn-default" ng-click="showConnectExams()">Connect Exams</button>
                                                                                             <button class="btn jd-btn jd-btn-primary" ng-click="show_add_examination_overlay()">New</button>
                                                                                         </div>
                                                                                     </div>
@@ -309,9 +309,6 @@
                                                                                     <div class="sidebar-container" ng-init="info.quota_id = examination.quota_id">
                                                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
                                                                                              {{ examination.name }} ({{ quota.session+' / '+quota.name }})
-                                                                                            <div class="min-max-form">
-                                                                                                <input type="number" placeholder="Max" onchange="setExamMaxScores(this.value)">
-                                                                                            </div>
                                                                                         </h3>
                                                                                         <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
                                                                                             <thead class="">
@@ -346,9 +343,6 @@
                                                                                     <div class="sidebar-container" ng-init="info.quota_id = examination.quota_id">
                                                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
                                                                                              {{ examination.name }} ({{ quota.session+' / '+quota.name }})
-                                                                                            <div class="min-max-form">
-                                                                                                <input type="number" placeholder="Max" onchange="setExamMaxScores(this.value)">
-                                                                                            </div>
                                                                                         </h3>
                                                                                         <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
                                                                                             <thead class="">
@@ -378,6 +372,14 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="jd-card" id="card-connect-exams">
+                                                                                <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                                                    Connect {{ quota.name }} Exams
+                                                                                    <span class="top-add-btn-container">
+                                                                                        <a onclick="showCard_('card-exam-settings', 'card-class-exams')" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Return</a>
+                                                                                    </span>
+                                                                               </h3>
+                                                                            </div>
                                                                         </div>
                                                                         <!--/ exam settings cards -->
                                                                     </div>
@@ -396,7 +398,7 @@
                                                                         <li data-href="tab_4">
                                                                             <a href="">Timetable</a>
                                                                         </li>
-                                                                        <li data-href="tab_5">
+                                                                        <li data-href="tab_5" onclick="showCard_('card-exam-settings', 'card-class-exams')">
                                                                             <a href="">Examination</a>
                                                                         </li>
                                                                     </ul>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2017 at 07:02 PM
+-- Generation Time: Jan 18, 2017 at 05:38 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -249,20 +249,9 @@ CREATE TABLE `tb_class_timetable` (
 --
 
 INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `weekday_id`, `class_period_id`, `class_basic_subject_id`) VALUES
-(49, 1, 1, 2, 1, 62),
-(50, 1, 1, 3, 1, 62),
-(52, 1, 1, 5, 1, 62),
-(53, 1, 1, 4, 1, 24),
-(54, 1, 1, 2, 2, 24),
-(55, 1, 1, 5, 4, 24),
-(56, 1, 1, 2, 6, 43),
-(58, 1, 1, 2, 4, 44),
-(59, 1, 1, 2, 5, 44),
-(60, 1, 1, 5, 2, 44),
-(63, 1, 1, 3, 4, 43),
-(64, 1, 1, 4, 6, 43),
-(65, 1, 1, 5, 5, 43),
-(66, 1, 1, 6, 7, 29);
+(2, 1, 1, 3, 2, 62),
+(3, 1, 1, 4, 1, 62),
+(4, 1, 1, 5, 1, 62);
 
 -- --------------------------------------------------------
 
@@ -650,6 +639,8 @@ CREATE TABLE `tb_quota` (
   `start_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
+  `grade_level_id` int(11) NOT NULL,
+  `class_designation_id` int(11) NOT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -657,12 +648,12 @@ CREATE TABLE `tb_quota` (
 -- Dumping data for table `tb_quota`
 --
 
-INSERT INTO `tb_quota` (`school_id`, `session_id`, `quota_id`, `name`, `start_time`, `end_time`, `description`, `date_created`) VALUES
-(1, 1, 1, 'First Term', '2013-11-01', '2013-03-16', NULL, '2016-11-21 13:47:57'),
-(1, 1, 2, 'Second Term', '2013-03-29', '2013-06-22', NULL, '2016-11-21 13:48:31'),
-(1, 1, 3, 'Third Term', '2016-11-02', '2016-12-30', NULL, '2016-11-21 16:41:40'),
-(1, 2, 4, 'Term 1', '2017-01-04', '2017-03-24', NULL, '2017-01-13 13:22:25'),
-(1, 2, 5, 'Term 2', '2017-01-05', '2017-06-22', NULL, '2017-01-13 13:22:40');
+INSERT INTO `tb_quota` (`school_id`, `session_id`, `quota_id`, `name`, `start_time`, `end_time`, `description`, `grade_level_id`, `class_designation_id`, `date_created`) VALUES
+(1, 1, 1, 'First Term', '2013-11-01', '2013-03-16', NULL, 0, 0, '2016-11-21 13:47:57'),
+(1, 1, 2, 'Second Term', '2013-03-29', '2013-06-22', NULL, 0, 0, '2016-11-21 13:48:31'),
+(1, 1, 3, 'Third Term', '2016-11-02', '2016-12-30', NULL, 0, 0, '2016-11-21 16:41:40'),
+(1, 2, 4, 'Term 1', '2017-01-04', '2017-03-24', NULL, 0, 0, '2017-01-13 13:22:25'),
+(1, 2, 5, 'Term 2', '2017-01-05', '2017-06-22', NULL, 0, 0, '2017-01-13 13:22:40');
 
 -- --------------------------------------------------------
 
@@ -1144,9 +1135,9 @@ INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `
 (81, 1, 7, 2, 2, '0000-00-00 00:00:00'),
 (82, 1, 4, 1, 1, '0000-00-00 00:00:00'),
 (84, 1, 5, 1, 1, '0000-00-00 00:00:00'),
-(85, 1, 2, 1, 1, '0000-00-00 00:00:00'),
 (87, 1, 6, 1, 1, '0000-00-00 00:00:00'),
-(88, 1, 6, 2, 1, '0000-00-00 00:00:00');
+(88, 1, 6, 2, 1, '0000-00-00 00:00:00'),
+(89, 1, 2, 1, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1822,7 +1813,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -1992,7 +1983,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

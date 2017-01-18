@@ -29,4 +29,10 @@ class Quota extends CI_Controller {
         echo json_encode($this->model->getQuotas($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
     }
     
+    function updateQuota(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        echo $this->model->updateQuota($data);
+    }
+    
 }
