@@ -918,6 +918,14 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.showConnectExams = function(){
         showCard_('card-exam-settings', 'card-connect-exams');
     }
+    
+    $scope.new_connect_exam = {};
+    $scope.connectExams = function(){
+        if($('#form-connect-exam-details').smkValidate()){
+            console.log($scope.new_connect_exam);
+        }
+        
+    }
 
 
     

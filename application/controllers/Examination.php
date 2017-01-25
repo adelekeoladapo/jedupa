@@ -70,4 +70,12 @@ class Examination extends CI_Controller {
         echo json_encode($this->model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
     }
     
+    function joinExaminations(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        foreach ($data->exams as $exam) {
+            
+        }
+    }
+    
 }
