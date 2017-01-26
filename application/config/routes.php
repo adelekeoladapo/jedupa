@@ -169,3 +169,5 @@ $route['api/get-examinations'] = 'Examination/getExaminations';
 $route['api/update-examinations'] = 'Examination/updateExaminations';
 $route['api/create-class-exam-timetable'] = 'Examination/createClassExamTimetable';
 $route['api/get-class-exam-timetables'] = 'Examination/getExamTimetables';
+$route['api/connect-exams'] = 'Examination/connectExaminations';
+$route['api/get-examination-groups'] = 'Examination/getExaminationGroups';

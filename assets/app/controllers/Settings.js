@@ -204,6 +204,8 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.class_period = {};
     
     $scope.weekday_class_period = {};
+    
+    $scope.examination_group = {};
      
     
     /** add department **/
@@ -877,6 +879,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     $scope.setActiveClassQuotaExams = function(class_id, quota_id){
         $scope.quota = Factory.getQuota(quota_id);
         $scope.active_exams = Factory.getClassQuotaExams(class_id, quota_id);
+        $scope.examination_group = Factory.getExaminationGroup(class_id, quota_id);
     }
     
     /** show ALL class exams**/
@@ -919,10 +922,22 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         showCard_('card-exam-settings', 'card-connect-exams');
     }
     
-    $scope.new_connect_exam = {};
+    //$scope.examination_group = {};
     $scope.connectExams = function(){
         if($('#form-connect-exam-details').smkValidate()){
-            console.log($scope.new_connect_exam);
+            show_loading_overlay();
+            $scope.examination_group.quota_id = $scope.quota.quota_id;
+            $scope.examination_group.class_id = $scope.classs.class_id;
+            $scope.examination_group.school_id = Factory.getSchoolID();
+            Service.connectExaminations($scope.examination_group).then(function(response){
+                Service.getExaminationGroups(Factory.getSchoolID()).then(function(response){
+                    Factory.updateExaminationGroups(response.data);
+                    Service.getExaminations(Factory.getSchoolID()).then(function(response){
+                        Factory.updateExaminations(response.data);
+                        hide_loading_overlay();
+                    });
+                });
+            }, function(error){});
         }
         
     }

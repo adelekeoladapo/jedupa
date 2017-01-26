@@ -8,6 +8,11 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+td input {
+    border: solid 1px #ddd;
+    border-radius: 3px;
+}
+
 .min-max-form {
     float: right;
     margin-top: -3px;

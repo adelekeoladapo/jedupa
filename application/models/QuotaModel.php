@@ -32,7 +32,7 @@ class QuotaModel extends CI_Model {
     }
     
     function updateQuota($data){
-        $this->db->where('quota_id', $data->examination_id);
+        $this->db->where('quota_id', $data->quota_id);
         $this->db->update($this->table_name, $data);
     }
     

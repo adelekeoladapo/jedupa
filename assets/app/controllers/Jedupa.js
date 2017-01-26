@@ -537,6 +537,24 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** class examination group **/
+    
+    data.getExaminationGroup = function(class_id, quota_id){
+        var dt = {};
+        angular.forEach(app_data.examination_groups, function(value, key, obj){
+            if((value.class_id == class_id)&&(value.quota_id == quota_id)){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    data.updateExaminationGroups = function(dt){
+        app_data.examination_groups = dt;
+    }
+    
+    
+    
     /** class exam timetables **/
     data.getClassQuotaExamTimetable = function(class_id, exam_id){
         var dt = [];
@@ -1081,6 +1099,20 @@ app.service('Service', function($http){
             method: "POST",
             url: base_url+"api/create-class-exam-timetable",
             data: data
+        });
+    };
+    
+    this.connectExaminations = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/connect-exams",
+            data: data
+        });
+    };
+    
+    this.getExaminationGroups = function(school_id){
+        return $http.get(base_url+"api/get-examination-groups", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
     

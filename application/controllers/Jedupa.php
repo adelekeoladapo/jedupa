@@ -85,6 +85,7 @@ class Jedupa extends CI_Controller {
         $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['examination_groups'] = $this->examination_model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }
