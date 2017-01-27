@@ -922,8 +922,12 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
         showCard_('card-exam-settings', 'card-connect-exams');
     }
     
-    //$scope.examination_group = {};
-    $scope.connectExams = function(){
+    $scope.connectExams = function(){ 
+        if($scope.getTotalWeightage() != 100){
+            toast('Total weightage must be 100');
+            return;
+        }
+        
         if($('#form-connect-exam-details').smkValidate()){
             show_loading_overlay();
             $scope.examination_group.quota_id = $scope.quota.quota_id;
@@ -934,12 +938,37 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     Factory.updateExaminationGroups(response.data);
                     Service.getExaminations(Factory.getSchoolID()).then(function(response){
                         Factory.updateExaminations(response.data);
+                        $scope.setActiveClassQuotaExams($scope.classs.class_id, $scope.quota.quota_id);
                         hide_loading_overlay();
+                        toast('Examinations connected successfully');
                     });
                 });
             }, function(error){});
         }
         
+    }
+    
+    $scope.getTotalWeightage = function(){
+        var sum = 0;
+        angular.forEach($scope.examination_group.exams, function(value, key, obj){
+            if(value.weightage)
+                sum += parseInt(value.weightage); 
+        });
+        return sum;
+    }
+    
+    
+    $scope.setTotalWeightage = function(){
+        var s = $scope.getTotalWeightage();
+        var color;
+        if(s < 100){
+            color = 'blue';
+        }else if(s == 100){
+            color = 'green';
+        }else{
+            color = 'red';
+        }
+        $('#total_weightage').html('<em style="color: '+color+'">'+s+'</em>');
     }
 
 

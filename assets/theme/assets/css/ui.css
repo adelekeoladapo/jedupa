@@ -741,6 +741,14 @@ table.jd-tb-timetable td:last-child {
     padding-bottom: 3px;
 }
 
+.exam-settings-header {
+    border: solid 1px #ddd;
+    padding: 8px 8px 5px;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
 /**** end class examination *****/
 
 
