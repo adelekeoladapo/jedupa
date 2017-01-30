@@ -591,6 +591,46 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** user privilege **/
+    
+    data.getUserPrivileges = function(){
+        return app_data.user_privileges;
+    }
+    
+    data.updateUserPrivileges = function(dt){
+        app_data.user_privileges = dt;
+    }
+    
+    data.getUserPrivilege = function(id){
+        var dt = {};
+        angular.forEach(app_data.user_privileges, function(value, key, obj){
+            if(value.user_privilege_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    /** system modules **/
+    
+    data.getSystemModules = function(){
+        return app_data.system_modules;
+    }
+    
+    data.getUserPrivilegeModules_ = function(privilege_id){
+        var dt = [];
+        angular.forEach(app_data.user_privilege_modules, function(value, key, obj){
+            if(value.user_privilege_id == privilege_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.updateUserPrivilegeModules = function(dt){
+        app_data.user_privilege_modules = dt;
+    }
+    
     
     /** 
      *  UTILITIES
@@ -1112,6 +1152,35 @@ app.service('Service', function($http){
     
     this.getExaminationGroups = function(school_id){
         return $http.get(base_url+"api/get-examination-groups", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /** user privilege **/
+    this.addUserPrivilege = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-user-privilege",
+            data: data
+        });
+    };
+    
+    this.getUserPrivileges = function(school_id){
+        return $http.get(base_url+"api/get-user-privileges", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.addUserPrivilegeModules = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-user-privilege-modules",
+            data: data
+        });
+    };
+    
+    this.getUserPrivilegeModules = function(school_id){
+        return $http.get(base_url+"api/get-user-privilege-modules", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };

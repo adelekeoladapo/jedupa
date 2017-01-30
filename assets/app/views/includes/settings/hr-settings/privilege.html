@@ -1,0 +1,81 @@
+                                            <div class="row"> 
+                                                
+                                                <div class="col-md-12">
+                                                    <h1 class="h4 m-b-md m-t-none font-normal jd-inner-page-title">
+                                                        User Privilege
+                                                        <span class="top-add-btn-container">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="show_add_position_overlay()"><i class="fa fa-plus-circle"> </i> New</button>
+                                                        </span>
+                                                    </h1>
+                                                    
+                                                </div>
+                                               
+                                                
+                                                <div class="col-md-2">
+                                                    
+                                                    <!-- class types list -->
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Privileges </h3>
+                                                        <ul class="class-level-list">
+                                                            <li ng-repeat="privilege in user_privileges">
+                                                                <a ng-init="id = privilege.user_privilege_id" href="" ng-click="setActiveUserPrivilege(id)">
+                                                                    {{ privilege.name }}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <form class="sidebar-form-content" style="background-color: #f8f8f8" id="form-add-employee-category" name="form-add-user-privilege">
+                                                            <div class="form-group" style="margin: 0">
+                                                                <input type="text" ng-model="user_privilege.name" placeholder="New Privilege" name="name" class="form-control" required>
+                                                            </div>
+                                                            <div style="border: solid 1px red" ng-hide="true">
+                                                                <button type="submit" ng-click="addUserPrivilege()">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!--/ class types list -->
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-10 main-table-with-sidebar">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">
+                                                            {{ active_user_privilege.name }}
+                                                        </h3>
+                                                        <div style="">
+                                                            <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>SN</th>
+                                                                        <th>Module</th>
+                                                                        <th>Create</th>
+                                                                        <th>View</th>
+                                                                        <th>Update</th>
+                                                                        <th>Delete</th>
+                                                                        <th>Print</th>
+                                                                        <th>All</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="module in active_privilege_modules" ng-init="user_privilege_module_ppts[$index] = module">
+                                                                        <td>{{ $index + 1 }}</td>
+                                                                        <td>{{ module.module }}</td>
+                                                                        <td><input ng-checked="(module.create == 1)" ng-model="user_privilege_module_ppts[$index].create" ng-value="{{ module.create }}" type="checkbox"></td>
+                                                                        <td><input ng-checked="(module.view == 1)" ng-model="user_privilege_module_ppts[$index].view" ng-value="{{ module.view }}" type="checkbox"></td>
+                                                                        <td><input ng-checked="(module.update == 1)" ng-model="user_privilege_module_ppts[$index].update" ng-value="{{ module.update }}" type="checkbox"></td>
+                                                                        <td><input ng-checked="(module.delete == 1)" ng-model="user_privilege_module_ppts[$index].delete" ng-value="{{ module.delete }}" type="checkbox"></td>
+                                                                        <td><input ng-checked="(module.print == 1)" ng-model="user_privilege_module_ppts[$index].print" ng-value="{{ module.print }}" type="checkbox"></td>
+                                                                        <td><input type="checkbox"></td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveUserPrivilegeModules()">Save</button>
+                                                            <button class="btn jd-btn jd-btn-error">Reset Privilege</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 

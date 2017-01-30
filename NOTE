@@ -215,3 +215,22 @@ FROM tb_class_timetable
 JOIN tb_weekday ON tb_class_timetable.weekday_id = tb_weekday.weekday_id 
 JOIN tb_class_period ON tb_class_timetable.class_period_id = tb_class_period.class_period_id 
 JOIN vw_class_basic_subject ON tb_class_timetable.class_basic_subject_id = vw_class_basic_subject.class_basic_subject_id
+
+
+
+
+CREATE VIEW vw_user_privilege_module AS SELECT 
+	tb_user_privilege_module.user_privilege_module_id,
+	tb_user_privilege_module.user_privilege_id,
+	tb_user_privilege_module.module_id,
+	tb_user_privilege_module.school_id,
+	tb_user_privilege_module.create,
+	tb_user_privilege_module.update,
+	tb_user_privilege_module.delete,
+	tb_user_privilege_module.view,
+	tb_user_privilege_module.print,
+	tb_user_privilege.name AS privilege,
+	tb_module.name AS module 
+FROM tb_user_privilege_module 
+JOIN tb_user_privilege ON tb_user_privilege.user_privilege_id = tb_user_privilege_module.user_privilege_id 
+JOIN tb_module ON tb_module.module_id = tb_user_privilege_module.module_id

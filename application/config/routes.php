@@ -171,3 +171,10 @@ $route['api/create-class-exam-timetable'] = 'Examination/createClassExamTimetabl
 $route['api/get-class-exam-timetables'] = 'Examination/getExamTimetables';
 $route['api/connect-exams'] = 'Examination/connectExaminations';
 $route['api/get-examination-groups'] = 'Examination/getExaminationGroups';
+
+
+/************* User Privilege APIs ****************/
+$route['api/add-user-privilege'] = 'UserPrivilege/addUserPrivilege';
+$route['api/get-user-privileges'] = 'UserPrivilege/getUserPrivileges';
+$route['api/add-user-privilege-modules'] = 'UserPrivilege/insertUserPrivilegeModules';
+$route['api/get-user-privilege-modules'] = 'UserPrivilege/getUserPrivilegeModules';

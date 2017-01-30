@@ -1000,6 +1000,10 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     
     $scope.additional_fields = Factory.getAdditionalFields();
     
+    $scope.user_privileges = Factory.getUserPrivileges();
+    
+    $scope.system_modules = Factory.getSystemModules();
+    
     $scope.employee_department = {};
     
     $scope.employee_category = {};
@@ -1007,6 +1011,8 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     $scope.employee_position = {};
     
     $scope.employee_grade_level = {};
+    
+    $scope.user_privilege = {};
     
     
     /*
@@ -1138,6 +1144,50 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
         }
     };
     /** end grade level **/
+    
+    
+    /** user privilege **/
+    
+    /** add privilege **/
+    $scope.addUserPrivilege = function(){
+        if($('#form-add-user-privilege').smkValidate()){
+            show_loading_overlay();
+            $scope.user_privilege.school_id = Factory.getSchoolID();
+            Service.addUserPrivilege($scope.user_privilege).then(function(response){
+                Service.getUserPrivileges(Factory.getSchoolID()).then(function(response){
+                    Factory.updateUserPrivileges(response.data);
+                    $scope.user_privileges = response.data;
+                    clear_form_fields('form-add-user-privilege');
+                    hide_loading_overlay();
+                    toast('Privilege Successfully Added');
+                }, function(error){});
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add privilege **/
+    
+    $scope.active_user_privilege = {};
+    $scope.active_privilege_modules = [];
+    $scope.setActiveUserPrivilege = function(privilege_id){
+        $scope.active_user_privilege = Factory.getUserPrivilege(privilege_id);
+        $scope.active_privilege_modules = Factory.getUserPrivilegeModules_(privilege_id);
+    }
+    
+    $scope.user_privilege_module_ppts = [];
+    $scope.saveUserPrivilegeModules = function(){
+        show_loading_overlay();
+        Service.addUserPrivilegeModules($scope.user_privilege_module_ppts).then(function(response){
+            Service.getUserPrivilegeModules(Factory.getSchoolID()).then(function(response){
+                Factory.updateUserPrivilegeModules(response.data);
+                hide_loading_overlay();
+                toast('Privilege Saved Successfully');
+            }, function(error){});
+            console.log(response.data);
+            hide_loading_overlay();
+        }, function(error){});
+    }
     
     
 });

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2017 at 05:49 PM
+-- Generation Time: Jan 30, 2017 at 06:22 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -488,15 +488,18 @@ CREATE TABLE `tb_examination` (
 
 INSERT INTO `tb_examination` (`examination_id`, `school_id`, `session_id`, `quota_id`, `name`, `description`, `weightage`, `class_id`, `date_created`) VALUES
 (1, 1, 1, 1, 'Test 1', 'First Test', 20, 1, '2017-01-13 13:39:41'),
-(2, 1, 1, 1, 'Test 2', 'Second Test', 25, 1, '2017-01-13 13:40:09'),
-(3, 1, 1, 2, 'First Test', 'First Periodic Test', 0, 1, '2017-01-13 14:14:42'),
-(4, 1, 1, 1, 'Exam', 'Examinaion', 15, 1, '2017-01-13 14:21:44'),
-(5, 1, 1, 2, 'Second Test', 'Second Periodic Test', 0, 1, '2017-01-13 14:31:09'),
-(6, 1, 1, 2, 'Exam', 'Examinaion', 0, 1, '2017-01-13 14:33:27'),
+(2, 1, 1, 1, 'Test 2', 'Second Test', 20, 1, '2017-01-13 13:40:09'),
+(3, 1, 1, 2, 'First Test', 'First Periodic Test', 20, 1, '2017-01-13 14:14:42'),
+(4, 1, 1, 1, 'Exam', 'Examinaion', 60, 1, '2017-01-13 14:21:44'),
+(5, 1, 1, 2, 'Second Test', 'Second Periodic Test', 20, 1, '2017-01-13 14:31:09'),
+(6, 1, 1, 2, 'Exam', 'Examinaion', 60, 1, '2017-01-13 14:33:27'),
 (7, 1, 2, 4, 'C A 1', 'First C A', 0, 1, '2017-01-13 14:37:32'),
 (8, 1, 1, 1, 'Test One', 'Test One', 40, 2, '2017-01-13 14:51:57'),
 (9, 1, 1, 1, 'Test Two', 'Test Two', 60, 2, '2017-01-13 14:53:38'),
-(10, 1, 1, 1, 'Practical', 'Practical', 0, 1, '2017-01-24 16:50:43');
+(10, 1, 1, 1, 'Practical', 'Practical', 0, 1, '2017-01-24 16:50:43'),
+(11, 1, 1, 3, 'Test 1', 'First Test', 30, 1, '2017-01-27 11:40:53'),
+(12, 1, 1, 3, 'Test 2', 'Second Test', 30, 1, '2017-01-27 11:41:04'),
+(13, 1, 1, 3, 'Exam', 'Examination', 40, 1, '2017-01-27 11:41:17');
 
 -- --------------------------------------------------------
 
@@ -519,7 +522,9 @@ CREATE TABLE `tb_examination_group` (
 
 INSERT INTO `tb_examination_group` (`examination_group_id`, `school_id`, `class_id`, `quota_id`, `grading_level_id`, `class_designation_id`) VALUES
 (1, 1, 1, 1, 2, 2),
-(2, 1, 2, 1, 2, 1);
+(2, 1, 2, 1, 2, 1),
+(3, 1, 1, 2, 1, 1),
+(4, 1, 1, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -626,6 +631,32 @@ CREATE TABLE `tb_grading_system` (
   `description` varchar(200) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_module`
+--
+
+CREATE TABLE `tb_module` (
+  `module_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `url` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_module`
+--
+
+INSERT INTO `tb_module` (`module_id`, `name`, `url`) VALUES
+(1, 'Student', ''),
+(2, 'Guardian', ''),
+(3, 'Employee', ''),
+(4, 'Library', ''),
+(5, 'Event', ''),
+(6, 'Timetable', ''),
+(7, 'Result', ''),
+(8, 'Mail', '');
 
 -- --------------------------------------------------------
 
@@ -1095,16 +1126,62 @@ INSERT INTO `tb_user_additional_field` (`user_additional_field_id`, `school_id`,
 
 CREATE TABLE `tb_user_privilege` (
   `user_privilege_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` varchar(100) NOT NULL
+  `description` varchar(100) NOT NULL,
+  `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_user_privilege`
 --
 
-INSERT INTO `tb_user_privilege` (`user_privilege_id`, `name`, `description`) VALUES
-(1, 'Super Admin', '');
+INSERT INTO `tb_user_privilege` (`user_privilege_id`, `school_id`, `name`, `description`, `date_created`) VALUES
+(1, 1, 'Student', '', '2017-01-30 13:35:23'),
+(2, 1, 'Parent', '', '2017-01-30 13:35:30'),
+(3, 1, 'Administrator', '', '2017-01-30 13:35:37'),
+(4, 1, 'Teacher', '', '2017-01-30 16:43:49'),
+(5, 1, 'Liberian', '', '2017-01-30 17:01:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_privilege_module`
+--
+
+CREATE TABLE `tb_user_privilege_module` (
+  `user_privilege_module_id` int(11) NOT NULL,
+  `user_privilege_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `create` tinyint(1) NOT NULL,
+  `update` tinyint(4) NOT NULL,
+  `delete` tinyint(4) NOT NULL,
+  `view` tinyint(4) NOT NULL,
+  `print` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_privilege_module`
+--
+
+INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privilege_id`, `module_id`, `school_id`, `create`, `update`, `delete`, `view`, `print`) VALUES
+(1, 4, 1, 1, 0, 1, 1, 1, 1),
+(2, 4, 2, 1, 0, 0, 0, 0, 0),
+(3, 4, 3, 1, 0, 0, 0, 0, 0),
+(4, 4, 4, 1, 0, 0, 0, 0, 0),
+(5, 4, 5, 1, 0, 0, 0, 0, 0),
+(6, 4, 6, 1, 1, 1, 1, 1, 1),
+(7, 4, 7, 1, 1, 0, 0, 0, 0),
+(8, 4, 8, 1, 0, 0, 0, 0, 0),
+(9, 5, 1, 1, 0, 0, 0, 0, 0),
+(10, 5, 2, 1, 0, 0, 0, 0, 0),
+(11, 5, 3, 1, 0, 0, 0, 0, 0),
+(12, 5, 4, 1, 0, 0, 0, 0, 0),
+(13, 5, 5, 1, 0, 0, 0, 0, 0),
+(14, 5, 6, 1, 0, 0, 0, 0, 0),
+(15, 5, 7, 1, 0, 0, 0, 0, 0),
+(16, 5, 8, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1427,6 +1504,25 @@ CREATE TABLE `vw_student` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_user_privilege_module`
+--
+CREATE TABLE `vw_user_privilege_module` (
+`user_privilege_module_id` int(11)
+,`user_privilege_id` int(11)
+,`module_id` int(11)
+,`school_id` int(11)
+,`create` tinyint(1)
+,`update` tinyint(4)
+,`delete` tinyint(4)
+,`view` tinyint(4)
+,`print` tinyint(4)
+,`privilege` varchar(50)
+,`module` varchar(30)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_weekday_class_period`
 --
 CREATE TABLE `vw_weekday_class_period` (
@@ -1529,6 +1625,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_student`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_student`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_student`.`student_id` AS `student_id`,`tb_student`.`student_department_id` AS `department_id`,`tb_student`.`registration_number` AS `registration_number`,`tb_student`.`admission_date` AS `admission_date`,`tb_student`.`date_created` AS `date_created`,`tb_student`.`batch_id` AS `batch_id`,`tb_student`.`student_category_id` AS `category_id`,`tb_student`.`parent_id` AS `parent_id`,`tb_student`.`parent_relationship` AS `parent_relationship`,`tb_student`.`class_type_id` AS `class_type_id`,`tb_student`.`class_level_id` AS `class_level_id`,`tb_student`.`class_id` AS `class_id`,`vw_class`.`name` AS `class`,`vw_class`.`code` AS `class_code`,`vw_class`.`level_name` AS `level`,`vw_class`.`department_name` AS `department`,`vw_class`.`department_code` AS `department_code`,`vw_class`.`class_type` AS `class_type`,`tb_student_category`.`name` AS `category`,`tb_student_category`.`code` AS `category_code`,`tb_state`.`name` AS `state`,`vw_parent`.`fullname` AS `parent_name`,`vw_parent`.`username` AS `parent_username`,`vw_parent`.`address` AS `parent_address`,`vw_parent`.`city` AS `parent_city`,`vw_parent`.`phone1` AS `parent_phone1`,`vw_parent`.`phone2` AS `parent_phone2`,`vw_parent`.`email` AS `parent_email`,`vw_parent`.`photo` AS `parent_photo` from (((((`tb_user` join `tb_student` on((`tb_user`.`user_id` = `tb_student`.`user_id`))) join `vw_class` on((`tb_student`.`class_id` = `vw_class`.`class_id`))) join `tb_student_category` on((`tb_student_category`.`student_category_id` = `tb_student`.`student_category_id`))) join `tb_state` on((`tb_user`.`state_id` = `tb_state`.`id`))) join `vw_parent` on((`tb_student`.`parent_id` = `vw_parent`.`parent_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_user_privilege_module`
+--
+DROP TABLE IF EXISTS `vw_user_privilege_module`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1694,6 +1799,12 @@ ALTER TABLE `tb_grading_system`
   ADD PRIMARY KEY (`grading_system_id`);
 
 --
+-- Indexes for table `tb_module`
+--
+ALTER TABLE `tb_module`
+  ADD PRIMARY KEY (`module_id`);
+
+--
 -- Indexes for table `tb_parent`
 --
 ALTER TABLE `tb_parent`
@@ -1794,6 +1905,12 @@ ALTER TABLE `tb_user_additional_field`
 --
 ALTER TABLE `tb_user_privilege`
   ADD PRIMARY KEY (`user_privilege_id`);
+
+--
+-- Indexes for table `tb_user_privilege_module`
+--
+ALTER TABLE `tb_user_privilege_module`
+  ADD PRIMARY KEY (`user_privilege_module_id`);
 
 --
 -- Indexes for table `tb_weekday`
@@ -1905,12 +2022,12 @@ ALTER TABLE `tb_employee_subject`
 -- AUTO_INCREMENT for table `tb_examination`
 --
 ALTER TABLE `tb_examination`
-  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tb_examination_group`
 --
 ALTER TABLE `tb_examination_group`
-  MODIFY `examination_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `examination_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_examination_timetable`
 --
@@ -1936,6 +2053,11 @@ ALTER TABLE `tb_grading_level_structure`
 --
 ALTER TABLE `tb_grading_system`
   MODIFY `grading_system_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_module`
+--
+ALTER TABLE `tb_module`
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_parent`
 --
@@ -2020,7 +2142,12 @@ ALTER TABLE `tb_user_additional_field`
 -- AUTO_INCREMENT for table `tb_user_privilege`
 --
 ALTER TABLE `tb_user_privilege`
-  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tb_user_privilege_module`
+--
+ALTER TABLE `tb_user_privilege_module`
+  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tb_weekday`
 --

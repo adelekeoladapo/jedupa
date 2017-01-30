@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $examination_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
+    private $school_model, $user_privilege_model, $examination_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
     
     function __construct() {
         parent::__construct();
@@ -26,6 +26,7 @@ class Jedupa extends CI_Controller {
         $this->load->model('ClassTimetableModel');
         $this->load->model('ClassDesignationModel');
         $this->load->model('ExaminationModel');
+        $this->load->model('UserPrivilegeModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
@@ -45,6 +46,7 @@ class Jedupa extends CI_Controller {
         $this->class_timetable_model = new ClassTimetableModel();
         $this->class_designation_model = new ClassDesignationModel();
         $this->examination_model = new ExaminationModel();
+        $this->user_privilege_model = new UserPrivilegeModel();
     }
 
     public function index(){
@@ -86,6 +88,9 @@ class Jedupa extends CI_Controller {
         $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         $data['examination_groups'] = $this->examination_model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['user_privileges'] = $this->user_privilege_model->getUserPrivileges($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+        $data['system_modules'] = $this->user_privilege_model->getModules($sort_field, $sort_order_mode, null, null, $page, $page_size);
+        $data['user_privilege_modules'] = $this->user_privilege_model->getUserPrivilegeModules($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
         
         echo json_encode($data);
     }
