@@ -24,6 +24,8 @@ app.controller('NewEmployeeCtrl', function($scope, $state, Factory, Service, sta
     
     $scope.additional_fields = Factory.getAdditionalFields('employee');
     
+    $scope.user_privileges = Factory.getUserPrivileges();
+    
     
     /** set active category **/
     $scope.setActiveEmpCategory = function(employee_category_id){

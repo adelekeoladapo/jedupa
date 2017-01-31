@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2017 at 12:33 PM
+-- Generation Time: Jan 31, 2017 at 05:12 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -334,6 +334,7 @@ CREATE TABLE `tb_employee` (
   `employee_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
+  `employee_number` varchar(30) NOT NULL,
   `employee_department_id` int(11) DEFAULT NULL,
   `employee_category_id` int(11) DEFAULT NULL,
   `employee_position_id` int(11) DEFAULT NULL,
@@ -348,9 +349,9 @@ CREATE TABLE `tb_employee` (
 -- Dumping data for table `tb_employee`
 --
 
-INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_code`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
-(1, 1, 21, 2, 2, 2, '2016-12-04', 'EMP-001', 2, '2016-12-06 17:08:59', NULL),
-(2, 1, 22, 1, 1, 1, '2016-12-20', 'EMP-002', 3, '2016-12-06 18:48:15', NULL);
+INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_number`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_code`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
+(1, 1, 21, '', 2, 2, 2, '2016-12-04', 'EMP-001', 2, '2016-12-06 17:08:59', NULL),
+(2, 1, 22, '', 1, 1, 1, '2016-12-20', 'EMP-002', 3, '2016-12-06 18:48:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -689,16 +690,27 @@ CREATE TABLE `tb_parent` (
   `parent_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `parent_number` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_parent`
 --
 
-INSERT INTO `tb_parent` (`parent_id`, `school_id`, `date_created`, `user_id`) VALUES
-(1, 1, '2016-12-05 13:24:46', 12),
-(2, 1, '2016-12-05 14:14:26', 14);
+INSERT INTO `tb_parent` (`parent_id`, `school_id`, `date_created`, `user_id`, `parent_number`) VALUES
+(1, 1, '2016-12-05 13:24:46', 12, ''),
+(2, 1, '2016-12-05 14:14:26', 14, ''),
+(3, 1, '2017-01-31 16:39:38', 62, ''),
+(4, 1, '2017-01-31 16:40:50', 64, ''),
+(5, 1, '2017-01-31 16:49:35', 66, ''),
+(6, 1, '2017-01-31 16:52:55', 68, ''),
+(7, 1, '2017-01-31 16:53:29', 70, ''),
+(8, 1, '2017-01-31 16:55:29', 72, ''),
+(9, 1, '2017-01-31 16:55:55', 74, ''),
+(10, 1, '2017-01-31 16:56:30', 76, ''),
+(11, 1, '2017-01-31 16:57:17', 78, ''),
+(12, 1, '2017-01-31 16:59:36', 80, '');
 
 -- --------------------------------------------------------
 
@@ -770,7 +782,7 @@ CREATE TABLE `tb_school` (
   `auto_gen_employee_id` int(11) NOT NULL,
   `auto_gen_parent_id` int(11) NOT NULL,
   `motto` varchar(1000) NOT NULL,
-  `rc_number` varchar(50) NOT NULL,
+  `unique_code` varchar(10) NOT NULL,
   `time_zone_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -778,8 +790,8 @@ CREATE TABLE `tb_school` (
 -- Dumping data for table `tb_school`
 --
 
-INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `address1`, `address2`, `phone1`, `phone2`, `status_id`, `country_id`, `state_id`, `language_id`, `auto_gen_student_id`, `email`, `website`, `password`, `auto_gen_employee_id`, `auto_gen_parent_id`, `motto`, `rc_number`, `time_zone_id`) VALUES
-(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 1, 'info@oxfordcollege.com', 'www.oxfordcollege.com', '', 1, 1, 'Up And On', '', NULL);
+INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `address1`, `address2`, `phone1`, `phone2`, `status_id`, `country_id`, `state_id`, `language_id`, `auto_gen_student_id`, `email`, `website`, `password`, `auto_gen_employee_id`, `auto_gen_parent_id`, `motto`, `unique_code`, `time_zone_id`) VALUES
+(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 0, 'info@oxfordcollege.com', 'www.oxfordcollege.com', '', 0, 0, 'Up And On', 'OCA', NULL);
 
 -- --------------------------------------------------------
 
@@ -889,8 +901,12 @@ CREATE TABLE `tb_student` (
 --
 
 INSERT INTO `tb_student` (`student_id`, `school_id`, `user_id`, `student_department_id`, `registration_number`, `admission_date`, `date_created`, `batch_id`, `student_category_id`, `parent_id`, `parent_relationship`, `class_type_id`, `class_level_id`, `class_id`) VALUES
-(1, 1, 11, 1, 'REG-01', '0000-00-00 00:00:00', '2016-12-05 13:24:46', 0, 1, 1, 'Father', 1, 1, 1),
-(2, 1, 13, 1, 'REG-02', '0000-00-00 00:00:00', '2016-12-05 14:14:26', 0, 1, 2, 'Father', 1, 1, 2);
+(1, 1, 11, 1, '', '0000-00-00 00:00:00', '2016-12-05 13:24:46', 0, 1, 1, 'Father', 1, 1, 1),
+(2, 1, 13, 1, '', '0000-00-00 00:00:00', '2016-12-05 14:14:26', 0, 1, 2, 'Father', 1, 1, 2),
+(3, 1, 63, 1, 'OCA/14/1', '0000-00-00 00:00:00', '2017-01-31 16:40:50', 0, 1, 4, 'Father', 1, 1, 1),
+(4, 1, 65, 1, 'OCA//2', '0000-00-00 00:00:00', '2017-01-31 16:49:35', 0, 1, 5, 'Father', 1, 1, 1),
+(5, 1, 77, 1, 'OCA/14/2', '0000-00-00 00:00:00', '2017-01-31 16:57:17', 0, 1, 11, 'Father', 1, 1, 1),
+(6, 1, 79, 1, 'OCA/14/3', '0000-00-00 00:00:00', '2017-01-31 16:59:36', 0, 1, 12, 'Father', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1077,7 +1093,65 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (13, 'Mark', 'Zuckerberg', 'Elliot', '', '', 0, 1, 'Male', '2016-12-30 00:00:00', '', 18, 'Daura', 'Daura', '0802324364', '', 'mark@gmail.com', 'passport_photo2.jpg', 0),
 (14, 'Mr Zuckerberg Jim', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, 'Somewhere in the U.S', '', '08095775757', '', 'zuckjim@gmail.com', '', 0),
 (21, 'Michael', 'Jordan', '', '', '', 0, 1, 'Male', '2016-12-11 00:00:00', '', 10, 'Ikoyi', 'Lagos', '0802324364', '', 'jordan@gmail.com', '10.jpg', 1),
-(22, 'James', 'Gosling', 'Mike', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 19, 'Ikoyi', 'Lagos', '0802324364', '', 'jamesgosling@gmail.com', '1018px-James_Gosling_2008.jpg', 1);
+(22, 'James', 'Gosling', 'Mike', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 19, 'Ikoyi', 'Lagos', '0802324364', '', 'jamesgosling@gmail.com', '1018px-James_Gosling_2008.jpg', 1),
+(23, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8).jpg', 0),
+(24, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(25, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)1.jpg', 0),
+(26, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(27, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)2.jpg', 0),
+(28, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(29, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)3.jpg', 0),
+(30, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(31, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)4.jpg', 0),
+(32, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(33, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)5.jpg', 0),
+(34, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(35, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)6.jpg', 0),
+(36, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(37, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)7.jpg', 0),
+(38, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(39, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)8.jpg', 0),
+(40, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(41, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)9.jpg', 0),
+(42, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(43, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)10.jpg', 0),
+(44, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(45, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)11.jpg', 0),
+(46, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(47, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)12.jpg', 0),
+(48, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(49, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)13.jpg', 0),
+(50, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(51, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)14.jpg', 0),
+(52, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(53, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)15.jpg', 0),
+(54, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(55, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)16.jpg', 0),
+(56, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(57, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)17.jpg', 0),
+(58, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(59, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)18.jpg', 0),
+(60, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(61, 'Janet', 'Jackson', '', '', '', 0, 1, 'Female', '2005-06-14 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)19.jpg', 0),
+(62, 'Mr Jackson', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(63, 'Janet', 'Jackson', '', '', '', 0, 1, 'Female', '2005-06-14 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)20.jpg', 0),
+(64, 'Mr Jackson', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(65, 'Jane', 'Doe', '', 'OCA//2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5).jpg', 0),
+(66, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(67, 'Jane', 'Doe', '', '', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)1.jpg', 0),
+(68, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(69, 'Jane', 'Doe', '', '', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)2.jpg', 0),
+(70, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(71, 'Jane', 'Doe', '', 'OCA//3', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)3.jpg', 0),
+(72, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(73, 'Jane', 'Doe', '', 'OCA//3', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)4.jpg', 0),
+(74, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(75, 'Jane', 'Doe', '', 'OCA/14/2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)5.jpg', 0),
+(76, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(77, 'Jane', 'Doe', '', 'OCA/14/2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)6.jpg', 0),
+(78, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
+(79, 'John', 'Cena', '', 'OCA/14/3', '', 0, 1, 'Male', '2017-01-19 00:00:00', '', 1, '', '', '', '', '', 'EL_SNEZY.JPEG', 0),
+(80, 'Mr John', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1107,7 +1181,23 @@ INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_i
 (7, 1, 13, 4, 'Christianity'),
 (8, 1, 13, 5, 'Grey'),
 (10, 1, 21, 3, 'Zenith Bank'),
-(11, 1, 22, 3, 'Diamond');
+(11, 1, 22, 3, 'Diamond'),
+(12, 1, 63, 1, ''),
+(13, 1, 63, 4, ''),
+(14, 1, 63, 5, ''),
+(15, 1, 63, 7, 'O'),
+(16, 1, 65, 1, ''),
+(17, 1, 65, 4, ''),
+(18, 1, 65, 5, ''),
+(19, 1, 65, 7, 'O'),
+(20, 1, 77, 1, ''),
+(21, 1, 77, 4, ''),
+(22, 1, 77, 5, ''),
+(23, 1, 77, 7, 'O'),
+(24, 1, 79, 1, ''),
+(25, 1, 79, 4, ''),
+(26, 1, 79, 5, ''),
+(27, 1, 79, 7, 'O');
 
 -- --------------------------------------------------------
 
@@ -2208,7 +2298,7 @@ ALTER TABLE `tb_module`
 -- AUTO_INCREMENT for table `tb_parent`
 --
 ALTER TABLE `tb_parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tb_quota`
 --
@@ -2233,7 +2323,7 @@ ALTER TABLE `tb_state`
 -- AUTO_INCREMENT for table `tb_student`
 --
 ALTER TABLE `tb_student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_student_category`
 --
@@ -2273,12 +2363,12 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --

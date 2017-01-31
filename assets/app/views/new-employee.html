@@ -124,8 +124,7 @@
                                                             <label for="class-id" class="col-sm-4 control-label">Privilege <span class="required-field"> *</span></label>
                                                             <div class="col-sm-8">
                                                                 <select class="form-control" name="privilege-id" required>
-                                                                    <option selected></option>
-                                                                    <option value="1">Default</option>
+                                                                    <option value="{{ privilege.user_privilege_id }}" ng-repeat="privilege in user_privileges">{{ privilege.name }}</option>
                                                                 </select>
                                                             </div>
                                                         </div>

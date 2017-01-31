@@ -33,6 +33,7 @@ class School extends CI_Controller {
             }
         }
         
+        $data->unique_code = $this->input->post('unique_code');
         $data->name = $this->input->post('name');
         $data->code = $this->input->post('code');
         $data->address1 = $this->input->post('address');

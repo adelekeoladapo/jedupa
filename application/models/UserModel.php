@@ -57,6 +57,28 @@ class UserModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function generateStudentNumber($school_id, $admission_date){
+        $this->load->model('SchoolModel');
+        $s = explode("/", $admission_date);
+        $adm_year = substr($s[2], 2, 4);
+        $school_model = new SchoolModel();
+        $unique_code = $school_model->getSchool($school_id)->unique_code;
+        $prefix = $unique_code."/".$adm_year;
+        
+        $this->db->select('registration_number');
+        $this->db->like('registration_number', $prefix);
+        $this->db->order_by('student_id', 'DESC');
+        $query = $this->db->get($this->table_student);
+        $last_id = ($query->num_rows()) ? $query->row()->registration_number : false;
+        if(!$last_id){
+            return $prefix."/1";
+        }else{
+            $s = explode("/", $last_id);
+            $num = $s[2]; $num++;
+            return $prefix."/".$num;
+        }    
+    }
+    
     /**
      * Parent Model
      */

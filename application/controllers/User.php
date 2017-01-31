@@ -44,6 +44,9 @@ class User extends CI_Controller {
         $data->state_id = $this->input->post('state-id');
         $data->city = $this->input->post('city');
         $data->address = $this->input->post('address');
+        $admission_date = $this->input->post('admission-date');
+        
+        $data->username = $this->model->generateStudentNumber($school_id, $admission_date);
         
         $user_id = $this->model->insertUser($data);
         
@@ -67,9 +70,9 @@ class User extends CI_Controller {
         $s_data = new stdClass();
         $s_data->user_id = $user_id;
         $s_data->school_id = $school_id;
-        $s_data->admission_date = date_format(new DateTime($this->input->post('admission-date')), "Y-m-d");
+        //$s_data->admission_date = date_format(new DateTime($this->input->post('admission-date')), "Y-m-d");
         $s_data->registration_number = $this->input->post('reg-no');
-        $s_data->admission_date = $this->input->post('admission-date');
+        $s_data->admission_date = $admission_date;
         $s_data->student_department_id = $this->input->post('department-id');
         $s_data->student_category_id = $this->input->post('category-id');
         $s_data->class_type_id = $this->input->post('class-type-id');
@@ -78,6 +81,8 @@ class User extends CI_Controller {
         $s_data->parent_relationship = $this->input->post('parent-relationship');
         $s_data->parent_id = $parent_id;
         $s_data->date_created = $this->penguin->getTime();
+        
+        $s_data->registration_number = $data->username;
         
         $student_id = $this->model->insertStudent($s_data);
         
