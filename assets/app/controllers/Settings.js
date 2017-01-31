@@ -1157,9 +1157,12 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                 Service.getUserPrivileges(Factory.getSchoolID()).then(function(response){
                     Factory.updateUserPrivileges(response.data);
                     $scope.user_privileges = response.data;
-                    clear_form_fields('form-add-user-privilege');
-                    hide_loading_overlay();
-                    toast('Privilege Successfully Added');
+                    Service.getUserPrivilegeModules(Factory.getSchoolID()).then(function(response){
+                        Factory.updateUserPrivilegeModules(response.data);
+                        clear_form_fields('form-add-user-privilege');
+                        hide_loading_overlay();
+                        toast('Privilege Successfully Added');
+                    }, function(error){});
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -1174,6 +1177,12 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
         $scope.active_user_privilege = Factory.getUserPrivilege(privilege_id);
         $scope.active_privilege_modules = Factory.getUserPrivilegeModules_(privilege_id);
     }
+    try{
+        $scope.setActiveUserPrivilege($scope.user_privileges[0].user_privilege_id);
+    }catch(e){
+        console.log(e.message);
+    }
+    
     
     $scope.user_privilege_module_ppts = [];
     $scope.saveUserPrivilegeModules = function(){
@@ -1188,6 +1197,48 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
             hide_loading_overlay();
         }, function(error){});
     }
+    
+    /** reset privilege **/
+    $scope.resetUserPrivilegeModules = function(){
+        var d = confirm("Reset "+$scope.active_user_privilege.name+" modules?");
+        if(d){
+            for(var i = 0; i < $scope.user_privilege_module_ppts.length; i++){
+                $scope.user_privilege_module_ppts[i].create = false;
+                $scope.user_privilege_module_ppts[i].view = false;
+                $scope.user_privilege_module_ppts[i].update = false;
+                $scope.user_privilege_module_ppts[i].delete = false;
+                $scope.user_privilege_module_ppts[i].print = false;
+                $scope.user_privilege_module_ppts[i].check_all = false;
+            }
+        }
+        $scope.saveUserPrivilegeModules();
+    }
+    
+    /** grant all privileges **/
+    $scope.assignAllModules = function(){
+        var d = confirm("Assign all to "+$scope.active_user_privilege.name+"?");
+        if(d){
+            for(var i = 0; i < $scope.user_privilege_module_ppts.length; i++){
+                $scope.user_privilege_module_ppts[i].create = true;
+                $scope.user_privilege_module_ppts[i].view = true;
+                $scope.user_privilege_module_ppts[i].update = true;
+                $scope.user_privilege_module_ppts[i].delete = true;
+                $scope.user_privilege_module_ppts[i].print = true;
+                $scope.user_privilege_module_ppts[i].check_all = true;
+            }
+        }
+        $scope.saveUserPrivilegeModules();
+    }
+    
+    /** check / uncheck all NOT WORKING :-( 
+    $scope.toggleModulePpts = function(module, ppt_val){
+        ppt_val = (ppt_val == 1) ? false : true;
+        console.log("Before: "+ppt_val);
+        if(ppt_val){
+            console.log("WOW!");
+        }
+        ppt_val = false;
+    }**/
     
     
 });

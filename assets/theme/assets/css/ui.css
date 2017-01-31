@@ -8,6 +8,18 @@ and open the template in the editor.
     Author     : Adeleke Oladapo
 */
 
+.capital_letter {
+    text-transform: uppercase;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+
 td input {
     border: solid 1px #ddd;
     border-radius: 3px;

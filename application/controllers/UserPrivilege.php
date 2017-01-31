@@ -13,6 +13,7 @@ class UserPrivilege extends CI_Controller {
     function addUserPrivilege(){
         $data = new stdClass();
         $data = json_decode(file_get_contents('php://input'));
+        $school_id = $data->school_id;
         $data->date_created = $this->penguin->getTime();
         $id = $this->model->insertUserPrivilege($data);
         
@@ -20,6 +21,7 @@ class UserPrivilege extends CI_Controller {
         $modules = $this->model->getModules();
         $data = new stdClass();
         $data->user_privilege_id = $id;
+        $data->school_id = $school_id;
         foreach($modules as $module){
             $data->module_id = $module->module_id;
             $this->model->insertUserPrivilegeModule($data);
@@ -43,7 +45,7 @@ class UserPrivilege extends CI_Controller {
         $data = new stdClass();
         $data = json_decode(file_get_contents('php://input'));
         foreach ($data as $d) {
-            unset($d->module); unset($d->privilege);
+            unset($d->module); unset($d->privilege); unset($d->has_child); unset($d->parent_id);
             $this->model->insertUserPrivilegeModule($d);
         }
     }

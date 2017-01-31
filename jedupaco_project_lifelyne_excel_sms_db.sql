@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2017 at 06:22 PM
+-- Generation Time: Jan 31, 2017 at 12:33 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -641,22 +641,43 @@ CREATE TABLE `tb_grading_system` (
 CREATE TABLE `tb_module` (
   `module_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `url` varchar(50) NOT NULL
+  `url` varchar(50) NOT NULL,
+  `has_child` tinyint(1) NOT NULL,
+  `parent_id` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_module`
 --
 
-INSERT INTO `tb_module` (`module_id`, `name`, `url`) VALUES
-(1, 'Student', ''),
-(2, 'Guardian', ''),
-(3, 'Employee', ''),
-(4, 'Library', ''),
-(5, 'Event', ''),
-(6, 'Timetable', ''),
-(7, 'Result', ''),
-(8, 'Mail', '');
+INSERT INTO `tb_module` (`module_id`, `name`, `url`, `has_child`, `parent_id`) VALUES
+(1, 'Student', '', 0, 0),
+(2, 'Guardian', '', 0, 0),
+(3, 'Employee', '', 0, 0),
+(4, 'Library', '', 0, 0),
+(5, 'Event', '', 0, 0),
+(6, 'Timetable', '', 0, 0),
+(7, 'Result', '', 0, 0),
+(8, 'Mail', '', 0, 0),
+(9, 'Settings', '', 1, 0),
+(10, 'General Settings', '', 1, 9),
+(11, 'Basic Information', '', 0, 10),
+(12, 'Student Category', '', 0, 10),
+(13, 'Additional Details', '', 0, 10),
+(14, 'Update Password', '', 0, 10),
+(15, 'Academic Settings', '', 1, 9),
+(16, 'Department', '', 0, 15),
+(17, 'Class', '', 0, 15),
+(18, 'Quota', '', 0, 15),
+(19, 'Subject', '', 0, 15),
+(20, 'Class Timing Set', '', 0, 15),
+(21, 'Grading Level', '', 0, 15),
+(22, 'Class Designation', '', 0, 15),
+(23, 'HR Settings', '', 1, 9),
+(24, 'Department', '', 0, 23),
+(25, 'Position', '', 0, 23),
+(26, 'Grade Level', '', 0, 23),
+(27, 'User Privilege', '', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -1137,11 +1158,13 @@ CREATE TABLE `tb_user_privilege` (
 --
 
 INSERT INTO `tb_user_privilege` (`user_privilege_id`, `school_id`, `name`, `description`, `date_created`) VALUES
-(1, 1, 'Student', '', '2017-01-30 13:35:23'),
-(2, 1, 'Parent', '', '2017-01-30 13:35:30'),
-(3, 1, 'Administrator', '', '2017-01-30 13:35:37'),
-(4, 1, 'Teacher', '', '2017-01-30 16:43:49'),
-(5, 1, 'Liberian', '', '2017-01-30 17:01:41');
+(1, 1, 'Student', '', '0000-00-00 00:00:00'),
+(2, 1, 'Parent', '', '0000-00-00 00:00:00'),
+(3, 1, 'Super Admin', '', '2017-01-31 12:18:06'),
+(4, 1, 'Admin-1', '', '2017-01-31 12:27:20'),
+(5, 1, 'Admin-2', '', '2017-01-31 12:27:30'),
+(6, 1, 'Liberian', '', '2017-01-31 12:27:43'),
+(7, 1, 'Class Teacher', '', '2017-01-31 12:31:00');
 
 -- --------------------------------------------------------
 
@@ -1158,30 +1181,150 @@ CREATE TABLE `tb_user_privilege_module` (
   `update` tinyint(4) NOT NULL,
   `delete` tinyint(4) NOT NULL,
   `view` tinyint(4) NOT NULL,
-  `print` tinyint(4) NOT NULL
+  `print` tinyint(4) NOT NULL,
+  `check_all` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_user_privilege_module`
 --
 
-INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privilege_id`, `module_id`, `school_id`, `create`, `update`, `delete`, `view`, `print`) VALUES
-(1, 4, 1, 1, 0, 1, 1, 1, 1),
-(2, 4, 2, 1, 0, 0, 0, 0, 0),
-(3, 4, 3, 1, 0, 0, 0, 0, 0),
-(4, 4, 4, 1, 0, 0, 0, 0, 0),
-(5, 4, 5, 1, 0, 0, 0, 0, 0),
-(6, 4, 6, 1, 1, 1, 1, 1, 1),
-(7, 4, 7, 1, 1, 0, 0, 0, 0),
-(8, 4, 8, 1, 0, 0, 0, 0, 0),
-(9, 5, 1, 1, 0, 0, 0, 0, 0),
-(10, 5, 2, 1, 0, 0, 0, 0, 0),
-(11, 5, 3, 1, 0, 0, 0, 0, 0),
-(12, 5, 4, 1, 0, 0, 0, 0, 0),
-(13, 5, 5, 1, 0, 0, 0, 0, 0),
-(14, 5, 6, 1, 0, 0, 0, 0, 0),
-(15, 5, 7, 1, 0, 0, 0, 0, 0),
-(16, 5, 8, 1, 0, 0, 0, 0, 0);
+INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privilege_id`, `module_id`, `school_id`, `create`, `update`, `delete`, `view`, `print`, `check_all`) VALUES
+(1, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 3, 2, 1, 1, 1, 1, 1, 1, 1),
+(3, 3, 3, 1, 1, 1, 1, 1, 1, 1),
+(4, 3, 4, 1, 1, 1, 1, 1, 1, 1),
+(5, 3, 5, 1, 1, 1, 1, 1, 1, 1),
+(6, 3, 6, 1, 1, 1, 1, 1, 1, 1),
+(7, 3, 7, 1, 1, 1, 1, 1, 1, 1),
+(8, 3, 8, 1, 1, 1, 1, 1, 1, 1),
+(9, 3, 9, 1, 1, 1, 1, 1, 1, 1),
+(10, 3, 10, 1, 1, 1, 1, 1, 1, 1),
+(11, 3, 11, 1, 1, 1, 1, 1, 1, 1),
+(12, 3, 12, 1, 1, 1, 1, 1, 1, 1),
+(13, 3, 13, 1, 1, 1, 1, 1, 1, 1),
+(14, 3, 14, 1, 1, 1, 1, 1, 1, 1),
+(15, 3, 15, 1, 1, 1, 1, 1, 1, 1),
+(16, 3, 16, 1, 1, 1, 1, 1, 1, 1),
+(17, 3, 17, 1, 1, 1, 1, 1, 1, 1),
+(18, 3, 18, 1, 1, 1, 1, 1, 1, 1),
+(19, 3, 19, 1, 1, 1, 1, 1, 1, 1),
+(20, 3, 20, 1, 1, 1, 1, 1, 1, 1),
+(21, 3, 21, 1, 1, 1, 1, 1, 1, 1),
+(22, 3, 22, 1, 1, 1, 1, 1, 1, 1),
+(23, 3, 23, 1, 1, 1, 1, 1, 1, 1),
+(24, 3, 24, 1, 1, 1, 1, 1, 1, 1),
+(25, 3, 25, 1, 1, 1, 1, 1, 1, 1),
+(26, 3, 26, 1, 1, 1, 1, 1, 1, 1),
+(27, 3, 27, 1, 1, 1, 1, 1, 1, 1),
+(28, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(29, 4, 2, 1, 1, 1, 1, 1, 1, 1),
+(30, 4, 3, 1, 1, 1, 1, 1, 1, 1),
+(31, 4, 4, 1, 1, 1, 1, 1, 1, 1),
+(32, 4, 5, 1, 1, 1, 1, 1, 1, 1),
+(33, 4, 6, 1, 1, 1, 1, 1, 1, 1),
+(34, 4, 7, 1, 1, 1, 1, 1, 1, 1),
+(35, 4, 8, 1, 1, 1, 1, 1, 1, 1),
+(36, 4, 9, 1, 1, 1, 1, 1, 1, 1),
+(37, 4, 10, 1, 1, 1, 1, 1, 1, 1),
+(38, 4, 11, 1, 1, 1, 1, 1, 1, 1),
+(39, 4, 12, 1, 1, 1, 1, 1, 1, 1),
+(40, 4, 13, 1, 1, 1, 1, 1, 1, 1),
+(41, 4, 14, 1, 1, 1, 1, 1, 1, 1),
+(42, 4, 15, 1, 1, 1, 1, 1, 1, 1),
+(43, 4, 16, 1, 1, 1, 1, 1, 1, 1),
+(44, 4, 17, 1, 1, 1, 1, 1, 1, 1),
+(45, 4, 18, 1, 1, 1, 1, 1, 1, 1),
+(46, 4, 19, 1, 1, 1, 1, 1, 1, 1),
+(47, 4, 20, 1, 1, 1, 1, 1, 1, 1),
+(48, 4, 21, 1, 1, 1, 1, 1, 1, 1),
+(49, 4, 22, 1, 1, 1, 1, 1, 1, 1),
+(50, 4, 23, 1, 1, 1, 1, 1, 1, 1),
+(51, 4, 24, 1, 1, 1, 1, 1, 1, 1),
+(52, 4, 25, 1, 1, 1, 1, 1, 1, 1),
+(53, 4, 26, 1, 1, 1, 1, 1, 1, 1),
+(54, 4, 27, 1, 0, 0, 0, 0, 0, 1),
+(55, 5, 1, 1, 0, 0, 0, 0, 0, 0),
+(56, 5, 2, 1, 0, 0, 0, 0, 0, 0),
+(57, 5, 3, 1, 0, 0, 0, 0, 0, 0),
+(58, 5, 4, 1, 0, 0, 0, 0, 0, 0),
+(59, 5, 5, 1, 0, 0, 0, 0, 0, 0),
+(60, 5, 6, 1, 0, 0, 0, 0, 0, 0),
+(61, 5, 7, 1, 0, 0, 0, 0, 0, 0),
+(62, 5, 8, 1, 0, 0, 0, 0, 0, 0),
+(63, 5, 9, 1, 0, 0, 0, 0, 0, 0),
+(64, 5, 10, 1, 0, 0, 0, 0, 0, 0),
+(65, 5, 11, 1, 0, 0, 0, 0, 0, 0),
+(66, 5, 12, 1, 0, 0, 0, 0, 0, 0),
+(67, 5, 13, 1, 0, 0, 0, 0, 0, 0),
+(68, 5, 14, 1, 0, 0, 0, 0, 0, 0),
+(69, 5, 15, 1, 0, 0, 0, 0, 0, 0),
+(70, 5, 16, 1, 0, 0, 0, 0, 0, 0),
+(71, 5, 17, 1, 0, 0, 0, 0, 0, 0),
+(72, 5, 18, 1, 0, 0, 0, 0, 0, 0),
+(73, 5, 19, 1, 0, 0, 0, 0, 0, 0),
+(74, 5, 20, 1, 0, 0, 0, 0, 0, 0),
+(75, 5, 21, 1, 0, 0, 0, 0, 0, 0),
+(76, 5, 22, 1, 0, 0, 0, 0, 0, 0),
+(77, 5, 23, 1, 0, 0, 0, 0, 0, 0),
+(78, 5, 24, 1, 0, 0, 0, 0, 0, 0),
+(79, 5, 25, 1, 0, 0, 0, 0, 0, 0),
+(80, 5, 26, 1, 0, 0, 0, 0, 0, 0),
+(81, 5, 27, 1, 0, 0, 0, 0, 0, 0),
+(82, 6, 1, 1, 0, 0, 0, 1, 1, 0),
+(83, 6, 2, 1, 0, 0, 0, 0, 0, 0),
+(84, 6, 3, 1, 0, 0, 0, 1, 0, 0),
+(85, 6, 4, 1, 1, 1, 1, 1, 1, 0),
+(86, 6, 5, 1, 1, 1, 1, 1, 1, 0),
+(87, 6, 6, 1, 0, 0, 0, 0, 0, 0),
+(88, 6, 7, 1, 0, 0, 0, 0, 0, 0),
+(89, 6, 8, 1, 1, 1, 1, 1, 1, 0),
+(90, 6, 9, 1, 0, 0, 0, 0, 0, 0),
+(91, 6, 10, 1, 0, 0, 0, 0, 0, 0),
+(92, 6, 11, 1, 1, 1, 1, 1, 1, 0),
+(93, 6, 12, 1, 0, 0, 0, 0, 0, 0),
+(94, 6, 13, 1, 0, 0, 0, 0, 0, 0),
+(95, 6, 14, 1, 1, 1, 1, 1, 1, 0),
+(96, 6, 15, 1, 0, 0, 0, 0, 0, 0),
+(97, 6, 16, 1, 0, 0, 0, 0, 0, 0),
+(98, 6, 17, 1, 0, 0, 0, 0, 0, 0),
+(99, 6, 18, 1, 0, 0, 0, 0, 0, 0),
+(100, 6, 19, 1, 0, 0, 0, 0, 0, 0),
+(101, 6, 20, 1, 0, 0, 0, 0, 0, 0),
+(102, 6, 21, 1, 0, 0, 0, 0, 0, 0),
+(103, 6, 22, 1, 0, 0, 0, 0, 0, 0),
+(104, 6, 23, 1, 0, 0, 0, 0, 0, 0),
+(105, 6, 24, 1, 0, 0, 0, 0, 0, 0),
+(106, 6, 25, 1, 0, 0, 0, 0, 0, 0),
+(107, 6, 26, 1, 0, 0, 0, 0, 0, 0),
+(108, 6, 27, 1, 0, 0, 0, 0, 0, 0),
+(109, 7, 1, 1, 0, 0, 0, 1, 1, 0),
+(110, 7, 2, 1, 0, 0, 0, 1, 1, 0),
+(111, 7, 3, 1, 0, 0, 0, 0, 0, 0),
+(112, 7, 4, 1, 1, 1, 0, 1, 1, 0),
+(113, 7, 5, 1, 0, 0, 0, 1, 1, 0),
+(114, 7, 6, 1, 0, 0, 0, 1, 1, 0),
+(115, 7, 7, 1, 0, 0, 0, 1, 0, 0),
+(116, 7, 8, 1, 1, 1, 1, 1, 1, 0),
+(117, 7, 9, 1, 0, 0, 0, 0, 0, 0),
+(118, 7, 10, 1, 0, 0, 0, 0, 0, 0),
+(119, 7, 11, 1, 1, 1, 1, 1, 1, 0),
+(120, 7, 12, 1, 0, 0, 0, 0, 0, 0),
+(121, 7, 13, 1, 0, 0, 0, 0, 0, 0),
+(122, 7, 14, 1, 1, 1, 1, 1, 1, 0),
+(123, 7, 15, 1, 0, 0, 0, 0, 0, 0),
+(124, 7, 16, 1, 0, 0, 0, 0, 0, 0),
+(125, 7, 17, 1, 0, 0, 0, 0, 0, 0),
+(126, 7, 18, 1, 0, 0, 0, 0, 0, 0),
+(127, 7, 19, 1, 0, 0, 0, 0, 0, 0),
+(128, 7, 20, 1, 0, 0, 0, 0, 0, 0),
+(129, 7, 21, 1, 0, 0, 0, 0, 0, 0),
+(130, 7, 22, 1, 0, 0, 0, 0, 0, 0),
+(131, 7, 23, 1, 0, 0, 0, 0, 0, 0),
+(132, 7, 24, 1, 0, 0, 0, 0, 0, 0),
+(133, 7, 25, 1, 0, 0, 0, 0, 0, 0),
+(134, 7, 26, 1, 0, 0, 0, 0, 0, 0),
+(135, 7, 27, 1, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1516,8 +1659,11 @@ CREATE TABLE `vw_user_privilege_module` (
 ,`delete` tinyint(4)
 ,`view` tinyint(4)
 ,`print` tinyint(4)
+,`check_all` tinyint(1)
 ,`privilege` varchar(50)
 ,`module` varchar(30)
+,`has_child` tinyint(1)
+,`parent_id` tinyint(1)
 );
 
 -- --------------------------------------------------------
@@ -1633,7 +1779,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_user_privilege_module`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege_module`.`check_all` AS `check_all`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module`,`tb_module`.`has_child` AS `has_child`,`tb_module`.`parent_id` AS `parent_id` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -2057,7 +2203,7 @@ ALTER TABLE `tb_grading_system`
 -- AUTO_INCREMENT for table `tb_module`
 --
 ALTER TABLE `tb_module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tb_parent`
 --
@@ -2142,12 +2288,12 @@ ALTER TABLE `tb_user_additional_field`
 -- AUTO_INCREMENT for table `tb_user_privilege`
 --
 ALTER TABLE `tb_user_privilege`
-  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tb_user_privilege_module`
 --
 ALTER TABLE `tb_user_privilege_module`
-  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 --
 -- AUTO_INCREMENT for table `tb_weekday`
 --
