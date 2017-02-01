@@ -159,6 +159,16 @@ function showCard_(container_id, card_id){
 /** End jD Card Layout Script **/
 
 
+/** jd slide card **/
+
+function showSlideCard(container_id, card_id){
+    var container = $('.jd-slide-cards#'+container_id);
+    $('.jd-slide-cards#'+container_id+' > .card').slideUp(500);
+    container.find('.card#'+card_id+':first').slideDown(500);
+}
+
+/** end jd slide card **/
+
 /** hide form modal **/
 function hide_form_modal(modal_id, obj = false){
     $('#'+modal_id).hide();

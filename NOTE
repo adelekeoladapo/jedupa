@@ -132,7 +132,7 @@ CREATE VIEW vw_employee AS SELECT
     tb_employee.employee_category_id AS category_id,
     tb_employee.employee_position_id AS position_id, 
 	tb_employee.date_joined AS date_joined,
-    tb_employee.employee_code AS employee_code, 
+    tb_employee.employee_number AS employee_number, 
     tb_employee.employee_grade_level_id AS grade_level_id, 
 	tb_employee_department.name AS department, 
     tb_employee_category.name AS category, 

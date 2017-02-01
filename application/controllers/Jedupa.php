@@ -53,6 +53,11 @@ class Jedupa extends CI_Controller {
         $this->load->view('home');
     }
     
+    public function login(){
+        $this->load->view('login');
+    }
+            
+    
     function init(){
         $sort_field = $this->input->get('sort-field');
         $sort_order_mode = $this->input->get('sort-order-mode');

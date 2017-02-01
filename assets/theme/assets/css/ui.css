@@ -548,6 +548,18 @@ table > tbody > tr > td.tb-btn {
 /********** End Sidebar ************/
 
 
+/******** jd-slide-cards ***********/
+
+.jd-slide-cards {
+}
+
+.jd-slide-cards .card {
+    display: none;
+}
+
+/******** end jd-slide-cards ***********/
+
+
 /********* class-level list *********/
 ul.class-level-list, ul.class-level-list-2 {
     padding: 0;

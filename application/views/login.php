@@ -28,7 +28,7 @@
                     <div class="content animated fadeIn">
                         <? echo form_open('admin/admin/doLogin', array('class'=>'login-form', 'id'=> 'login-form')); ?>
                             <h3 class="form-title">Log into your account</h3>
-                            <span class="login-error"><? echo $error; ?></span>
+                            <span class="login-error"><? //echo $error; ?></span>
                             <div class="form-group">
                                 <div class="input-icon">
                                     <i class="fa fa-user"></i>
@@ -47,8 +47,8 @@
                                 </div>
                             </div>
                             <div class="forgot-password">
-                                <h4>Forgot your password?</h4>
-                                <p>No worries, click <a href="#">here</a> to reset your password.</p>
+                                <h4 style="display: none">Forgot your password?</h4>
+                                <p>Forgot password? Click <a href="#">here</a> to reset your password.</p>
                             </div>
 
                         </form>

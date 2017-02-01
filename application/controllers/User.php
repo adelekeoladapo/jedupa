@@ -50,21 +50,27 @@ class User extends CI_Controller {
         
         $user_id = $this->model->insertUser($data);
         
+        $parent_id = $this->input->post('parent-id');
         
-        /** add student parent **/
-        $pu_data = new stdClass();
-        $pu_data->firstname = $this->input->post('parent-name');
-        $pu_data->phone1 = $this->input->post('parent-phone');
-        $pu_data->email = $this->input->post('parent-email');
-        $pu_data->address = $this->input->post('parent-address');
-        $pu_data->school_id = $school_id;
-        $parent_user_id = $this->model->insertUser($pu_data);
-        $p_data = new stdClass();
-        $p_data->user_id = $parent_user_id;
-        $p_data->date_created = $this->penguin->getTime();
-        $p_data->school_id = $school_id;
-        $parent_id = $this->model->insertParent($p_data);
-        
+        if(!$parent_id){
+            /** add student parent **/
+            $pu_data = new stdClass();
+            $pu_data->firstname = $this->input->post('parent-name');
+            $pu_data->phone1 = $this->input->post('parent-phone');
+            $pu_data->email = $this->input->post('parent-email');
+            $pu_data->address = $this->input->post('parent-address');
+            $pu_data->school_id = $school_id;
+            $parent_number = $this->model->generateParentNumber($school_id);
+            $pu_data->username = $parent_number;
+            $parent_user_id = $this->model->insertUser($pu_data);
+            $p_data = new stdClass();
+            $p_data->user_id = $parent_user_id;
+            $p_data->date_created = $this->penguin->getTime();
+            $p_data->school_id = $school_id;
+            $p_data->parent_number = $parent_number;
+
+            $parent_id = $this->model->insertParent($p_data);
+        }
         
         /** student table data **/
         $s_data = new stdClass();
@@ -170,21 +176,21 @@ class User extends CI_Controller {
         $data->city = $this->input->post('city');
         $data->address = $this->input->post('address');
         $data->privilege_id = $this->input->post('privilege-id');
+        $employee_number = $data->username = $this->model->generateEmployeeNumber($school_id);
         
         $user_id = $this->model->insertUser($data);
         
         /** employee data **/
         $e_data = new stdClass();
         $e_data->school_id = $school_id;
-        $e_data->employee_code = $this->input->post('employee-no');
         $e_data->user_id = $user_id;
         $e_data->employee_department_id = $this->input->post('department-id');
         $e_data->employee_category_id = $this->input->post('category-id');
         $e_data->employee_position_id = $this->input->post('position-id');
         $e_data->date_joined = date_format(new DateTime($this->input->post('date-joined')), "Y-m-d");
-        $e_data->employee_code = $this->input->post('employee-no');
         $e_data->employee_grade_level_id = $this->input->post('grade-level-id');
         $e_data->date_created = $this->penguin->getTime(); 
+        $e_data->employee_number = $employee_number;
         
         $employee_id = $this->model->insertEmployee($e_data);
         

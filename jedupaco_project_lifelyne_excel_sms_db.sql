@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2017 at 05:12 PM
+-- Generation Time: Feb 01, 2017 at 05:50 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -339,7 +339,6 @@ CREATE TABLE `tb_employee` (
   `employee_category_id` int(11) DEFAULT NULL,
   `employee_position_id` int(11) DEFAULT NULL,
   `date_joined` date DEFAULT NULL,
-  `employee_code` varchar(100) DEFAULT NULL,
   `employee_grade_level_id` int(11) DEFAULT NULL,
   `date_created` datetime NOT NULL,
   `student_department_id` int(11) DEFAULT NULL
@@ -349,9 +348,8 @@ CREATE TABLE `tb_employee` (
 -- Dumping data for table `tb_employee`
 --
 
-INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_number`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_code`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
-(1, 1, 21, '', 2, 2, 2, '2016-12-04', 'EMP-001', 2, '2016-12-06 17:08:59', NULL),
-(2, 1, 22, '', 1, 1, 1, '2016-12-20', 'EMP-002', 3, '2016-12-06 18:48:15', NULL);
+INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_number`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
+(1, 1, 4, 'OCA/E001', 1, 1, 1, '2005-07-07', 1, '2017-02-01 16:37:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -699,18 +697,8 @@ CREATE TABLE `tb_parent` (
 --
 
 INSERT INTO `tb_parent` (`parent_id`, `school_id`, `date_created`, `user_id`, `parent_number`) VALUES
-(1, 1, '2016-12-05 13:24:46', 12, ''),
-(2, 1, '2016-12-05 14:14:26', 14, ''),
-(3, 1, '2017-01-31 16:39:38', 62, ''),
-(4, 1, '2017-01-31 16:40:50', 64, ''),
-(5, 1, '2017-01-31 16:49:35', 66, ''),
-(6, 1, '2017-01-31 16:52:55', 68, ''),
-(7, 1, '2017-01-31 16:53:29', 70, ''),
-(8, 1, '2017-01-31 16:55:29', 72, ''),
-(9, 1, '2017-01-31 16:55:55', 74, ''),
-(10, 1, '2017-01-31 16:56:30', 76, ''),
-(11, 1, '2017-01-31 16:57:17', 78, ''),
-(12, 1, '2017-01-31 16:59:36', 80, '');
+(1, 1, '2017-02-01 16:24:25', 2, 'OCA/G001'),
+(2, 1, '2017-02-01 16:47:25', 6, 'OCA/G002');
 
 -- --------------------------------------------------------
 
@@ -901,12 +889,9 @@ CREATE TABLE `tb_student` (
 --
 
 INSERT INTO `tb_student` (`student_id`, `school_id`, `user_id`, `student_department_id`, `registration_number`, `admission_date`, `date_created`, `batch_id`, `student_category_id`, `parent_id`, `parent_relationship`, `class_type_id`, `class_level_id`, `class_id`) VALUES
-(1, 1, 11, 1, '', '0000-00-00 00:00:00', '2016-12-05 13:24:46', 0, 1, 1, 'Father', 1, 1, 1),
-(2, 1, 13, 1, '', '0000-00-00 00:00:00', '2016-12-05 14:14:26', 0, 1, 2, 'Father', 1, 1, 2),
-(3, 1, 63, 1, 'OCA/14/1', '0000-00-00 00:00:00', '2017-01-31 16:40:50', 0, 1, 4, 'Father', 1, 1, 1),
-(4, 1, 65, 1, 'OCA//2', '0000-00-00 00:00:00', '2017-01-31 16:49:35', 0, 1, 5, 'Father', 1, 1, 1),
-(5, 1, 77, 1, 'OCA/14/2', '0000-00-00 00:00:00', '2017-01-31 16:57:17', 0, 1, 11, 'Father', 1, 1, 1),
-(6, 1, 79, 1, 'OCA/14/3', '0000-00-00 00:00:00', '2017-01-31 16:59:36', 0, 1, 12, 'Father', 1, 1, 1);
+(1, 1, 1, 1, 'OCA/16/001', '0000-00-00 00:00:00', '2017-02-01 16:24:25', 0, 1, 1, 'Father', 1, 1, 1),
+(2, 1, 3, 1, 'OCA/16/002', '0000-00-00 00:00:00', '2017-02-01 16:32:38', 0, 1, 1, 'Father', 1, 1, 1),
+(3, 1, 5, 1, 'OCA/16/003', '0000-00-00 00:00:00', '2017-02-01 16:47:25', 0, 1, 2, 'Sister', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1078,80 +1063,12 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `username`, `password`, `is_active`, `school_id`, `gender`, `dob`, `marital_status`, `state_id`, `address`, `city`, `phone1`, `phone2`, `email`, `photo`, `privilege_id`) VALUES
-(1, 'John', 'Doe', 'Plantain', '', '', 0, 1, 'Male', '2016-12-01 00:00:00', '', 6, 'Lagos', 'Lagos', '0802324364', '', 'johndoe@gmail.com', 'passport_photo.jpg', 0),
-(2, 'Mr John', '', '', '', '', 0, NULL, NULL, '0000-00-00 00:00:00', '', NULL, 'Lagos', '', '08095775757', '', 'jane@gmail.com', '', 0),
-(3, 'Bill', 'Gates', '', '', '', 0, 1, 'Male', '2016-11-15 00:00:00', '', 7, 'Lagos', 'Lagos', '0802324364', '', 'bill@gmail.com', '14725506_10208052812786742_2500313437545856516_n.jpg', 0),
-(4, 'Mr Bill', '', '', '', '', 0, NULL, NULL, '0000-00-00 00:00:00', '', NULL, 'Lagos', '', '08095775757', '', 'mary@gmail.com', '', 0),
-(5, 'Michael', 'Jackson', '', '', '', 0, 1, 'Male', '2016-12-09 00:00:00', '', 0, '', '', '0802324364', '', '', 'passport_photo1.jpg', 0),
-(6, 'Mr John', '', '', '', '', 0, NULL, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(7, 'Christiana', 'Perri', '', '', '', 0, 1, 'Female', '2016-11-09 00:00:00', '', 16, '', 'Lagos', '0802324364', '', 'sundayijeoma001@gmail.com', '', 0),
-(8, 'Mr Perri', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(9, 'Adeleke', 'Oladapo', 'Philips', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 1, 'Ajah', 'Lagos', '0802324364', '', 'adelekeoladapo@gmail.com', '14725506_10208052812786742_2500313437545856516_n1.jpg', 0),
-(10, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0),
-(11, 'Adeleke', 'Oladapo', 'Philips', '', '', 0, 1, 'Male', '2016-12-21 00:00:00', '', 24, 'Lagos', 'Lagos', '0802324364', '', 'adelekeoladapo@gmail.com', '14725506_10208052812786742_2500313437545856516_n2.jpg', 0),
-(12, 'Mr Adeleke', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '08095775757', '', 'adeleke@gmail.com', '', 0),
-(13, 'Mark', 'Zuckerberg', 'Elliot', '', '', 0, 1, 'Male', '2016-12-30 00:00:00', '', 18, 'Daura', 'Daura', '0802324364', '', 'mark@gmail.com', 'passport_photo2.jpg', 0),
-(14, 'Mr Zuckerberg Jim', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, 'Somewhere in the U.S', '', '08095775757', '', 'zuckjim@gmail.com', '', 0),
-(21, 'Michael', 'Jordan', '', '', '', 0, 1, 'Male', '2016-12-11 00:00:00', '', 10, 'Ikoyi', 'Lagos', '0802324364', '', 'jordan@gmail.com', '10.jpg', 1),
-(22, 'James', 'Gosling', 'Mike', '', '', 0, 1, 'Male', '2016-12-23 00:00:00', '', 19, 'Ikoyi', 'Lagos', '0802324364', '', 'jamesgosling@gmail.com', '1018px-James_Gosling_2008.jpg', 1),
-(23, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8).jpg', 0),
-(24, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(25, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)1.jpg', 0),
-(26, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(27, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)2.jpg', 0),
-(28, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(29, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)3.jpg', 0),
-(30, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(31, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)4.jpg', 0),
-(32, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(33, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)5.jpg', 0),
-(34, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(35, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)6.jpg', 0),
-(36, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(37, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)7.jpg', 0),
-(38, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(39, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)8.jpg', 0),
-(40, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(41, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)9.jpg', 0),
-(42, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(43, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)10.jpg', 0),
-(44, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(45, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)11.jpg', 0),
-(46, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(47, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)12.jpg', 0),
-(48, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(49, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)13.jpg', 0),
-(50, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(51, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)14.jpg', 0),
-(52, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(53, 'James', 'Gotham', 'Smith', '', '', 0, 1, 'Male', '2017-01-05 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)15.jpg', 0),
-(54, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(55, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)16.jpg', 0),
-(56, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(57, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)17.jpg', 0),
-(58, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(59, 'Awolusi', 'Bode', '', '', '', 0, 1, 'Male', '2017-01-27 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)18.jpg', 0),
-(60, 'Mr Gotham', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(61, 'Janet', 'Jackson', '', '', '', 0, 1, 'Female', '2005-06-14 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)19.jpg', 0),
-(62, 'Mr Jackson', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(63, 'Janet', 'Jackson', '', '', '', 0, 1, 'Female', '2005-06-14 00:00:00', '', 1, '', '', '', '', '', '(_)_3FOLA_FLORISH_3_(_)(8)20.jpg', 0),
-(64, 'Mr Jackson', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(65, 'Jane', 'Doe', '', 'OCA//2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5).jpg', 0),
-(66, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(67, 'Jane', 'Doe', '', '', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)1.jpg', 0),
-(68, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(69, 'Jane', 'Doe', '', '', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)2.jpg', 0),
-(70, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(71, 'Jane', 'Doe', '', 'OCA//3', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)3.jpg', 0),
-(72, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(73, 'Jane', 'Doe', '', 'OCA//3', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)4.jpg', 0),
-(74, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(75, 'Jane', 'Doe', '', 'OCA/14/2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)5.jpg', 0),
-(76, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(77, 'Jane', 'Doe', '', 'OCA/14/2', '', 0, 1, 'Female', '2012-02-07 00:00:00', '', 1, '', '', '', '', '', ')(_)ß????_???D@_--(5)6.jpg', 0),
-(78, 'Mr Doe', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0),
-(79, 'John', 'Cena', '', 'OCA/14/3', '', 0, 1, 'Male', '2017-01-19 00:00:00', '', 1, '', '', '', '', '', 'EL_SNEZY.JPEG', 0),
-(80, 'Mr John', '', '', '', '', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '', '', '', '', '', '', 0);
+(1, 'Bill', 'Gates', 'Simeon', 'OCA/16/001', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 1, 'Male', '1991-07-17 00:00:00', '', 14, '10 Somewhere in Akoka', 'Akoka', '0803475757', '', 'billgates@gmail.com', 'passport_photo3.jpg', 0),
+(2, 'Mr Bill', '', '', 'OCA/G001', '1a3bcdc0c70ccb4d0f54b23cd4aee93b', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '10 Somewhere in Akoka', '', '08034657876', '', 'bill@gmail.com', '', 0),
+(3, 'Bill', 'Bezos', 'John', 'OCA/16/002', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 1, 'Male', '1995-07-13 00:00:00', '', 1, '10 Somewhere in Akoka', 'Akoka', '0803475757', '', 'besoz@gmail.com', '4.jpg', 0),
+(4, 'Mark', 'Zuckerberg', 'Elliot', 'OCA/E001', 'b82a9a13f4651e9abcbde90cd24ce2cb', 0, 1, 'Male', '1940-06-26 00:00:00', '', 19, '12 Somewhere in Kano', 'Muda', '0803475757', '', 'mark@gmail.com', '1018px-James_Gosling_20081.jpg', 7),
+(5, 'Melinda', 'Besty', 'Elly', 'OCA/16/003', '428c841430ea18a70f7b06525d4b748a', 0, 1, 'Female', '2011-03-03 00:00:00', '', 18, '23B Melo Str, Kaduna', 'Kaduna', '08034275409', '', 'melinda@yahoo.com', '(_)_3FOLA_FLORISH_3_(_)(8)21.jpg', 0),
+(6, 'Miss Wright', '', '', 'OCA/G002', 'ee5b4e08c69e19a7b1d425ad449da87d', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '23B Melo Str, Kaduna', '', '08034657876', '', 'write@hotmail.com', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1114,63 @@ INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_i
 (24, 1, 79, 1, ''),
 (25, 1, 79, 4, ''),
 (26, 1, 79, 5, ''),
-(27, 1, 79, 7, 'O');
+(27, 1, 79, 7, 'O'),
+(28, 1, 81, 1, ''),
+(29, 1, 81, 4, ''),
+(30, 1, 81, 5, ''),
+(31, 1, 81, 7, 'O'),
+(32, 1, 83, 1, ''),
+(33, 1, 83, 4, ''),
+(34, 1, 83, 5, ''),
+(35, 1, 83, 7, 'O'),
+(36, 1, 101, 1, ''),
+(37, 1, 101, 4, ''),
+(38, 1, 101, 5, ''),
+(39, 1, 101, 7, 'O'),
+(40, 1, 103, 1, ''),
+(41, 1, 103, 4, ''),
+(42, 1, 103, 5, ''),
+(43, 1, 103, 7, 'O'),
+(44, 1, 107, 1, ''),
+(45, 1, 107, 4, ''),
+(46, 1, 107, 5, ''),
+(47, 1, 107, 7, 'O'),
+(48, 1, 109, 3, ''),
+(49, 1, 109, 6, ''),
+(50, 1, 109, 8, ''),
+(51, 1, 109, 9, ''),
+(52, 1, 113, 3, ''),
+(53, 1, 113, 6, ''),
+(54, 1, 113, 8, ''),
+(55, 1, 113, 9, ''),
+(56, 1, 114, 1, ''),
+(57, 1, 114, 4, ''),
+(58, 1, 114, 5, ''),
+(59, 1, 114, 7, ''),
+(60, 1, 116, 1, ''),
+(61, 1, 116, 4, ''),
+(62, 1, 116, 5, ''),
+(63, 1, 116, 7, ''),
+(64, 1, 118, 1, ''),
+(65, 1, 118, 4, ''),
+(66, 1, 118, 5, ''),
+(67, 1, 118, 7, ''),
+(68, 1, 1, 1, '10m'),
+(69, 1, 1, 4, 'Christianity'),
+(70, 1, 1, 5, '120kg'),
+(71, 1, 1, 7, 'O'),
+(72, 1, 3, 1, '12cm'),
+(73, 1, 3, 4, 'Christianity'),
+(74, 1, 3, 5, '132kg'),
+(75, 1, 3, 7, 'A+'),
+(76, 1, 4, 3, 'GTB'),
+(77, 1, 4, 6, 'Grey'),
+(78, 1, 4, 8, '0987654321'),
+(79, 1, 4, 9, '5652435467'),
+(80, 1, 5, 1, '12m'),
+(81, 1, 5, 4, 'Christianity'),
+(82, 1, 5, 5, '56kg'),
+(83, 1, 5, 7, 'B+');
 
 -- --------------------------------------------------------
 
@@ -1610,7 +1583,7 @@ CREATE TABLE `vw_employee` (
 ,`category_id` int(11)
 ,`position_id` int(11)
 ,`date_joined` date
-,`employee_code` varchar(100)
+,`employee_number` varchar(30)
 ,`grade_level_id` int(11)
 ,`department` varchar(200)
 ,`category` varchar(100)
@@ -1824,7 +1797,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_employee`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_employee`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_user_privilege`.`name` AS `privilege`,`tb_employee`.`employee_id` AS `employee_id`,`tb_employee`.`employee_department_id` AS `deparment_id`,`tb_employee`.`employee_category_id` AS `category_id`,`tb_employee`.`employee_position_id` AS `position_id`,`tb_employee`.`date_joined` AS `date_joined`,`tb_employee`.`employee_code` AS `employee_code`,`tb_employee`.`employee_grade_level_id` AS `grade_level_id`,`tb_employee_department`.`name` AS `department`,`tb_employee_category`.`name` AS `category`,`tb_employee_position`.`name` AS `position`,`tb_employee_grade_level`.`name` AS `grade_level` from ((((((`tb_user` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user`.`privilege_id`))) join `tb_employee` on((`tb_employee`.`user_id` = `tb_user`.`user_id`))) join `tb_employee_department` on((`tb_employee_department`.`employee_department_id` = `tb_employee`.`employee_department_id`))) join `tb_employee_category` on((`tb_employee_category`.`employee_category_id` = `tb_employee`.`employee_category_id`))) join `tb_employee_position` on((`tb_employee_position`.`employee_position_id` = `tb_employee`.`employee_position_id`))) join `tb_employee_grade_level` on((`tb_employee_grade_level`.`employee_grade_level_id` = `tb_employee`.`employee_grade_level_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_employee`  AS  select `tb_user`.`user_id` AS `user_id`,`tb_user`.`firstname` AS `firstname`,`tb_user`.`lastname` AS `lastname`,`tb_user`.`othernames` AS `othernames`,`tb_user`.`username` AS `username`,`tb_user`.`password` AS `password`,`tb_user`.`is_active` AS `is_active`,`tb_user`.`school_id` AS `school_id`,`tb_user`.`gender` AS `gender`,`tb_user`.`dob` AS `dob`,`tb_user`.`marital_status` AS `marital_status`,`tb_user`.`state_id` AS `state_id`,`tb_user`.`address` AS `address`,`tb_user`.`city` AS `city`,`tb_user`.`phone1` AS `phone1`,`tb_user`.`phone2` AS `phone2`,`tb_user`.`email` AS `email`,`tb_user`.`photo` AS `photo`,`tb_user`.`privilege_id` AS `privilege_id`,`tb_user_privilege`.`name` AS `privilege`,`tb_employee`.`employee_id` AS `employee_id`,`tb_employee`.`employee_department_id` AS `deparment_id`,`tb_employee`.`employee_category_id` AS `category_id`,`tb_employee`.`employee_position_id` AS `position_id`,`tb_employee`.`date_joined` AS `date_joined`,`tb_employee`.`employee_number` AS `employee_number`,`tb_employee`.`employee_grade_level_id` AS `grade_level_id`,`tb_employee_department`.`name` AS `department`,`tb_employee_category`.`name` AS `category`,`tb_employee_position`.`name` AS `position`,`tb_employee_grade_level`.`name` AS `grade_level` from ((((((`tb_user` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user`.`privilege_id`))) join `tb_employee` on((`tb_employee`.`user_id` = `tb_user`.`user_id`))) join `tb_employee_department` on((`tb_employee_department`.`employee_department_id` = `tb_employee`.`employee_department_id`))) join `tb_employee_category` on((`tb_employee_category`.`employee_category_id` = `tb_employee`.`employee_category_id`))) join `tb_employee_position` on((`tb_employee_position`.`employee_position_id` = `tb_employee`.`employee_position_id`))) join `tb_employee_grade_level` on((`tb_employee_grade_level`.`employee_grade_level_id` = `tb_employee`.`employee_grade_level_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -2228,7 +2201,7 @@ ALTER TABLE `tb_country`
 -- AUTO_INCREMENT for table `tb_employee`
 --
 ALTER TABLE `tb_employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_employee_category`
 --
@@ -2298,7 +2271,7 @@ ALTER TABLE `tb_module`
 -- AUTO_INCREMENT for table `tb_parent`
 --
 ALTER TABLE `tb_parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_quota`
 --
@@ -2323,7 +2296,7 @@ ALTER TABLE `tb_state`
 -- AUTO_INCREMENT for table `tb_student`
 --
 ALTER TABLE `tb_student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_student_category`
 --
@@ -2363,12 +2336,12 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --

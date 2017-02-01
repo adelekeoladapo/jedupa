@@ -1,3 +1,7 @@
+body {
+    background-image: url('../../../../images/system-images/login-bg.jpg');
+}
+
 .content-outer {
     padding: 50px 50px 0px;
 }
@@ -5,7 +9,7 @@
 .content{
     margin-top: 0px;
     padding: 0px;
-    background-color: #FaFaFa;
+    /*background-color: #FaFaFa;*/
     border-radius: 0 0 0 4px;
     min-height: 200px !important
 }
@@ -24,8 +28,8 @@
     background-color: rgb(255, 255, 255);
     margin-top: 0px;
     padding: 20px 30px 15px;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 17px 0px, rgba(0, 0, 0, 0.188235) 0px 6px 20px 0px;
+    /* border-radius: 4px 4px 4px 4px; */
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 17px 0px, rgba(0, 0, 0, 0.188235) 0px 6px 20px 0px; */
 }
 
 .login .content h3{

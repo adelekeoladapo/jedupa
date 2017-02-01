@@ -30,6 +30,14 @@ class Penguin {
         return $str;
     }
     
-    
+    function prependZeros($num, $desired_length){
+        if(strlen($num) >= $desired_length)
+            return $num;
+        
+        for($i = 0; $i < ($desired_length - strlen($num)); $i++){
+            $num = "0".$num;
+        }
+        return $num;
+    }
     
 }

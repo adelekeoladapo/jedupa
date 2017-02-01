@@ -952,6 +952,12 @@ app.service('Service', function($http){
         });
     };
     
+    this.getClassStudents = function(class_id){
+        return $http.get(base_url+"api/get-students", {
+            params : {'filter-field': 'class_id', 'filter-value': class_id}
+        });
+    };
+    
     this.getStudent = function(id){
         return $http.get(base_url+"api/get-student", {
             params : {'student_id' : id}
