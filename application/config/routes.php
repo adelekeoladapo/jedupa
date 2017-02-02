@@ -120,6 +120,9 @@ $route['api/get-employee-categories'] = 'EmpCategory/getEmpCategories';
 $route['api/add-employee-grade-level'] = 'EmpGradeLevel/addEmpGradeLevel';
 $route['api/get-employee-grade-levels'] = 'EmpGradeLevel/getEmpGradeLevel';
 
+/************** User API *******************/
+$route['api/user-login'] = 'Jedupa/user_login';
+
 /************* Student APIs ***************/
 $route['api/add-student'] = 'User/addStudent';
 $route['api/get-students'] = 'User/getStudents';

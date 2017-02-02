@@ -22,6 +22,14 @@ class SchoolModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function getSchool_2($unique_code, $password){
+        $this->db->select('*');
+        $this->db->where('unique_code', $unique_code);
+        $this->db->where('password', $password);
+        $query = $this->db->get($this->table_name);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
+    
     function updateSchool($id, $data){
         $this->db->where('school_id', $id);
         return $this->db->update($this->table_name, $data);

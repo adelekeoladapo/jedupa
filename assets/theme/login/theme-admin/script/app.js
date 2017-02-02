@@ -10,11 +10,11 @@ $(document).ready(function(){
             var form_data = $('#login-form').serialize();
             $.ajax({
                 type: "POST",
-                url: BASE_URL+"admin/doLogin",
+                url: base_url+"api/user-login",
                 data: form_data,
                 success:function(result, status, xhr){
                     if(result){
-                        window.location = BASE_URL+"admin";
+                        window.location = base_url;
                     }else{
                        hide_loading_overlay();
                        toast("Invalid username and/or password"); 

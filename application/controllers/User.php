@@ -12,11 +12,6 @@ class User extends CI_Controller {
         $this->additonal_fields_model = new AdditionalFieldModel();
     }
     
-    function login(){
-        $data['error'] = '';
-        $this->load->view('login', $data);
-    }
-    
     function addStudent(){
         $school_id = $this->input->post('school-id');
         $data = new stdClass();

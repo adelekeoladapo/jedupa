@@ -33,7 +33,17 @@ class UserModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
-    
+    function getUser_2($username, $password){
+        $this->db->select('*');
+        $this->db->where('username', $username);
+        $this->db->where('password', $password);
+        $query = $this->db->get($this->table_name);
+        return ($query->num_rows()) ? $query->row() : false;
+    }
+
+
+
+
     /**
      * USER MODEL
      */

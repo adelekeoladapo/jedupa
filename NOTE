@@ -1,4 +1,8 @@
-*Remember to create default privileges (student, parent) at school creation
+* DEFAULT PRIVILEGES : Privileges that are not tied to any school 
+1. Student - 0
+2. Parent - 1
+3. Teacher - 2
+4. Super Admin - 3 ***
 
 JEDUPA
 1. Sessions & Quota

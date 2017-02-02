@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2017 at 05:50 PM
+-- Generation Time: Feb 02, 2017 at 06:33 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -779,7 +779,7 @@ CREATE TABLE `tb_school` (
 --
 
 INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `address1`, `address2`, `phone1`, `phone2`, `status_id`, `country_id`, `state_id`, `language_id`, `auto_gen_student_id`, `email`, `website`, `password`, `auto_gen_employee_id`, `auto_gen_parent_id`, `motto`, `unique_code`, `time_zone_id`) VALUES
-(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 0, 'info@oxfordcollege.com', 'www.oxfordcollege.com', '', 0, 0, 'Up And On', 'OCA', NULL);
+(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 0, 'info@oxfordcollege.com', 'www.oxfordcollege.com', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 0, 'Up And On', 'OCA', NULL);
 
 -- --------------------------------------------------------
 

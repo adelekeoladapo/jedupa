@@ -82,6 +82,13 @@ class UserPrivilegeModel extends CI_Model {
         return ($query->num_rows()) ? $query->result() : [];
     }
     
+    function getUserPrivilegeActiveModules($user_privilege_id){ 
+        $this->db->select('*');
+        $this->db->where(array('user_privilege_id' => $user_privilege_id, 'create' => 0, 'update' => 0, 'delete' => 0, 'view' => 0, 'print' => 0, 'check_all' => 0));
+        $query = $this->db->get($this->view_user_privilege_module);
+        return ($query->num_rows()) ? $query->result() : [];
+    }
+    
     function getUserPrivilegeModule($id){
         $this->db->select('*');
         $this->db->where('user_privilege_module_id', $id);

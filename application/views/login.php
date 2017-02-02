@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<? echo base_url(); ?>assets/theme/login/theme-admin/css/login.css">
         
         <script>
-            var BASE_URL = '<? echo base_url(); ?>';
+            var base_url = '<? echo base_url(); ?>';
         </script>
         
     </head>
@@ -26,7 +26,8 @@
                         <h4 style="color: #f8f8f8">Jedupa</h4>
                     </div>
                     <div class="content animated fadeIn">
-                        <? echo form_open('admin/admin/doLogin', array('class'=>'login-form', 'id'=> 'login-form')); ?>
+                        <? // echo form_open('admin/admin/doLogin', array('class'=>'login-form', 'id'=> 'login-form')); ?>
+                        <form class="login-form" id="login-form">
                             <h3 class="form-title">Log into your account</h3>
                             <span class="login-error"><? //echo $error; ?></span>
                             <div class="form-group">
@@ -43,7 +44,7 @@
                             </div>
                             <div class="form-action">
                                 <div class="form-group">
-                                    <button class="btn btn-info btn-block bg-primary login-btn border-primary" id="login-btn" type="submit" >Login</button>
+                                    <button class="btn btn-info btn-block bg-primary login-btn border-primary" id="login-btn" type="button" >Login</button>
                                 </div>
                             </div>
                             <div class="forgot-password">
@@ -63,7 +64,7 @@
         <!--Loading overlay-->
         <div class="transparent-overlay" id="loading-overlay">
             <div class="loading-img">
-                <img src="<? echo base_url(); ?>assets/images/loading.gif">
+                <img src="<? echo base_url(); ?>assets/images/system-images/loading.gif">
             </div>
         </div>
         
@@ -78,8 +79,9 @@
         <script src="<? echo base_url(); ?>assets/lib/jquery/jquery-2.2.1.min.js"></script> 
         <script src="<? echo base_url(); ?>assets/lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="<? echo base_url(); ?>assets/lib/smoke/js/smoke.min.js"></script>
-        <script src="<? echo base_url(); ?>assets/theme-admin/script/ui.js"></script>
-        <script src="<? echo base_url(); ?>assets/theme-admin/script/app.js"></script>
+        <script src="<? echo base_url(); ?>assets/lib/bootstrap/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="<? echo base_url(); ?>assets/theme/assets/js/ui.js"></script>
+        <script src="<? echo base_url(); ?>assets/theme/login/theme-admin/script/app.js"></script>
         
     </body>
     
