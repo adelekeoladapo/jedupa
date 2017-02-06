@@ -611,6 +611,17 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** privilege modules **/
+    data.getPrivilegeChildModules = function(id){
+        var dt = [];
+        angular.forEach(app_data.privilege_modules, function(value, key, obj){
+            if(value.parent_id == id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
     /** system modules **/
     
     data.getSystemModules = function(){
@@ -1381,11 +1392,14 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
     /** Init App Data **/
     Service.loadAppData(Factory.getSchoolID()).then(function(response){
         Factory.setAppData(response.data);
+        /** set base privileges with parent_id = 0 **/
+        $rootScope.myPrivileges = Factory.getPrivilegeChildModules(0);
+        console.log($rootScope.myPrivileges);
     }, function(error){
         console.log(error);
     });
     
-    
+
     
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){ 
         show_loading_overlay();
@@ -1401,5 +1415,8 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
         hide_loading_overlay();
     });
+    
+    
+    
     
 });

@@ -61,6 +61,10 @@ class UserPrivilegeModel extends CI_Model {
     
     function insertUserPrivilegeModule($data){
         if($this->getUserPrivilegeModule($data->user_privilege_module_id)){
+            if($data->create == 1 || $data->view == 1 || $data->update == 1 || $data->delete == 1 || $data->check_all == 1 || $data->print == 1)
+                $data->is_active = 1;
+            else
+                $data->is_active = 0;
             $this->updateUserPrivilegeModule($data);
         }else{
             $this->db->insert($this->table_user_privilege_module, $data);
@@ -84,7 +88,7 @@ class UserPrivilegeModel extends CI_Model {
     
     function getUserPrivilegeActiveModules($user_privilege_id){ 
         $this->db->select('*');
-        $this->db->where(array('user_privilege_id' => $user_privilege_id, 'create' => 0, 'update' => 0, 'delete' => 0, 'view' => 0, 'print' => 0, 'check_all' => 0));
+        $this->db->where(array('user_privilege_id' => $user_privilege_id, 'is_active' => 1));
         $query = $this->db->get($this->view_user_privilege_module);
         return ($query->num_rows()) ? $query->result() : [];
     }
@@ -94,6 +98,12 @@ class UserPrivilegeModel extends CI_Model {
         $this->db->where('user_privilege_module_id', $id);
         $query = $this->db->get($this->table_user_privilege_module);
         return ($query->num_rows()) ? $query->row() : null;
+    }
+    
+    function update_is_active($user_privilege_module_id, $is_active){
+        $data->is_active = $is_active;
+        $this->db->where('user_privilege_module_id', $user_privilege_module_id);
+        $this->db->update($this->table_user_privilege_module, $data);
     }
     
 }

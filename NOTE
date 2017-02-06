@@ -236,6 +236,7 @@ CREATE VIEW vw_user_privilege_module AS SELECT
 	tb_user_privilege_module.view,
 	tb_user_privilege_module.print,
         tb_user_privilege_module.check_all,
+        tb_user_privilege_module.is_active,
 	tb_user_privilege.name AS privilege,
 	tb_module.name AS module,
         tb_module.has_child,

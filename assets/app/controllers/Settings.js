@@ -1209,6 +1209,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                 $scope.user_privilege_module_ppts[i].delete = false;
                 $scope.user_privilege_module_ppts[i].print = false;
                 $scope.user_privilege_module_ppts[i].check_all = false;
+                $scope.user_privilege_module_ppts[i].is_active = false;
             }
         }
         $scope.saveUserPrivilegeModules();
@@ -1225,6 +1226,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                 $scope.user_privilege_module_ppts[i].delete = true;
                 $scope.user_privilege_module_ppts[i].print = true;
                 $scope.user_privilege_module_ppts[i].check_all = true;
+                $scope.user_privilege_module_ppts[i].is_active = true;
             }
         }
         $scope.saveUserPrivilegeModules();
