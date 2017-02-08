@@ -9,7 +9,43 @@
                                         <span>Dashboard</span>
                                     </a>
                                 </li>
-                                <li data-status="close">
+                                <li data-status="close" ng-repeat="module in base_modules" ng-init="children = root_factory.getPrivilegeChildModules(module.module_id)">
+                                    <!-- without children -->
+                                    <a ng-if="(children.length == 0)" ui-sref="{{ (module.url) ? module.url : 'empty' }}" class="auto font-bold">
+                                        <i class="icon icon-{{ module.icon }} text-info-lt"></i>
+                                        <span>{{ module.module }}</span>
+                                    </a>
+                                    <!--/ without children -->
+                                    
+                                    <!-- with children -->
+                                    <a ng-if="(children.length > 0)" href="#" class="auto font-bold">
+                                        <span class="pull-right text-muted">
+                                            <i class="fa fa-angle-left text"></i>
+                                            <i class="fa fa-angle-down text-active"></i>
+                                        </span>
+                                        <i class="icon icon-{{ module.icon }} text-info-lt"></i>
+                                        <span>{{ module.module }}</span>
+                                    </a>
+                                    <!--/ with children -->
+                                    <ul class="nav sub-menu">
+                                        <li id="menu-item-432" class="active" ng-repeat="child in children">
+                                            <a ui-sref="{{ (child.url) ? child.url : 'empty' }}" class="auto font-bold">
+                                                <i class="fa fa-circle text-info-lt"></i>
+                                                <span>{{ child.module }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <!--<li data-status="close">
                                     <a ui-sref="students" class="auto font-bold">
                                         <i class="icon icon-graduation text-info-lt"></i>
                                         <span>Students</span>
@@ -104,7 +140,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>-->
                                 
                                 <li class="m-b hidden-nav-xs"></li>
                             </ul>

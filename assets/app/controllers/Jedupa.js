@@ -1380,6 +1380,10 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             }
         });
+        
+//        .state('empty', {});
+        
+            
     
 });
 
@@ -1389,12 +1393,13 @@ app.config(function($stateProvider, $urlRouterProvider){
  */
 app.controller('mainCtrl', function($rootScope, Factory, Service){
     
+    $rootScope.root_factory = Factory;
     /** Init App Data **/
     Service.loadAppData(Factory.getSchoolID()).then(function(response){
         Factory.setAppData(response.data);
         /** set base privileges with parent_id = 0 **/
-        $rootScope.myPrivileges = Factory.getPrivilegeChildModules(0);
-        console.log($rootScope.myPrivileges);
+        $rootScope.base_modules = Factory.getPrivilegeChildModules(0);
+        console.log($rootScope.base_modules);
     }, function(error){
         console.log(error);
     });

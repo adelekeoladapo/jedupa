@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2017 at 06:12 PM
+-- Generation Time: Feb 08, 2017 at 12:45 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -639,6 +639,7 @@ CREATE TABLE `tb_grading_system` (
 CREATE TABLE `tb_module` (
   `module_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
+  `icon` varchar(20) NOT NULL,
   `url` varchar(50) NOT NULL,
   `has_child` tinyint(1) NOT NULL,
   `parent_id` tinyint(1) NOT NULL
@@ -648,34 +649,34 @@ CREATE TABLE `tb_module` (
 -- Dumping data for table `tb_module`
 --
 
-INSERT INTO `tb_module` (`module_id`, `name`, `url`, `has_child`, `parent_id`) VALUES
-(1, 'Student', '', 0, 0),
-(2, 'Guardian', '', 0, 0),
-(3, 'Employee', '', 0, 0),
-(4, 'Library', '', 0, 0),
-(5, 'Event', '', 0, 0),
-(6, 'Timetable', '', 0, 0),
-(7, 'Result', '', 0, 0),
-(8, 'Mail', '', 0, 0),
-(9, 'Settings', '', 1, 0),
-(10, 'General Settings', '', 1, 9),
-(11, 'Basic Information', '', 0, 10),
-(12, 'Student Category', '', 0, 10),
-(13, 'Additional Details', '', 0, 10),
-(14, 'Update Password', '', 0, 10),
-(15, 'Academic Settings', '', 1, 9),
-(16, 'Department', '', 0, 15),
-(17, 'Class', '', 0, 15),
-(18, 'Quota', '', 0, 15),
-(19, 'Subject', '', 0, 15),
-(20, 'Class Timing Set', '', 0, 15),
-(21, 'Grading Level', '', 0, 15),
-(22, 'Class Designation', '', 0, 15),
-(23, 'HR Settings', '', 1, 9),
-(24, 'Department', '', 0, 23),
-(25, 'Position', '', 0, 23),
-(26, 'Grade Level', '', 0, 23),
-(27, 'User Privilege', '', 0, 23);
+INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `url`, `has_child`, `parent_id`) VALUES
+(1, 'Student', 'graduation', 'students', 0, 0),
+(2, 'Guardian', 'users', 'parents', 0, 0),
+(3, 'Employee', 'directions', 'employees', 0, 0),
+(4, 'Library', 'folder', '', 0, 0),
+(5, 'Event', 'calendar', '', 0, 0),
+(6, 'Timetable', 'book-open', '', 0, 0),
+(7, 'Result', 'docs', '', 0, 0),
+(8, 'Mail', 'envelope', '', 0, 0),
+(9, 'Settings', 'settings', '', 1, 0),
+(10, 'General Settings', '', 'general-settings', 1, 9),
+(11, 'Basic Information', '', '', 0, 10),
+(12, 'Student Category', '', '', 0, 10),
+(13, 'Additional Details', '', '', 0, 10),
+(14, 'Update Password', '', '', 0, 10),
+(15, 'Academic Settings', '', 'academic-settings', 1, 9),
+(16, 'Department', '', '', 0, 15),
+(17, 'Class', '', '', 0, 15),
+(18, 'Quota', '', '', 0, 15),
+(19, 'Subject', '', '', 0, 15),
+(20, 'Class Timing Set', '', '', 0, 15),
+(21, 'Grading Level', '', '', 0, 15),
+(22, 'Class Designation', '', '', 0, 15),
+(23, 'HR Settings', '', 'hr-settings', 1, 9),
+(24, 'Department', '', '', 0, 23),
+(25, 'Position', '', '', 0, 23),
+(26, 'Grade Level', '', '', 0, 23),
+(27, 'User Privilege', '', '', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -1755,6 +1756,8 @@ CREATE TABLE `vw_user_privilege_module` (
 ,`privilege` varchar(50)
 ,`module` varchar(30)
 ,`has_child` tinyint(1)
+,`icon` varchar(20)
+,`url` varchar(50)
 ,`parent_id` tinyint(1)
 );
 
@@ -1871,7 +1874,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_user_privilege_module`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege_module`.`check_all` AS `check_all`,`tb_user_privilege_module`.`is_active` AS `is_active`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module`,`tb_module`.`has_child` AS `has_child`,`tb_module`.`parent_id` AS `parent_id` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege_module`.`check_all` AS `check_all`,`tb_user_privilege_module`.`is_active` AS `is_active`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module`,`tb_module`.`has_child` AS `has_child`,`tb_module`.`icon` AS `icon`,`tb_module`.`url` AS `url`,`tb_module`.`parent_id` AS `parent_id` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
 
 -- --------------------------------------------------------
 

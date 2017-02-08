@@ -240,6 +240,8 @@ CREATE VIEW vw_user_privilege_module AS SELECT
 	tb_user_privilege.name AS privilege,
 	tb_module.name AS module,
         tb_module.has_child,
+        tb_module.icon,
+        tb_module.url,
         tb_module.parent_id
 FROM tb_user_privilege_module 
 JOIN tb_user_privilege ON tb_user_privilege.user_privilege_id = tb_user_privilege_module.user_privilege_id 
