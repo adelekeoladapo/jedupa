@@ -60,6 +60,8 @@
     <script src="<? echo base_url(); ?>assets/app/controllers/Student.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Parent.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Employee.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Timetable.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Examination.js"></script>
     
     <!-- JS Links -->
     

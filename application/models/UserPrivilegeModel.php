@@ -60,6 +60,7 @@ class UserPrivilegeModel extends CI_Model {
     /** User Privilege Modules **/
     
     function insertUserPrivilegeModule($data){
+        unset($data->icon); unset($data->url); unset($data->position);
         if($this->getUserPrivilegeModule($data->user_privilege_module_id)){
             if($data->create == 1 || $data->view == 1 || $data->update == 1 || $data->delete == 1 || $data->check_all == 1 || $data->print == 1)
                 $data->is_active = 1;
@@ -88,6 +89,7 @@ class UserPrivilegeModel extends CI_Model {
     
     function getUserPrivilegeActiveModules($user_privilege_id){ 
         $this->db->select('*');
+        $this->db->order_by('position', 'ASC');
         $this->db->where(array('user_privilege_id' => $user_privilege_id, 'is_active' => 1));
         $query = $this->db->get($this->view_user_privilege_module);
         return ($query->num_rows()) ? $query->result() : [];

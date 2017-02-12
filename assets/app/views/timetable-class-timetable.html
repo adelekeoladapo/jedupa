@@ -1,0 +1,93 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Timetable
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <!--<span class="top-add-btn-container" style="margin-top: -12px;">
+                                        <a ui-sref="new-student" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
+                                    </span>-->
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="students">
+                                                <a href="">Class Timetable</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="timetable">
+                                            <fieldset class="options-container">
+                                                <legend>Select Class</legend>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_type_id" ng-change="setClassLevels(class_type_id)">
+                                                            <option ng-value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select ng-model="class_level_id" class="form-control" ng-change="setClasses(class_level_id)">
+                                                            <option ng-value="level.class_level_id" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_id" ng-change="setTimetable(class_id)">
+                                                            <option ng-value="classs.class_id" ng-repeat="classs in classes">{{ classs.code }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            
+                                            <div class="jd-tb-timetable-wrapper" ng-if="classs.class_id">
+                                                <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                                    Timetable: {{ classs.name }}
+                                                </h1>
+                                                <table class="table table-bordered jd-tb-timetable">
+                                                    <tr ng-repeat="weekday in class_weekday_periods" ng-if="weekday.info.class_timing_id">
+                                                        <td class="weekday-title">{{ factory.break_str(factory.abr_week_day(weekday.weekday.name)) }}</td>
+                                                        <td class="period {{ (is_break == 1) ? 'break' : ''; }}" ng-init="is_break = period.is_break" ng-repeat="period in weekday.periods">
+                                                            {{ period.start_time+" - "+period.end_time }} <input ng-if="is_break == 0" class="check" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
+                                                            <span ng-if="is_break == 0" ng-init="timetable = factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id)">
+                                                                <span class="subject"><br />{{ timetable.subject }}</span>
+                                                                <span class="teacher"><br />{{ timetable.teacher }}</span>
+                                                            </span>
+                                                            <span class="subject" ng-if="is_break == 1">
+                                                                <br />{{ period.name }}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <!--/ timetable controls -->
+                                            <div class="row" ng-if="classs.class_id">
+                                                <div class="col-md-12">
+                                                    <form class="form-inline" style="display: inline-block;">
+                                                        <select class="form-control" ng-model="new_periods.subject_id">
+                                                            <option value="{{ subject.subject_id }}" ng-repeat="subject in subjects">{{ subject.name  }}</option>
+                                                        </select>
+                                                        <select class="form-control" ng-model="new_periods.employee_id">
+                                                            <option value="{{ employee.employee_id }}" ng-repeat="employee in employees">{{ employee.firstname+" "+employee.lastname  }}</option>
+                                                        </select>
+                                                        <button class="btn jd-btn jd-btn-primary" ng-click="addClassWeekdaysPeriodsSubjects()">Assign</button>
+                                                    </form>
+                                                    <button class="btn jd-btn jd-btn-default" ng-click="resetClassTimetablePeriods()">Reset</button>
+                                                    <button class="btn jd-btn jd-btn-error" ng-click="resetClassWeekdaysPeriodsSubjects()">Reset Timetable</button>
+                                                    <button class="btn jd-btn jd-btn-default" ng-click="">Print Timetable</button>
+                                                </div>
+                                            </div>
+                                            <!--/ timetable controls -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->

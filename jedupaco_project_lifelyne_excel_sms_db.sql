@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2017 at 12:45 PM
--- Server version: 10.1.16-MariaDB
+-- Generation Time: Feb 12, 2017 at 11:52 PM
+-- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -150,7 +150,8 @@ CREATE TABLE `tb_class_designation` (
 
 INSERT INTO `tb_class_designation` (`class_designation_id`, `school_id`, `name`, `date_created`) VALUES
 (1, 1, 'Default', '2017-01-12 18:02:49'),
-(2, 1, 'Desig_2', '2017-01-12 18:15:23');
+(2, 1, 'Desig_2', '2017-01-12 18:15:23'),
+(3, 1, 'Desig_3', '2017-02-12 01:25:00');
 
 -- --------------------------------------------------------
 
@@ -175,7 +176,8 @@ CREATE TABLE `tb_class_designation_structure` (
 
 INSERT INTO `tb_class_designation_structure` (`class_designation_structure_id`, `school_id`, `class_designation_id`, `name`, `min_score`, `date_created`, `date_modified`, `description`) VALUES
 (1, 1, 1, 'First Class', 70, '2017-01-12 18:14:39', '0000-00-00 00:00:00', 'First Class'),
-(2, 1, 1, 'Second Class Upper', 60, '2017-01-12 18:15:04', '0000-00-00 00:00:00', 'Second Class Upper Students');
+(2, 1, 1, 'Second Class Upper', 60, '2017-01-12 18:15:04', '0000-00-00 00:00:00', 'Second Class Upper Students'),
+(3, 1, 2, 'Upper Students', 70, '2017-02-12 01:24:50', '0000-00-00 00:00:00', 'Upper Students');
 
 -- --------------------------------------------------------
 
@@ -230,7 +232,9 @@ INSERT INTO `tb_class_period` (`class_period_id`, `school_id`, `class_timing_set
 (4, 1, 1, 'Period 3', '11:00:00', '12:00:00', 0),
 (5, 1, 1, 'Period 4', '11:00:00', '12:00:00', 0),
 (6, 1, 1, 'Period 5', '12:00:00', '13:00:00', 0),
-(7, 1, 2, 'Period 1', '07:00:00', '08:00:00', 0);
+(7, 1, 2, 'Period 1', '07:00:00', '08:00:00', 0),
+(8, 1, 3, 'Period 1', '06:00:00', '07:00:00', 0),
+(9, 1, 3, 'Period 2', '07:00:00', '08:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -244,26 +248,30 @@ CREATE TABLE `tb_class_timetable` (
   `school_id` int(11) NOT NULL,
   `weekday_id` int(11) NOT NULL,
   `class_period_id` int(11) NOT NULL,
-  `class_basic_subject_id` int(11) NOT NULL
+  `subject_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_class_timetable`
 --
 
-INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `weekday_id`, `class_period_id`, `class_basic_subject_id`) VALUES
-(1, 1, 1, 2, 1, 62),
-(2, 1, 1, 2, 2, 62),
-(3, 1, 1, 3, 1, 62),
-(4, 1, 1, 5, 2, 62),
-(5, 1, 1, 3, 2, 66),
-(6, 1, 1, 5, 6, 64),
-(7, 1, 1, 6, 7, 66),
-(8, 1, 1, 4, 2, 66),
-(10, 1, 1, 5, 4, 65),
-(11, 1, 1, 2, 4, 64),
-(12, 1, 1, 3, 5, 64),
-(13, 1, 1, 4, 4, 64);
+INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `weekday_id`, `class_period_id`, `subject_id`, `employee_id`, `date_created`) VALUES
+(23, 1, 1, 2, 1, 1, 1, '0000-00-00 00:00:00'),
+(24, 1, 1, 4, 1, 1, 1, '0000-00-00 00:00:00'),
+(25, 1, 1, 4, 2, 1, 1, '0000-00-00 00:00:00'),
+(26, 1, 1, 3, 2, 1, 1, '0000-00-00 00:00:00'),
+(27, 1, 1, 5, 1, 1, 1, '0000-00-00 00:00:00'),
+(28, 1, 1, 2, 2, 2, 3, '0000-00-00 00:00:00'),
+(29, 1, 1, 3, 1, 2, 3, '0000-00-00 00:00:00'),
+(30, 1, 1, 5, 2, 2, 3, '0000-00-00 00:00:00'),
+(31, 1, 1, 6, 9, 2, 3, '0000-00-00 00:00:00'),
+(32, 1, 1, 6, 8, 3, 4, '0000-00-00 00:00:00'),
+(33, 1, 1, 5, 6, 3, 4, '0000-00-00 00:00:00'),
+(34, 1, 1, 2, 4, 3, 4, '0000-00-00 00:00:00'),
+(35, 1, 1, 3, 5, 3, 4, '0000-00-00 00:00:00'),
+(36, 1, 1, 3, 6, 3, 4, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -285,7 +293,8 @@ CREATE TABLE `tb_class_timing_set` (
 
 INSERT INTO `tb_class_timing_set` (`class_timing_set_id`, `school_id`, `name`, `description`, `date_created`) VALUES
 (1, 1, 'Default', NULL, '2016-12-31 00:27:59'),
-(2, 1, 'Fridays', NULL, '2016-12-31 00:34:54');
+(2, 1, 'Fridays', NULL, '2016-12-31 00:34:54'),
+(3, 1, 'Weekends', NULL, '2017-02-11 09:40:55');
 
 -- --------------------------------------------------------
 
@@ -348,7 +357,10 @@ CREATE TABLE `tb_employee` (
 --
 
 INSERT INTO `tb_employee` (`employee_id`, `school_id`, `user_id`, `employee_number`, `employee_department_id`, `employee_category_id`, `employee_position_id`, `date_joined`, `employee_grade_level_id`, `date_created`, `student_department_id`) VALUES
-(1, 1, 4, 'OCA/E001', 1, 1, 1, '2005-07-07', 1, '2017-02-01 16:37:06', NULL);
+(1, 1, 4, 'OCA/E001', 1, 1, 1, '2005-07-07', 1, '2017-02-01 16:37:06', NULL),
+(2, 1, 7, 'OCA/E002', 1, 1, 1, '2017-02-15', 1, '2017-02-09 09:14:10', NULL),
+(3, 1, 8, 'OCA/E003', 1, 1, 3, '2017-02-15', 1, '2017-02-09 10:28:32', NULL),
+(4, 1, 9, 'OCA/E004', 2, 2, 2, '2017-01-31', 2, '2017-02-09 10:32:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -587,7 +599,8 @@ CREATE TABLE `tb_grading_level` (
 INSERT INTO `tb_grading_level` (`grading_level_id`, `school_id`, `name`, `date_created`) VALUES
 (1, 1, 'Default', '2017-01-12 14:56:30'),
 (2, 1, 'G Level_2', '2017-01-12 15:31:59'),
-(3, 1, 'G Level_3', '2017-01-12 15:32:12');
+(3, 1, 'G Level_3', '2017-01-12 15:32:12'),
+(4, 1, 'G Level_4', '2017-02-12 01:31:44');
 
 -- --------------------------------------------------------
 
@@ -614,7 +627,8 @@ INSERT INTO `tb_grading_level_structure` (`tb_grading_level_structure_id`, `scho
 (1, 1, 1, 'A', 70, '2017-01-12 15:24:17', '0000-00-00 00:00:00', 'Distinction'),
 (2, 1, 1, 'B', 60, '2017-01-12 15:26:41', '0000-00-00 00:00:00', 'Good'),
 (3, 1, 1, 'C', 50, '2017-01-12 16:09:50', '0000-00-00 00:00:00', 'Average'),
-(4, 1, 2, 'A', 90, '2017-01-24 16:37:46', '0000-00-00 00:00:00', 'Excel');
+(4, 1, 2, 'A', 90, '2017-01-24 16:37:46', '0000-00-00 00:00:00', 'Excel'),
+(5, 1, 4, 'A', 80, '2017-02-12 01:32:02', '0000-00-00 00:00:00', 'Excellent');
 
 -- --------------------------------------------------------
 
@@ -640,6 +654,7 @@ CREATE TABLE `tb_module` (
   `module_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `icon` varchar(20) NOT NULL,
+  `position` int(11) NOT NULL,
   `url` varchar(50) NOT NULL,
   `has_child` tinyint(1) NOT NULL,
   `parent_id` tinyint(1) NOT NULL
@@ -649,34 +664,40 @@ CREATE TABLE `tb_module` (
 -- Dumping data for table `tb_module`
 --
 
-INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `url`, `has_child`, `parent_id`) VALUES
-(1, 'Student', 'graduation', 'students', 0, 0),
-(2, 'Guardian', 'users', 'parents', 0, 0),
-(3, 'Employee', 'directions', 'employees', 0, 0),
-(4, 'Library', 'folder', '', 0, 0),
-(5, 'Event', 'calendar', '', 0, 0),
-(6, 'Timetable', 'book-open', '', 0, 0),
-(7, 'Result', 'docs', '', 0, 0),
-(8, 'Mail', 'envelope', '', 0, 0),
-(9, 'Settings', 'settings', '', 1, 0),
-(10, 'General Settings', '', 'general-settings', 1, 9),
-(11, 'Basic Information', '', '', 0, 10),
-(12, 'Student Category', '', '', 0, 10),
-(13, 'Additional Details', '', '', 0, 10),
-(14, 'Update Password', '', '', 0, 10),
-(15, 'Academic Settings', '', 'academic-settings', 1, 9),
-(16, 'Department', '', '', 0, 15),
-(17, 'Class', '', '', 0, 15),
-(18, 'Quota', '', '', 0, 15),
-(19, 'Subject', '', '', 0, 15),
-(20, 'Class Timing Set', '', '', 0, 15),
-(21, 'Grading Level', '', '', 0, 15),
-(22, 'Class Designation', '', '', 0, 15),
-(23, 'HR Settings', '', 'hr-settings', 1, 9),
-(24, 'Department', '', '', 0, 23),
-(25, 'Position', '', '', 0, 23),
-(26, 'Grade Level', '', '', 0, 23),
-(27, 'User Privilege', '', '', 0, 23);
+INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `position`, `url`, `has_child`, `parent_id`) VALUES
+(1, 'Student', 'graduation', 1, 'students', 0, 0),
+(2, 'Guardian', 'users', 2, 'parents', 0, 0),
+(3, 'Employee', 'directions', 3, 'employees', 0, 0),
+(4, 'Library', 'folder', 4, '', 0, 0),
+(5, 'Event', 'calendar', 5, '', 0, 0),
+(6, 'Timetable', 'book-open', 6, 'timetable', 0, 0),
+(7, 'Result', 'docs', 8, '', 0, 0),
+(8, 'Mail', 'envelope', 9, '', 0, 0),
+(9, 'Settings', 'settings', 10, '', 1, 0),
+(10, 'General', '', 11, 'general-settings', 1, 9),
+(11, 'Basic Information', '', 12, '', 0, 10),
+(12, 'Student Category', '', 13, '', 0, 10),
+(13, 'Additional Details', '', 14, '', 0, 10),
+(14, 'Update Password', '', 15, '', 0, 10),
+(15, 'Academic ', '', 16, 'academic-settings', 1, 9),
+(16, 'Department', '', 17, '', 0, 15),
+(17, 'Class', '', 18, '', 0, 15),
+(18, 'Quota', '', 19, '', 0, 15),
+(19, 'Subject', '', 20, '', 0, 15),
+(20, 'Class Timing Set', '', 21, '', 0, 15),
+(21, 'Grading Level', '', 22, '', 0, 15),
+(22, 'Class Designation', '', 23, '', 0, 15),
+(23, 'Human Resource', '', 24, 'hr-settings', 1, 9),
+(24, 'Department', '', 25, '', 0, 23),
+(25, 'Position', '', 26, '', 0, 23),
+(26, 'Grade Level', '', 27, '', 0, 23),
+(27, 'User Privilege', '', 28, '', 0, 23),
+(28, 'Examination', 'puzzle', 7, 'examination', 1, 0),
+(29, 'Class Timetable', '', 0, 'timetable-class-timetable', 0, 6),
+(30, 'Settings', '', 0, 'timetable-settings', 1, 6),
+(31, 'Timetable', '', 0, 'examination-timetanle', 0, 28),
+(32, 'Assessment', '', 0, 'examination-assessment', 0, 28),
+(33, 'Settings', '', 0, 'examination-settings', 1, 28);
 
 -- --------------------------------------------------------
 
@@ -1068,7 +1089,10 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (3, 'Bill', 'Bezos', 'John', 'OCA/16/002', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 1, 'Male', '1995-07-13 00:00:00', '', 1, '10 Somewhere in Akoka', 'Akoka', '0803475757', '', 'besoz@gmail.com', '4.jpg', 0),
 (4, 'Mark', 'Zuckerberg', 'Elliot', 'OCA/E001', 'b82a9a13f4651e9abcbde90cd24ce2cb', 0, 1, 'Male', '1940-06-26 00:00:00', '', 19, '12 Somewhere in Kano', 'Muda', '0803475757', '', 'mark@gmail.com', '1018px-James_Gosling_20081.jpg', 7),
 (5, 'Melinda', 'Besty', 'Elly', 'OCA/16/003', '428c841430ea18a70f7b06525d4b748a', 0, 1, 'Female', '2011-03-03 00:00:00', '', 18, '23B Melo Str, Kaduna', 'Kaduna', '08034275409', '', 'melinda@yahoo.com', '(_)_3FOLA_FLORISH_3_(_)(8)21.jpg', 0),
-(6, 'Miss Wright', '', '', 'OCA/G002', 'ee5b4e08c69e19a7b1d425ad449da87d', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '23B Melo Str, Kaduna', '', '08034657876', '', 'write@hotmail.com', '', 0);
+(6, 'Miss Wright', '', '', 'OCA/G002', 'ee5b4e08c69e19a7b1d425ad449da87d', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '23B Melo Str, Kaduna', '', '08034657876', '', 'write@hotmail.com', '', 0),
+(7, 'James', 'Gosling', '', 'OCA/E002', 'd52e32f3a96a64786814ae9b5279fbe5', 0, 1, 'Male', '2017-02-12 00:00:00', '', 1, 'FUTA', 'Akure', '08034275409', '', 'jamesgosling@gmail.com', '(_)_UGO(_)(1).jpg', 4),
+(8, 'Desmond', 'Idiot', '', 'OCA/E003', 'a39e9eea66930fe0050d56a28bafab72', 0, 1, 'Male', '2017-02-14 00:00:00', '', 10, 'Somewhere in Ahila', 'Ahila', '08034275409', '', 'desmonidiot@yahoo.com', 'temmy(73).jpg', 5),
+(9, 'Mickael', 'Jackson', '', 'OCA/E004', '4b503f9fdf97688234717f3c50dc8bb9', 0, 1, 'Male', '2017-02-08 00:00:00', '', 2, '10 Bala street', 'Yola', '08034275409', '', 'mickaeljackson@mail.com', '(_)_UGO(_)(1)1.jpg', 11);
 
 -- --------------------------------------------------------
 
@@ -1170,7 +1194,19 @@ INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_i
 (80, 1, 5, 1, '12m'),
 (81, 1, 5, 4, 'Christianity'),
 (82, 1, 5, 5, '56kg'),
-(83, 1, 5, 7, 'B+');
+(83, 1, 5, 7, 'B+'),
+(84, 1, 7, 3, 'Ecobank'),
+(85, 1, 7, 6, 'Red'),
+(86, 1, 7, 8, '0987654321'),
+(87, 1, 7, 9, '5652435467'),
+(88, 1, 8, 3, 'Ecobank'),
+(89, 1, 8, 6, 'Grey'),
+(90, 1, 8, 8, '0987654321'),
+(91, 1, 8, 9, '5652435467'),
+(92, 1, 9, 3, 'Ecobank'),
+(93, 1, 9, 6, 'Grey'),
+(94, 1, 9, 8, '0987654321'),
+(95, 1, 9, 9, '5652435467');
 
 -- --------------------------------------------------------
 
@@ -1228,7 +1264,10 @@ INSERT INTO `tb_user_privilege` (`user_privilege_id`, `school_id`, `name`, `desc
 (5, 1, 'Admin-2', '', '2017-01-31 12:27:30'),
 (6, 1, 'Liberian', '', '2017-01-31 12:27:43'),
 (7, 1, 'Class Teacher', '', '2017-01-31 12:31:00'),
-(8, 1, 'Test', '', '2017-02-06 11:20:04');
+(8, 1, 'Test', '', '2017-02-06 11:20:04'),
+(9, 1, 'Test-2', '', '2017-02-11 07:09:59'),
+(10, 1, 'Test-3', '', '2017-02-11 07:38:08'),
+(11, 1, 'Test-4', '', '2017-02-12 01:03:46');
 
 -- --------------------------------------------------------
 
@@ -1255,33 +1294,33 @@ CREATE TABLE `tb_user_privilege_module` (
 --
 
 INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privilege_id`, `module_id`, `school_id`, `create`, `update`, `delete`, `view`, `print`, `check_all`, `is_active`) VALUES
-(1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 0),
-(2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 0),
-(3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 0),
-(4, 3, 4, 1, 1, 1, 1, 1, 1, 1, 0),
-(5, 3, 5, 1, 1, 1, 1, 1, 1, 1, 0),
-(6, 3, 6, 1, 1, 1, 1, 1, 1, 1, 0),
-(7, 3, 7, 1, 1, 1, 1, 1, 1, 1, 0),
-(8, 3, 8, 1, 1, 1, 1, 1, 1, 1, 0),
-(9, 3, 9, 1, 1, 1, 1, 1, 1, 1, 0),
+(1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1),
+(3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(4, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(5, 3, 5, 1, 1, 1, 1, 1, 1, 1, 1),
+(6, 3, 6, 1, 1, 1, 1, 1, 1, 1, 1),
+(7, 3, 7, 1, 1, 1, 1, 1, 1, 1, 1),
+(8, 3, 8, 1, 1, 1, 1, 1, 1, 1, 1),
+(9, 3, 9, 1, 1, 1, 1, 1, 1, 1, 1),
 (10, 3, 10, 1, 1, 1, 1, 1, 1, 1, 1),
-(11, 3, 11, 1, 1, 1, 1, 1, 1, 1, 0),
-(12, 3, 12, 1, 1, 1, 1, 1, 1, 1, 0),
-(13, 3, 13, 1, 1, 1, 1, 1, 1, 1, 0),
-(14, 3, 14, 1, 1, 1, 1, 1, 1, 1, 0),
+(11, 3, 11, 1, 1, 1, 1, 1, 1, 1, 1),
+(12, 3, 12, 1, 1, 1, 1, 1, 1, 1, 1),
+(13, 3, 13, 1, 1, 1, 1, 1, 1, 1, 1),
+(14, 3, 14, 1, 1, 1, 1, 1, 1, 1, 1),
 (15, 3, 15, 1, 1, 1, 1, 1, 1, 1, 1),
-(16, 3, 16, 1, 1, 1, 1, 1, 1, 1, 0),
-(17, 3, 17, 1, 1, 1, 1, 1, 1, 1, 0),
-(18, 3, 18, 1, 1, 1, 1, 1, 1, 1, 0),
-(19, 3, 19, 1, 1, 1, 1, 1, 1, 1, 0),
-(20, 3, 20, 1, 1, 1, 1, 1, 1, 1, 0),
-(21, 3, 21, 1, 1, 1, 1, 1, 1, 1, 0),
-(22, 3, 22, 1, 1, 1, 1, 1, 1, 1, 0),
+(16, 3, 16, 1, 1, 1, 1, 1, 1, 1, 1),
+(17, 3, 17, 1, 1, 1, 1, 1, 1, 1, 1),
+(18, 3, 18, 1, 1, 1, 1, 1, 1, 1, 1),
+(19, 3, 19, 1, 1, 1, 1, 1, 1, 1, 1),
+(20, 3, 20, 1, 1, 1, 1, 1, 1, 1, 1),
+(21, 3, 21, 1, 1, 1, 1, 1, 1, 1, 1),
+(22, 3, 22, 1, 1, 1, 1, 1, 1, 1, 1),
 (23, 3, 23, 1, 1, 1, 1, 1, 1, 1, 1),
-(24, 3, 24, 1, 1, 1, 1, 1, 1, 1, 0),
-(25, 3, 25, 1, 1, 1, 1, 1, 1, 1, 0),
-(26, 3, 26, 1, 1, 1, 1, 1, 1, 1, 0),
-(27, 3, 27, 1, 1, 1, 1, 1, 1, 1, 0),
+(24, 3, 24, 1, 1, 1, 1, 1, 1, 1, 1),
+(25, 3, 25, 1, 1, 1, 1, 1, 1, 1, 1),
+(26, 3, 26, 1, 1, 1, 1, 1, 1, 1, 1),
+(27, 3, 27, 1, 1, 1, 1, 1, 1, 1, 1),
 (28, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0),
 (29, 4, 2, 1, 1, 1, 1, 1, 1, 1, 0),
 (30, 4, 3, 1, 1, 1, 1, 1, 1, 1, 0),
@@ -1416,7 +1455,100 @@ INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privil
 (159, 8, 24, 1, 0, 0, 0, 0, 0, 0, 0),
 (160, 8, 25, 1, 0, 0, 0, 0, 0, 0, 0),
 (161, 8, 26, 1, 0, 0, 0, 0, 0, 0, 0),
-(162, 8, 27, 1, 0, 0, 0, 0, 0, 0, 0);
+(162, 8, 27, 1, 0, 0, 0, 0, 0, 0, 0),
+(163, 3, 28, 1, 1, 0, 0, 0, 0, 0, 1),
+(164, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(165, 9, 2, 1, 1, 1, 1, 1, 1, 1, 1),
+(166, 9, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(167, 9, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(168, 9, 5, 1, 1, 1, 1, 1, 1, 1, 1),
+(169, 9, 6, 1, 1, 1, 1, 1, 1, 1, 1),
+(170, 9, 7, 1, 1, 1, 1, 1, 1, 1, 1),
+(171, 9, 8, 1, 1, 1, 1, 1, 1, 1, 1),
+(172, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1),
+(173, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1),
+(174, 9, 11, 1, 1, 1, 1, 1, 1, 1, 1),
+(175, 9, 12, 1, 1, 1, 1, 1, 1, 1, 1),
+(176, 9, 13, 1, 1, 1, 1, 1, 1, 1, 1),
+(177, 9, 14, 1, 1, 1, 1, 1, 1, 1, 1),
+(178, 9, 15, 1, 1, 1, 1, 1, 1, 1, 1),
+(179, 9, 16, 1, 1, 1, 1, 1, 1, 1, 1),
+(180, 9, 17, 1, 1, 1, 1, 1, 1, 1, 1),
+(181, 9, 18, 1, 1, 1, 1, 1, 1, 1, 1),
+(182, 9, 19, 1, 1, 1, 1, 1, 1, 1, 1),
+(183, 9, 20, 1, 1, 1, 1, 1, 1, 1, 1),
+(184, 9, 21, 1, 1, 1, 1, 1, 1, 1, 1),
+(185, 9, 22, 1, 1, 1, 1, 1, 1, 1, 1),
+(186, 9, 23, 1, 1, 1, 1, 1, 1, 1, 1),
+(187, 9, 24, 1, 1, 1, 1, 1, 1, 1, 1),
+(188, 9, 25, 1, 1, 1, 1, 1, 1, 1, 1),
+(189, 9, 26, 1, 1, 1, 1, 1, 1, 1, 1),
+(190, 9, 27, 1, 1, 1, 1, 1, 1, 1, 1),
+(191, 9, 28, 1, 1, 1, 1, 1, 1, 1, 1),
+(192, 9, 29, 1, 1, 1, 1, 1, 1, 1, 1),
+(193, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(194, 10, 2, 1, 1, 1, 1, 1, 1, 1, 1),
+(195, 10, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(196, 10, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(197, 10, 5, 1, 1, 1, 1, 1, 1, 1, 1),
+(198, 10, 6, 1, 1, 1, 1, 1, 1, 1, 1),
+(199, 10, 7, 1, 1, 1, 1, 1, 1, 1, 1),
+(200, 10, 8, 1, 1, 1, 1, 1, 1, 1, 1),
+(201, 10, 9, 1, 1, 1, 1, 1, 1, 1, 1),
+(202, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1),
+(203, 10, 11, 1, 1, 1, 1, 1, 1, 1, 1),
+(204, 10, 12, 1, 1, 1, 1, 1, 1, 1, 1),
+(205, 10, 13, 1, 1, 1, 1, 1, 1, 1, 1),
+(206, 10, 14, 1, 1, 1, 1, 1, 1, 1, 1),
+(207, 10, 15, 1, 1, 1, 1, 1, 1, 1, 1),
+(208, 10, 16, 1, 1, 1, 1, 1, 1, 1, 1),
+(209, 10, 17, 1, 1, 1, 1, 1, 1, 1, 1),
+(210, 10, 18, 1, 1, 1, 1, 1, 1, 1, 1),
+(211, 10, 19, 1, 1, 1, 1, 1, 1, 1, 1),
+(212, 10, 20, 1, 1, 1, 1, 1, 1, 1, 1),
+(213, 10, 21, 1, 1, 1, 1, 1, 1, 1, 1),
+(214, 10, 22, 1, 1, 1, 1, 1, 1, 1, 1),
+(215, 10, 23, 1, 1, 1, 1, 1, 1, 1, 1),
+(216, 10, 24, 1, 1, 1, 1, 1, 1, 1, 1),
+(217, 10, 25, 1, 1, 1, 1, 1, 1, 1, 1),
+(218, 10, 26, 1, 1, 1, 1, 1, 1, 1, 1),
+(219, 10, 27, 1, 1, 1, 1, 1, 1, 1, 1),
+(220, 10, 28, 1, 1, 1, 1, 1, 1, 1, 1),
+(221, 10, 29, 1, 1, 1, 1, 1, 1, 1, 1),
+(222, 10, 30, 1, 1, 1, 1, 1, 1, 1, 1),
+(223, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(224, 11, 2, 1, 1, 1, 1, 1, 1, 1, 1),
+(225, 11, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(226, 11, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(227, 11, 5, 1, 1, 1, 1, 1, 1, 1, 1),
+(228, 11, 6, 1, 1, 1, 1, 1, 1, 1, 1),
+(229, 11, 7, 1, 1, 1, 1, 1, 1, 1, 1),
+(230, 11, 8, 1, 1, 1, 1, 1, 1, 1, 1),
+(231, 11, 9, 1, 1, 1, 1, 1, 1, 1, 1),
+(232, 11, 10, 1, 1, 1, 1, 1, 1, 1, 1),
+(233, 11, 11, 1, 1, 1, 1, 1, 1, 1, 1),
+(234, 11, 12, 1, 1, 1, 1, 1, 1, 1, 1),
+(235, 11, 13, 1, 1, 1, 1, 1, 1, 1, 1),
+(236, 11, 14, 1, 1, 1, 1, 1, 1, 1, 1),
+(237, 11, 15, 1, 1, 1, 1, 1, 1, 1, 1),
+(238, 11, 16, 1, 1, 1, 1, 1, 1, 1, 1),
+(239, 11, 17, 1, 1, 1, 1, 1, 1, 1, 1),
+(240, 11, 18, 1, 1, 1, 1, 1, 1, 1, 1),
+(241, 11, 19, 1, 1, 1, 1, 1, 1, 1, 1),
+(242, 11, 20, 1, 1, 1, 1, 1, 1, 1, 1),
+(243, 11, 21, 1, 1, 1, 1, 1, 1, 1, 1),
+(244, 11, 22, 1, 1, 1, 1, 1, 1, 1, 1),
+(245, 11, 23, 1, 1, 1, 1, 1, 1, 1, 1),
+(246, 11, 24, 1, 1, 1, 1, 1, 1, 1, 1),
+(247, 11, 25, 1, 1, 1, 1, 1, 1, 1, 1),
+(248, 11, 26, 1, 1, 1, 1, 1, 1, 1, 1),
+(249, 11, 27, 1, 1, 1, 1, 1, 1, 1, 1),
+(250, 11, 28, 1, 1, 1, 1, 1, 1, 1, 1),
+(251, 11, 29, 1, 1, 1, 1, 1, 1, 1, 1),
+(252, 11, 30, 1, 1, 1, 1, 1, 1, 1, 1),
+(253, 11, 31, 1, 1, 1, 1, 1, 1, 1, 1),
+(254, 11, 32, 1, 1, 1, 1, 1, 1, 1, 1),
+(255, 11, 33, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1485,7 +1617,8 @@ INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `
 (84, 1, 5, 1, 1, '0000-00-00 00:00:00'),
 (87, 1, 6, 1, 1, '0000-00-00 00:00:00'),
 (88, 1, 6, 2, 1, '0000-00-00 00:00:00'),
-(90, 1, 2, 1, 1, '0000-00-00 00:00:00');
+(90, 1, 2, 1, 1, '0000-00-00 00:00:00'),
+(92, 1, 6, 3, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1569,14 +1702,15 @@ CREATE TABLE `vw_class_timetable` (
 ,`school_id` int(11)
 ,`weekday_id` int(11)
 ,`class_period_id` int(11)
-,`class_basic_subject_id` int(11)
+,`subject_id` int(11)
+,`employee_id` int(11)
+,`date_created` datetime
 ,`weekday` varchar(100)
 ,`class_timing_set_id` int(11)
 ,`class_period` varchar(100)
 ,`start_time` time
 ,`end_time` time
 ,`is_break` int(11)
-,`subject_id` int(11)
 ,`subject` varchar(200)
 ,`teacher` varchar(201)
 );
@@ -1759,6 +1893,7 @@ CREATE TABLE `vw_user_privilege_module` (
 ,`icon` varchar(20)
 ,`url` varchar(50)
 ,`parent_id` tinyint(1)
+,`position` int(11)
 );
 
 -- --------------------------------------------------------
@@ -1820,7 +1955,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_class_timetable`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_timetable`  AS  select `tb_class_timetable`.`class_timetable_id` AS `class_timetable_id`,`tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`weekday_id` AS `weekday_id`,`tb_class_timetable`.`class_period_id` AS `class_period_id`,`tb_class_timetable`.`class_basic_subject_id` AS `class_basic_subject_id`,`tb_weekday`.`name` AS `weekday`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `class_period`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`vw_class_basic_subject`.`subject_id` AS `subject_id`,`vw_class_basic_subject`.`subject` AS `subject`,`vw_class_basic_subject`.`teacher` AS `teacher` from (((`tb_class_timetable` join `tb_weekday` on((`tb_class_timetable`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_period` on((`tb_class_timetable`.`class_period_id` = `tb_class_period`.`class_period_id`))) join `vw_class_basic_subject` on((`tb_class_timetable`.`class_basic_subject_id` = `vw_class_basic_subject`.`class_basic_subject_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_timetable`  AS  select `tb_class_timetable`.`class_timetable_id` AS `class_timetable_id`,`tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`weekday_id` AS `weekday_id`,`tb_class_timetable`.`class_period_id` AS `class_period_id`,`tb_class_timetable`.`subject_id` AS `subject_id`,`tb_class_timetable`.`employee_id` AS `employee_id`,`tb_class_timetable`.`date_created` AS `date_created`,`tb_weekday`.`name` AS `weekday`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `class_period`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`tb_subject`.`name` AS `subject`,concat(`vw_employee`.`firstname`,' ',`vw_employee`.`lastname`) AS `teacher` from ((((`tb_class_timetable` join `tb_weekday` on((`tb_class_timetable`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_period` on((`tb_class_timetable`.`class_period_id` = `tb_class_period`.`class_period_id`))) join `tb_subject` on((`tb_class_timetable`.`subject_id` = `tb_subject`.`subject_id`))) left join `vw_employee` on((`tb_class_timetable`.`employee_id` = `vw_employee`.`employee_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1874,7 +2009,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_user_privilege_module`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege_module`.`check_all` AS `check_all`,`tb_user_privilege_module`.`is_active` AS `is_active`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module`,`tb_module`.`has_child` AS `has_child`,`tb_module`.`icon` AS `icon`,`tb_module`.`url` AS `url`,`tb_module`.`parent_id` AS `parent_id` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_privilege_module`  AS  select `tb_user_privilege_module`.`user_privilege_module_id` AS `user_privilege_module_id`,`tb_user_privilege_module`.`user_privilege_id` AS `user_privilege_id`,`tb_user_privilege_module`.`module_id` AS `module_id`,`tb_user_privilege_module`.`school_id` AS `school_id`,`tb_user_privilege_module`.`create` AS `create`,`tb_user_privilege_module`.`update` AS `update`,`tb_user_privilege_module`.`delete` AS `delete`,`tb_user_privilege_module`.`view` AS `view`,`tb_user_privilege_module`.`print` AS `print`,`tb_user_privilege_module`.`check_all` AS `check_all`,`tb_user_privilege_module`.`is_active` AS `is_active`,`tb_user_privilege`.`name` AS `privilege`,`tb_module`.`name` AS `module`,`tb_module`.`has_child` AS `has_child`,`tb_module`.`icon` AS `icon`,`tb_module`.`url` AS `url`,`tb_module`.`parent_id` AS `parent_id`,`tb_module`.`position` AS `position` from ((`tb_user_privilege_module` join `tb_user_privilege` on((`tb_user_privilege`.`user_privilege_id` = `tb_user_privilege_module`.`user_privilege_id`))) join `tb_module` on((`tb_module`.`module_id` = `tb_user_privilege_module`.`module_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -2193,12 +2328,12 @@ ALTER TABLE `tb_class_basic_subject`
 -- AUTO_INCREMENT for table `tb_class_designation`
 --
 ALTER TABLE `tb_class_designation`
-  MODIFY `class_designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_class_designation_structure`
 --
 ALTER TABLE `tb_class_designation_structure`
-  MODIFY `class_designation_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_designation_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_class_level`
 --
@@ -2208,17 +2343,17 @@ ALTER TABLE `tb_class_level`
 -- AUTO_INCREMENT for table `tb_class_period`
 --
 ALTER TABLE `tb_class_period`
-  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
 ALTER TABLE `tb_class_timing_set`
-  MODIFY `class_timing_set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_timing_set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_class_type`
 --
@@ -2233,7 +2368,7 @@ ALTER TABLE `tb_country`
 -- AUTO_INCREMENT for table `tb_employee`
 --
 ALTER TABLE `tb_employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_employee_category`
 --
@@ -2283,12 +2418,12 @@ ALTER TABLE `tb_grade_level_payroll`
 -- AUTO_INCREMENT for table `tb_grading_level`
 --
 ALTER TABLE `tb_grading_level`
-  MODIFY `grading_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `grading_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_grading_level_structure`
 --
 ALTER TABLE `tb_grading_level_structure`
-  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_grading_system`
 --
@@ -2298,7 +2433,7 @@ ALTER TABLE `tb_grading_system`
 -- AUTO_INCREMENT for table `tb_module`
 --
 ALTER TABLE `tb_module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tb_parent`
 --
@@ -2368,12 +2503,12 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --
@@ -2383,12 +2518,12 @@ ALTER TABLE `tb_user_additional_field`
 -- AUTO_INCREMENT for table `tb_user_privilege`
 --
 ALTER TABLE `tb_user_privilege`
-  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tb_user_privilege_module`
 --
 ALTER TABLE `tb_user_privilege_module`
-  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 --
 -- AUTO_INCREMENT for table `tb_weekday`
 --
@@ -2398,7 +2533,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

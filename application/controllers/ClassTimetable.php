@@ -22,7 +22,8 @@ class ClassTimetable extends CI_Controller {
         $timetable = new stdClass();
         $timetable->class_id = $data->class_id;
         $timetable->school_id = $data->school_id;
-        $timetable->class_basic_subject_id = $data->class_basic_subject_id;
+        $timetable->subject_id = $data->subject_id;
+        $timetable->employee_id = $data->employee_id;
         $periods = $data->periods;
         foreach ($periods as $period) {
             $timetable->weekday_id = $period->weekday_id;

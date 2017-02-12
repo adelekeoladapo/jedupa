@@ -207,20 +207,23 @@ CREATE VIEW vw_class_timetable AS SELECT
 	tb_class_timetable.school_id AS school_id,
 	tb_class_timetable.weekday_id AS weekday_id,
 	tb_class_timetable.class_period_id AS class_period_id,
-	tb_class_timetable.class_basic_subject_id AS class_basic_subject_id,
+	tb_class_timetable.subject_id AS subject_id,
+        tb_class_timetable.employee_id AS employee_id,  
+        tb_class_timetable.date_created AS date_created,
 	tb_weekday.name AS weekday,
 	tb_class_period.class_timing_set_id AS class_timing_set_id,
 	tb_class_period.name AS class_period,
 	tb_class_period.start_time AS start_time,
 	tb_class_period.end_time AS end_time,
 	tb_class_period.is_break AS is_break,
-	vw_class_basic_subject.subject_id AS subject_id,
-	vw_class_basic_subject.subject AS subject,
-	vw_class_basic_subject.teacher AS teacher
+	tb_subject.name AS subject,
+	CONCAT(vw_employee.firstname," ",vw_employee.lastname) AS teacher  
 FROM tb_class_timetable 
 JOIN tb_weekday ON tb_class_timetable.weekday_id = tb_weekday.weekday_id 
 JOIN tb_class_period ON tb_class_timetable.class_period_id = tb_class_period.class_period_id 
-JOIN vw_class_basic_subject ON tb_class_timetable.class_basic_subject_id = vw_class_basic_subject.class_basic_subject_id
+JOIN tb_subject ON tb_class_timetable.subject_id = tb_subject.subject_id 
+LEFT JOIN vw_employee ON tb_class_timetable.employee_id = vw_employee.employee_id
+
 
 
 
@@ -242,7 +245,8 @@ CREATE VIEW vw_user_privilege_module AS SELECT
         tb_module.has_child,
         tb_module.icon,
         tb_module.url,
-        tb_module.parent_id
+        tb_module.parent_id,
+        tb_module.position
 FROM tb_user_privilege_module 
 JOIN tb_user_privilege ON tb_user_privilege.user_privilege_id = tb_user_privilege_module.user_privilege_id 
 JOIN tb_module ON tb_module.module_id = tb_user_privilege_module.module_id

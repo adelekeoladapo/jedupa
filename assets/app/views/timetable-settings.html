@@ -1,0 +1,86 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Timetable Settings
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="timing-set">
+                                                <a href="">Timing Sets</a>
+                                            </li>
+                                            <li data-href="class-weekday-timing">
+                                                <a href="">Class Weekday Timing</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="timing-set" ng-include="'assets/app/views/includes/settings/academic-settings/class-timing-set.html'">
+                                        </div>
+                                        <div class="jd-tab-pane" id="class-weekday-timing">
+                                            <fieldset class="options-container">
+                                                <legend>Select Class</legend>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_type_id" ng-change="setClassLevels(class_type_id)">
+                                                            <option ng-value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select ng-model="class_level_id" class="form-control" ng-change="setClasses(class_level_id)">
+                                                            <option ng-value="level.class_level_id" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_id" ng-change="setClassWeekdayTimingSets(class_id)">
+                                                            <option ng-value="classs.class_id" ng-repeat="classs in classes">{{ classs.code }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="jd-tb-timetable-wrapper" ng-if="classs.class_id">
+                                                <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                                    Weekday Timing: {{ classs.name }}
+                                                </h1>
+                                                <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                    <thead class="table-bordered">
+                                                        <tr>
+                                                            <th>SN</th>
+                                                            <th>Weekday</th>
+                                                            <th>Class Timing Set</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-bordered">
+                                                        <tr ng-repeat="data in class_weekday_periods">
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ data.weekday.name }}</td>
+                                                            <td>
+                                                                <select class="table-select" id="class_timing_{{ data.weekday.weekday_id }}" ng-model="data.info.class_timing_id" ng-change="toggleWeekdayClassPeriod(data, true)">
+                                                                    <option value="{{ d.class_timing_set_id }}" ng-selected="data.info.class_timing_id == d.class_timing_set_id" ng-repeat="d in class_timing_sets">{{ d.name }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tb-btn">
+                                                                <i ng-hide="data.info.weekday" class="ion ion-checkmark-circled jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Activate" ng-click="toggleWeekdayClassPeriod(data, true)"></i>
+                                                                <i ng-show="data.info.weekday" class="ion ion-close-circled jd-btn-error" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="De-activate" ng-click="toggleWeekdayClassPeriod(data, false)"></i>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->

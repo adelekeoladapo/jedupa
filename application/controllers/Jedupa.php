@@ -145,8 +145,8 @@ class Jedupa extends CI_Controller {
             $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['examination_groups'] = $this->examination_model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['user_privileges'] = $this->user_privilege_model->getUserPrivileges($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-            $data['system_modules'] = $this->user_privilege_model->getModules($sort_field, $sort_order_mode, null, null, $page, $page_size);
-            $data['user_privilege_modules'] = $this->user_privilege_model->getUserPrivilegeModules($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['system_modules'] = $this->user_privilege_model->getModules('position', 'ASC', null, null, $page, $page_size);
+            $data['user_privilege_modules'] = $this->user_privilege_model->getUserPrivilegeModules('position', 'ASC', $filter_field, $filter_value, $page, $page_size);
 
             echo json_encode($data);
         }else{

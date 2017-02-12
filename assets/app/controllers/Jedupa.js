@@ -1312,6 +1312,66 @@ app.config(function($stateProvider, $urlRouterProvider){
             }
         })
         
+        .state('timetable-class-timetable', {
+            url: "/timetable-class-timetable",
+            templateUrl: "assets/app/views/timetable-class-timetable.html",
+                controller: "TimetableCtrl",
+            resolve: {
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                },
+                employees: function(Service, Factory){
+                    return Service.getEmployees(Factory.getSchoolID());
+                },
+                subjects: function(Service, Factory){
+                    return Service.getSubjects(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('timetable-settings', {
+            url: "/timetable-settings",
+            templateUrl: "assets/app/views/timetable-settings.html",
+                controller: "TimetableSettingsCtrl",
+            resolve: {
+                class_timing_sets: function(Service, Factory){
+                    return Service.getClassTimingSets(Factory.getSchoolID());
+                },
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('examination', {
+            url: "/examination",
+            templateUrl: "assets/app/views/examination.html",
+                controller: "ExaminationCtrl",
+            resolve: {
+                
+            }
+        })
+        
+        .state('examination-settings', {
+            url: "/examination-settings",
+            templateUrl: "assets/app/views/examination-settings.html",
+                controller: "ExaminationCtrl",
+            resolve: {
+                grading_levels: function(Service, Factory){
+                    return Service.getGradingLevels(Factory.getSchoolID());
+                },
+                class_designations: function(Service, Factory){
+                    return Service.getClassDesignations(Factory.getSchoolID());
+                },
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                },
+                sessions: function(Service, Factory){
+                    return Service.getSessions(Factory.getSchoolID());
+                }
+            }
+        })
+        
         .state('general-settings', {
             url: "/general-settings",
             templateUrl: "assets/app/views/general-settings.html",
@@ -1399,7 +1459,6 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
         Factory.setAppData(response.data);
         /** set base privileges with parent_id = 0 **/
         $rootScope.base_modules = Factory.getPrivilegeChildModules(0);
-        console.log($rootScope.base_modules);
     }, function(error){
         console.log(error);
     });

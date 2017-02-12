@@ -1,0 +1,104 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Examination Settings
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="grading-level">
+                                                <a href="">Grading Levels</a>
+                                            </li>
+                                            <li data-href="class-designation">
+                                                <a href="">Class Designations</a>
+                                            </li>
+                                            <li data-href="class-examination">
+                                                <a href="">Class Examinations</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="grading-level" ng-include="'assets/app/views/includes/settings/academic-settings/grading-level.html'">
+                                            Grading Levels
+                                        </div>
+                                        <div class="jd-tab-pane" id="class-designation" ng-include="'assets/app/views/includes/settings/academic-settings/class-designation.html'">
+                                            
+                                        </div>
+                                        <div class="jd-tab-pane" id="class-examination">
+                                            <fieldset class="options-container">
+                                                <legend>Select Options</legend>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-change="setActiveSession(new_examination.session_id);" ng-model="new_examination.session_id">
+                                                            <option value="{{ session.session_id }}" ng-repeat="session in sessions">{{ session.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="new_examination.quota_id" ng-change="setActiveClassQuotaExams(classs.class_id, new_examination.quota_id)">
+                                                            <option value="{{ quota.quota_id }}" ng-repeat="quota in active_session_quota">{{ quota.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_type_id" ng-change="setClassLevels(class_type_id)">
+                                                            <option ng-value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select ng-model="class_level_id" class="form-control" ng-change="setClasses(class_level_id)">
+                                                            <option ng-value="level.class_level_id" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_id" ng-change="setClass(class_id)">
+                                                            <option ng-value="classs.class_id" ng-repeat="classs in classes">{{ classs.code }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="jd-tb-timetable-wrapper" ng-if="classs.class_id">
+                                                <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                                    {{ quota.session+' / '+quota.name }}
+                                                </h1>
+                                                <table class="table dt-table table-hover table-striped table-responsive" style="margin-bottom: 0"> 
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th>SN</th>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Weightage(%)</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="">
+                                                        <tr ng-repeat="exam in active_exams">
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ exam.name }}</td>
+                                                            <td>{{ exam.description }}</td>
+                                                            <td>{{ (exam.weightage == 0) ? 'Not Set' : exam.weightage; }}</td>
+                                                            <td class="tb-btn">
+                                                                <!--<i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="Create timetable" ng-click="createClassExam(exam.examination_id)" ng-init="has_timetable = (factory.getExamTimetable(exam.examination_id).length > 0) ? true : false " ng-hide="has_timetable"></i>-->
+                                                                <i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View Timetable" ng-click="viewClassExam(exam.examination_id)"></i>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-show="active_exams.length == 0"><td colspan="5">No exams added yet</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->

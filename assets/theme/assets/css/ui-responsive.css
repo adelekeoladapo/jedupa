@@ -21,6 +21,9 @@
         width: 100%;
     }
     
+    .dataTables_wrapper {
+        overflow-x: auto;
+    }
 }
 
 /* Small devices (tablets, 768px and up) */
