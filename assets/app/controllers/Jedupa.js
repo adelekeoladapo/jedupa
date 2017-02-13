@@ -1463,6 +1463,10 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
         console.log(error);
     });
     
+    $rootScope.show_set_default_quota_overlay = function(){
+        $('#set-default-quota-overlay').show();
+    }
+    
 
     
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){ 

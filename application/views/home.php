@@ -117,6 +117,44 @@
         </div>
     </div>
     <!-- Loading overlay -->
+    
+    <!-- Set default quota overlay -->
+    <div class="transparent-overlay" id="set-default-quota-overlay">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="jd-modal">
+                    <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
+                        Default Quota
+                    </h1>
+                    <div class="jd-modal-body">
+                        <form class="form-horizontal" name="form-add-class" id="form-add-class"  novalidate> 
+                            <div class="form-group">
+                                <label for="department_id" class="col-sm-4 control-label">Session <span class="required-field"> *</span></label>
+                                <div class="col-sm-8">
+                                    <select name="session_id" class="form-control" ng-model="" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="department_id" class="col-sm-4 control-label">Quota <span class="required-field"> *</span></label>
+                                <div class="col-sm-8">
+                                    <select name="quota_id" class="form-control" ng-model="" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="jd-modal-footer">
+                        <button class="btn jd-modal-btn" onclick="hide_form_modal('set-default-quota-overlay', '')">Cancel</button>
+                        <button class="btn jd-modal-btn btn-ok" ng-click="addClass()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Set default quota overlay -->
 
 </body>
 
