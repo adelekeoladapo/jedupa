@@ -124,23 +124,23 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="jd-modal">
                     <h1 class="h4 m-b-md m-t-none font-normal jd-modal-title">
-                        Default Quota
+                        Set Default Quota
                     </h1>
                     <div class="jd-modal-body">
                         <form class="form-horizontal" name="form-add-class" id="form-add-class"  novalidate> 
                             <div class="form-group">
-                                <label for="department_id" class="col-sm-4 control-label">Session <span class="required-field"> *</span></label>
+                                <label for="session_id" class="col-sm-4 control-label">Session <span class="required-field"> *</span></label>
                                 <div class="col-sm-8">
-                                    <select name="session_id" class="form-control" ng-model="" required>
-                                        <option></option>
+                                    <select name="session_id" ng-model="session_id_" class="form-control" required>
+                                        <option ng-selected="(session.session_id == default_quota.session_id)" ng-repeat="session in root_factory.getSessions()">{{ session.name }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="department_id" class="col-sm-4 control-label">Quota <span class="required-field"> *</span></label>
+                                <label for="quota_id" class="col-sm-4 control-label">Quota <span class="required-field"> *</span></label>
                                 <div class="col-sm-8">
-                                    <select name="quota_id" class="form-control" ng-model="" required>
-                                        <option></option>
+                                    <select name="quota_id" class="form-control" required>
+                                        <option ng-selected="(quota.quota_id == default_quota.quota_id)">{{ quota.name }}</option>
                                     </select>
                                 </div>
                             </div>

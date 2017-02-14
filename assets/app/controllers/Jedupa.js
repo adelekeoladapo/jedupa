@@ -1459,12 +1459,13 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
         Factory.setAppData(response.data);
         /** set base privileges with parent_id = 0 **/
         $rootScope.base_modules = Factory.getPrivilegeChildModules(0);
+        $rootScope.default_quota = response.data.quotas[response.data.quotas.length-1];
     }, function(error){
         console.log(error);
     });
     
     $rootScope.show_set_default_quota_overlay = function(){
-        $('#set-default-quota-overlay').show();
+        $('#set-default-quota-overlay').fadeIn(300);
     }
     
 

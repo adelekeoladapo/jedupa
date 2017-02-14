@@ -56,7 +56,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
     /** add department **/
     
     $scope.show_add_student_category_overlay = function(){
-        $('#add-student-category-overlay').show();
+        $('#add-student-category-overlay').fadeIn(300);
     }
     
     $scope.addStudentCategory = function(){
@@ -89,7 +89,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
     /** add additional field **/
     
     $scope.show_add_additional_field_overlay = function(){
-        $('#add-additional-field-overlay').show();
+        $('#add-additional-field-overlay').fadeIn(300);
     }
     
     $scope.addAdditionalField = function(){
@@ -211,7 +211,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     /** add department **/
     
     $scope.show_add_dept_overlay = function(){
-        $('#add-department-overlay').show();
+        $('#add-department-overlay').fadeIn(300);
     }
     
     $scope.addAcademicDept = function(){
@@ -238,7 +238,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add class **/
     $scope.show_add_class_overlay = function(){
-        $('#add-class-overlay').show();
+        $('#add-class-overlay').fadeIn(300);
     }
     $scope.addClass = function(){
         if($('#form-add-class').smkValidate()){
@@ -298,7 +298,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** assign subject to class **/
     $scope.show_assign_subject_overlay = function(){
-        $('#assign-subject-overlay').show();
+        $('#assign-subject-overlay').fadeIn(300);
     }
     $scope.assignClassSubject = function(){
         if($('#form-assign-subject').smkValidate()){
@@ -450,7 +450,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add session **/
     $scope.show_add_session_overlay = function(){
-        $('#add-session-overlay').show();
+        $('#add-session-overlay').fadeIn(300);
     }
     $scope.addSession = function(){
         if($('#form-add-session').smkValidate()){
@@ -489,7 +489,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add quota **/
     $scope.show_add_quota_overlay = function(){
-        $('#add-quota-overlay').show();
+        $('#add-quota-overlay').fadeIn(300);
     }
     $scope.addQuota = function(){
         if($('#form-add-quota').smkValidate()){
@@ -550,7 +550,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add grading level structure **/
     $scope.show_add_score_group_structure_overlay = function(){
-        $('#add-score-group-structure-overlay').show();
+        $('#add-score-group-structure-overlay').fadeIn(300);
     }
     $scope.addGradingLevelStructure = function(){
         if($('#form-add-score-group-structure').smkValidate()){
@@ -611,7 +611,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add Class Designation structure **/
     $scope.show_add_class_designation_structure_overlay = function(){
-        $('#add-class-designation-structure-overlay').show();
+        $('#add-class-designation-structure-overlay').fadeIn(300);
     }
     $scope.addClassDesignationStructure = function(){
         if($('#form-add-class-designation-structure').smkValidate()){
@@ -665,7 +665,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add subject **/
     $scope.show_add_subject_overlay = function(){
-        $('#add-subject-overlay').show();
+        $('#add-subject-overlay').fadeIn(300);
     }
     $scope.addSubject = function(){
         if($('#form-add-subject').smkValidate()){
@@ -703,7 +703,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add score group structure **/
     $scope.show_add_class_period_overlay = function(){
-        $('#add-class-period-overlay').show();
+        $('#add-class-period-overlay').fadeIn(300);
     }
     $scope.addClassPeriod = function(){
         if($('#form-add-class-period').smkValidate()){
@@ -852,7 +852,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
     
     /** add examination **/
     $scope.show_add_examination_overlay = function(){
-        $('#add-examination-overlay').show();
+        $('#add-examination-overlay').fadeIn(300);
     }
     $scope.new_examination = {};
     $scope.addExamination = function(){
@@ -1022,7 +1022,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     /** add department **/
     
     $scope.show_add_dept_overlay = function(){
-        $('#add-department-overlay').show();
+        $('#add-department-overlay').fadeIn(300);
     }
     
     $scope.addEmpDepartment = function(){
@@ -1076,7 +1076,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
     
     /** add employee position **/
     $scope.show_add_position_overlay = function(){
-        $('#add-position-overlay').show();
+        $('#add-position-overlay').fadeIn(300);
     }
     $scope.addEmpPosition = function(){
         if($('#form-add-employee-position').smkValidate()){
@@ -1120,7 +1120,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
    /** add grade level **/
     
     $scope.show_add_grade_level_overlay = function(){
-        $('#add-grade-level-overlay').show();
+        $('#add-grade-level-overlay').fadeIn(300);
     }
     
     $scope.addEmpGradeLevel = function(){
