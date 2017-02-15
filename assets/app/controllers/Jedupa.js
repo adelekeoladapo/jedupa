@@ -1453,6 +1453,10 @@ app.config(function($stateProvider, $urlRouterProvider){
  */
 app.controller('mainCtrl', function($rootScope, Factory, Service){
     
+    $rootScope._sessions = [];
+    
+    $rootScope._quotas = [];
+    
     $rootScope.root_factory = Factory;
     /** Init App Data **/
     Service.loadAppData(Factory.getSchoolID()).then(function(response){
@@ -1466,6 +1470,24 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
     
     $rootScope.show_set_default_quota_overlay = function(){
         $('#set-default-quota-overlay').fadeIn(300);
+    }
+    
+    $rootScope._setSessionQuotas = function(session_id){
+        $rootScope._quotas = Factory.getSessionQuotas(session_id);
+    }
+    
+    $rootScope.def = {};
+    $rootScope._setDefaultQuota = function(){
+        if($('#form-set-default-quota').smkValidate() && $rootScope.def.quota_id != null){
+            hide_form_modal('set-default-quota-overlay', '');
+            show_loading_overlay();
+            $rootScope.default_quota = Factory.getQuota($rootScope.def.quota_id);
+            hide_loading_overlay();
+            toast("Default Quota Successfully Set");
+            $rootScope.def = {};
+        }else{
+            toast("Select Quota");
+        }
     }
     
 

@@ -127,20 +127,20 @@
                         Set Default Quota
                     </h1>
                     <div class="jd-modal-body">
-                        <form class="form-horizontal" name="form-add-class" id="form-add-class"  novalidate> 
+                        <form class="form-horizontal" name="form-set-default-quota" id="form-set-default-quota"  novalidate> 
                             <div class="form-group">
                                 <label for="session_id" class="col-sm-4 control-label">Session <span class="required-field"> *</span></label>
                                 <div class="col-sm-8">
-                                    <select name="session_id" ng-model="session_id_" class="form-control" required>
-                                        <option ng-selected="(session.session_id == default_quota.session_id)" ng-repeat="session in root_factory.getSessions()">{{ session.name }}</option>
+                                    <select name="session_id" ng-model="def.session_id" ng-change="_setSessionQuotas(def.session_id)" class="form-control" required>
+                                        <option value="{{ session.session_id }}" ng-repeat="session in root_factory.getSessions()">{{ session.name }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="quota_id" class="col-sm-4 control-label">Quota <span class="required-field"> *</span></label>
                                 <div class="col-sm-8">
-                                    <select name="quota_id" class="form-control" required>
-                                        <option ng-selected="(quota.quota_id == default_quota.quota_id)">{{ quota.name }}</option>
+                                    <select name="quota_id" class="form-control" ng-model="def.quota_id" required>
+                                        <option value="{{ quota.quota_id }}" ng-repeat="quota in _quotas">{{ quota.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="jd-modal-footer">
                         <button class="btn jd-modal-btn" onclick="hide_form_modal('set-default-quota-overlay', '')">Cancel</button>
-                        <button class="btn jd-modal-btn btn-ok" ng-click="addClass()">OK</button>
+                        <button class="btn jd-modal-btn btn-ok" ng-click="_setDefaultQuota()">OK</button>
                     </div>
                 </div>
             </div>
