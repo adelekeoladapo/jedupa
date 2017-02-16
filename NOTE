@@ -156,6 +156,8 @@ CREATE VIEW vw_class_basic_subject AS SELECT DISTINCT
 	tb_class_timetable.class_id, 
 	tb_class_timetable.school_id, 
 	tb_class_timetable.subject_id,
+        tb_class_timetable.session_id,
+        tb_class_timetable.quota_id,
 	tb_class.name AS class,
 	tb_class.code AS class_code,
 	tb_subject.name AS subject,
@@ -187,6 +189,8 @@ CREATE VIEW vw_weekday_class_period AS SELECT
 	tb_weekday_class_period.weekday_id AS weekday_id,
 	tb_weekday_class_period.class_timing_id AS class_timing_id,
 	tb_weekday_class_period.class_id AS class_id,
+        tb_weekday_class_period.session_id AS session_id,
+        tb_weekday_class_period.quota_id AS quota_id,
 	tb_weekday.name AS weekday,
 	tb_class_timing_set.name AS class_timing_set,
 	tb_class.name AS class

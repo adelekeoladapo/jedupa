@@ -147,6 +147,8 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
     
     $scope.class_period = {};
     
+    $scope.default_quota = $scope.$parent.default_quota;
+    
     /** add class timing set **/
     $scope.addClassTimingSet = function(){
         if($('#form-add-class-timing-set').smkValidate()){
@@ -254,6 +256,8 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             data.class_id = $scope.classs.class_id;
             data.school_id = Factory.getSchoolID();
             data.weekday_id = weekday_class_period.weekday.weekday_id;
+            data.session_id = $scope.default_quota.session_id;
+            data.quota_id = $scope.default_quota.quota_id;
             Service.addWeekdayClassPeriod(data).then(function(response){
                 Service.getWeekdayClassPeriods().then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);
@@ -265,6 +269,8 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             data.class_id = $scope.classs.class_id;
             data.school_id = Factory.getSchoolID();
             data.weekday_id = weekday_class_period.weekday.weekday_id;
+            data.session_id = $scope.default_quota.session_id;
+            data.quota_id = $scope.default_quota.quota_id;
             Service.deleteWeekdayClassPeriod(data.class_id, data.weekday_id).then(function(response){
                 Service.getWeekdayClassPeriods().then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);

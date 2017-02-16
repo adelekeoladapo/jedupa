@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2017 at 06:46 PM
--- Server version: 10.1.16-MariaDB
+-- Generation Time: Feb 16, 2017 at 11:58 PM
+-- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -208,9 +208,27 @@ CREATE TABLE `tb_class_timetable` (
 --
 
 INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `session_id`, `quota_id`, `weekday_id`, `class_period_id`, `subject_id`, `employee_id`, `date_created`) VALUES
-(50, 1, 1, 2, 5, 2, 1, 1, 2, '0000-00-00 00:00:00'),
-(51, 1, 1, 2, 5, 3, 2, 1, 2, '0000-00-00 00:00:00'),
-(52, 1, 1, 2, 5, 5, 1, 1, 2, '0000-00-00 00:00:00');
+(53, 2, 1, 2, 5, 2, 1, 1, 2, '0000-00-00 00:00:00'),
+(54, 2, 1, 2, 5, 3, 2, 2, 3, '0000-00-00 00:00:00'),
+(55, 2, 1, 2, 5, 3, 1, 1, 2, '0000-00-00 00:00:00'),
+(56, 2, 1, 2, 5, 4, 2, 3, 1, '0000-00-00 00:00:00'),
+(57, 2, 1, 2, 5, 5, 1, 1, 2, '0000-00-00 00:00:00'),
+(58, 2, 1, 2, 5, 4, 1, 1, 2, '0000-00-00 00:00:00'),
+(59, 2, 1, 2, 5, 5, 2, 1, 2, '0000-00-00 00:00:00'),
+(60, 2, 1, 2, 5, 2, 2, 1, 2, '0000-00-00 00:00:00'),
+(62, 2, 1, 2, 5, 6, 9, 2, 3, '0000-00-00 00:00:00'),
+(63, 2, 1, 2, 5, 6, 8, 2, 3, '0000-00-00 00:00:00'),
+(64, 2, 1, 2, 5, 2, 4, 3, 1, '0000-00-00 00:00:00'),
+(65, 2, 1, 2, 5, 4, 5, 5, 4, '0000-00-00 00:00:00'),
+(66, 2, 1, 2, 5, 4, 6, 5, 4, '0000-00-00 00:00:00'),
+(67, 2, 1, 2, 5, 5, 4, 2, 3, '0000-00-00 00:00:00'),
+(68, 2, 1, 2, 5, 2, 5, 3, 1, '0000-00-00 00:00:00'),
+(69, 2, 1, 2, 5, 5, 6, 3, 1, '0000-00-00 00:00:00'),
+(70, 2, 1, 2, 5, 5, 5, 5, 4, '0000-00-00 00:00:00'),
+(71, 2, 1, 2, 5, 3, 6, 6, 4, '0000-00-00 00:00:00'),
+(72, 2, 1, 2, 5, 3, 5, 6, 4, '0000-00-00 00:00:00'),
+(73, 2, 1, 2, 5, 4, 4, 6, 4, '0000-00-00 00:00:00'),
+(74, 2, 1, 2, 5, 2, 6, 7, 4, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -453,7 +471,10 @@ INSERT INTO `tb_examination` (`examination_id`, `school_id`, `session_id`, `quot
 (15, 1, NULL, NULL, 'Assignment', 'Assignment', 0, 1, '2017-02-16 12:46:10'),
 (16, 1, NULL, NULL, 'Practical 2', 'Practical 2', 0, 1, '2017-02-16 12:49:18'),
 (17, 1, NULL, NULL, 'Practical 3', 'Practical 3', 0, 1, '2017-02-16 12:54:32'),
-(18, 1, NULL, 1, 'Practical-2', 'Practical-2', 5, 1, '2017-02-16 12:57:28');
+(18, 1, NULL, 1, 'Practical-2', 'Practical-2', 5, 1, '2017-02-16 12:57:28'),
+(19, 1, NULL, 5, 'Test 1', 'First Test', 0, 2, '2017-02-16 23:43:13'),
+(20, 1, NULL, 5, 'Exam', 'Examination', 0, 2, '2017-02-16 23:43:34'),
+(21, 1, NULL, 4, 'CA', 'CA', 0, 2, '2017-02-16 23:46:38');
 
 -- --------------------------------------------------------
 
@@ -1530,6 +1551,8 @@ INSERT INTO `tb_weekday` (`weekday_id`, `name`) VALUES
 CREATE TABLE `tb_weekday_class_period` (
   `weekday_class_period_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
+  `session_id` int(11) NOT NULL,
+  `quota_id` int(11) NOT NULL,
   `weekday_id` int(11) DEFAULT NULL,
   `class_timing_id` int(11) DEFAULT NULL,
   `class_id` int(11) NOT NULL,
@@ -1540,32 +1563,15 @@ CREATE TABLE `tb_weekday_class_period` (
 -- Dumping data for table `tb_weekday_class_period`
 --
 
-INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `weekday_id`, `class_timing_id`, `class_id`, `date_created`) VALUES
-(29, 1, 2, 1, 4, '0000-00-00 00:00:00'),
-(30, 1, 3, 1, 4, '0000-00-00 00:00:00'),
-(31, 1, 4, 1, 4, '0000-00-00 00:00:00'),
-(32, 1, 5, 1, 4, '0000-00-00 00:00:00'),
-(33, 1, 6, 1, 4, '0000-00-00 00:00:00'),
-(56, 1, 6, 1, 2, '0000-00-00 00:00:00'),
-(57, 1, 6, 2, 4, '0000-00-00 00:00:00'),
-(58, 1, 2, 1, 3, '0000-00-00 00:00:00'),
-(59, 1, 3, 1, 3, '0000-00-00 00:00:00'),
-(60, 1, 4, 1, 3, '0000-00-00 00:00:00'),
-(61, 1, 5, 1, 3, '0000-00-00 00:00:00'),
-(64, 1, 6, 2, 3, '0000-00-00 00:00:00'),
-(70, 1, 2, 1, 5, '0000-00-00 00:00:00'),
-(71, 1, 3, 1, 5, '0000-00-00 00:00:00'),
-(72, 1, 4, 1, 5, '0000-00-00 00:00:00'),
-(73, 1, 5, 1, 5, '0000-00-00 00:00:00'),
-(74, 1, 6, 2, 5, '0000-00-00 00:00:00'),
-(78, 1, 3, 1, 1, '0000-00-00 00:00:00'),
-(81, 1, 7, 2, 2, '0000-00-00 00:00:00'),
-(82, 1, 4, 1, 1, '0000-00-00 00:00:00'),
-(84, 1, 5, 1, 1, '0000-00-00 00:00:00'),
-(87, 1, 6, 1, 1, '0000-00-00 00:00:00'),
-(88, 1, 6, 2, 1, '0000-00-00 00:00:00'),
-(90, 1, 2, 1, 1, '0000-00-00 00:00:00'),
-(92, 1, 6, 3, 1, '0000-00-00 00:00:00');
+INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `session_id`, `quota_id`, `weekday_id`, `class_timing_id`, `class_id`, `date_created`) VALUES
+(6, 1, 2, 5, 2, 1, 2, '0000-00-00 00:00:00'),
+(7, 1, 2, 5, 3, 1, 2, '0000-00-00 00:00:00'),
+(8, 1, 2, 5, 4, 1, 2, '0000-00-00 00:00:00'),
+(9, 1, 2, 5, 5, 1, 2, '0000-00-00 00:00:00'),
+(10, 1, 2, 5, 6, 3, 2, '0000-00-00 00:00:00'),
+(11, 1, 2, 4, 2, 1, 2, '0000-00-00 00:00:00'),
+(12, 1, 2, 4, 2, 1, 1, '0000-00-00 00:00:00'),
+(13, 1, 2, 5, 2, 1, 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1613,6 +1619,8 @@ CREATE TABLE `vw_class_basic_subject` (
 `class_id` int(11)
 ,`school_id` int(11)
 ,`subject_id` int(11)
+,`session_id` int(11)
+,`quota_id` int(11)
 ,`class` varchar(100)
 ,`class_code` varchar(200)
 ,`subject` varchar(200)
@@ -1853,6 +1861,8 @@ CREATE TABLE `vw_weekday_class_period` (
 ,`weekday_id` int(11)
 ,`class_timing_id` int(11)
 ,`class_id` int(11)
+,`session_id` int(11)
+,`quota_id` int(11)
 ,`weekday` varchar(100)
 ,`class_timing_set` varchar(100)
 ,`class` varchar(100)
@@ -1883,7 +1893,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_class_basic_subject`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_basic_subject`  AS  select distinct `tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`subject_id` AS `subject_id`,`tb_class`.`name` AS `class`,`tb_class`.`code` AS `class_code`,`tb_subject`.`name` AS `subject`,`tb_subject`.`code` AS `subject_code` from ((`tb_class_timetable` join `tb_class` on((`tb_class`.`class_id` = `tb_class_timetable`.`class_id`))) join `tb_subject` on((`tb_subject`.`subject_id` = `tb_class_timetable`.`subject_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_basic_subject`  AS  select distinct `tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`subject_id` AS `subject_id`,`tb_class_timetable`.`session_id` AS `session_id`,`tb_class_timetable`.`quota_id` AS `quota_id`,`tb_class`.`name` AS `class`,`tb_class`.`code` AS `class_code`,`tb_subject`.`name` AS `subject`,`tb_subject`.`code` AS `subject_code` from ((`tb_class_timetable` join `tb_class` on((`tb_class`.`class_id` = `tb_class_timetable`.`class_id`))) join `tb_subject` on((`tb_subject`.`subject_id` = `tb_class_timetable`.`subject_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1964,7 +1974,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_weekday_class_period`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_weekday_class_period`  AS  select `tb_weekday_class_period`.`weekday_class_period_id` AS `weekday_class_period_id`,`tb_weekday_class_period`.`school_id` AS `school_id`,`tb_weekday_class_period`.`weekday_id` AS `weekday_id`,`tb_weekday_class_period`.`class_timing_id` AS `class_timing_id`,`tb_weekday_class_period`.`class_id` AS `class_id`,`tb_weekday`.`name` AS `weekday`,`tb_class_timing_set`.`name` AS `class_timing_set`,`tb_class`.`name` AS `class` from (((`tb_weekday_class_period` join `tb_weekday` on((`tb_weekday_class_period`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_timing_set` on((`tb_class_timing_set`.`class_timing_set_id` = `tb_weekday_class_period`.`class_timing_id`))) join `tb_class` on((`tb_weekday_class_period`.`class_id` = `tb_class`.`class_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_weekday_class_period`  AS  select `tb_weekday_class_period`.`weekday_class_period_id` AS `weekday_class_period_id`,`tb_weekday_class_period`.`school_id` AS `school_id`,`tb_weekday_class_period`.`weekday_id` AS `weekday_id`,`tb_weekday_class_period`.`class_timing_id` AS `class_timing_id`,`tb_weekday_class_period`.`class_id` AS `class_id`,`tb_weekday_class_period`.`session_id` AS `session_id`,`tb_weekday_class_period`.`quota_id` AS `quota_id`,`tb_weekday`.`name` AS `weekday`,`tb_class_timing_set`.`name` AS `class_timing_set`,`tb_class`.`name` AS `class` from (((`tb_weekday_class_period` join `tb_weekday` on((`tb_weekday_class_period`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_timing_set` on((`tb_class_timing_set`.`class_timing_set_id` = `tb_weekday_class_period`.`class_timing_id`))) join `tb_class` on((`tb_weekday_class_period`.`class_id` = `tb_class`.`class_id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -2283,7 +2293,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -2333,7 +2343,7 @@ ALTER TABLE `tb_employee_subject`
 -- AUTO_INCREMENT for table `tb_examination`
 --
 ALTER TABLE `tb_examination`
-  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `tb_examination_group`
 --
@@ -2468,7 +2478,7 @@ ALTER TABLE `tb_weekday`
 -- AUTO_INCREMENT for table `tb_weekday_class_period`
 --
 ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

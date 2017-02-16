@@ -141,11 +141,11 @@ class Jedupa extends CI_Controller {
             $data['employee_positions'] = $this->employee_position_model->getEmpPositions($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['employee_grade_levels'] = $this->employee_grade_level_model->getEmpGradeLevels($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['subjects'] = $this->subject_model->getSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-            $data['classes_basic_subjects'] = $this->subject_model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['classes_basic_subjects'] = $this->subject_model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['class_timing_sets'] = $this->class_timing_set_model->getClassTimingSets($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['class_periods'] = $this->class_period_model->getClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['weekdays'] = $this->weekday_model->getWeekdays($sort_field, $sort_order_mode, null, null, $page, $page_size);
-            $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);

@@ -39,10 +39,16 @@ class ClassPeriodModel extends CI_Model {
         return $this->db->insert_id();
     }
     
-    function getWeekdayClassPeriods($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){ 
+    function getWeekdayClassPeriods($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false, $quota = false){ 
         $this->db->select('*');
         $this->db->order_by($sort_field, $sort_order_mode);
         ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
+        
+        if($quota){
+            $this->db->where('session_id', $quota->session_id);
+            $this->db->where('quota_id', $quota->quota_id);
+        }
+        
         ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
         $query = $this->db->get($this->view_weekday_class_period);
         return ($query->num_rows()) ? $query->result() : [];
