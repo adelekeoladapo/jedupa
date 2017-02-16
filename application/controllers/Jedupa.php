@@ -99,6 +99,12 @@ class Jedupa extends CI_Controller {
         $id = $this->session->userdata('id');
         $privilege_id = $this->session->userdata('privilege_id');
         
+        $quota = new stdClass();
+        $quota->session_id = $this->input->get('session-id');
+        $quota->quota_id = $this->input->get('quota-id');
+        
+        (!$quota->quota_id) ? $quota = false : '';
+        
         
         $sort_field = $this->input->get('sort-field');
         $sort_order_mode = $this->input->get('sort-order-mode');
@@ -140,7 +146,7 @@ class Jedupa extends CI_Controller {
             $data['class_periods'] = $this->class_period_model->getClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['weekdays'] = $this->weekday_model->getWeekdays($sort_field, $sort_order_mode, null, null, $page, $page_size);
             $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-            $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['examination_groups'] = $this->examination_model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);

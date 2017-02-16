@@ -2,6 +2,8 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
     
     $scope.factory = Factory;
     
+    $scope.default_quota = $scope.$parent.default_quota;
+    
     $scope.class_types = class_types.data;
     
     $scope.class_levels = [];
@@ -42,6 +44,8 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
     $scope.addClassWeekdaysPeriodsSubjects = function(){ 
         $scope.new_periods.class_id = $scope.classs.class_id;
         $scope.new_periods.school_id = Factory.getSchoolID();
+        $scope.new_periods.quota_id = $scope.default_quota.quota_id;
+        $scope.new_periods.session_id = $scope.default_quota.session_id;
         $scope.new_periods.periods = period_tray;
         if(!$scope.new_periods.subject_id){
             toast("Kindly select a subject");

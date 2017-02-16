@@ -158,6 +158,10 @@ app.factory('Factory', function(){
     
     
     /**  quota **/
+    data.getDefaultQuota = function(){
+        return app_data.default_quota;
+    }
+    
     data.getQuotas = function(){
         return app_data.quotas;
     };
@@ -688,9 +692,9 @@ app.factory('Factory', function(){
  */
 app.service('Service', function($http){
     
-    this.loadAppData = function(school_id){
+    this.loadAppData = function(school_id, session_id, quota_id){
         return $http.get(base_url+"api/init-app", {
-            params : {'filter-field': 'school_id', 'filter-value': school_id}
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'session-id': session_id, 'quota-id': quota_id}
         });
     }
     
@@ -1451,7 +1455,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 /*
  * App Controller
  */
-app.controller('mainCtrl', function($rootScope, Factory, Service){
+app.controller('mainCtrl', function($rootScope, $state, Factory, Service){
     
     $rootScope._sessions = [];
     
@@ -1459,7 +1463,7 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
     
     $rootScope.root_factory = Factory;
     /** Init App Data **/
-    Service.loadAppData(Factory.getSchoolID()).then(function(response){
+    Service.loadAppData(Factory.getSchoolID(), false, false).then(function(response){
         Factory.setAppData(response.data);
         /** set base privileges with parent_id = 0 **/
         $rootScope.base_modules = Factory.getPrivilegeChildModules(0);
@@ -1481,10 +1485,15 @@ app.controller('mainCtrl', function($rootScope, Factory, Service){
         if($('#form-set-default-quota').smkValidate() && $rootScope.def.quota_id != null){
             hide_form_modal('set-default-quota-overlay', '');
             show_loading_overlay();
-            $rootScope.default_quota = Factory.getQuota($rootScope.def.quota_id);
-            hide_loading_overlay();
-            toast("Default Quota Successfully Set");
-            $rootScope.def = {};
+            Service.loadAppData(Factory.getSchoolID(), $rootScope.def.session_id, $rootScope.def.quota_id).then(function(response){
+                Factory.setAppData(response.data);
+                $rootScope.base_modules = Factory.getPrivilegeChildModules(0);
+                $rootScope.default_quota = Factory.getQuota($rootScope.def.quota_id);
+                $state.go('dashboard');
+                $rootScope.def = {};
+                hide_loading_overlay();
+                toast("Default Quota Successfully Set");
+            }, function(error){});
         }else{
             toast("Select Quota");
         }

@@ -152,21 +152,17 @@ JOIN tb_employee_grade_level ON tb_employee_grade_level.employee_grade_level_id 
 
 
 
-
-CREATE VIEW vw_class_basic_subject AS SELECT 
-tb_class_basic_subject.class_basic_subject_id AS class_basic_subject_id, 
-tb_class_basic_subject.school_id AS school_id, 
-tb_class_basic_subject.class_id AS class_id, 
-tb_class_basic_subject.employee_id AS employee_id,
-tb_class_basic_subject.subject_id AS subject_id, 
-tb_class.name AS class, 
-tb_class.code AS class_code, 
-tb_subject.name AS subject, 
-tb_subject.code AS subject_code, 
-CONCAT(vw_employee.firstname," ",vw_employee.lastname) AS teacher  
-FROM tb_class_basic_subject JOIN tb_class ON tb_class_basic_subject.class_id = tb_class.class_id 
-JOIN tb_subject ON tb_class_basic_subject.subject_id = tb_subject.subject_id  
-LEFT JOIN vw_employee ON tb_class_basic_subject.employee_id = vw_employee.employee_id
+CREATE VIEW vw_class_basic_subject AS SELECT DISTINCT 
+	tb_class_timetable.class_id, 
+	tb_class_timetable.school_id, 
+	tb_class_timetable.subject_id,
+	tb_class.name AS class,
+	tb_class.code AS class_code,
+	tb_subject.name AS subject,
+	tb_subject.code AS subject_code 
+FROM tb_class_timetable 
+JOIN tb_class ON tb_class.class_id = tb_class_timetable.class_id 
+JOIN tb_subject ON tb_subject.subject_id = tb_class_timetable.subject_id 
 
 
 
@@ -205,6 +201,8 @@ CREATE VIEW vw_class_timetable AS SELECT
 	tb_class_timetable.class_timetable_id,
 	tb_class_timetable.class_id AS class_id,
 	tb_class_timetable.school_id AS school_id,
+        tb_class_timetable.session_id AS session_id,
+        tb_class_timetable.quota_id AS quota_id,
 	tb_class_timetable.weekday_id AS weekday_id,
 	tb_class_timetable.class_period_id AS class_period_id,
 	tb_class_timetable.subject_id AS subject_id,
