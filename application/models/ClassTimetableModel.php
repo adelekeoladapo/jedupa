@@ -11,7 +11,7 @@ class ClassTimetableModel extends CI_Model {
     private $table_name = 'tb_class_timetable', $view_name = 'vw_class_timetable';
     
     function insertClassTimetable($data){
-        if($this->getClassTimetable_($data->weekday_id, $data->class_period_id)){
+        if($this->getClassTimetable_($data->weekday_id, $data->class_period_id, $data->class_id, $data->quota_id)){
             $this->updateClassTimetable($data);
         }else{
             $this->db->insert($this->table_name, $data);
@@ -28,12 +28,16 @@ class ClassTimetableModel extends CI_Model {
     function removeClassTimetablePeriod($data){
         $this->db->where('weekday_id', $data->weekday_id);
         $this->db->where('class_period_id', $data->class_period_id);
+        $this->db->where('class_id', $data->class_id);
+        $this->db->where('quota_id', $data->quota_id);
         $this->db->delete($this->table_name);
     }
     
-    function getClassTimetable_($weekday_id, $class_period_id){
+    function getClassTimetable_($weekday_id, $class_period_id, $class_id, $quota_id){
         $this->db->where('weekday_id', $weekday_id);
         $this->db->where('class_period_id', $class_period_id);
+        $this->db->where('class_id', $class_id);
+        $this->db->where('quota_id', $quota_id);
         $query = $this->db->get($this->table_name);
         return ($query->num_rows()) ? $query->row() : false;
     }
@@ -54,15 +58,17 @@ class ClassTimetableModel extends CI_Model {
     }
     
     /** reset timetable for a class **/
-    function clearClassTimetable($class_id){
+    function clearClassTimetable($class_id, $quota_id){
         $this->db->where('class_id', $class_id);
+        $this->db->where('quota_id', $quota_id);
         $this->db->delete($this->table_name);
     }
     
     /** reset weekday timetable for a class **/
-    function clearWeekdayClassTimetable($class_id, $weekday_id){
+    function clearWeekdayClassTimetable($class_id, $weekday_id, $quota_id){
         $this->db->where('class_id', $class_id);
         $this->db->where('weekday_id', $weekday_id);
+        $this->db->where('quota_id', $quota_id);
         $this->db->delete($this->table_name);
     }
     

@@ -284,7 +284,7 @@ app.factory('Factory', function(){
         return dt;
     };
     
-     /** student category **/
+    /** student category **/
     data.getStudentCategories = function(){
         return app_data.student_categories;
     }
@@ -412,6 +412,16 @@ app.factory('Factory', function(){
         app_data.subjects = dt;
     }
     
+    data.getSubject = function(id){
+        var dt = {};
+        angular.forEach(app_data.subjects, function(value, key, obj){
+            if(value.subject_id == id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
     /**  Class Periods **/
     data.getClassPeriods = function(){
         return app_data.class_periods;
@@ -420,6 +430,7 @@ app.factory('Factory', function(){
     data.updateClassPeriods = function(dt){
         app_data.class_periods = dt;
     }
+    
     
     data.getActiveClassPeriods = function(class_timing_set_ids){
         var dt = [];
@@ -593,6 +604,10 @@ app.factory('Factory', function(){
             }
         });
         return dt;
+    }
+    
+    data.updateExamTimetable = function(dt){
+        app_data.examination_timetables = dt;
     }
     
     /** user privilege **/
@@ -868,7 +883,8 @@ app.service('Service', function($http){
         return $http.get(base_url+"api/get-class-designation-structures", {
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
-    };
+    }; 
+    
     
     /** student category **/
     this.addStudentCategory = function(data){
@@ -1048,9 +1064,9 @@ app.service('Service', function($http){
         });
     }
     
-    this.getClassSubjects = function(school_id){
+    this.getClassSubjects = function(school_id, quota){
         return $http.get(base_url+"api/get-class-subjects", {
-            params : {'filter-field': 'school_id', 'filter-value': school_id}
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota}
         });
     };
     
@@ -1099,15 +1115,15 @@ app.service('Service', function($http){
         });
     };
     
-    this.getWeekdayClassPeriods = function(school_id){
+    this.getWeekdayClassPeriods = function(school_id, quota){
         return $http.get(base_url+"api/get-weekday-class-periods", {
-            params : {'filter-field': 'school_id', 'filter-value': school_id}
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota}
         });
     };
     
-    this.deleteWeekdayClassPeriod = function(class_id, weekday_id){
+    this.deleteWeekdayClassPeriod = function(class_id, weekday_id, quota_id){
         return $http.get(base_url+"api/delete-weekday-class-period", {
-            params : {'weekday-id' : weekday_id, 'class-id' : class_id}
+            params : {'weekday-id' : weekday_id, 'class-id' : class_id, 'quota-id': quota_id}
         });
     }
     
@@ -1120,15 +1136,15 @@ app.service('Service', function($http){
         });
     };
     
-    this.getClassTimetables = function(school_id){
+    this.getClassTimetables = function(school_id, quota){
         return $http.get(base_url+"api/get-class-timetable", {
-            params : {'filter-field': 'school_id', 'filter-value': school_id}
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota}
         });
     };
     
-    this.resetClassTimetable = function(class_id){
+    this.resetClassTimetable = function(class_id, quota_id){
         return $http.get(base_url+"api/reset-class-timetable", {
-            params : {'class-id' : class_id}
+            params : {'class-id' : class_id, 'quota-id': quota_id}
         });
     }
     
@@ -1163,6 +1179,12 @@ app.service('Service', function($http){
         });
     };
     
+    this.getExaminationTimetables = function(school_id, quota){
+        return $http.get(base_url+"api/get-class-exam-timetables", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota}
+        });
+    }
+    
     this.connectExaminations = function(data){
         return $http({
             method: "POST",
@@ -1176,6 +1198,16 @@ app.service('Service', function($http){
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
+    
+    this.saveContinuousAssessment = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/save-continuous-assessment",
+            data: data
+        });
+    }
+    
+    
     
     /** user privilege **/
     this.addUserPrivilege = function(data){
@@ -1372,6 +1404,17 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 sessions: function(Service, Factory){
                     return Service.getSessions(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('examination-assessment', {
+            url: "/examination-assessment",
+            templateUrl: "assets/app/views/examination-assessment.html",
+                controller: "ExaminationAssessmentCtrl",
+            resolve: {
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
                 }
             }
         })

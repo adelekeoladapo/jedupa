@@ -59,7 +59,10 @@ class Subject extends CI_Controller {
         $filter_value = $this->input->get('filter-value');
         $page_size = $this->input->get('page-size');
         $page = $this->input->get('page');
-        echo json_encode($this->model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+        
+        $quota = json_decode($this->input->get('quota'));
+        
+        echo json_encode($this->model->getClassesBasicSubjects($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota));
     }
     
     function deleteClassBasicSubject(){

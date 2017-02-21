@@ -187,6 +187,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
             $scope.new_examination.class_id = $scope.classs.class_id;
             $scope.new_examination.school_id = Factory.getSchoolID();
             $scope.new_examination.quota_id = $scope.default_quota.quota_id;
+            $scope.new_examination.session_id = $scope.default_quota.session_id;
             Service.addExamination($scope.new_examination).then(function(response){
                 Service.getExaminations().then(function(response){
                     Factory.updateExaminations(response.data);
@@ -213,6 +214,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
     
     /** show ALL class exams**/
     $scope.showClassExams = function(){
+        $scope.new_timetable = [];
         showCard_('card-exam-settings', 'card-class-exams');
     }
     
@@ -236,6 +238,10 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
         if($('#exam-timetable-form').smkValidate()){
             show_loading_overlay(); 
             Service.createClassExamTimetable({'timetable': $scope.new_timetable, 'examination': $scope.examination}).then(function(response){
+                //update class_exam_timetable
+                Service.getExaminationTimetables(Factory.getSchoolID(), $scope.default_quota).then(function(response){
+                    Factory.updateExamTimetable(response.data);
+                }, function(error){});
                 hide_loading_overlay();
                 toast('Done!');
             }, function(error){
@@ -303,4 +309,75 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
 });
 
 
+
+app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Service, class_types){
+    
+    $scope.factory = Factory;
+    
+    $scope.default_quota = $scope.$parent.default_quota;
+    
+    $scope.class_types = class_types.data;
+    
+    $scope.basic_class_subjects = [];
+    
+    $scope.students = [];
+    
+    $scope.quota_exams = {};
+    
+    $scope.classs = {};
+    
+    $scope.student = {};
+    
+    $scope.subject = {};
+    
+    
+    /** set class levels **/
+    $scope.setClassLevels = function(class_type_id){
+        $scope.class_levels = Factory.getClassTypeLevels(class_type_id);
+    }
+    
+    /** set classes **/
+    $scope.setClasses = function(class_level_id){
+        $scope.classes = Factory.getLevelClasses(class_level_id);
+    }
+    
+    $scope.setClass = function(class_id){
+        $scope.subject = {};
+        show_loading_overlay();
+        Service.getClassStudents(class_id).then(function(response){
+            $scope.classs = Factory.getClass(class_id);
+            $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
+            $scope.students = response.data;
+            $scope.quota_exams = Factory.getClassQuotaExams(class_id, $scope.default_quota.quota_id);
+            hide_loading_overlay();
+        }, function(error){});
+        
+    }
+    
+    $scope.setActiveSubject = function(subject_id){
+        $scope.subject = Factory.getSubject(subject_id);
+    }
+    
+    
+    $scope.class_subject_continuous_assessment = {};
+    
+    $scope.saveContinuousAssessment = function(){
+        $scope.class_subject_continuous_assessment.school_id = Factory.getSchoolID();
+        $scope.class_subject_continuous_assessment.session_id = $scope.default_quota.session_id;
+        $scope.class_subject_continuous_assessment.quota_id = $scope.default_quota.quota_id;
+        $scope.class_subject_continuous_assessment.class_id = $scope.classs.class_id;
+        $scope.class_subject_continuous_assessment.subject_id = $scope.subject.subject_id;
+        
+        
+        Service.saveContinuousAssessment($scope.class_subject_continuous_assessment).then(function(response){
+            console.log(response.data);
+        }, function(error){});
+        
+        
+        
+    }
+    
+    
+    
+});
 

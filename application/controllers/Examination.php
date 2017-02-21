@@ -67,7 +67,10 @@ class Examination extends CI_Controller {
         $filter_value = $this->input->get('filter-value');
         $page = $this->input->get('page');
         $page_size = $this->input->get('page-size');
-        echo json_encode($this->model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+        
+        $quota = json_decode($this->input->get('quota'));
+        
+        echo json_encode($this->model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota));
     }
     
     function connectExaminations(){
@@ -96,5 +99,61 @@ class Examination extends CI_Controller {
         $page_size = $this->input->get('page-size');
         echo json_encode($this->model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
     }
+    
+    
+    
+    
+    /** Continuous Assessment **/
+    
+    function addContinuousAssessment(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        echo $this->model->insertContinuousAssessment($data);
+    }
+    
+    function getContinuousAssessments(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page = $this->input->get('page');
+        $page_size = $this->input->get('page-size');
+        
+        $quota = json_decode($this->input->get('quota'));
+        
+        echo json_encode($this->model->getContinuousAssessments($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota));
+    }
+    
+    function saveContinuousAssessment(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        
+        $c_a = new stdClass();
+        $c_a->school_id = $data->school_id;
+        $c_a->session_id = $data->session_id;
+        $c_a->quota_id = $data->quota_id;
+        $c_a->class_id = $data->class_id;
+        $c_a->subject_id = $data->subject_id;
+        
+        $ca_data = $data->data;
+        
+        foreach ($ca_data as $d) {
+            $c_a->student_id = $d->student_id;
+            $ca_data_exams = $d->examinations;
+            
+            foreach($ca_data_exams as $exam){
+                $c_a->continuous_assessment_id = $exam->continuous_assessment_id;
+                
+                $c_a->examination_id = $exam->examination_id;
+                
+                $c_a->score = $exam->score;
+                    
+                $this->model->insertContinuousAssessment($c_a);
+            }
+            
+        }
+        
+    }
+    
     
 }

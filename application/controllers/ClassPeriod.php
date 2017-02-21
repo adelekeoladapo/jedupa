@@ -42,14 +42,18 @@ class ClassPeriod extends CI_Controller {
         $filter_value = $this->input->get('filter-value');
         $page = $this->input->get('page');
         $page_size = $this->input->get('page-size');
-        echo json_encode($this->model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size));
+        
+        $quota = json_decode($this->input->get('quota'));
+        
+        echo json_encode($this->model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota));
     }
     
     function deleteWeekdayClassPeriod(){
         $weekday_id = $this->input->get('weekday-id');
         $class_id = $this->input->get('class-id');
-        $this->model->deleteWeekdayClassPeriod_($class_id, $weekday_id);
-        $this->class_timetable_model->clearWeekdayClassTimetable($class_id, $weekday_id);
+        $quota_id = $this->input->get('quota-id');
+        $this->model->deleteWeekdayClassPeriod_($class_id, $weekday_id, $quota_id);
+        $this->class_timetable_model->clearWeekdayClassTimetable($class_id, $weekday_id, $quota_id);
     }
     
 }

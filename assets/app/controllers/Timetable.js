@@ -54,10 +54,14 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
         }else{
             show_loading_overlay();
             Service.addClassWeekdaysPeriodsSubjects($scope.new_periods).then(function(response){
-                Service.getClassTimetables().then(function(response){
+                Service.getClassTimetables(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                     Factory.updateClassTimeTables(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
                     period_tray = [];
+                    //update class basic subjects
+                    Service.getClassSubjects(Factory.getSchoolID(), $scope.default_quota).then(function(response){
+                        Factory.updateBasicClassSubjects(response.data);
+                    }, function(error){});
                     hide_loading_overlay();
                     toast($scope.new_periods.periods.length+" periods added successfully");
                 }, function(error){});
@@ -72,12 +76,21 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
         }else{
             var c = confirm("Reset Periods?");
             if(c){
+                var data = {};
+                data.class_id = $scope.classs.class_id;
+                data.school_id = Factory.getSchoolID();
+                data.quota_id = $scope.default_quota.quota_id;
+                data.periods = periods;
                 show_loading_overlay();
-                Service.removeClassWeekdaysPeriodsSubjects(periods).then(function(response){
-                    Service.getClassTimetables().then(function(response){
+                Service.removeClassWeekdaysPeriodsSubjects(data).then(function(response){
+                    Service.getClassTimetables(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                         Factory.updateClassTimeTables(response.data);
                         $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
                         period_tray = [];
+                        //update class basic subjects
+                        Service.getClassSubjects(Factory.getSchoolID(), $scope.default_quota).then(function(response){
+                            Factory.updateBasicClassSubjects(response.data);
+                        }, function(error){});
                         hide_loading_overlay();
                         toast(periods.length+" periods reset successfully");
                     }, function(error){});
@@ -109,10 +122,14 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
         var c = confirm("Reset Timetable?")
         if(c){
             show_loading_overlay();
-            Service.resetClassTimetable($scope.classs.class_id).then(function(response){
-                Service.getClassTimetables().then(function(response){
+            Service.resetClassTimetable($scope.classs.class_id, $scope.default_quota.quota_id).then(function(response){
+                Service.getClassTimetables(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                     Factory.updateClassTimeTables(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
+                    //update class basic subjects
+                    Service.getClassSubjects(Factory.getSchoolID(), $scope.default_quota).then(function(response){
+                        Factory.updateBasicClassSubjects(response.data);
+                    }, function(error){});
                     hide_loading_overlay();
                     toast("Timetable reset successfully");
                 }, function(error){});
@@ -155,7 +172,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             show_loading_overlay();
             $scope.class_timing_set.school_id = Factory.getSchoolID();
             Service.addClassTimingSet($scope.class_timing_set).then(function(response){
-                Service.getClassTimingSets().then(function(response){
+                Service.getClassTimingSets(Factory.getSchoolID()).then(function(response){
                     Factory.updateClassTimingSets(response.data);
                     $scope.class_timing_sets = response.data;
                     clear_form_fields('form-add-class-timing-set');
@@ -207,7 +224,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             $scope.class_period.school_id = Factory.getSchoolID();
             $scope.class_period.class_timing_set_id = $scope.active_class_timing_set.class_timing_set_id;//$scope.active_score_group.score_group_id;
             Service.addClassPeriod($scope.class_period).then(function(response){
-                Service.getClassPeriods().then(function(response){
+                Service.getClassPeriods(Factory.getSchoolID()).then(function(response){
                     Factory.updateClassPeriods(response.data);
                     $scope.class_periods = response.data;
                     $scope.setActiveClassTimingSet($scope.active_class_timing_set.class_timing_set_id);
@@ -259,7 +276,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             data.session_id = $scope.default_quota.session_id;
             data.quota_id = $scope.default_quota.quota_id;
             Service.addWeekdayClassPeriod(data).then(function(response){
-                Service.getWeekdayClassPeriods().then(function(response){
+                Service.getWeekdayClassPeriods(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
                     hide_loading_overlay();
@@ -271,17 +288,21 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
             data.weekday_id = weekday_class_period.weekday.weekday_id;
             data.session_id = $scope.default_quota.session_id;
             data.quota_id = $scope.default_quota.quota_id;
-            Service.deleteWeekdayClassPeriod(data.class_id, data.weekday_id).then(function(response){
-                Service.getWeekdayClassPeriods().then(function(response){
+            Service.deleteWeekdayClassPeriod(data.class_id, data.weekday_id, data.quota_id).then(function(response){
+                Service.getWeekdayClassPeriods(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                     Factory.updateWeekdayClassPeriods(response.data);
                     $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
-                    Service.getClassTimetables().then(function(response){
+                    Service.getClassTimetables(Factory.getSchoolID(), $scope.default_quota).then(function(response){
                         Factory.updateClassTimeTables(response.data);
+                        $scope.class_weekday_periods = Factory.getClassWeekdayPeriods_($scope.classs.class_id);
                         hide_loading_overlay();
                     }, function(error){});
                 }, function(error){});
             }, function(error){});
         }
+        
+        
+        
     }
     
     

@@ -1,0 +1,125 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                            <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                Examination Assessment
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+                                
+                                <div class="jd-tab-container">
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="assessment">
+                                                <a href="">Assessment</a>
+                                            </li>
+                                            <li data-href="tab-2">
+                                                <a href="">Tab 2</a>
+                                            </li>
+                                            <li data-href="tab-3">
+                                                <a href="">Tab 3</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane active" id="assessment">
+                                            <fieldset class="options-container">
+                                                <legend>Select Class</legend>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_type_id" ng-change="setClassLevels(class_type_id)">
+                                                            <option ng-value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select ng-model="class_level_id" class="form-control" ng-change="setClasses(class_level_id)">
+                                                            <option ng-value="level.class_level_id" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_id" ng-change="setClass(class_id);">
+                                                            <option ng-value="{{ classs.class_id }}" ng-repeat="classs in classes">{{ classs.code }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4" style="text-align: right">
+                                                        <!--<button class="btn jd-btn jd-btn-default" ng-click="showConnectExams()">Connect Exams</button>-->
+                                                        <button class="btn jd-btn jd-btn-primary" ng-click="show_add_examination_overlay()">New</button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="sidebar-container" ng-if="(classs.class_id)">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects</h3>
+                                                        <ul class="class-level-list" ng-if="(basic_class_subjects.length > 0)">
+                                                            <li ng-repeat="subject in basic_class_subjects">
+                                                                <a ng-init="id = subject.subject_id" href="" ng-click="setActiveSubject(id)" class="ng-binding">
+                                                                    {{ subject.subject }}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="class-level-list" ng-if="(basic_class_subjects.length == 0)">
+                                                            <li>
+                                                                <a href="">No Subject</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 main-table-with-sidebar">
+                                                    <div class="sidebar-container" ng-if="(subject.name)">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">{{ subject.name }}</h3>
+                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                            <thead class="table-bordered">
+                                                                <tr>
+                                                                    <th>SN</th>
+                                                                    <th>Student</th>
+                                                                    <th ng-repeat="exam in quota_exams">{{ exam.name }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="table-bordered">
+                                                                <tr ng-repeat="student in students" ng-init="global_index = $index" ng-if="(students.length > 0)">
+                                                                    <td class="ng-binding">{{ $index + 1 }}</td>
+                                                                    <td ng-init="class_subject_continuous_assessment.data[$index].student_id = student.student_id" class="ng-binding">{{ student.firstname+" "+student.lastname }}</td>
+                                                                    <td ng-repeat="exam in quota_exams" ng-init="class_subject_continuous_assessment.data[global_index].examinations[$index].examination_id = exam.examination_id">
+                                                                        <input type=" text" ng-init="class_subject_continuous_assessment.data[global_index].examinations[$index].continuous_assessment_id = 0" ng-model="class_subject_continuous_assessment.data[global_index].examinations[$index].continuous_assessment_id">
+                                                                        <input ng-init="class_subject_continuous_assessment.data[global_index].examinations[$index].score = 0" ng-model="class_subject_continuous_assessment.data[global_index].examinations[$index].score" type="number">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-if="(students.length == 0)">
+                                                                    <td colspan="{{ quota_exams.length + 2 }}">No student</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--/ control btns -->
+                                                    <div class="row" ng-if="(subject.name)">
+                                                        <div class="col-md-12">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ control btns -->
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        <div class="jd-tab-pane" id="tab-2">
+                                            Tab Two
+                                        </div>
+                                        <div class="jd-tab-pane" id="tab-3">
+                                            Tab Three
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->
+                    

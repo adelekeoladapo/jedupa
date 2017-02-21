@@ -148,7 +148,7 @@ class Jedupa extends CI_Controller {
             $data['weekday_class_periods'] = $this->class_period_model->getWeekdayClassPeriods($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['class_timetables'] = $this->class_timetable_model->getClassTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['examinations'] = $this->examination_model->getExaminations($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
-            $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['examination_timetables'] = $this->examination_model->getExaminationTimetables($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota);
             $data['examination_groups'] = $this->examination_model->getExamGroups($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['user_privileges'] = $this->user_privilege_model->getUserPrivileges($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['system_modules'] = $this->user_privilege_model->getModules('position', 'ASC', null, null, $page, $page_size);
