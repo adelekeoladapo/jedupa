@@ -71,6 +71,7 @@ section.scrollable::-webkit-scrollbar-thumb {
 td input {
     border: solid 1px #ddd;
     border-radius: 3px;
+    padding-left: 5px;
 }
 
 .min-max-form {

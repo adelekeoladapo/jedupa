@@ -552,6 +552,32 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    data.updateClassQuotaContinuousAssessment = function(dt){
+        app_data.class_quota_continuous_assessments = dt;
+    }
+    
+    data.getClassSubjectContinuousAssessments = function(subject_id){
+        var dt = [];
+        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
+            if(value.subject_id == subject_id){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.getContinuousAssessment = function(student_id, exam_id, subject_id){
+        var dt = {};
+        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
+            if(value.student_id == student_id && value.examination_id == exam_id && value.subject_id == subject_id){
+                dt = angular.copy(obj[key]);
+            }
+        });
+        return dt;
+    }
+    
+    
+    
     /** class examination group **/
     
     data.getExaminationGroup = function(class_id, quota_id){
@@ -1206,6 +1232,12 @@ app.service('Service', function($http){
             data: data
         });
     }
+    
+    this.getClassQuotaContinuousAssessment = function(school_id, quota, class_id){
+        return $http.get(base_url+"api/get-class-quota-continuous-assessment", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota, 'class-id': class_id}
+        });
+    };
     
     
     

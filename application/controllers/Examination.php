@@ -142,17 +142,32 @@ class Examination extends CI_Controller {
             $ca_data_exams = $d->examinations;
             
             foreach($ca_data_exams as $exam){
-                $c_a->continuous_assessment_id = $exam->continuous_assessment_id;
+                $c_a->continuous_assessment_id = (isset($exam->continuous_assessment_id)) ? $exam->continuous_assessment_id : 0;
                 
                 $c_a->examination_id = $exam->examination_id;
                 
-                $c_a->score = $exam->score;
+                $c_a->score = (isset($exam->score)) ? $exam->score : 0;
                     
                 $this->model->insertContinuousAssessment($c_a);
             }
             
         }
         
+    }
+    
+    function getClassQuotaContinuousAssessment(){
+        $sort_field = $this->input->get('sort-field');
+        $sort_order_mode = $this->input->get('sort-order-mode');
+        $filter_field = $this->input->get('filter-field');
+        $filter_value = $this->input->get('filter-value');
+        $page = $this->input->get('page');
+        $page_size = $this->input->get('page-size');
+        
+        $quota = json_decode($this->input->get('quota'));
+        
+        $class_id = $this->input->get('class-id');
+        
+        echo json_encode($this->model->getContinuousAssessments($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota, $class_id));
     }
     
     

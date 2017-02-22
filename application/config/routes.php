@@ -174,7 +174,8 @@ $route['api/create-class-exam-timetable'] = 'Examination/createClassExamTimetabl
 $route['api/get-class-exam-timetables'] = 'Examination/getExamTimetables';
 $route['api/connect-exams'] = 'Examination/connectExaminations';
 $route['api/get-examination-groups'] = 'Examination/getExaminationGroups'; 
-$route['api/save-continuous-assessment'] = 'Examination/saveContinuousAssessment';
+$route['api/save-continuous-assessment'] = 'Examination/saveContinuousAssessment'; 
+$route['api/get-class-quota-continuous-assessment'] = 'Examination/getClassQuotaContinuousAssessment';
 
 
 

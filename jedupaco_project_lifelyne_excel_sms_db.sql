@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2017 at 06:10 PM
+-- Generation Time: Feb 22, 2017 at 06:51 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -304,23 +304,12 @@ CREATE TABLE `tb_continuous_assessment` (
 --
 
 INSERT INTO `tb_continuous_assessment` (`continuous_assessment_id`, `school_id`, `session_id`, `quota_id`, `class_id`, `examination_id`, `student_id`, `subject_id`, `score`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 1, 55),
+(1, 1, 1, 1, 1, 1, 1, 1, 0),
 (2, 1, 1, 1, 1, 3, 1, 1, 0),
 (3, 1, 1, 1, 1, 1, 2, 1, 0),
 (4, 1, 1, 1, 1, 3, 2, 1, 0),
 (5, 1, 1, 1, 1, 1, 3, 1, 0),
-(6, 1, 1, 1, 1, 3, 3, 1, 0),
-(7, 1, 1, 1, 1, 1, 1, 1, 55),
-(8, 1, 1, 1, 1, 3, 1, 1, 0),
-(9, 1, 1, 1, 1, 1, 2, 1, 0),
-(10, 1, 1, 1, 1, 3, 2, 1, 0),
-(11, 1, 1, 1, 1, 1, 3, 1, 0),
-(12, 1, 1, 1, 1, 3, 3, 1, 0),
-(13, 1, 1, 1, 1, 3, 1, 1, 0),
-(14, 1, 1, 1, 1, 1, 2, 1, 0),
-(15, 1, 1, 1, 1, 3, 2, 1, 0),
-(16, 1, 1, 1, 1, 1, 3, 1, 0),
-(17, 1, 1, 1, 1, 3, 3, 1, 0);
+(6, 1, 1, 1, 1, 3, 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -2379,7 +2368,7 @@ ALTER TABLE `tb_class_type`
 -- AUTO_INCREMENT for table `tb_continuous_assessment`
 --
 ALTER TABLE `tb_continuous_assessment`
-  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_country`
 --
