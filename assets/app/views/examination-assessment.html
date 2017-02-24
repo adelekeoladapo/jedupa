@@ -57,7 +57,7 @@
                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects</h3>
                                                         <ul class="class-level-list" ng-if="(basic_class_subjects.length > 0)">
                                                             <li ng-repeat="subject in basic_class_subjects">
-                                                                <a ng-init="id = subject.subject_id" href="" ng-click="setActiveSubject(id)" class="ng-binding">
+                                                                <a ng-init="new_CAs.subjects[subject.subject_id].subject_id = id = subject.subject_id" href="" ng-click="setActiveSubject(id)">
                                                                     {{ subject.subject }}
                                                                 </a>
                                                             </li>
@@ -81,16 +81,25 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="table-bordered" id="ca_table">
-                                                                <tr ng-repeat="student in students" ng-init="global_index = $index" ng-if="(students.length > 0)">
+                                                                <tr ng-repeat="student in students" ng-init="student_index_data = { 'index':  $index, 'student_id': student.student_id }" ng-if="(students.length > 0)">
                                                                     <td>{{ $index + 1 }}</td>
-                                                                    <td ng-init="new_CAs[subject.subject_id].class_subject_continuous_assessment.data[$index].info = {'student-id': student.student_id, 'subject-id': subject.subject_id}" class="ng-binding">
+                                                                    <td>
                                                                         {{ student.firstname+" "+student.lastname }}
                                                                     </td>
-                                                                    <td ng-repeat="exam in quota_exams" ng-init="new_CAs[subject.subject_id].class_subject_continuous_assessment.data[global_index].examinations[$index].examination_id = exam.examination_id">
-                                                                        <span ng-init="c_a = factory.getContinuousAssessment(student.student_id, exam.examination_id, subject.subject_id)">
-                                                                            {{ "SubjectID: "+subject.subject_id+". Global Index: "+global_index+". Index: "+$index+". Score: "+c_a.score }}
-                                                                            <input type="hidden" ng-value="{{ (c_a) ? c_a.continuous_assessment_id : 0 }}" ng-model="new_CAs[subject.subject_id].class_subject_continuous_assessment.data[global_index].examinations[$index].continuous_assessment_id">
-                                                                            <input ng-value="{{ (c_a) ? c_a.score : 0 }}" ng-model="new_CAs[subject.subject_id].class_subject_continuous_assessment.data[global_index].examinations[$index].score" type="number">
+                                                                    <td ng-repeat="exam in quota_exams" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].examination_id = exam.examination_id ">
+                                                                        <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].student_id = student_index_data.student_id">
+                                                                            <span ng-init="ca = factory.getContinuousAssessment(student_index_data.student_id, exam.examination_id, subject.subject_id)">
+                                                                                
+                                                                                <!-- Continuous Assessment ID -->
+                                                                                <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].continuous_assessment_id = (ca) ? ca.continuous_assessment_id : 0 "> </span>
+                                                                                <!--/ Continuous Assessment ID -->
+
+                                                                                <!-- examination score -->
+                                                                                <span ng-init="score = (ca) ? ca.score : -1">
+                                                                                    <input ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
+                                                                                </span>
+                                                                                <!--/ examination score -->
+                                                                            </span>
                                                                         </span>
                                                                     </td>
                                                                 </tr>

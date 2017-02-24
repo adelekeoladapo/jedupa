@@ -90,7 +90,7 @@ class ExaminationModel extends CI_Model {
     /** Continuous Assessment **/
     
     function insertContinuousAssessment($data){
-        if($this->getContinuousAssessment($data->continuous_assessment_id)){
+        if($this->getContinuousAssessment($data->continuous_assessment_id) || $this->getContinuousAssessment_($data->quota_id, $data->class_id, $data->examination_id, $data->student_id, $data->subject_id)){
             $this->updateContinuousAssessment($data);
             return;
         }
@@ -127,5 +127,19 @@ class ExaminationModel extends CI_Model {
         return ($query->num_rows()) ? $query->row() : null;
     }
     
+    function getContinuousAssessment_($quota_id, $class_id, $exam_id, $student_id, $subject_id){
+        $this->db->where('quota_id', $quota_id);
+        $this->db->where('class_id', $class_id);
+        $this->db->where('examination_id', $exam_id);
+        $this->db->where('student_id', $student_id);
+        $this->db->where('subject_id', $subject_id);
+        $query = $this->db->get($this->table_continuous_assessment);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
+    
+    function deleteContinuousAssessment($id){
+        $this->db->where('continuous_assessment_id', $id);
+        $query = $this->db->delete($this->table_continuous_assessment);
+    }
     
 }

@@ -322,6 +322,8 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
     
     $scope.students = [];
     
+     $scope.class_subject_continuous_assessments = [];
+    
     $scope.quota_exams = {};
     
     $scope.classs = {};
@@ -330,7 +332,9 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
     
     $scope.subject = {};
     
-    $scope.class_subject_continuous_assessment = {};
+     $scope.class_subject_continuous_assessment = {};
+    
+   
     
     
     /** set class levels **/
@@ -367,28 +371,47 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
     }
     
     
-    $scope.new_CAs = [];
+    $scope.new_CAs = {};
     
     $scope.saveContinuousAssessment = function(){
+        show_loading_overlay();
+        $scope.new_CAs.school_id = Factory.getSchoolID();
+        $scope.new_CAs.session_id = $scope.default_quota.session_id;
+        $scope.new_CAs.quota_id = $scope.default_quota.quota_id;
+        $scope.new_CAs.class_id = $scope.classs.class_id;
         
-        console.log($scope.new_CAs); return;
-        
-        //show_loading_overlay();
-        $scope.class_subject_continuous_assessment.school_id = Factory.getSchoolID();
-        $scope.class_subject_continuous_assessment.session_id = $scope.default_quota.session_id;
-        $scope.class_subject_continuous_assessment.quota_id = $scope.default_quota.quota_id;
-        $scope.class_subject_continuous_assessment.class_id = $scope.classs.class_id;
-        $scope.class_subject_continuous_assessment.subject_id = $scope.subject.subject_id;
-        
-        console.log($scope.class_subject_continuous_assessment); return;
-        
-        Service.saveContinuousAssessment($scope.class_subject_continuous_assessment).then(function(response){
+        Service.saveContinuousAssessment($scope.new_CAs).then(function(response){
             Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, $scope.classs.class_id).then(function(response){
                 Factory.updateClassQuotaContinuousAssessment(response.data);
+                $scope.setActiveSubject($scope.subject.subject_id);
                 hide_loading_overlay();
                 toast('Successfully Saved');
             },  function(error){});
         }, function(error){});
+        
+        
+        
+       // console.log($scope.new_CAs);
+        
+        
+//        console.log($scope.new_CAs); return;
+//        
+//        //show_loading_overlay();
+//        $scope.class_subject_continuous_assessment.school_id = Factory.getSchoolID();
+//        $scope.class_subject_continuous_assessment.session_id = $scope.default_quota.session_id;
+//        $scope.class_subject_continuous_assessment.quota_id = $scope.default_quota.quota_id;
+//        $scope.class_subject_continuous_assessment.class_id = $scope.classs.class_id;
+//        $scope.class_subject_continuous_assessment.subject_id = $scope.subject.subject_id;
+//        
+//        console.log($scope.class_subject_continuous_assessment); return;
+//        
+//        Service.saveContinuousAssessment($scope.class_subject_continuous_assessment).then(function(response){
+//            Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, $scope.classs.class_id).then(function(response){
+//                Factory.updateClassQuotaContinuousAssessment(response.data);
+//                hide_loading_overlay();
+//                toast('Successfully Saved');
+//            },  function(error){});
+//        }, function(error){});
     }
     
     

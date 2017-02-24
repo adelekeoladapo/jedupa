@@ -133,7 +133,31 @@ class Examination extends CI_Controller {
         $c_a->session_id = $data->session_id;
         $c_a->quota_id = $data->quota_id;
         $c_a->class_id = $data->class_id;
-        $c_a->subject_id = $data->subject_id;
+        
+        $c_a->subjects = $data->subjects;
+        
+        foreach ($c_a->subjects as $subject) {
+            $c_a->subject_id = $subject->subject_id;
+            $students = (isset($subject->students)) ? $subject->students : false;
+            if($students){
+                foreach ($students as $student) {
+                    $c_a->student_id = $student->student_id;
+                    $examinations = $student->examinations;
+                    foreach ($examinations as $examination) {
+                        $c_a->examination_id = $examination->examination_id;
+                        $c_a->continuous_assessment_id = (isset($examination->continuous_assessment_id)) ? $examination->continuous_assessment_id : 0;
+                        $c_a->score = (isset($examination->score) && $examination->score > -1) ? $examination->score : false;
+                        if($c_a->score)
+                            $this->model->insertContinuousAssessment($c_a);
+                    }
+                }
+            }
+        }
+        
+        return;
+        
+        
+        
         
         $ca_data = $data->data;
         
