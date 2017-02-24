@@ -36,4 +36,9 @@ class QuotaModel extends CI_Model {
         $this->db->update($this->table_name, $data);
     }
     
+    function deactivateAllQuotas(){
+        $this->db->set('is_active', 0);
+        $this->db->update($this->table_name, $data);
+    }
+    
 }

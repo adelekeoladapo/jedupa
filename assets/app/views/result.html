@@ -3,7 +3,7 @@
                             
                             <!-- Page Title -->
                             <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                Examination Assessment
+                                Class Result
                             </h1>
                             <!-- Page Title -->
                             
@@ -13,8 +13,8 @@
                                 <div class="jd-tab-container">
                                     <div class="jd-tab-title-block">
                                         <ul>
-                                            <li class="active" data-href="assessment">
-                                                <a href="">Assessment</a>
+                                            <li class="active" data-href="result">
+                                                <a href="">Result</a>
                                             </li>
                                             <li data-href="tab-2">
                                                 <a href="">Tab 2</a>
@@ -25,7 +25,7 @@
                                         </ul>
                                     </div>
                                     <div class="jd-tab-content-block">
-                                        <div class="jd-tab-pane active" id="assessment">
+                                        <div class="jd-tab-pane active" id="result">
                                             <fieldset class="options-container">
                                                 <legend>Select Class</legend>
                                                 <div class="row">
@@ -50,7 +50,7 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                            
+                                          <!--
                                             <div class="row">
                                                 <div class="col-md-2">
                                                     <div class="sidebar-container" ng-if="(classs.class_id)">
@@ -70,54 +70,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10 main-table-with-sidebar">
-                                                    <div class="sidebar-container" ng-if="(subject.name)">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">{{ subject.name }}</h3>
-                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
-                                                            <thead class="table-bordered">
-                                                                <tr>
-                                                                    <th>SN</th>
-                                                                    <th>Student</th>
-                                                                    <th ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" }}</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="table-bordered" id="ca_table">
-                                                                <tr ng-repeat="student in students" ng-init="student_index_data = { 'index':  $index, 'student_id': student.student_id }" ng-if="(students.length > 0)">
-                                                                    <td>{{ $index + 1 }}</td>
-                                                                    <td>
-                                                                        {{ student.firstname+" "+student.lastname }}
-                                                                    </td>
-                                                                    <td ng-repeat="exam in quota_exams" ng-if="(exam.weightage > 0)" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].examination_id = exam.examination_id ">
-                                                                        <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].student_id = student_index_data.student_id">
-                                                                            <span ng-init="ca = factory.getContinuousAssessment(student_index_data.student_id, exam.examination_id, subject.subject_id)">
-                                                                                
-                                                                                <!-- Continuous Assessment ID -->
-                                                                                <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].continuous_assessment_id = (ca) ? ca.continuous_assessment_id : 0 "> </span>
-                                                                                <!--/ Continuous Assessment ID -->
-
-                                                                                <!-- examination score -->
-                                                                                <span ng-init="score = (ca) ? ca.score : -1">
-                                                                                    <input ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
-                                                                                </span>
-                                                                                <!--/ examination score -->
-                                                                            </span>
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr ng-if="(students.length == 0)">
-                                                                    <td colspan="{{ quota_exams.length + 2 }}">No student</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <!--/ control btns -->
-                                                    <div class="row" ng-if="(subject.name)">
-                                                        <div class="col-md-12">
-                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ control btns -->
+                                                    
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             
                                         </div>
                                         <div class="jd-tab-pane" id="tab-2">

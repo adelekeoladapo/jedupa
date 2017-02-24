@@ -145,7 +145,7 @@ class Examination extends CI_Controller {
                     $examinations = $student->examinations;
                     foreach ($examinations as $examination) {
                         $c_a->examination_id = $examination->examination_id;
-                        $c_a->continuous_assessment_id = (isset($examination->continuous_assessment_id)) ? $examination->continuous_assessment_id : 0;
+                        $c_a->continuous_assessment_id = (isset($examination->continuous_assessment_id)) ? $examination->continuous_assessment_id : false;
                         $c_a->score = (isset($examination->score) && $examination->score > -1) ? $examination->score : false;
                         if($c_a->score)
                             $this->model->insertContinuousAssessment($c_a);

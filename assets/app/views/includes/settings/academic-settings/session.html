@@ -44,6 +44,7 @@
                                                                         <th>Session</th>
                                                                         <th>Start Date</th>
                                                                         <th>Finish Date</th>
+                                                                        <th>Status</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
@@ -54,6 +55,12 @@
                                                                         <td>{{ quota.session }}</td>
                                                                         <td>{{ factory.formatDate_1(quota.start_time) }}</td>
                                                                         <td>{{ factory.formatDate_1(quota.end_time) }}</td>
+                                                                        <td>
+                                                                            <select class="table-select">
+                                                                                <option>Not Active</option>
+                                                                                <option>Active</option>
+                                                                            </select>
+                                                                        </td>
                                                                         <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View"></i></td>
                                                                     </tr>
 

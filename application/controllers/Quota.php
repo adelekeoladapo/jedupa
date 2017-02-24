@@ -35,4 +35,9 @@ class Quota extends CI_Controller {
         echo $this->model->updateQuota($data);
     }
     
+    function changeQuotaStatus(){
+        
+    }
+    
+    
 }

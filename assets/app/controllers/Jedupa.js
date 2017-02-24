@@ -1451,6 +1451,37 @@ app.config(function($stateProvider, $urlRouterProvider){
             }
         })
         
+        .state('result-settings', {
+            url: "/result-settings",
+            templateUrl: "assets/app/views/result-settings.html",
+                controller: "ResultSettingsCtrl",
+            resolve: {
+                grading_levels: function(Service, Factory){
+                    return Service.getGradingLevels(Factory.getSchoolID());
+                },
+                class_designations: function(Service, Factory){
+                    return Service.getClassDesignations(Factory.getSchoolID());
+                },
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                },
+                sessions: function(Service, Factory){
+                    return Service.getSessions(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('result-class-result', {
+            url: "/result-class-result",
+            templateUrl: "assets/app/views/result.html",
+                controller: "ResultCtrl",
+            resolve: {
+                class_types: function(Service, Factory){
+                    return Service.getClassTypes(Factory.getSchoolID());
+                }
+            }
+        })
+        
         .state('general-settings', {
             url: "/general-settings",
             templateUrl: "assets/app/views/general-settings.html",
