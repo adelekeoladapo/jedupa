@@ -214,7 +214,21 @@ app.controller('ResultCtrl', function($scope, $scope, Factory, Service, class_ty
     }
     
     $scope.setClass = function(class_id){
+        $scope.classs = Factory.getClass(class_id);
         
+        $scope.subject = {};
+        show_loading_overlay();
+        Service.getClassStudents(class_id).then(function(response){
+            $scope.classs = Factory.getClass(class_id);
+            $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
+            $scope.students = response.data;
+            $scope.quota_exams = Factory.getClassQuotaExams(class_id, $scope.default_quota.quota_id);
+            //get CAs
+            Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, class_id).then(function(response){
+                Factory.updateClassQuotaContinuousAssessment(response.data);
+            },  function(error){});
+            hide_loading_overlay();
+        }, function(error){});
     }
     
     

@@ -14,7 +14,7 @@
                                     <div class="jd-tab-title-block">
                                         <ul>
                                             <li class="active" data-href="result">
-                                                <a href="">Result</a>
+                                                <a href="">Broad Sheet</a>
                                             </li>
                                             <li data-href="tab-2">
                                                 <a href="">Tab 2</a>
@@ -50,30 +50,42 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                          <!--
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="sidebar-container" ng-if="(classs.class_id)">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class Subjects</h3>
-                                                        <ul class="class-level-list" ng-if="(basic_class_subjects.length > 0)">
-                                                            <li ng-repeat="subject in basic_class_subjects">
-                                                                <a ng-init="new_CAs.subjects[subject.subject_id].subject_id = id = subject.subject_id" href="" ng-click="setActiveSubject(id)">
-                                                                    {{ subject.subject }}
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <ul class="class-level-list" ng-if="(basic_class_subjects.length == 0)">
-                                                            <li>
-                                                                <a href="">No Subject</a>
-                                                            </li>
-                                                        </ul>
+                                                <div class="col-md-12" ng-if="basic_class_subjects.length > 0">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Broad Sheet: {{ classs.name }}</h3>
+                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                            <thead class="table-bordered">
+                                                                <tr>
+                                                                    <th>SN</th>
+                                                                    <th>Student</th> 
+                                                                    <th class="center" ng-repeat="subject in basic_class_subjects">{{ subject.subject_code }} [100]</th>
+                                                                    <th class="center">Total [{{ 100 * basic_class_subjects.length }}]</th>
+                                                                    <th class="center">Average [100]</th>
+                                                                    <th class="center">Position</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="table-bordered" id="ca_table">
+                                                                <tr ng-repeat="student in students">
+                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td>{{ student.firstname+' '+student.lastname }}</td>
+                                                                    <td class="center" ng-repeat="subject in basic_class_subjects">{{ factory.getStudentSubjectTotalContinuousAssessment(student.student_id, subject.subject_id) }}</td>
+                                                                    <td class="center">{{ factory.getStudentTotalContinuousAssessment(student.student_id) }}</td>
+                                                                    <td class="center">{{ factory.getStudentTotalContinuousAssessment(student.student_id) / basic_class_subjects.length | number : 1 }}</td>
+                                                                    <td class="center">19</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
+                                                    <!--/ control btns -->
+                                                    <div class="row" ng-if="(subject.name)">
+                                                        <div class="col-md-12">
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ control btns -->
                                                 </div>
-                                                <div class="col-md-10 main-table-with-sidebar">
-                                                    
-                                                </div>
-                                            </div>-->
-                                            
+                                            </div>
                                         </div>
                                         <div class="jd-tab-pane" id="tab-2">
                                             Tab Two

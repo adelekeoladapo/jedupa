@@ -576,6 +576,28 @@ app.factory('Factory', function(){
         return dt;
     }
     
+    /** get the summation of quota examinations scores in a subject **/
+    data.getStudentSubjectTotalContinuousAssessment = function(student_id, subject_id){
+        total = 0;
+        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
+            if(value.student_id == student_id && value.subject_id == subject_id){
+                total += parseInt(value.score);
+            }
+        });
+        return total;
+    }
+    
+    /** get the summation of quota examinations scores of a student **/
+    data.getStudentTotalContinuousAssessment = function(student_id, subject_id){
+        total = 0;
+        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
+            if(value.student_id == student_id){
+                total += parseInt(value.score);
+            }
+        });
+        return total;
+    }
+    
     
     
     /** class examination group **/
