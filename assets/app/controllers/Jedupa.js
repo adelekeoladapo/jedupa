@@ -556,6 +556,10 @@ app.factory('Factory', function(){
         app_data.class_quota_continuous_assessments = dt;
     }
     
+    data.updateClassQuotaContinuousAssessmentSums = function(dt){
+        app_data.class_quota_continuous_assessments_sums = dt;
+    }
+    
     data.getClassSubjectContinuousAssessments = function(subject_id){
         var dt = [];
         angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
@@ -577,25 +581,29 @@ app.factory('Factory', function(){
     }
     
     /** get the summation of quota examinations scores in a subject **/
-    data.getStudentSubjectTotalContinuousAssessment = function(student_id, subject_id){
-        total = 0;
-        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
+    data.getStudentSubjectTotalContinuousAssessment = function(student_id, subject_id){ 
+        dt = 0;
+        angular.forEach(app_data.class_quota_continuous_assessments_sums, function(value, key, obj){
             if(value.student_id == student_id && value.subject_id == subject_id){
-                total += parseInt(value.score);
+                dt += parseInt(value.total_score); 
+            }
+        });
+        return dt;
+    }
+    
+    /** get the summation of quota examinations scores of a student **/
+    data.getStudentTotalContinuousAssessment = function(student_id){
+        total = 0;
+        angular.forEach(app_data.class_quota_continuous_assessments_sums, function(value, key, obj){
+            if(value.student_id == student_id){
+                total += parseInt(value.total_score);
             }
         });
         return total;
     }
     
-    /** get the summation of quota examinations scores of a student **/
-    data.getStudentTotalContinuousAssessment = function(student_id, subject_id){
-        total = 0;
-        angular.forEach(app_data.class_quota_continuous_assessments, function(value, key, obj){
-            if(value.student_id == student_id){
-                total += parseInt(value.score);
-            }
-        });
-        return total;
+    data.updateClassBroadSheet = function(dt){
+        app_data.class_broadsheet = dt;
     }
     
     
@@ -1258,6 +1266,18 @@ app.service('Service', function($http){
     this.getClassQuotaContinuousAssessment = function(school_id, quota, class_id){
         return $http.get(base_url+"api/get-class-quota-continuous-assessment", {
             params : {'filter-field': 'school_id', 'filter-value': school_id, 'quota': quota, 'class-id': class_id}
+        });
+    };
+    
+    this.getClassQuotaSubjectsContinuousAssesssmentsSums = function(school_id, quota_id, class_id){
+        return $http.get(base_url+"api/get-class-quota-subjects-contuinuous-assessment-sums", {
+            params : {'school-id': school_id, 'quota-id': quota_id, 'class-id': class_id}
+        });
+    };
+    
+    this.getClassQuotaBroadsheet = function(school_id, quota_id, class_id){
+        return $http.get(base_url+"api/get-class-quota-broadsheet", {
+            params : {'school-id': school_id, 'quota-id': quota_id, 'class-id': class_id}
         });
     };
     

@@ -194,5 +194,22 @@ class Examination extends CI_Controller {
         echo json_encode($this->model->getContinuousAssessments($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size, $quota, $class_id));
     }
     
+    /* returns rhe sum of each student's quota's subject examination scores */
+    function getClassQuotaSubjectsContinuousAssesssmentsSums(){
+        $class_id = $this->input->get('class-id');
+        $quota_id = $this->input->get('quota-id');
+        $school_id = $this->input->get('school-id');
+        $dd = $this->model->getClassQuotaSubjectsContinuousAssesssmentsSums($school_id, $class_id, $quota_id);
+        echo json_encode($dd);
+    }
+    
+    function getClassQuotaBroadsheet(){
+        $class_id = $this->input->get('class-id');
+        $quota_id = $this->input->get('quota-id');
+        $school_id = $this->input->get('school-id');
+        $data = $this->model->getClassQuotaBroadSheet($school_id, $class_id, $quota_id);
+        echo json_encode($data);
+    }
+    
     
 }

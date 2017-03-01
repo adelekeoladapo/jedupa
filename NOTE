@@ -252,3 +252,27 @@ CREATE VIEW vw_user_privilege_module AS SELECT
 FROM tb_user_privilege_module 
 JOIN tb_user_privilege ON tb_user_privilege.user_privilege_id = tb_user_privilege_module.user_privilege_id 
 JOIN tb_module ON tb_module.module_id = tb_user_privilege_module.module_id
+
+
+
+CREATE VIEW `vw_continuous_assessment_master`  
+AS  select `tb_continuous_assessment`.`continuous_assessment_id` AS `continuous_assessment_id`,`tb_continuous_assessment`.`school_id` 
+AS `school_id`,`tb_continuous_assessment`.`session_id` AS `session_id`,`tb_continuous_assessment`.`quota_id` AS `quota_id`,`tb_continuous_assessment`.`class_id` 
+AS `class_id`,`tb_continuous_assessment`.`examination_id` AS `examination_id`,`tb_continuous_assessment`.`student_id` 
+AS `student_id`,`tb_continuous_assessment`.`subject_id` AS `subject_id`,sum(`tb_continuous_assessment`.`score`) AS `Score` from `tb_continuous_assessment` 
+group by `tb_continuous_assessment`.`school_id`,`tb_continuous_assessment`.`session_id`,`tb_continuous_assessment`.`quota_id`,`tb_continuous_assessment`.`class_id`,
+`tb_continuous_assessment`.`subject_id`,`tb_continuous_assessment`.`student_id` order by `tb_continuous_assessment`.`student_id` ;
+
+
+CREATE VIEW `vw_broadsheet`  AS  SELECT 
+`tb_continuous_assessment`.`continuous_assessment_id` AS `continuous_assessment_id`,
+`tb_continuous_assessment`.`school_id` AS `school_id`,
+`tb_continuous_assessment`.`session_id` AS `session_id`,
+`tb_continuous_assessment`.`quota_id` AS `quota_id`,
+`tb_continuous_assessment`.`class_id` AS `class_id`,
+`tb_continuous_assessment`.`examination_id` AS `examination_id`,
+`tb_continuous_assessment`.`student_id` AS `student_id`,
+`tb_continuous_assessment`.`subject_id` AS `subject_id`,
+vw_student.firstname AS firstname, 
+vw_student.lastname AS lastname,
+sum(`tb_continuous_assessment`.`score`) AS `total_score` from `tb_continuous_assessment` JOIN vw_student ON tb_continuous_assessment.student_id = vw_student.student_id group by `tb_continuous_assessment`.`school_id`,`tb_continuous_assessment`.`session_id`,`tb_continuous_assessment`.`quota_id`,`tb_continuous_assessment`.`class_id`,`tb_continuous_assessment`.`student_id` order by `tb_continuous_assessment`.`student_id` ;

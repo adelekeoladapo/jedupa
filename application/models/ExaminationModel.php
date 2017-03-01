@@ -6,7 +6,7 @@
  */
 class ExaminationModel extends CI_Model {
     
-    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment';
+    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment', $view_broadsheet = 'vw_broadsheet';
     
     function insertExamination($data){
         $this->db->insert($this->table_name, $data);
@@ -140,6 +140,49 @@ class ExaminationModel extends CI_Model {
     function deleteContinuousAssessment($id){
         $this->db->where('continuous_assessment_id', $id);
         $query = $this->db->delete($this->table_continuous_assessment);
+    }
+    
+    function getClassQuotaSubjectsContinuousAssesssmentsSums($school_id, $class_id, $quota_id){
+        $query = $this->db->query('SELECT tb_continuous_assessment.continuous_assessment_id, tb_continuous_assessment.school_id,tb_continuous_assessment.session_id,tb_continuous_assessment.student_id,tb_continuous_assessment.subject_id,SUM(tb_continuous_assessment.score)AS total_score FROM tb_continuous_assessment WHERE tb_continuous_assessment.quota_id = '.$quota_id.' AND tb_continuous_assessment.class_id = '.$class_id.' AND tb_continuous_assessment.school_id = '.$school_id.' GROUP BY tb_continuous_assessment.subject_id, tb_continuous_assessment.student_id ORDER BY tb_continuous_assessment.student_id');
+        return ($query->num_rows()) ? $query->result() : null;
+    }
+    
+    function getClassQuotaBroadSheet($school_id, $class_id, $quota_id){
+        $this->db->where('quota_id', $quota_id);
+        $this->db->where('class_id', $class_id);
+        $this->db->where('school_id', $school_id);
+        $this->db->order_by('total_score', 'DESC');
+        $query = $this->db->get($this->view_broadsheet);
+        $data = ($query->num_rows()) ? $query->result() : false;
+        if($data){
+            //get an array of total_score
+            $total_scores = [];
+            foreach ($data as $d){
+                array_push($total_scores, $d->total_score);
+            }
+            
+            $broadsheet = [];
+            foreach ($data as $d){
+                $position = $this->penguin->getPosition($d->total_score, $total_scores);
+                
+                $last_char = substr($position, -1);
+                
+                if($last_char == '1')
+                    $position .= 'st';
+                elseif($last_char == '2')
+                    $position .= 'nd';
+                elseif($last_char == '3')
+                    $position .= 'rd';
+                else
+                    $position .= 'th';
+                
+                $d->position = $position;
+                array_push($broadsheet, $d);
+            }
+            return $broadsheet;
+        }else{
+            return false;
+        }
     }
     
 }

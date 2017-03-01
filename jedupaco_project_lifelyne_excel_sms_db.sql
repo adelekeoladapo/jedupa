@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2017 at 06:47 PM
+-- Generation Time: Mar 01, 2017 at 04:36 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -307,19 +307,25 @@ CREATE TABLE `tb_continuous_assessment` (
 --
 
 INSERT INTO `tb_continuous_assessment` (`continuous_assessment_id`, `school_id`, `session_id`, `quota_id`, `class_id`, `examination_id`, `student_id`, `subject_id`, `score`) VALUES
-(5, 1, 1, 1, 1, 3, 1, 1, 60),
-(7, 1, 1, 2, 1, 2, 1, 2, 12),
-(8, 1, 1, 2, 1, 2, 2, 2, 2),
-(9, 1, 1, 2, 1, 2, 3, 2, 17),
-(12, 1, 1, 1, 1, 3, 1, 2, 40),
-(13, 1, 1, 1, 1, 3, 2, 2, 20),
-(14, 1, 1, 1, 1, 1, 1, 1, 4),
-(15, 1, 1, 1, 1, 1, 2, 1, 34),
-(16, 1, 1, 1, 1, 3, 2, 1, 23),
-(17, 1, 1, 1, 1, 1, 3, 1, 11),
-(18, 1, 1, 1, 1, 3, 3, 1, 19),
-(19, 1, 1, 1, 1, 1, 1, 2, 34),
-(20, 1, 1, 1, 1, 1, 2, 2, 23);
+(1, 1, 1, 1, 1, 1, 1, 1, 38),
+(2, 1, 1, 1, 1, 1, 2, 1, 38),
+(3, 1, 1, 1, 1, 1, 3, 1, 5),
+(4, 1, 1, 1, 1, 3, 1, 1, 55),
+(5, 1, 1, 1, 1, 3, 2, 1, 55),
+(6, 1, 1, 1, 1, 3, 3, 1, 51),
+(7, 1, 1, 1, 1, 1, 1, 2, 35),
+(8, 1, 1, 1, 1, 1, 2, 2, 35),
+(9, 1, 1, 1, 1, 1, 3, 2, 32),
+(10, 1, 1, 1, 1, 3, 1, 2, 57),
+(11, 1, 1, 1, 1, 3, 2, 2, 57),
+(12, 1, 1, 1, 1, 3, 3, 2, 50),
+(13, 1, 1, 1, 1, 1, 1, 7, 20),
+(14, 1, 1, 1, 1, 3, 1, 7, 46),
+(15, 1, 1, 1, 1, 1, 2, 7, 20),
+(16, 1, 1, 1, 1, 3, 2, 7, 46),
+(17, 1, 1, 1, 1, 1, 3, 7, 12),
+(18, 1, 1, 1, 1, 3, 3, 7, 40),
+(19, 1, 1, 1, 2, 12, 4, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -698,7 +704,6 @@ INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `position`, `url`, `has_ch
 (28, 'Examination', 'puzzle', 7, 'examination', 1, 0),
 (29, 'Class Timetable', '', 0, 'timetable-class-timetable', 0, 6),
 (30, 'Settings', '', 0, 'timetable-settings', 1, 6),
-(31, 'Timetable', '', 0, 'examination-timetanle', 0, 28),
 (32, 'Assessment', '', 0, 'examination-assessment', 0, 28),
 (33, 'Settings', '', 0, 'examination-settings', 1, 28),
 (34, 'Class Result', '', 0, 'result-class-result', 0, 7),
@@ -915,7 +920,8 @@ CREATE TABLE `tb_student` (
 INSERT INTO `tb_student` (`student_id`, `school_id`, `user_id`, `student_department_id`, `registration_number`, `admission_date`, `date_created`, `batch_id`, `student_category_id`, `parent_id`, `parent_relationship`, `class_type_id`, `class_level_id`, `class_id`) VALUES
 (1, 1, 1, 1, 'OCA/16/001', '0000-00-00 00:00:00', '2017-02-01 16:24:25', 0, 1, 1, 'Father', 1, 1, 1),
 (2, 1, 3, 1, 'OCA/16/002', '0000-00-00 00:00:00', '2017-02-01 16:32:38', 0, 1, 1, 'Father', 1, 1, 1),
-(3, 1, 5, 1, 'OCA/16/003', '0000-00-00 00:00:00', '2017-02-01 16:47:25', 0, 1, 2, 'Sister', 1, 1, 1);
+(3, 1, 5, 1, 'OCA/16/003', '0000-00-00 00:00:00', '2017-02-01 16:47:25', 0, 1, 2, 'Sister', 1, 1, 1),
+(4, 1, 10, 1, 'OCA/17/001', '0000-00-00 00:00:00', '2017-02-27 17:22:39', 0, 1, 1, 'Father', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1095,7 +1101,8 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (6, 'Miss Wright', '', '', 'OCA/G002', 'ee5b4e08c69e19a7b1d425ad449da87d', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '23B Melo Str, Kaduna', '', '08034657876', '', 'write@hotmail.com', '', 0),
 (7, 'James', 'Gosling', '', 'OCA/E002', 'd52e32f3a96a64786814ae9b5279fbe5', 0, 1, 'Male', '2017-02-12 00:00:00', '', 1, 'FUTA', 'Akure', '08034275409', '', 'jamesgosling@gmail.com', '(_)_UGO(_)(1).jpg', 4),
 (8, 'Desmond', 'Idiot', '', 'OCA/E003', 'a39e9eea66930fe0050d56a28bafab72', 0, 1, 'Male', '2017-02-14 00:00:00', '', 10, 'Somewhere in Ahila', 'Ahila', '08034275409', '', 'desmonidiot@yahoo.com', 'temmy(73).jpg', 5),
-(9, 'Mickael', 'Jackson', '', 'OCA/E004', '4b503f9fdf97688234717f3c50dc8bb9', 0, 1, 'Male', '2017-02-08 00:00:00', '', 2, '10 Bala street', 'Yola', '08034275409', '', 'mickaeljackson@mail.com', '(_)_UGO(_)(1)1.jpg', 13);
+(9, 'Mickael', 'Jackson', '', 'OCA/E004', '4b503f9fdf97688234717f3c50dc8bb9', 0, 1, 'Male', '2017-02-08 00:00:00', '', 2, '10 Bala street', 'Yola', '08034275409', '', 'mickaeljackson@mail.com', '(_)_UGO(_)(1)1.jpg', 13),
+(10, 'James', 'Ibori', 'Solomon', 'OCA/17/001', 'd52e32f3a96a64786814ae9b5279fbe5', 0, 1, 'Male', '2017-02-15 00:00:00', '', 1, '10 Ikire Str', 'Ikire', '0803475757', '', 'james@gmail.com', '21-cute-newborn-baby.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -1209,7 +1216,11 @@ INSERT INTO `tb_user_additional_details` (`user_additional_detail_id`, `school_i
 (92, 1, 9, 3, 'Ecobank'),
 (93, 1, 9, 6, 'Grey'),
 (94, 1, 9, 8, '0987654321'),
-(95, 1, 9, 9, '5652435467');
+(95, 1, 9, 9, '5652435467'),
+(96, 1, 10, 1, '10cm'),
+(97, 1, 10, 4, 'Islam'),
+(98, 1, 10, 5, '20kg'),
+(99, 1, 10, 7, 'K');
 
 -- --------------------------------------------------------
 
@@ -1706,6 +1717,25 @@ CREATE TABLE `vw_additional_details` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_broadsheet`
+--
+CREATE TABLE `vw_broadsheet` (
+`continuous_assessment_id` int(11)
+,`school_id` int(11)
+,`session_id` int(11)
+,`quota_id` int(11)
+,`class_id` int(11)
+,`examination_id` int(11)
+,`student_id` int(11)
+,`subject_id` int(11)
+,`firstname` varchar(100)
+,`lastname` varchar(100)
+,`total_score` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_class`
 --
 CREATE TABLE `vw_class` (
@@ -1780,6 +1810,23 @@ CREATE TABLE `vw_class_timetable` (
 ,`is_break` int(11)
 ,`subject` varchar(200)
 ,`teacher` varchar(201)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_continuous_assessment_master`
+--
+CREATE TABLE `vw_continuous_assessment_master` (
+`continuous_assessment_id` int(11)
+,`school_id` int(11)
+,`session_id` int(11)
+,`quota_id` int(11)
+,`class_id` int(11)
+,`examination_id` int(11)
+,`student_id` int(11)
+,`subject_id` int(11)
+,`Score` decimal(32,0)
 );
 
 -- --------------------------------------------------------
@@ -1993,6 +2040,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_broadsheet`
+--
+DROP TABLE IF EXISTS `vw_broadsheet`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_broadsheet`  AS  select `tb_continuous_assessment`.`continuous_assessment_id` AS `continuous_assessment_id`,`tb_continuous_assessment`.`school_id` AS `school_id`,`tb_continuous_assessment`.`session_id` AS `session_id`,`tb_continuous_assessment`.`quota_id` AS `quota_id`,`tb_continuous_assessment`.`class_id` AS `class_id`,`tb_continuous_assessment`.`examination_id` AS `examination_id`,`tb_continuous_assessment`.`student_id` AS `student_id`,`tb_continuous_assessment`.`subject_id` AS `subject_id`,`vw_student`.`firstname` AS `firstname`,`vw_student`.`lastname` AS `lastname`,sum(`tb_continuous_assessment`.`score`) AS `total_score` from (`tb_continuous_assessment` join `vw_student` on((`tb_continuous_assessment`.`student_id` = `vw_student`.`student_id`))) group by `tb_continuous_assessment`.`school_id`,`tb_continuous_assessment`.`session_id`,`tb_continuous_assessment`.`quota_id`,`tb_continuous_assessment`.`class_id`,`tb_continuous_assessment`.`student_id` order by `tb_continuous_assessment`.`student_id` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_class`
 --
 DROP TABLE IF EXISTS `vw_class`;
@@ -2025,6 +2081,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_class_timetable`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_class_timetable`  AS  select `tb_class_timetable`.`class_timetable_id` AS `class_timetable_id`,`tb_class_timetable`.`class_id` AS `class_id`,`tb_class_timetable`.`school_id` AS `school_id`,`tb_class_timetable`.`session_id` AS `session_id`,`tb_class_timetable`.`quota_id` AS `quota_id`,`tb_class_timetable`.`weekday_id` AS `weekday_id`,`tb_class_timetable`.`class_period_id` AS `class_period_id`,`tb_class_timetable`.`subject_id` AS `subject_id`,`tb_class_timetable`.`employee_id` AS `employee_id`,`tb_class_timetable`.`date_created` AS `date_created`,`tb_weekday`.`name` AS `weekday`,`tb_class_period`.`class_timing_set_id` AS `class_timing_set_id`,`tb_class_period`.`name` AS `class_period`,`tb_class_period`.`start_time` AS `start_time`,`tb_class_period`.`end_time` AS `end_time`,`tb_class_period`.`is_break` AS `is_break`,`tb_subject`.`name` AS `subject`,concat(`vw_employee`.`firstname`,' ',`vw_employee`.`lastname`) AS `teacher` from ((((`tb_class_timetable` join `tb_weekday` on((`tb_class_timetable`.`weekday_id` = `tb_weekday`.`weekday_id`))) join `tb_class_period` on((`tb_class_timetable`.`class_period_id` = `tb_class_period`.`class_period_id`))) join `tb_subject` on((`tb_class_timetable`.`subject_id` = `tb_subject`.`subject_id`))) left join `vw_employee` on((`tb_class_timetable`.`employee_id` = `vw_employee`.`employee_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_continuous_assessment_master`
+--
+DROP TABLE IF EXISTS `vw_continuous_assessment_master`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_continuous_assessment_master`  AS  select `tb_continuous_assessment`.`continuous_assessment_id` AS `continuous_assessment_id`,`tb_continuous_assessment`.`school_id` AS `school_id`,`tb_continuous_assessment`.`session_id` AS `session_id`,`tb_continuous_assessment`.`quota_id` AS `quota_id`,`tb_continuous_assessment`.`class_id` AS `class_id`,`tb_continuous_assessment`.`examination_id` AS `examination_id`,`tb_continuous_assessment`.`student_id` AS `student_id`,`tb_continuous_assessment`.`subject_id` AS `subject_id`,sum(`tb_continuous_assessment`.`score`) AS `Score` from `tb_continuous_assessment` group by `tb_continuous_assessment`.`school_id`,`tb_continuous_assessment`.`session_id`,`tb_continuous_assessment`.`quota_id`,`tb_continuous_assessment`.`class_id`,`tb_continuous_assessment`.`subject_id`,`tb_continuous_assessment`.`student_id` order by `tb_continuous_assessment`.`student_id` ;
 
 -- --------------------------------------------------------
 
@@ -2427,7 +2492,7 @@ ALTER TABLE `tb_class_type`
 -- AUTO_INCREMENT for table `tb_continuous_assessment`
 --
 ALTER TABLE `tb_continuous_assessment`
-  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tb_country`
 --
@@ -2532,7 +2597,7 @@ ALTER TABLE `tb_state`
 -- AUTO_INCREMENT for table `tb_student`
 --
 ALTER TABLE `tb_student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_student_category`
 --
@@ -2572,12 +2637,12 @@ ALTER TABLE `tb_time_zone`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_details`
 --
 ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `tb_user_additional_field`
 --

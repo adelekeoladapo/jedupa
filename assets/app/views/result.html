@@ -16,8 +16,8 @@
                                             <li class="active" data-href="result">
                                                 <a href="">Broad Sheet</a>
                                             </li>
-                                            <li data-href="tab-2">
-                                                <a href="">Tab 2</a>
+                                            <li data-href="student-result">
+                                                <a href="">Student Result</a>
                                             </li>
                                             <li data-href="tab-3">
                                                 <a href="">Tab 3</a>
@@ -66,13 +66,13 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="table-bordered" id="ca_table">
-                                                                <tr ng-repeat="student in students">
+                                                                <tr ng-repeat="broadsheet in class_broadsheet">
                                                                     <td>{{ $index + 1 }}</td>
-                                                                    <td>{{ student.firstname+' '+student.lastname }}</td>
-                                                                    <td class="center" ng-repeat="subject in basic_class_subjects">{{ factory.getStudentSubjectTotalContinuousAssessment(student.student_id, subject.subject_id) }}</td>
-                                                                    <td class="center">{{ factory.getStudentTotalContinuousAssessment(student.student_id) }}</td>
-                                                                    <td class="center">{{ factory.getStudentTotalContinuousAssessment(student.student_id) / basic_class_subjects.length | number : 1 }}</td>
-                                                                    <td class="center">19</td>
+                                                                    <td>{{ broadsheet.firstname+' '+broadsheet.lastname }}</td>
+                                                                    <td class="center" ng-repeat="subject in basic_class_subjects">{{ factory.getStudentSubjectTotalContinuousAssessment(broadsheet.student_id, subject.subject_id) }}</td>
+                                                                    <td class="center">{{ broadsheet.total_score }}</td>
+                                                                    <td class="center">{{ broadsheet.total_score / basic_class_subjects.length | number : 1 }}</td>
+                                                                    <td class="center">{{ broadsheet.position }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -87,8 +87,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="jd-tab-pane" id="tab-2">
-                                            Tab Two
+                                        <div class="jd-tab-pane" id="student-result">
+                                            Student Result
                                         </div>
                                         <div class="jd-tab-pane" id="tab-3">
                                             Tab Three

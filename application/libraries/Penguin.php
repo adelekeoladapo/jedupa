@@ -40,4 +40,14 @@ class Penguin {
         return $num;
     }
     
+    function getPosition($num, $arr){
+        rsort($arr);
+        for($i = 0; $i < count($arr); $i++){
+            if($arr[$i] == $num){
+                return ($i + 1);
+            }
+        }
+        return false;
+    }
+    
 }

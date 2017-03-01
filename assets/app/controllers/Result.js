@@ -218,14 +218,13 @@ app.controller('ResultCtrl', function($scope, $scope, Factory, Service, class_ty
         
         $scope.subject = {};
         show_loading_overlay();
-        Service.getClassStudents(class_id).then(function(response){
+        Service.getClassQuotaBroadsheet(Factory.getSchoolID(), $scope.default_quota.quota_id, class_id).then(function(response){
+            $scope.class_broadsheet = response.data;
             $scope.classs = Factory.getClass(class_id);
             $scope.basic_class_subjects = Factory.getBasicClassSubjects(class_id);
-            $scope.students = response.data;
             $scope.quota_exams = Factory.getClassQuotaExams(class_id, $scope.default_quota.quota_id);
-            //get CAs
-            Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, class_id).then(function(response){
-                Factory.updateClassQuotaContinuousAssessment(response.data);
+            Service.getClassQuotaSubjectsContinuousAssesssmentsSums(Factory.getSchoolID(), $scope.default_quota.quota_id, class_id).then(function(response){
+                Factory.updateClassQuotaContinuousAssessmentSums(response.data);
             },  function(error){});
             hide_loading_overlay();
         }, function(error){});
