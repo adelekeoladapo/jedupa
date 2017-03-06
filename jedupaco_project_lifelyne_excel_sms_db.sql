@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2017 at 04:36 PM
+-- Generation Time: Mar 06, 2017 at 04:31 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -211,7 +211,6 @@ CREATE TABLE `tb_class_timetable` (
 
 INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `session_id`, `quota_id`, `weekday_id`, `class_period_id`, `subject_id`, `employee_id`, `date_created`) VALUES
 (1, 1, 1, 1, 1, 2, 1, 1, 1, '0000-00-00 00:00:00'),
-(2, 1, 1, 1, 1, 2, 2, 1, 1, '0000-00-00 00:00:00'),
 (3, 1, 1, 1, 1, 4, 1, 1, 1, '0000-00-00 00:00:00'),
 (4, 1, 1, 1, 1, 5, 2, 1, 1, '0000-00-00 00:00:00'),
 (5, 1, 1, 1, 1, 6, 8, 1, 1, '0000-00-00 00:00:00'),
@@ -237,7 +236,8 @@ INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`,
 (29, 1, 1, 1, 1, 4, 5, 7, 3, '0000-00-00 00:00:00'),
 (30, 1, 1, 1, 1, 4, 6, 2, 2, '0000-00-00 00:00:00'),
 (31, 1, 1, 1, 1, 3, 5, 2, 2, '0000-00-00 00:00:00'),
-(32, 1, 1, 1, 2, 3, 1, 5, 3, '0000-00-00 00:00:00');
+(32, 1, 1, 1, 2, 3, 1, 5, 3, '0000-00-00 00:00:00'),
+(33, 1, 1, 1, 1, 3, 2, 1, 2, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -771,6 +771,21 @@ CREATE TABLE `tb_quota` (
 INSERT INTO `tb_quota` (`school_id`, `session_id`, `quota_id`, `name`, `start_time`, `end_time`, `description`, `is_active`, `date_created`) VALUES
 (1, 1, 1, '1st Term', '2015-11-04', '2016-11-04', NULL, 0, '2017-02-17 17:13:37'),
 (1, 1, 2, '2nd Term', '2016-08-24', '2017-03-07', NULL, 0, '2017-02-18 23:55:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_quota_class_result_settings`
+--
+
+CREATE TABLE `tb_quota_class_result_settings` (
+  `quota_class_result_settings_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  `quota_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `grading_level_id` int(11) NOT NULL,
+  `class_designation_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2327,6 +2342,12 @@ ALTER TABLE `tb_quota`
   ADD PRIMARY KEY (`quota_id`);
 
 --
+-- Indexes for table `tb_quota_class_result_settings`
+--
+ALTER TABLE `tb_quota_class_result_settings`
+  ADD PRIMARY KEY (`quota_class_result_settings_id`);
+
+--
 -- Indexes for table `tb_school`
 --
 ALTER TABLE `tb_school`
@@ -2477,7 +2498,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -2579,6 +2600,11 @@ ALTER TABLE `tb_parent`
 ALTER TABLE `tb_quota`
   MODIFY `quota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `tb_quota_class_result_settings`
+--
+ALTER TABLE `tb_quota_class_result_settings`
+  MODIFY `quota_class_result_settings_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tb_school`
 --
 ALTER TABLE `tb_school`
@@ -2628,46 +2654,6 @@ ALTER TABLE `tb_subject_assessment_timetable`
 --
 ALTER TABLE `tb_subject_category`
   MODIFY `subject_category_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tb_time_zone`
---
-ALTER TABLE `tb_time_zone`
-  MODIFY `time_zone_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tb_user`
---
-ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `tb_user_additional_details`
---
-ALTER TABLE `tb_user_additional_details`
-  MODIFY `user_additional_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
---
--- AUTO_INCREMENT for table `tb_user_additional_field`
---
-ALTER TABLE `tb_user_additional_field`
-  MODIFY `user_additional_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `tb_user_privilege`
---
-ALTER TABLE `tb_user_privilege`
-  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `tb_user_privilege_module`
---
-ALTER TABLE `tb_user_privilege_module`
-  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
---
--- AUTO_INCREMENT for table `tb_weekday`
---
-ALTER TABLE `tb_weekday`
-  MODIFY `weekday_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `tb_weekday_class_period`
---
-ALTER TABLE `tb_weekday_class_period`
-  MODIFY `weekday_class_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

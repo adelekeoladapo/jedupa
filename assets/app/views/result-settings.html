@@ -56,8 +56,40 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                            <div>
-                                                Class settings
+                                            <div class="row">
+                                                <div class="col-md-12" ng-if="true">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Class: {{ classs.name }}</h3>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <form class="form-horizontal" style="margin: 30px 15px">
+                                                                    <div class="form-group">
+                                                                        <label for="reg-no" class="col-sm-4 control-label">Grading Level <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control">
+                                                                                <option ng-repeat="data in grading_levels">{{ data.name }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="reg-no" class="col-sm-4 control-label">Class Designation <span class="required-field"> *</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control">
+                                                                                <option ng-repeat="data in class_designations">{{ data.name }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="reg-no" class="col-sm-4 control-label"></label>
+                                                                        <div class="col-sm-8">
+                                                                            <button class="btn jd-btn jd-btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
