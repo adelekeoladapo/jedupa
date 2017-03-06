@@ -54,7 +54,7 @@ class School extends CI_Controller {
     }
     
     function getSchool(){
-        $id = $this->input->post('school-id');
+        $id = 1;//$this->input->post('school-id');
         echo json_encode($this->model->getSchool($id));
     }
     

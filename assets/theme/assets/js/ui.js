@@ -133,7 +133,7 @@ function clear_form_fields(form_name){
 }
 
 function show_loading_overlay(){
-    $('#loading-overlay').fadeIn(500); //css("display", "block");
+    $('#loading-overlay').css("display", "block");
 }
 
 function hide_loading_overlay(){
