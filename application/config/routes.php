@@ -177,7 +177,10 @@ $route['api/get-examination-groups'] = 'Examination/getExaminationGroups';
 $route['api/save-continuous-assessment'] = 'Examination/saveContinuousAssessment'; 
 $route['api/get-class-quota-continuous-assessment'] = 'Examination/getClassQuotaContinuousAssessment'; 
 $route['api/get-class-quota-subjects-contuinuous-assessment-sums'] = 'Examination/getClassQuotaSubjectsContinuousAssesssmentsSums';
-$route['api/get-class-quota-broadsheet'] = 'Examination/getClassQuotaBroadsheet';
+$route['api/get-class-quota-broadsheet'] = 'Examination/getClassQuotaBroadsheet'; 
+$route['api/add-class-quota-result-settings'] = 'Examination/insertClassQuotaResultSettings'; 
+$route['api/get-class-quota-result-settings'] = 'Examination/getClassQuotaResultSettings'; 
+
 
 
 

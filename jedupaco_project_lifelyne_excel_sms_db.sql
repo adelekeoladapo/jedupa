@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2017 at 04:31 PM
+-- Generation Time: Mar 08, 2017 at 02:09 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -784,8 +784,20 @@ CREATE TABLE `tb_quota_class_result_settings` (
   `quota_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `grading_level_id` int(11) NOT NULL,
-  `class_designation_id` int(11) NOT NULL
+  `class_designation_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_quota_class_result_settings`
+--
+
+INSERT INTO `tb_quota_class_result_settings` (`quota_class_result_settings_id`, `session_id`, `quota_id`, `class_id`, `grading_level_id`, `class_designation_id`, `school_id`) VALUES
+(1, 1, 1, 1, 3, 1, 1),
+(2, 1, 1, 2, 1, 1, 1),
+(3, 1, 1, 3, 3, 3, 1),
+(4, 1, 2, 1, 1, 1, 1),
+(5, 1, 1, 4, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2603,7 +2615,7 @@ ALTER TABLE `tb_quota`
 -- AUTO_INCREMENT for table `tb_quota_class_result_settings`
 --
 ALTER TABLE `tb_quota_class_result_settings`
-  MODIFY `quota_class_result_settings_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `quota_class_result_settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_school`
 --

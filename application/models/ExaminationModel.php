@@ -6,7 +6,7 @@
  */
 class ExaminationModel extends CI_Model {
     
-    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment', $view_broadsheet = 'vw_broadsheet';
+    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment', $view_broadsheet = 'vw_broadsheet', $table_quota_class_result_settings = 'tb_quota_class_result_settings';
     
     function insertExamination($data){
         $this->db->insert($this->table_name, $data);
@@ -183,6 +183,39 @@ class ExaminationModel extends CI_Model {
         }else{
             return false;
         }
+    }
+    
+    
+    /** Class quota result settings **/
+    
+    function insertQuotaClassResultSettings($data){
+        if($this->getQuotaClassResultSettings_($data->quota_id, $data->class_id)){
+            $this->updateQuotaClassResultSettings ($data);
+            return;
+        }
+        $this->db->insert($this->table_quota_class_result_settings, $data);
+        return $this->db->insert_id();
+    }
+    
+    function getQuotaClassResultSettings($id){
+        $this->db->select('*');
+        $this->db->where('quota_class_result_settings_id', $id);
+        $query = $this->db->get($this->table_quota_class_result_settings);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
+    
+    function getQuotaClassResultSettings_($quota_id, $class_id){
+        $this->db->select('*');
+        $this->db->where('quota_id', $quota_id);
+        $this->db->where('class_id', $class_id);
+        $query = $this->db->get($this->table_quota_class_result_settings);
+        return ($query->num_rows()) ? $query->row() : null;
+    }
+    
+    function updateQuotaClassResultSettings($data){
+        $this->db->where('quota_id', $data->quota_id);
+        $this->db->where('class_id', $data->class_id);
+        $this->db->update($this->table_quota_class_result_settings, $data);
     }
     
 }

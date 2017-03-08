@@ -212,4 +212,19 @@ class Examination extends CI_Controller {
     }
     
     
+    
+    /** Class quota result settings **/
+    function insertClassQuotaResultSettings(){
+        $data = new stdClass();
+        $data = json_decode(file_get_contents('php://input'));
+        $this->model->insertQuotaClassResultSettings($data);
+    }
+    
+    function getClassQuotaResultSettings(){
+        $class_id = $this->input->get('class-id');
+        $quota_id = $this->input->get('quota-id');
+        $data = $this->model->getQuotaClassResultSettings_($quota_id, $class_id);
+        echo json_encode($data);
+    }
+    
 }

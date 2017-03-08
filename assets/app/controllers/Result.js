@@ -30,6 +30,8 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
     
     $scope.examination_group = {};
     
+    $scope.class_quota_result_settings = {};
+    
     /** CLASS DESIGNATION **/
     
     /** add Class Designation **/
@@ -162,8 +164,40 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
     }
     
     $scope.setClass = function(class_id){
-        $scope.classs = Factory.getClass(class_id);
+        show_loading_overlay();
+        Service.getClassQuotaResultSettings(class_id, $scope.default_quota.quota_id).then(function(response){
+            $scope.class_quota_result_settings = (response.data != 'null') ?  response.data : {};
+            $scope.classs = Factory.getClass(class_id);
+            hide_loading_overlay();
+        }, function(error){});
     }
+    
+    /** add class quota result settings **/
+    
+    $scope.addQuotaResultSettings = function(){
+        if($('#form-add-class-quota-result-settings').smkValidate()){
+            show_loading_overlay();
+            $scope.class_quota_result_settings.school_id = Factory.getSchoolID();
+            $scope.class_quota_result_settings.class_id = $scope.classs.class_id;
+            $scope.class_quota_result_settings.session_id = $scope.default_quota.session_id;
+            $scope.class_quota_result_settings.quota_id = $scope.default_quota.quota_id;
+            Service.saveClassQuotaResultSettings($scope.class_quota_result_settings).then(function(response){
+                hide_loading_overlay();
+                toast("Saved Successfully");
+            }, function(error){
+                console.log(error);
+            });
+        }
+    }
+    /** end add class quota result settings **/
+    
+    
+    
+    
+    
+    
+    
+    
     
     /** set active session **/
     $scope.setActiveSession = function(session_id){

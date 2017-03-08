@@ -1282,6 +1282,22 @@ app.service('Service', function($http){
     };
     
     
+    this.saveClassQuotaResultSettings = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-class-quota-result-settings",
+            data: data
+        });
+    }
+    
+    this.getClassQuotaResultSettings = function(class_id, quota_id){
+        return $http.get(base_url+"api/get-class-quota-result-settings", {
+            params : {'quota-id': quota_id, 'class-id': class_id}
+        });
+    };
+    
+    
+    
     
     /** user privilege **/
     this.addUserPrivilege = function(data){
