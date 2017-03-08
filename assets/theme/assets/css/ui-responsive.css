@@ -28,7 +28,9 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    
+    .nav-xs .nav-primary > ul > li > a {
+        overflow: hidden;
+    }
 }
 
 /* Medium devices (desktops, 992px and up) */
