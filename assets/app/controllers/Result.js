@@ -18,6 +18,8 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
     
     $scope.default_quota = $scope.$parent.default_quota;//Factory.getDefaultQuota();
     
+    $scope.class_students = [];
+    
     $scope.class_designation = {};
     
     $scope.class_designation_structure = {};
@@ -220,9 +222,13 @@ app.controller('ResultCtrl', function($scope, $scope, Factory, Service, class_ty
     
     $scope.basic_class_subjects = [];
     
+    $scope.basic_class_subjects_2 = [];
+    
     $scope.students = [];
     
      $scope.class_subject_continuous_assessments = [];
+     
+     $scope.quota_exams = [];
     
     $scope.quota_exams = {};
     
@@ -263,6 +269,34 @@ app.controller('ResultCtrl', function($scope, $scope, Factory, Service, class_ty
             hide_loading_overlay();
         }, function(error){});
     }
+    
+    
+    /**
+     * Student Result
+    **/
+   
+   $scope.setClass_2 = function(class_id){
+       $scope.classs_2 = Factory.getClass(class_id);
+       show_loading_overlay();
+        Service.getClassStudents(class_id).then(function(response){
+            $scope.students_2 = response.data;
+            $scope.basic_class_subjects_2 = Factory.getBasicClassSubjects(class_id);
+            $scope.quota_exams = Factory.getClassQuotaExams(class_id, $scope.default_quota.quota_id);
+            //get CAs
+            Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, class_id).then(function(response){
+                Factory.updateClassQuotaContinuousAssessment(response.data);
+                console.log(response.data);
+            },  function(error){});
+            hide_loading_overlay();
+        }, function(error){});
+   }
+   
+   
+   $scope.setClassStudent = function(student_id){
+       $scope.setClass_2($scope.classs_2.class_id);
+       $scope.student_2 = {'student_id': student_id};
+       //console.log(Factory.getContinuousAssessment(student_id, exam.examination_id, subject.subject_id));
+   }
     
     
 });

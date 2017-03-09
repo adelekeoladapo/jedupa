@@ -88,7 +88,77 @@
                                             </div>
                                         </div>
                                         <div class="jd-tab-pane" id="student-result">
-                                            Student Result
+                                            <fieldset class="options-container">
+                                                <legend>Select Class</legend>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_type_id" ng-change="setClassLevels(class_type_id)">
+                                                            <option ng-value="{{ type.class_type_id }}" ng-repeat="type in class_types">{{ type.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select ng-model="class_level_id" class="form-control" ng-change="setClasses(class_level_id)">
+                                                            <option ng-value="level.class_level_id" ng-repeat="level in class_levels">{{ level.name }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control" ng-model="class_id" ng-change="setClass_2(class_id);">
+                                                            <option ng-value="{{ classs.class_id }}" ng-repeat="classs in classes">{{ classs.code }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-4" style="text-align: right">
+                                                        <!--<button class="btn jd-btn jd-btn-default" ng-click="showConnectExams()">Connect Exams</button>-->
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="row">
+                                                <!-- class student list -->
+                                                <div class="col-md-2" ng-show="(students_2.length > 0)">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">{{ classs_2.code }} Students</h3>
+                                                        <ul class="class-level-list">
+                                                            <li ng-repeat="student in students_2">
+                                                                <a ng-init="id = student.student_id" href="" ng-click="setClassStudent(id)">
+                                                                    {{ student.firstname+" "+student.lastname }}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!--/ class student list -->
+                                                <!-- student result -->
+                                                <div class="col-md-10 main-table-with-sidebar">
+                                                    <div class="sidebar-container">
+                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title"> {{ 'StudentName' }}</h3>
+                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                            <thead class="table-bordered">
+                                                                <tr>
+                                                                    <th>Subject</th> 
+                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" }}</th>
+                                                                    <th class="center">Total</th>
+                                                                    <th class="center">Grade</th>
+                                                                    <th class="center">Remark</th>
+                                                                    <th class="center">Position</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="table-bordered" id="ca_table">
+                                                                <tr ng-repeat="subject in basic_class_subjects_2">
+                                                                    <td>{{ subject.subject }}</td>
+                                                                    <td class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">
+                                                                        <span ng-init="ca = factory.getContinuousAssessment(student_2.student_id, exam.examination_id, subject.subject_id)">{{ ca.score }}</span>
+                                                                    </td>
+                                                                    <td class="center">00</td>
+                                                                    <td class="center">XX</td>
+                                                                    <td class="center">------</td>
+                                                                    <td class="center">X</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- class result -->
+                                            </div>
                                         </div>
                                         <div class="jd-tab-pane" id="tab-3">
                                             Tab Three
