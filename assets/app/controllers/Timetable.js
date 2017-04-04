@@ -48,9 +48,9 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
         $scope.new_periods.session_id = $scope.default_quota.session_id;
         $scope.new_periods.periods = period_tray;
         if(!$scope.new_periods.subject_id){
-            toast("Kindly select a subject");
+            toastr.error("Kindly select a subject");
         }else if($scope.new_periods.periods.length < 1){
-            toast("No period selected");
+            toastr.error("No period selected");
         }else{
             show_loading_overlay();
             Service.addClassWeekdaysPeriodsSubjects($scope.new_periods).then(function(response){
@@ -63,7 +63,7 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
                         Factory.updateBasicClassSubjects(response.data);
                     }, function(error){});
                     hide_loading_overlay();
-                    toast($scope.new_periods.periods.length+" periods added successfully");
+                    toastr.success($scope.new_periods.periods.length+" periods added successfully");
                 }, function(error){});
             }, function(error){});
         }
@@ -72,7 +72,7 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
     $scope.resetClassTimetablePeriods = function(){ 
         var periods = period_tray;
         if(periods.length < 1){
-            toast("No period selected");
+            toastr.error("No period selected");
         }else{
             var c = confirm("Reset Periods?");
             if(c){
@@ -92,7 +92,7 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
                             Factory.updateBasicClassSubjects(response.data);
                         }, function(error){});
                         hide_loading_overlay();
-                        toast(periods.length+" periods reset successfully");
+                        toastr.success(periods.length+" periods reset successfully");
                     }, function(error){});
                 }, function(error){});
             }
@@ -131,7 +131,7 @@ app.controller('TimetableCtrl', function($scope, $scope, Factory, Service, class
                         Factory.updateBasicClassSubjects(response.data);
                     }, function(error){});
                     hide_loading_overlay();
-                    toast("Timetable reset successfully");
+                    toastr.success("Timetable reset successfully");
                 }, function(error){});
             }, function(error){});
         }
@@ -177,7 +177,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
                     $scope.class_timing_sets = response.data;
                     clear_form_fields('form-add-class-timing-set');
                     hide_loading_overlay();
-                    toast('Class Timing Successfully Added');
+                    toastr.success('Class Timing Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -230,7 +230,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
                     $scope.setActiveClassTimingSet($scope.active_class_timing_set.class_timing_set_id);
                     clear_form_fields('form-add-class-period');
                     hide_loading_overlay();
-                    toast('Period Successfully Added');
+                    toastr.success('Period Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -266,7 +266,7 @@ app.controller('TimetableSettingsCtrl', function($scope, $scope, Factory, Servic
         if(status){
             data.class_timing_id = $('#class_timing_'+weekday_class_period.weekday.weekday_id).val();
             if(data.class_timing_id == "? undefined:undefined ?"){
-                toast("Select Class Timing Set");
+                toastr.success("Select Class Timing Set");
                 hide_loading_overlay();
                 return;
             } 

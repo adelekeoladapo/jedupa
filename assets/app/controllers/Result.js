@@ -47,7 +47,7 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
                     $scope.class_designations = response.data;
                     clear_form_fields('form-add-class-designation');
                     hide_loading_overlay();
-                    toast('Class Designation Successfully Added');
+                    toastr.success('Class Designation Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -86,7 +86,7 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
                     clear_form_fields('form-add-class-designation-structure');
                     $scope.class_designation_structures = {};
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -108,7 +108,7 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
                     $scope.grading_levels = response.data;
                     clear_form_fields('form-add-score-group');
                     hide_loading_overlay();
-                    toast('Grading Level Successfully Added');
+                    toastr.success('Grading Level Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -146,7 +146,7 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
                     $scope.setActiveGradingLevel($scope.active_grading_level.grading_level_id);
                     clear_form_fields('form-add-score-group-structure');
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -185,7 +185,7 @@ app.controller('ResultSettingsCtrl', function($scope, $scope, Factory, Service, 
             $scope.class_quota_result_settings.quota_id = $scope.default_quota.quota_id;
             Service.saveClassQuotaResultSettings($scope.class_quota_result_settings).then(function(response){
                 hide_loading_overlay();
-                toast("Saved Successfully");
+                toastr.success("Saved Successfully");
             }, function(error){
                 console.log(error);
             });

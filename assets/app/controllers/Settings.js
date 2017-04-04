@@ -29,16 +29,16 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
                     result = JSON.parse(result);
                     hide_loading_overlay();
                     if(result.status){
-                        toast(result.message);
+                        toastr.success(result.message);
                     }else{
-                        toast(result.message);
+                        toastr.success(result.message);
                     }
                 },
                 complete: function(){
                 },
                 timeout: 50000,
                 error: function(){
-                    toast("An error occurred. Try again");
+                    toastr.success("An error occurred. Try again");
                 },
                 //Options to tell jQuery not to process data or worry about content-type.
                 cache: false,
@@ -70,7 +70,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
                     Factory.updateStudentCategories(response.data);
                     clear_form_fields('form-add-student-category');
                     hide_loading_overlay();
-                    toast('Category Successfully Added');
+                    toastr.success('Category Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -103,7 +103,7 @@ app.controller('GeneralSettingsCtrl', function($scope, Factory, Service, states,
                     Factory.updateAdditionalFields(response.data);
                     clear_form_fields('form-add-additional-field');
                     hide_loading_overlay();
-                    toast('Field Successfully Added');
+                    toastr.success('Field Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -225,7 +225,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     Factory.updateStudentDepartments(response.data);
                     clear_form_fields('form-add-student-dept');
                     hide_loading_overlay();
-                    toast('Department Successfully Added');
+                    toastr.success('Department Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -254,7 +254,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     clear_form_fields('form-add-class');
                     $scope.setActiveLevel($scope.classs.class_level_id);
                     hide_loading_overlay();
-                    toast('Class Successfully Added');
+                    toastr.success('Class Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -356,7 +356,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     Factory.updateBasicClassSubjects(response.data);
                     $scope.basic_class_subjects = Factory.getBasicClassSubjects(basic_class_subject.class_id);
                     hide_loading_overlay();
-                    toast("Deleted Successfully")
+                    toastr.success("Deleted Successfully")
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -381,7 +381,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.setActiveClassType($scope.active_class_type.class_type_id);
                     clear_form_fields('form-add-class-level');
                     hide_loading_overlay();
-                    toast('Level Successfully Added');
+                    toastr.success('Level Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -417,7 +417,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.class_types = response.data;
                     clear_form_fields('form-add-class-type');
                     hide_loading_overlay();
-                    toast('Type Successfully Added');
+                    toastr.success('Type Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -463,7 +463,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.sessions = response.data;
                     clear_form_fields('form-add-session');
                     hide_loading_overlay();
-                    toast('Session Successfully Added');
+                    toastr.success('Session Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -504,7 +504,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.setActiveSession($scope.active_session.session_id);
                     clear_form_fields('form-add-quota');
                     hide_loading_overlay();
-                    toast('Quota Successfully Added');
+                    toastr.success('Quota Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -527,7 +527,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.grading_levels = response.data;
                     clear_form_fields('form-add-score-group');
                     hide_loading_overlay();
-                    toast('Grading Level Successfully Added');
+                    toastr.success('Grading Level Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -565,7 +565,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.setActiveGradingLevel($scope.active_grading_level.grading_level_id);
                     clear_form_fields('form-add-score-group-structure');
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -588,7 +588,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.class_designations = response.data;
                     clear_form_fields('form-add-class-designation');
                     hide_loading_overlay();
-                    toast('Class Designation Successfully Added');
+                    toastr.success('Class Designation Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -627,7 +627,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     clear_form_fields('form-add-class-designation-structure');
                     $scope.class_designation_structures = {};
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -652,7 +652,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.class_timing_sets = response.data;
                     clear_form_fields('form-add-class-timing-set');
                     hide_loading_overlay();
-                    toast('Class Timing Successfully Added');
+                    toastr.success('Class Timing Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -678,7 +678,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.subjects = response.data;
                     clear_form_fields('form-add-subject');
                     hide_loading_overlay();
-                    toast('Subject Successfully Added');
+                    toastr.success('Subject Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -718,7 +718,7 @@ app.controller('AcademicSettingsCtrl', function($scope, Factory, Service, depart
                     $scope.setActiveClassTimingSet($scope.active_class_timing_set.class_timing_set_id);
                     clear_form_fields('form-add-class-period');
                     hide_loading_overlay();
-                    toast('Period Successfully Added');
+                    toastr.success('Period Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -792,7 +792,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                     Factory.updateEmpDepartments(response.data);
                     clear_form_fields('form-add-employee-department');
                     hide_loading_overlay();
-                    toast('Department Successfully Added');
+                    toastr.success('Department Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -819,7 +819,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                     $scope.employee_categories = response.data;
                     clear_form_fields('form-add-employee-category');
                     hide_loading_overlay();
-                    toast('Category Successfully Added');
+                    toastr.success('Category Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -847,7 +847,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                     clear_form_fields('form-add-employee-position');
                     $scope.setActiveEmpCategory($scope.active_employee_category.employee_category_id);
                     hide_loading_overlay();
-                    toast('Position Successfully Added');
+                    toastr.success('Position Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -890,7 +890,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                     Factory.updateEmpGradeLevels(response.data);
                     clear_form_fields('form-add-employee-grade-level');
                     hide_loading_overlay();
-                    toast('Grade Level Successfully Added');
+                    toastr.success('Grade Level Successfully Added');
                 }, function(error){
                     console.log(error);
                 });
@@ -917,7 +917,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
                         Factory.updateUserPrivilegeModules(response.data);
                         clear_form_fields('form-add-user-privilege');
                         hide_loading_overlay();
-                        toast('Privilege Successfully Added');
+                        toastr.success('Privilege Successfully Added');
                     }, function(error){});
                 }, function(error){});
             }, function(error){
@@ -947,7 +947,7 @@ app.controller('HRSettingsCtrl', function($scope, Factory, Service, employee_dep
             Service.getUserPrivilegeModules(Factory.getSchoolID()).then(function(response){
                 Factory.updateUserPrivilegeModules(response.data);
                 hide_loading_overlay();
-                toast('Privilege Saved Successfully');
+                toastr.success('Privilege Saved Successfully');
             }, function(error){});
             console.log(response.data);
             hide_loading_overlay();

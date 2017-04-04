@@ -63,12 +63,12 @@ app.controller('NewStudentCtrl', function($scope, $state, Factory, Service, stat
         if($('#form-add-student').smkValidate()){
             if($scope.mtd == 'card-guardian'){
                 if($('#parent_name_').val().trim().length == 0){
-                    toast("Kindly specify guardian");
+                    toastr.error("Kindly specify guardian");
                     return; 
                 }
             }else if($scope.mtd == 'card-sib'){
                 if($('#parent_id_').val().trim().length == 0){
-                    toast("Kindly select sibling");
+                    toastr.error("Kindly select sibling");
                     return; 
                 }
             }
@@ -84,16 +84,16 @@ app.controller('NewStudentCtrl', function($scope, $state, Factory, Service, stat
                     hide_loading_overlay();
                     if(result.status){
                         $state.reload();
-                        toast(result.message);
+                        toastr.success(result.message);
                     }else{
-                        toast(result.message);
+                        toastr.error(result.message);
                     }
                 },
                 complete: function(){
                 },
                 timeout: 50000,
                 error: function(){
-                    toast("An error occurred. Try again");
+                    toastr.error("An error occurred. Try again");
                 },
                 //Options to tell jQuery not to process data or worry about content-type.
                 cache: false,

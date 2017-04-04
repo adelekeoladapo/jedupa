@@ -1656,10 +1656,10 @@ app.controller('mainCtrl', function($rootScope, $state, Factory, Service){
                 $state.go('dashboard');
                 $rootScope.def = {};
                 hide_loading_overlay();
-                toast("Default Quota Successfully Set");
+                toastr.success("Default Quota Successfully Set");
             }, function(error){});
         }else{
-            toast("Select Quota");
+            toastr.error("Select Quota");
         }
     }
     
@@ -1672,7 +1672,7 @@ app.controller('mainCtrl', function($rootScope, $state, Factory, Service){
     
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){ 
         hide_loading_overlay();
-        toast('No Internet Access');
+        toastr.success('No Internet Access');
     });
     
     

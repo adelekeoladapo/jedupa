@@ -43,7 +43,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     $scope.class_designations = response.data;
                     clear_form_fields('form-add-class-designation');
                     hide_loading_overlay();
-                    toast('Class Designation Successfully Added');
+                    toastr.success('Class Designation Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -82,7 +82,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     clear_form_fields('form-add-class-designation-structure');
                     $scope.class_designation_structures = {};
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -104,7 +104,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     $scope.grading_levels = response.data;
                     clear_form_fields('form-add-score-group');
                     hide_loading_overlay();
-                    toast('Grading Level Successfully Added');
+                    toastr.success('Grading Level Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -142,7 +142,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     $scope.setActiveGradingLevel($scope.active_grading_level.grading_level_id);
                     clear_form_fields('form-add-score-group-structure');
                     hide_loading_overlay();
-                    toast('Pattern Successfully Added');
+                    toastr.success('Pattern Successfully Added');
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -194,7 +194,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     $scope.setActiveClassQuotaExams($scope.classs.class_id);
                     $scope.new_examination.name = $scope.new_examination.description = "";
                     hide_loading_overlay();
-                    toast("Examination added successfully");
+                    toastr.success("Examination added successfully");
                 }, function(error){});
             }, function(error){
                 console.log(error);
@@ -243,12 +243,12 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                     Factory.updateExamTimetable(response.data);
                 }, function(error){});
                 hide_loading_overlay();
-                toast('Done!');
+                toastr.success('Done!');
             }, function(error){
                 console.log(error);
             });
         }else{
-            toast('Kindly set timetable correctly');
+            toastr.success('Kindly set timetable correctly');
         }
     }
     
@@ -259,7 +259,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
     
     $scope.connectExams = function(){ 
         if($scope.getTotalWeightage() != 100){
-            toast('Total weightage must be 100');
+            toastr.success('Total weightage must be 100');
             return;
         }
         
@@ -275,7 +275,7 @@ app.controller('ExaminationCtrl', function($scope, $scope, Factory, Service, gra
                         Factory.updateExaminations(response.data);
                         $scope.setActiveClassQuotaExams($scope.classs.class_id, $scope.quota.quota_id);
                         hide_loading_overlay();
-                        toast('Examinations connected successfully');
+                        toastr.success('Examinations connected successfully');
                     });
                 });
             }, function(error){});
@@ -385,7 +385,7 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
                 Factory.updateClassQuotaContinuousAssessment(response.data);
                 $scope.setActiveSubject($scope.subject.subject_id);
                 hide_loading_overlay();
-                toast('Successfully Saved');
+                toastr.success('Successfully Saved');
             },  function(error){});
         }, function(error){});
         
@@ -409,7 +409,7 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
 //            Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, $scope.classs.class_id).then(function(response){
 //                Factory.updateClassQuotaContinuousAssessment(response.data);
 //                hide_loading_overlay();
-//                toast('Successfully Saved');
+//                toastr.success('Successfully Saved');
 //            },  function(error){});
 //        }, function(error){});
     }
