@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jedupa extends CI_Controller {
     
-    private $school_model, $user_model, $user_privilege_model, $examination_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model;
+    private $school_model, $user_model, $user_privilege_model, $examination_model, $student_dept_model, $class_model, $session_model, $quota_model, $grading_level_model, $class_designation_model, $student_category_model, $additional_field_model, $employee_department_model, $employee_category_model, $employee_position_model, $employee_grade_level_model, $subject_model, $class_timing_set_model, $class_period_model, $weekday_model, $class_timetable_model, $behavioural_trait_model;
     
     function __construct() {
         parent::__construct();
@@ -28,6 +28,7 @@ class Jedupa extends CI_Controller {
         $this->load->model('ExaminationModel');
         $this->load->model('UserPrivilegeModel');
         $this->load->model('UserModel');
+        $this->load->model('BehaviouralTraitModel');
         $this->school_model = new SchoolModel();
         $this->student_dept_model = new StudentDeptModel();
         $this->class_model = new ClassModel();
@@ -48,6 +49,7 @@ class Jedupa extends CI_Controller {
         $this->class_designation_model = new ClassDesignationModel();
         $this->examination_model = new ExaminationModel();
         $this->user_privilege_model = new UserPrivilegeModel();
+        $this->behavioural_trait_model = new BehaviouralTraitModel();
         $this->user_model = new UserModel();
     }
 
@@ -153,7 +155,10 @@ class Jedupa extends CI_Controller {
             $data['user_privileges'] = $this->user_privilege_model->getUserPrivileges($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
             $data['system_modules'] = $this->user_privilege_model->getModules('position', 'ASC', null, null, $page, $page_size);
             $data['user_privilege_modules'] = $this->user_privilege_model->getUserPrivilegeModules('position', 'ASC', $filter_field, $filter_value, $page, $page_size);
-
+            $data['psychomotors'] = $this->behavioural_trait_model->getPsychometers($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            $data['effective_areas'] = $this->behavioural_trait_model->getEffectiveAreas($sort_field, $sort_order_mode, $filter_field, $filter_value, $page, $page_size);
+            
+            
             echo json_encode($data);
         }else{
             echo 'default privileges not ready';

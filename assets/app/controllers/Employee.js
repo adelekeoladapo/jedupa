@@ -1,6 +1,8 @@
-app.controller('EmployeesCtrl', function($scope, $scope, Factory, Service, employees){
+app.controller('EmployeesCtrl', function($scope, $state, Factory, Service, employees){
     
     $scope.factory = Factory;
+    
+    $scope.state = $state;
     
     $scope.employees = employees.data;
     

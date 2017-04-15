@@ -6,7 +6,7 @@
  */
 class ExaminationModel extends CI_Model {
     
-    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment', $view_broadsheet = 'vw_broadsheet', $table_quota_class_result_settings = 'tb_quota_class_result_settings';
+    private $table_name = 'tb_examination', $table_exam_timetable = 'tb_examination_timetable', $table_exam_group = 'tb_examination_group', $table_continuous_assessment = 'tb_continuous_assessment', $view_broadsheet = 'vw_broadsheet', $table_quota_class_result_settings = 'tb_quota_class_result_settings', $view_total_quota_subject_exams_score = 'vw_total_quota_subject_exams_score';
     
     function insertExamination($data){
         $this->db->insert($this->table_name, $data);
@@ -216,6 +216,14 @@ class ExaminationModel extends CI_Model {
         $this->db->where('quota_id', $data->quota_id);
         $this->db->where('class_id', $data->class_id);
         $this->db->update($this->table_quota_class_result_settings, $data);
+    }
+    
+    function getClassTotalQuotaSubjectExamsScores_($quota_id, $class_id){
+        $this->db->select('*');
+        $this->db->where('quota_id', $quota_id);
+        $this->db->where('class_id', $class_id);
+        $query = $this->db->get($this->view_total_quota_subject_exams_score);
+        return ($query->num_rows()) ? $query->result() : null;
     }
     
 }

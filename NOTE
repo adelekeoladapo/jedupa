@@ -1,3 +1,25 @@
+   Jedupa Web v1.0
+   - Exam assessment
+   - Result Settings
+   - Result
+	 - Result Settings
+	 - Class Result
+	   . Broad Sheet
+	   . Result
+   - Grading Systems
+   - Set Default Quota
+   - Exam Timetable
+   - Mail
+   - Event
+   - Library
+   - Clean Up
+   - Dashboard
+
+
+
+
+
+
 * DEFAULT PRIVILEGES : Privileges that are not tied to any school 
 1. Student - 0
 2. Parent - 1
@@ -276,3 +298,17 @@ CREATE VIEW `vw_broadsheet`  AS  SELECT
 vw_student.firstname AS firstname, 
 vw_student.lastname AS lastname,
 sum(`tb_continuous_assessment`.`score`) AS `total_score` from `tb_continuous_assessment` JOIN vw_student ON tb_continuous_assessment.student_id = vw_student.student_id group by `tb_continuous_assessment`.`school_id`,`tb_continuous_assessment`.`session_id`,`tb_continuous_assessment`.`quota_id`,`tb_continuous_assessment`.`class_id`,`tb_continuous_assessment`.`student_id` order by `tb_continuous_assessment`.`student_id` ;
+
+
+
+
+CREATE VIEW vw_total_quota_subject_exams_score AS SELECT 
+    quota_id,
+    session_id,
+    school_id,
+    class_id,
+    student_id,
+    subject_id,
+    SUM(score) AS score
+FROM tb_continuous_assessment 
+    GROUP BY subject_id, student_id, quota_id

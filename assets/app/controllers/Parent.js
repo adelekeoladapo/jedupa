@@ -1,6 +1,8 @@
-app.controller('ParentsCtrl', function($scope, $scope, Factory, Service, parents){
+app.controller('ParentsCtrl', function($scope, $state, Factory, Service, parents){
     
     $scope.factory = Factory;
+    
+    $scope.state = $state;
     
     $scope.parents = parents.data;
     
@@ -8,7 +10,7 @@ app.controller('ParentsCtrl', function($scope, $scope, Factory, Service, parents
 
 
 
-app.controller('ViewParentCtrl', function($scope, $scope, Factory, Service, parent, children){
+app.controller('ViewParentCtrl', function($scope, $state, Factory, Service, parent, children){
     
     $scope.factory = Factory;
     

@@ -1,0 +1,103 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: rgb(51, 51, 51);
+}
+
+th.blue {
+	background: #08C;
+	color: #FFF;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+
+.table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+    border-top: 0px none;
+}
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid rgb(221, 221, 221);
+    padding: 4px 5px;
+    background-color: #F8F8F8;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 3px 5px;
+    line-height: 1.22857;
+    vertical-align: top;
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table > tbody > tr > td > span {
+    padding: 3px;
+}
+
+.yes-print{
+    display: block;
+}
+
+.no-print {
+    display: none;
+}
+
+
+
+
+.col-md-6 {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+
+/** school header **/
+.table-school-header .sch-logo {
+    width: 15%;
+    text-align: left;
+}
+
+.table-school-header .sch-logo img {
+    width: 120px;
+    height: 120px;
+    /*border: solid 1px #ddd;*/
+}
+
+.table-school-header th {
+    /*text-align: center;*/
+    padding: 0px;
+    border: 0px;
+}
+
+.table-school-header .school-name {
+    font-size: 30px;
+    margin-bottom: 3px;
+}
+
+.table-school-header p {
+    margin: 0px;
+}
+
+/** school header **/
+
+
+.no-border-right {
+    border-right: transparent !important;
+}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2017 at 02:09 PM
+-- Generation Time: Apr 16, 2017 at 12:06 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -210,34 +210,53 @@ CREATE TABLE `tb_class_timetable` (
 --
 
 INSERT INTO `tb_class_timetable` (`class_timetable_id`, `class_id`, `school_id`, `session_id`, `quota_id`, `weekday_id`, `class_period_id`, `subject_id`, `employee_id`, `date_created`) VALUES
-(1, 1, 1, 1, 1, 2, 1, 1, 1, '0000-00-00 00:00:00'),
+(1, 1, 1, 1, 2, 2, 1, 1, 1, '0000-00-00 00:00:00'),
 (3, 1, 1, 1, 1, 4, 1, 1, 1, '0000-00-00 00:00:00'),
-(4, 1, 1, 1, 1, 5, 2, 1, 1, '0000-00-00 00:00:00'),
+(4, 1, 1, 1, 2, 5, 2, 1, 1, '0000-00-00 00:00:00'),
 (5, 1, 1, 1, 1, 6, 8, 1, 1, '0000-00-00 00:00:00'),
-(6, 1, 1, 1, 1, 3, 1, 2, 3, '0000-00-00 00:00:00'),
+(6, 1, 1, 1, 2, 3, 1, 1, 1, '0000-00-00 00:00:00'),
 (7, 1, 1, 1, 1, 4, 2, 2, 3, '0000-00-00 00:00:00'),
-(8, 1, 1, 1, 1, 5, 1, 2, 3, '0000-00-00 00:00:00'),
+(8, 1, 1, 1, 2, 5, 1, 1, 1, '0000-00-00 00:00:00'),
 (9, 1, 1, 1, 1, 6, 9, 2, 3, '0000-00-00 00:00:00'),
 (10, 1, 1, 1, 1, 5, 6, 7, 2, '0000-00-00 00:00:00'),
 (11, 1, 1, 1, 1, 5, 5, 7, 2, '0000-00-00 00:00:00'),
 (12, 1, 1, 1, 2, 2, 2, 2, 2, '0000-00-00 00:00:00'),
-(13, 1, 1, 1, 2, 2, 1, 2, 2, '0000-00-00 00:00:00'),
+(13, 1, 1, 1, 2, 2, 1, 1, 1, '0000-00-00 00:00:00'),
 (14, 1, 1, 1, 2, 4, 1, 2, 2, '0000-00-00 00:00:00'),
-(15, 1, 1, 1, 2, 5, 1, 2, 2, '0000-00-00 00:00:00'),
-(16, 1, 1, 1, 2, 5, 2, 2, 2, '0000-00-00 00:00:00'),
-(17, 1, 1, 1, 2, 6, 7, 2, 2, '0000-00-00 00:00:00'),
-(22, 3, 1, 1, 1, 2, 1, 1, 1, '0000-00-00 00:00:00'),
+(15, 1, 1, 1, 2, 5, 1, 1, 1, '0000-00-00 00:00:00'),
+(16, 1, 1, 1, 2, 5, 2, 1, 1, '0000-00-00 00:00:00'),
+(17, 1, 1, 1, 2, 6, 7, 4, 4, '0000-00-00 00:00:00'),
+(22, 1, 1, 1, 2, 2, 1, 1, 1, '0000-00-00 00:00:00'),
 (23, 3, 1, 1, 1, 3, 2, 1, 1, '0000-00-00 00:00:00'),
 (24, 3, 1, 1, 1, 4, 2, 1, 1, '0000-00-00 00:00:00'),
-(25, 3, 1, 1, 1, 5, 1, 1, 1, '0000-00-00 00:00:00'),
-(26, 2, 1, 1, 1, 2, 1, 1, 2, '0000-00-00 00:00:00'),
+(25, 1, 1, 1, 2, 5, 1, 1, 1, '0000-00-00 00:00:00'),
+(26, 1, 1, 1, 2, 2, 1, 1, 1, '0000-00-00 00:00:00'),
 (27, 2, 1, 1, 1, 2, 2, 2, 3, '0000-00-00 00:00:00'),
 (28, 1, 1, 1, 1, 2, 4, 7, 3, '0000-00-00 00:00:00'),
 (29, 1, 1, 1, 1, 4, 5, 7, 3, '0000-00-00 00:00:00'),
 (30, 1, 1, 1, 1, 4, 6, 2, 2, '0000-00-00 00:00:00'),
 (31, 1, 1, 1, 1, 3, 5, 2, 2, '0000-00-00 00:00:00'),
-(32, 1, 1, 1, 2, 3, 1, 5, 3, '0000-00-00 00:00:00'),
-(33, 1, 1, 1, 1, 3, 2, 1, 2, '0000-00-00 00:00:00');
+(32, 1, 1, 1, 2, 3, 1, 1, 1, '0000-00-00 00:00:00'),
+(33, 1, 1, 1, 1, 3, 2, 1, 2, '0000-00-00 00:00:00'),
+(34, 1, 1, 1, 1, 3, 4, 5, 3, '0000-00-00 00:00:00'),
+(35, 1, 1, 1, 1, 4, 4, 5, 3, '0000-00-00 00:00:00'),
+(36, 1, 1, 1, 1, 2, 2, 5, 2, '0000-00-00 00:00:00'),
+(37, 1, 1, 1, 1, 2, 5, 5, 2, '0000-00-00 00:00:00'),
+(38, 1, 1, 1, 1, 5, 4, 5, 2, '0000-00-00 00:00:00'),
+(39, 1, 1, 1, 2, 4, 2, 1, 1, '0000-00-00 00:00:00'),
+(40, 1, 1, 1, 2, 3, 2, 2, 2, '0000-00-00 00:00:00'),
+(41, 1, 1, 1, 2, 2, 4, 3, 3, '0000-00-00 00:00:00'),
+(42, 1, 1, 1, 2, 5, 6, 3, 3, '0000-00-00 00:00:00'),
+(43, 1, 1, 1, 2, 3, 4, 4, 4, '0000-00-00 00:00:00'),
+(44, 1, 1, 1, 2, 2, 5, 5, 2, '0000-00-00 00:00:00'),
+(45, 1, 1, 1, 2, 5, 5, 5, 2, '0000-00-00 00:00:00'),
+(46, 1, 1, 1, 2, 5, 4, 6, 3, '0000-00-00 00:00:00'),
+(47, 1, 1, 1, 2, 2, 6, 6, 3, '0000-00-00 00:00:00'),
+(48, 1, 1, 1, 2, 4, 6, 7, 1, '0000-00-00 00:00:00'),
+(49, 1, 1, 1, 2, 4, 5, 7, 1, '0000-00-00 00:00:00'),
+(50, 1, 1, 1, 2, 4, 4, 3, 2, '0000-00-00 00:00:00'),
+(51, 1, 1, 1, 2, 3, 5, 3, 2, '0000-00-00 00:00:00'),
+(52, 1, 1, 1, 2, 3, 6, 3, 2, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -307,7 +326,7 @@ CREATE TABLE `tb_continuous_assessment` (
 --
 
 INSERT INTO `tb_continuous_assessment` (`continuous_assessment_id`, `school_id`, `session_id`, `quota_id`, `class_id`, `examination_id`, `student_id`, `subject_id`, `score`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 1, 38),
+(1, 1, 1, 1, 1, 1, 1, 1, 32),
 (2, 1, 1, 1, 1, 1, 2, 1, 38),
 (3, 1, 1, 1, 1, 1, 3, 1, 5),
 (4, 1, 1, 1, 1, 3, 1, 1, 55),
@@ -325,7 +344,77 @@ INSERT INTO `tb_continuous_assessment` (`continuous_assessment_id`, `school_id`,
 (16, 1, 1, 1, 1, 3, 2, 7, 46),
 (17, 1, 1, 1, 1, 1, 3, 7, 12),
 (18, 1, 1, 1, 1, 3, 3, 7, 40),
-(19, 1, 1, 1, 2, 12, 4, 1, 15);
+(19, 1, 1, 1, 2, 12, 4, 1, 15),
+(20, 1, 1, 1, 1, 1, 1, 5, 25),
+(21, 1, 1, 1, 1, 3, 1, 5, 32),
+(22, 1, 1, 1, 1, 1, 2, 5, 32),
+(23, 1, 1, 1, 1, 3, 2, 5, 59),
+(24, 1, 1, 1, 1, 1, 3, 5, 28),
+(25, 1, 1, 1, 1, 3, 3, 5, 48),
+(26, 1, 1, 1, 2, 12, 4, 2, 18),
+(27, 1, 1, 2, 1, 13, 1, 1, 17),
+(28, 1, 1, 2, 1, 14, 1, 1, 16),
+(29, 1, 1, 2, 1, 15, 1, 1, 2),
+(30, 1, 1, 2, 1, 13, 2, 1, 12),
+(31, 1, 1, 2, 1, 14, 2, 1, 20),
+(32, 1, 1, 2, 1, 15, 2, 1, 31),
+(33, 1, 1, 2, 1, 13, 3, 1, 17),
+(34, 1, 1, 2, 1, 14, 3, 1, 11),
+(35, 1, 1, 2, 1, 15, 3, 1, 50),
+(36, 1, 1, 2, 1, 13, 1, 2, 15),
+(37, 1, 1, 2, 1, 14, 1, 2, 10),
+(38, 1, 1, 2, 1, 15, 1, 2, 30),
+(39, 1, 1, 2, 1, 13, 2, 2, 8),
+(40, 1, 1, 2, 1, 14, 2, 2, 16),
+(41, 1, 1, 2, 1, 15, 2, 2, 48),
+(42, 1, 1, 2, 1, 13, 3, 2, 12),
+(43, 1, 1, 2, 1, 14, 3, 2, 6),
+(44, 1, 1, 2, 1, 15, 3, 2, 16),
+(45, 1, 1, 2, 1, 13, 1, 4, 15),
+(46, 1, 1, 2, 1, 14, 1, 4, 8),
+(47, 1, 1, 2, 1, 15, 1, 4, 26),
+(48, 1, 1, 2, 1, 13, 2, 4, 6),
+(49, 1, 1, 2, 1, 14, 2, 4, 14),
+(50, 1, 1, 2, 1, 15, 2, 4, 58),
+(51, 1, 1, 2, 1, 13, 3, 4, 2),
+(52, 1, 1, 2, 1, 14, 3, 4, 10),
+(53, 1, 1, 2, 1, 15, 3, 4, 30),
+(54, 1, 1, 2, 1, 13, 1, 3, 12),
+(55, 1, 1, 2, 1, 14, 1, 3, 20),
+(56, 1, 1, 2, 1, 15, 1, 3, 50),
+(57, 1, 1, 2, 1, 13, 2, 3, 10),
+(58, 1, 1, 2, 1, 14, 2, 3, 12),
+(59, 1, 1, 2, 1, 15, 2, 3, 41),
+(60, 1, 1, 2, 1, 13, 3, 3, 19),
+(61, 1, 1, 2, 1, 14, 3, 3, 6),
+(62, 1, 1, 2, 1, 15, 3, 3, 35),
+(63, 1, 1, 2, 1, 13, 1, 5, 5),
+(64, 1, 1, 2, 1, 14, 1, 5, 4),
+(65, 1, 1, 2, 1, 15, 1, 5, 32),
+(66, 1, 1, 2, 1, 13, 2, 5, 14),
+(67, 1, 1, 2, 1, 14, 2, 5, 18),
+(68, 1, 1, 2, 1, 15, 2, 5, 44),
+(69, 1, 1, 2, 1, 13, 3, 5, 12),
+(70, 1, 1, 2, 1, 14, 3, 5, 8),
+(71, 1, 1, 2, 1, 15, 3, 5, 52),
+(72, 1, 1, 2, 1, 13, 1, 6, 11),
+(73, 1, 1, 2, 1, 14, 1, 6, 18),
+(74, 1, 1, 2, 1, 15, 1, 6, 44),
+(75, 1, 1, 2, 1, 13, 2, 6, 8),
+(76, 1, 1, 2, 1, 14, 2, 6, 15),
+(77, 1, 1, 2, 1, 15, 2, 6, 28),
+(78, 1, 1, 2, 1, 13, 3, 6, 3),
+(79, 1, 1, 2, 1, 14, 3, 6, 10),
+(80, 1, 1, 2, 1, 15, 3, 6, 31),
+(81, 1, 1, 2, 1, 13, 1, 7, 12),
+(82, 1, 1, 2, 1, 14, 1, 7, 12),
+(83, 1, 1, 2, 1, 15, 1, 7, 28),
+(84, 1, 1, 2, 1, 13, 2, 7, 18),
+(85, 1, 1, 2, 1, 14, 2, 7, 17),
+(86, 1, 1, 2, 1, 15, 2, 7, 41),
+(87, 1, 1, 2, 1, 13, 3, 7, 16),
+(88, 1, 1, 2, 1, 14, 3, 7, 10),
+(89, 1, 1, 2, 1, 15, 3, 7, 33);
 
 -- --------------------------------------------------------
 
@@ -340,6 +429,30 @@ CREATE TABLE `tb_country` (
   `currency_type` varchar(10) DEFAULT NULL,
   `time_zone_id` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_effective_area`
+--
+
+CREATE TABLE `tb_effective_area` (
+  `effective_area_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `school_id` int(11) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_effective_area`
+--
+
+INSERT INTO `tb_effective_area` (`effective_area_id`, `name`, `status`, `school_id`, `date_created`) VALUES
+(1, 'Punctuality', 1, 1, '2017-04-13 11:21:26'),
+(2, 'Politeness', 1, 1, '2017-04-13 11:23:24'),
+(3, 'Neatness', 1, 1, '2017-04-14 15:35:13'),
+(4, 'Attentiveness', 1, 1, '2017-04-14 15:38:54');
 
 -- --------------------------------------------------------
 
@@ -517,7 +630,10 @@ INSERT INTO `tb_examination` (`examination_id`, `school_id`, `session_id`, `quot
 (9, 1, 1, 2, '1st Test', '1st Test', 0, 2, '2017-02-24 07:07:40'),
 (10, 1, 1, 2, '2nd Test', '2nd Test', 20, 2, '2017-02-24 07:19:37'),
 (11, 1, 1, 2, 'Exam', 'Exam', 0, 2, '2017-02-24 07:22:02'),
-(12, 1, 1, 1, 'Test 2', 'Test 2', 20, 2, '2017-02-24 07:37:51');
+(12, 1, 1, 1, 'Test 2', 'Test 2', 20, 2, '2017-02-24 07:37:51'),
+(13, 1, 1, 2, 'CA1', 'First Test', 20, 1, '2017-04-15 10:35:53'),
+(14, 1, 1, 2, 'CA2', 'Second Test', 20, 1, '2017-04-15 10:36:07'),
+(15, 1, 1, 2, 'Exam', 'Examination', 60, 1, '2017-04-15 10:36:23');
 
 -- --------------------------------------------------------
 
@@ -608,7 +724,8 @@ INSERT INTO `tb_grading_level` (`grading_level_id`, `school_id`, `name`, `date_c
 (2, 1, 'G Level_2', '2017-01-12 15:31:59'),
 (3, 1, 'G Level_3', '2017-01-12 15:32:12'),
 (4, 1, 'G Level_4', '2017-02-12 01:31:44'),
-(5, 1, 'G Level_5', '2017-02-24 07:41:15');
+(5, 1, 'G Level_5', '2017-02-24 07:41:15'),
+(6, 1, 'Super Grading', '2017-04-15 11:05:16');
 
 -- --------------------------------------------------------
 
@@ -637,7 +754,15 @@ INSERT INTO `tb_grading_level_structure` (`tb_grading_level_structure_id`, `scho
 (3, 1, 1, 'C', 50, '2017-01-12 16:09:50', '0000-00-00 00:00:00', 'Average'),
 (4, 1, 2, 'A', 90, '2017-01-24 16:37:46', '0000-00-00 00:00:00', 'Excel'),
 (5, 1, 4, 'A', 80, '2017-02-12 01:32:02', '0000-00-00 00:00:00', 'Excellent'),
-(6, 1, 1, 'D', 40, '2017-02-24 07:41:01', '0000-00-00 00:00:00', 'Below Average');
+(6, 1, 1, 'D', 40, '2017-02-24 07:41:01', '0000-00-00 00:00:00', 'Below Average'),
+(7, 1, 1, 'E', 30, '2017-04-11 04:49:41', '0000-00-00 00:00:00', 'Olodo'),
+(8, 1, 1, 'F', 0, '2017-04-11 05:26:08', '0000-00-00 00:00:00', 'Olodo Rabata'),
+(9, 1, 6, 'A', 80, '2017-04-15 11:06:00', '0000-00-00 00:00:00', 'Excellent'),
+(10, 1, 6, 'B', 70, '2017-04-15 11:06:22', '0000-00-00 00:00:00', 'V.Good'),
+(11, 1, 6, 'C', 50, '2017-04-15 11:07:19', '0000-00-00 00:00:00', 'Average'),
+(12, 1, 6, 'D', 40, '2017-04-15 11:07:47', '0000-00-00 00:00:00', 'Fair'),
+(13, 1, 6, 'E', 20, '2017-04-15 11:08:08', '0000-00-00 00:00:00', 'Poor'),
+(14, 1, 6, 'F', 0, '2017-04-15 11:08:24', '0000-00-00 00:00:00', 'V.Poor');
 
 -- --------------------------------------------------------
 
@@ -749,6 +874,31 @@ CREATE TABLE `tb_payroll_category` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_psychometer`
+--
+
+CREATE TABLE `tb_psychometer` (
+  `psychomotor_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `school_id` int(11) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_psychometer`
+--
+
+INSERT INTO `tb_psychometer` (`psychomotor_id`, `name`, `status`, `school_id`, `date_created`) VALUES
+(1, 'Handwriting', 1, 1, '2017-04-12 09:32:43'),
+(2, 'Verbal Fluency', 1, 1, '2017-04-12 09:40:15'),
+(3, 'Musical Skills', 1, 1, '2017-04-12 10:11:50'),
+(4, 'Sports', 1, 1, '2017-04-14 14:26:46'),
+(5, 'Painting', 0, 1, '2017-04-14 14:30:57');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_quota`
 --
 
@@ -793,11 +943,44 @@ CREATE TABLE `tb_quota_class_result_settings` (
 --
 
 INSERT INTO `tb_quota_class_result_settings` (`quota_class_result_settings_id`, `session_id`, `quota_id`, `class_id`, `grading_level_id`, `class_designation_id`, `school_id`) VALUES
-(1, 1, 1, 1, 3, 1, 1),
+(1, 1, 1, 1, 1, 1, 1),
 (2, 1, 1, 2, 1, 1, 1),
 (3, 1, 1, 3, 3, 3, 1),
-(4, 1, 2, 1, 1, 1, 1),
+(4, 1, 2, 1, 6, 1, 1),
 (5, 1, 1, 4, 2, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_remark`
+--
+
+CREATE TABLE `tb_remark` (
+  `remark_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `quota_id` int(11) NOT NULL,
+  `comment` varchar(500) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_remark`
+--
+
+INSERT INTO `tb_remark` (`remark_id`, `student_id`, `class_id`, `quota_id`, `comment`, `type`) VALUES
+(1, 1, 1, 1, 'Very good boy', 1),
+(2, 1, 1, 1, 'He is very intelligent', 2),
+(3, 2, 1, 1, 'I''ve never had any issue with him', 1),
+(4, 2, 1, 1, 'He plays too much', 2),
+(5, 3, 1, 1, 'Nothing to write', 1),
+(6, 3, 1, 1, 'u dey aiit sha', 2),
+(7, 4, 2, 1, 'He''s quite but less attentive in class.', 1),
+(8, 4, 2, 1, 'Poor performance, your need an extra care from home.', 2),
+(9, 1, 1, 2, 'He plays too much.', 1),
+(10, 1, 1, 2, 'Try harder next term.', 2),
+(11, 2, 1, 2, 'He''s too quiet', 1),
+(12, 2, 1, 2, 'Good result. You can do better next term.', 2);
 
 -- --------------------------------------------------------
 
@@ -1037,11 +1220,11 @@ CREATE TABLE `tb_subject` (
 
 INSERT INTO `tb_subject` (`subject_id`, `school_id`, `name`, `code`, `credit_unit`, `description`, `date_created`) VALUES
 (1, 1, 'Mathematics', 'Math', NULL, 'Just figures', '2016-12-07 15:23:52'),
-(2, 1, 'English Language', 'Eng', NULL, 'English Language', '2016-12-07 15:25:31'),
+(2, 1, 'English ', 'Eng', NULL, 'English Language', '2016-12-07 15:25:31'),
 (3, 1, 'Physics', 'Phy', NULL, 'Physics science', '2016-12-07 15:32:20'),
 (4, 1, 'Chemistry', 'Chem', NULL, 'Chemistry Science', '2016-12-07 15:33:08'),
 (5, 1, 'Biology', 'BIO', NULL, 'Study of life', '2016-12-23 20:41:04'),
-(6, 1, 'Agricultural Science', 'AGRIC', NULL, 'Agricultural Science', '2016-12-28 09:03:27'),
+(6, 1, 'Agric Sci', 'AGRIC', NULL, 'Agricultural Science', '2016-12-28 09:03:27'),
 (7, 1, 'Fine Arts', 'ART', NULL, 'Drawing', '2017-01-11 07:35:06');
 
 -- --------------------------------------------------------
@@ -1278,6 +1461,50 @@ INSERT INTO `tb_user_additional_field` (`user_additional_field_id`, `school_id`,
 (7, 1, 'Blood Group', 'Blood Group', 'student', 1, '2016-12-28 15:37:46'),
 (8, 1, 'Acc No', 'Account Number', 'employee', 1, '2016-12-28 15:49:36'),
 (9, 1, 'BVN No', 'Bank Verification No', 'employee', 1, '2016-12-30 13:06:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_effective_area`
+--
+
+CREATE TABLE `tb_user_effective_area` (
+  `user_effective_area_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `quota_id` int(11) NOT NULL,
+  `effective_area_id` int(11) NOT NULL,
+  `rating` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_effective_area`
+--
+
+INSERT INTO `tb_user_effective_area` (`user_effective_area_id`, `student_id`, `class_id`, `school_id`, `quota_id`, `effective_area_id`, `rating`) VALUES
+(1, 1, 1, 1, 1, 1, 'A'),
+(2, 1, 1, 1, 1, 2, 'B'),
+(3, 2, 1, 1, 1, 2, 'B'),
+(4, 2, 1, 1, 1, 1, 'E'),
+(5, 1, 1, 1, 1, 4, 'C'),
+(6, 3, 1, 1, 1, 1, 'C'),
+(7, 3, 1, 1, 1, 2, 'A'),
+(8, 3, 1, 1, 1, 3, 'D'),
+(9, 3, 1, 1, 1, 4, 'E'),
+(10, 2, 1, 1, 1, 3, 'A'),
+(11, 1, 1, 1, 1, 3, 'C'),
+(12, 4, 2, 1, 1, 1, 'D'),
+(13, 4, 2, 1, 1, 2, 'B'),
+(14, 4, 2, 1, 1, 3, 'A'),
+(15, 1, 1, 1, 2, 1, 'B'),
+(16, 1, 1, 1, 2, 2, 'D'),
+(17, 1, 1, 1, 2, 3, 'E'),
+(18, 1, 1, 1, 2, 4, 'D'),
+(19, 2, 1, 1, 2, 1, 'A'),
+(20, 2, 1, 1, 2, 2, 'C'),
+(21, 2, 1, 1, 2, 3, 'D'),
+(22, 2, 1, 1, 2, 4, 'C');
 
 -- --------------------------------------------------------
 
@@ -1664,6 +1891,50 @@ INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privil
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_user_psychomotor`
+--
+
+CREATE TABLE `tb_user_psychomotor` (
+  `user_psychomotor_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `quota_id` int(11) NOT NULL,
+  `psychomotor_id` int(11) NOT NULL,
+  `rating` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_psychomotor`
+--
+
+INSERT INTO `tb_user_psychomotor` (`user_psychomotor_id`, `student_id`, `class_id`, `school_id`, `quota_id`, `psychomotor_id`, `rating`) VALUES
+(1, 2, 1, 1, 1, 1, 'E'),
+(2, 2, 1, 1, 1, 2, 'A'),
+(3, 2, 1, 1, 1, 3, 'B'),
+(4, 3, 1, 1, 1, 1, 'A'),
+(5, 3, 1, 1, 1, 3, 'B'),
+(6, 1, 1, 1, 1, 1, 'D'),
+(7, 3, 1, 1, 1, 2, 'B'),
+(8, 1, 1, 1, 1, 2, 'C'),
+(9, 1, 1, 1, 1, 3, 'E'),
+(10, 1, 1, 1, 1, 4, 'A'),
+(11, 1, 1, 1, 1, 5, 'D'),
+(12, 4, 2, 1, 1, 1, 'A'),
+(13, 4, 2, 1, 1, 2, 'B'),
+(14, 4, 2, 1, 1, 3, 'E'),
+(15, 1, 1, 1, 2, 1, 'B'),
+(16, 1, 1, 1, 2, 2, 'C'),
+(17, 1, 1, 1, 2, 3, 'E'),
+(18, 1, 1, 1, 2, 4, 'A'),
+(19, 2, 1, 1, 2, 1, 'B'),
+(20, 2, 1, 1, 2, 2, 'B'),
+(21, 2, 1, 1, 2, 3, 'C'),
+(22, 2, 1, 1, 2, 4, 'A');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_weekday`
 --
 
@@ -2014,6 +2285,21 @@ CREATE TABLE `vw_student` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_total_quota_subject_exams_score`
+--
+CREATE TABLE `vw_total_quota_subject_exams_score` (
+`quota_id` int(11)
+,`session_id` int(11)
+,`school_id` int(11)
+,`class_id` int(11)
+,`student_id` int(11)
+,`subject_id` int(11)
+,`score` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_user_privilege_module`
 --
 CREATE TABLE `vw_user_privilege_module` (
@@ -2166,6 +2452,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_total_quota_subject_exams_score`
+--
+DROP TABLE IF EXISTS `vw_total_quota_subject_exams_score`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_total_quota_subject_exams_score`  AS  select `tb_continuous_assessment`.`quota_id` AS `quota_id`,`tb_continuous_assessment`.`session_id` AS `session_id`,`tb_continuous_assessment`.`school_id` AS `school_id`,`tb_continuous_assessment`.`class_id` AS `class_id`,`tb_continuous_assessment`.`student_id` AS `student_id`,`tb_continuous_assessment`.`subject_id` AS `subject_id`,sum(`tb_continuous_assessment`.`score`) AS `score` from `tb_continuous_assessment` group by `tb_continuous_assessment`.`subject_id`,`tb_continuous_assessment`.`student_id`,`tb_continuous_assessment`.`quota_id` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_user_privilege_module`
 --
 DROP TABLE IF EXISTS `vw_user_privilege_module`;
@@ -2258,6 +2553,12 @@ ALTER TABLE `tb_country`
   ADD PRIMARY KEY (`country_id`);
 
 --
+-- Indexes for table `tb_effective_area`
+--
+ALTER TABLE `tb_effective_area`
+  ADD PRIMARY KEY (`effective_area_id`);
+
+--
 -- Indexes for table `tb_employee`
 --
 ALTER TABLE `tb_employee`
@@ -2348,6 +2649,12 @@ ALTER TABLE `tb_parent`
   ADD PRIMARY KEY (`parent_id`);
 
 --
+-- Indexes for table `tb_psychometer`
+--
+ALTER TABLE `tb_psychometer`
+  ADD PRIMARY KEY (`psychomotor_id`);
+
+--
 -- Indexes for table `tb_quota`
 --
 ALTER TABLE `tb_quota`
@@ -2358,6 +2665,12 @@ ALTER TABLE `tb_quota`
 --
 ALTER TABLE `tb_quota_class_result_settings`
   ADD PRIMARY KEY (`quota_class_result_settings_id`);
+
+--
+-- Indexes for table `tb_remark`
+--
+ALTER TABLE `tb_remark`
+  ADD PRIMARY KEY (`remark_id`);
 
 --
 -- Indexes for table `tb_school`
@@ -2444,6 +2757,12 @@ ALTER TABLE `tb_user_additional_field`
   ADD PRIMARY KEY (`user_additional_field_id`);
 
 --
+-- Indexes for table `tb_user_effective_area`
+--
+ALTER TABLE `tb_user_effective_area`
+  ADD PRIMARY KEY (`user_effective_area_id`);
+
+--
 -- Indexes for table `tb_user_privilege`
 --
 ALTER TABLE `tb_user_privilege`
@@ -2454,6 +2773,12 @@ ALTER TABLE `tb_user_privilege`
 --
 ALTER TABLE `tb_user_privilege_module`
   ADD PRIMARY KEY (`user_privilege_module_id`);
+
+--
+-- Indexes for table `tb_user_psychomotor`
+--
+ALTER TABLE `tb_user_psychomotor`
+  ADD PRIMARY KEY (`user_psychomotor_id`);
 
 --
 -- Indexes for table `tb_weekday`
@@ -2510,7 +2835,7 @@ ALTER TABLE `tb_class_period`
 -- AUTO_INCREMENT for table `tb_class_timetable`
 --
 ALTER TABLE `tb_class_timetable`
-  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `class_timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `tb_class_timing_set`
 --
@@ -2525,12 +2850,17 @@ ALTER TABLE `tb_class_type`
 -- AUTO_INCREMENT for table `tb_continuous_assessment`
 --
 ALTER TABLE `tb_continuous_assessment`
-  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `continuous_assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 --
 -- AUTO_INCREMENT for table `tb_country`
 --
 ALTER TABLE `tb_country`
   MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_effective_area`
+--
+ALTER TABLE `tb_effective_area`
+  MODIFY `effective_area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_employee`
 --
@@ -2565,7 +2895,7 @@ ALTER TABLE `tb_employee_subject`
 -- AUTO_INCREMENT for table `tb_examination`
 --
 ALTER TABLE `tb_examination`
-  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tb_examination_group`
 --
@@ -2585,12 +2915,12 @@ ALTER TABLE `tb_grade_level_payroll`
 -- AUTO_INCREMENT for table `tb_grading_level`
 --
 ALTER TABLE `tb_grading_level`
-  MODIFY `grading_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `grading_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_grading_level_structure`
 --
 ALTER TABLE `tb_grading_level_structure`
-  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `tb_grading_level_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tb_grading_system`
 --
@@ -2607,6 +2937,11 @@ ALTER TABLE `tb_module`
 ALTER TABLE `tb_parent`
   MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `tb_psychometer`
+--
+ALTER TABLE `tb_psychometer`
+  MODIFY `psychomotor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `tb_quota`
 --
 ALTER TABLE `tb_quota`
@@ -2616,6 +2951,11 @@ ALTER TABLE `tb_quota`
 --
 ALTER TABLE `tb_quota_class_result_settings`
   MODIFY `quota_class_result_settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tb_remark`
+--
+ALTER TABLE `tb_remark`
+  MODIFY `remark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tb_school`
 --
@@ -2666,6 +3006,16 @@ ALTER TABLE `tb_subject_assessment_timetable`
 --
 ALTER TABLE `tb_subject_category`
   MODIFY `subject_category_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_user_effective_area`
+--
+ALTER TABLE `tb_user_effective_area`
+  MODIFY `user_effective_area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `tb_user_psychomotor`
+--
+ALTER TABLE `tb_user_psychomotor`
+  MODIFY `user_psychomotor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

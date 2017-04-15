@@ -54,20 +54,20 @@
                                                 <div class="col-md-12" ng-if="basic_class_subjects.length > 0">
                                                     <div class="sidebar-container">
                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Broad Sheet: {{ classs.name }}</h3>
-                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
-                                                            <thead class="table-bordered">
+                                                        <table class="table table-hover table-striped table-responsive table-bordered" style="margin-bottom: 0px"> 
+                                                            <thead>
                                                                 <tr>
-                                                                    <th>SN</th>
-                                                                    <th>Student</th> 
-                                                                    <th class="center" ng-repeat="subject in basic_class_subjects">{{ subject.subject_code }} [100]</th>
-                                                                    <th class="center">Total [{{ 100 * basic_class_subjects.length }}]</th>
-                                                                    <th class="center">Average [100]</th>
-                                                                    <th class="center">Position</th>
+                                                                    <th class="center">SN</th>
+                                                                    <th>STUDENT</th> 
+                                                                    <th class="center" ng-repeat="subject in basic_class_subjects">{{ subject.subject_code | uppercase }} [100]</th>
+                                                                    <th class="center">TOTAL [{{ 100 * basic_class_subjects.length }}]</th>
+                                                                    <th class="center">AVERAGE [100]</th>
+                                                                    <th class="center">POSITION</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody class="table-bordered" id="ca_table">
+                                                            <tbody id="ca_table">
                                                                 <tr ng-repeat="broadsheet in class_broadsheet">
-                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td class="center">{{ $index + 1 }}</td>
                                                                     <td>{{ broadsheet.firstname+' '+broadsheet.lastname }}</td>
                                                                     <td class="center" ng-repeat="subject in basic_class_subjects">{{ factory.getStudentSubjectTotalContinuousAssessment(broadsheet.student_id, subject.subject_id) }}</td>
                                                                     <td class="center">{{ broadsheet.total_score }}</td>
@@ -128,36 +128,204 @@
                                                 </div>
                                                 <!--/ class student list -->
                                                 <!-- student result -->
-                                                <div class="col-md-10 main-table-with-sidebar">
-                                                    <div class="sidebar-container">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title"> {{ 'StudentName' }}</h3>
-                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
-                                                            <thead class="table-bordered">
+                                                <div class="col-md-10 main-table-with-sidebar" id="div-student-result" ng-if="student_2">
+                                                    <div class="sidebar-container no-border">
+                                                        <!-- header -->
+                                                        <table class="table table-school-header no-border table-little-margin-bottom yes-print">
+                                                            <tr>
+                                                                <th class="sch-logo no-border">
+                                                                    <div class="img-placeholder" id="img-placeholder" ng-init=" path = (school.logo) ? 'uploads/'+school.school_id+'/'+school.logo : 'system-images/placeholder.png' ">
+                                                                        <img ng-src="assets/images/{{ path }}">
+                                                                    </div>
+                                                                </th>
+                                                                <th class="no-border">
+                                                                    <h2 class="school-name">{{ school.name }}</h2>
+                                                                    <p>{{ school.address1 }}</p>
+                                                                    <p>{{ 'Tel: '+school.phone1+', '+school.phone2 }}</p>
+                                                                    <p>{{ 'Website: '+school.website+' | Email: '+school.email }}</p>
+                                                                </th>
+                                                            </tr>
+                                                        </table>
+                                                        <!--/ header -->
+                                                        
+                                                        <!-- result header -->
+                                                        <table class="table table-bordered table-little-margin-bottom">
+                                                            <thead>
+                                                                <tr class="">
+                                                                    <th colspan="2" class="center">FULL-TERM REPORT, FIRST TERM 2016/2017 SESSION</th>
+                                                                </tr>
                                                                 <tr>
-                                                                    <th>Subject</th> 
-                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" }}</th>
-                                                                    <th class="center">Total</th>
-                                                                    <th class="center">Grade</th>
-                                                                    <th class="center">Remark</th>
-                                                                    <th class="center">Position</th>
+                                                                    <th>NAME: ADELEKE OLADAPO</th>
+                                                                    <th>CLASS: J S S 3A</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>GENDER: MALE</td>
+                                                                    <td>AGE: 15 YEARS</td>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody class="table-bordered" id="ca_table">
-                                                                <tr ng-repeat="subject in basic_class_subjects_2">
+                                                        </table>
+                                                        <!--/ result header -->
+                                                        
+                                                        <table class="table table-hover table-striped table-responsive table-bordered" style="margin-bottom: 0px"> 
+                                                            <thead class="">
+                                                                <tr>
+                                                                    <th class="center">SN</th>
+                                                                    <th>SUBJECT</th> 
+                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" | uppercase }}</th>
+                                                                    <th class="center">TOTAL</th>
+                                                                    <th class="center">CLASS AVG</th>
+                                                                    <th class="center">GRADE</th>
+                                                                    <th class="center">REMARK</th>
+                                                                    <th class="center">POSITION</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="ca_table">
+                                                                <tr ng-repeat="subject in basic_class_subjects_2" ng-init="total = getStudentSubjectTotalScore(student_2.student_id, subject.subject_id)">
+                                                                    <td class="center">{{ $index + 1 }}</td>
                                                                     <td>{{ subject.subject }}</td>
                                                                     <td class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">
                                                                         <span ng-init="ca = factory.getContinuousAssessment(student_2.student_id, exam.examination_id, subject.subject_id)">{{ ca.score }}</span>
                                                                     </td>
-                                                                    <td class="center">00</td>
-                                                                    <td class="center">XX</td>
-                                                                    <td class="center">------</td>
-                                                                    <td class="center">X</td>
+                                                                    <td class="center">{{ total }}</td>
+                                                                    <td class="center">{{ getSubjectTotalScore(subject.subject_id) / students_2.length | number:1 }}</td>
+                                                                    <td class="center">{{ factory.getScoreAttr(grading_level_structure, total).name }}</td>
+                                                                    <td class="center">{{ factory.getScoreAttr(grading_level_structure, total).description }}</td>
+                                                                    <td class="center" ng-init="scores = getSubjectStudentsScores(subject.subject_id)">{{ factory.getPosition(scores, getStudentSubjectTotalScore(student_2.student_id, subject.subject_id)) }}</td>
+                                                                </tr>
+                                                                <tr class="table-bordered table-title">
+                                                                    <td></td>
+                                                                    <th class="no-border-right">TOTAL SCORE</th>
+                                                                    <td class="no-border-right" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">
+                                                                    </td>
+                                                                    <th class="center">{{ student_broadsheet.total_score }}</th>
+                                                                    <th class="center">{{ getTotalScore() / students_2.length | number:1 }}</th>
+                                                                    <th colspan="2" class="no-border-right">OVERALL POSITION</th>
+                                                                    <th class="center">{{ student_broadsheet.position }}</th>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    <!-- behavioural traits -->
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <table class="table table-responsive table-bordered table-little-margin-bottom">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">PSYCHOMOTOR SKILLS</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="data in student_psychomotors">
+                                                                        <td>{{ data.name }}</td>
+                                                                        <td class="no-padding center">
+                                                                            <select class="form-control no-border no-print" ng-init="value[$index] = data.rating" ng-model="value[$index]" ng-change="addUserPsychomotor(data.psychomotor_id, value[$index])">
+                                                                                <option ng-repeat="rate in ratings" ng-value="{{ rate }}">{{ rate }}</option>
+                                                                            </select>
+                                                                            <span class="yes-print">{{ data.rating }}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-md-6 main-table-with-sidebar">
+                                                            <table class="table table-responsive table-bordered table-little-margin-bottom">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">EFFECTIVE AREAS</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="data in student_effective_areas">
+                                                                        <td>{{ data.name }}</td>
+                                                                        <td class="no-padding center">
+                                                                            <select class="form-control no-border no-print" ng-init="value[$index] = data.rating" ng-model="value[$index]" ng-change="addUserEffectiveArea(data.effective_area_id, value[$index])">
+                                                                                <option ng-repeat="rate in ratings" ng-value="{{ rate }}">{{ rate }}</option>
+                                                                            </select>
+                                                                            <span class="yes-print">{{ data.rating }}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ behavioural traits -->
+                                                    
+                                                    <!-- remark -->
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <table class="table table-responsive table-bordered table-little-margin-bottom">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">REMARKS / COMMENTS</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 30%">Class Teacher's Comment</td>
+                                                                        <td class="no-padding">
+                                                                            <input type="text" class="form-control no-border no-print" ng-model="remark_1.comment" ng-change="addRemark(1, remark_1.comment)">
+                                                                            <span class="yes-print"> {{ remark_1.comment }}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Head Teacher's Comment</td>
+                                                                        <td class="no-padding">
+                                                                            <input type="text" class="form-control no-border no-print" ng-model="remark_2.comment" ng-change="addRemark(2, remark_2.comment)">
+                                                                            <span class="yes-print"> {{ remark_2.comment }}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ remark -->
+                                                    
+                                                    <!-- keys -->
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <table class="table table-responsive table-bordered table-little-margin-bottom">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="{{ effort_rating.length }}">EFFORT RATING</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td ng-repeat="data in effort_rating">{{ data }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <table class="table table-responsive table-bordered table-little-margin-bottom">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="5">KEY TO BEHAVIOURAL TRAITS / PSYCHOMOTOR</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>A-Excellent</td>
+                                                                        <td>B-High Level</td>
+                                                                        <td>C-Fair Exhibition</td>
+                                                                        <td>D-Minimal Exhibition</td>
+                                                                        <td>E-No Regard</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ keys -->
+                                                    
                                                 </div>
                                                 <!-- class result -->
+                                                
+                                                <!-- buttons -->
+                                                <div>
+                                                    <button type="button" onclick="$('#div-student-result').printMe({ 'path': ['http://localhost/jedupa/assets/theme/bootstrap/css/bootstrap.min.css', 'http://localhost/jedupa/assets/theme/assets/css/ui.css', 'http://localhost/jedupa/assets/lib/printMe/example2.css'] });">Print</button>
+                                                </div>
+                                                <!--/ buttons -->
+                                                
                                             </div>
                                         </div>
                                         <div class="jd-tab-pane" id="tab-3">

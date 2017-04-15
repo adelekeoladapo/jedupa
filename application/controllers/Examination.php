@@ -227,4 +227,11 @@ class Examination extends CI_Controller {
         echo json_encode($data);
     }
     
+    function getClassTotalQuotaSubjectExamsScores_(){
+        $quota_id = $this->input->get('quota-id');
+        $class_id = $this->input->get('class-id');
+        $data = $this->model->getClassTotalQuotaSubjectExamsScores_($quota_id, $class_id);
+        echo json_encode($data);
+    }
+    
 }

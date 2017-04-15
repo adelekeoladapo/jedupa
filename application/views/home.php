@@ -45,6 +45,7 @@
     <script src="<? echo base_url(); ?>assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="<? echo base_url(); ?>assets/lib/smoke/js/smoke.min.js"></script>
     <script src="<? echo base_url(); ?>assets/lib/toastr/toastr.min.js"></script>
+    <script src="<? echo base_url(); ?>assets/lib/printMe/jquery-printme.min.js"></script>
    
     <script src="<? echo base_url(); ?>assets/lib/bootstrap/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
     

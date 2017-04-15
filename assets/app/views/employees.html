@@ -34,11 +34,11 @@
                                                         <th>Category</th>
                                                         <th>Position</th>
                                                         <th>Privilege</th>
-                                                        <th></th>
+                                                        <!--<th></th>-->
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-bordered">
-                                                    <tr ng-repeat="employee in employees">
+                                                    <tr ng-repeat="employee in employees" class="clickable" ng-click="state.go('view-employee', { id : employee.employee_id })">
                                                         <td>{{ $index + 1 }}</td>
                                                         <td>{{ employee.employee_number }}</td>
                                                         <td>{{ employee.firstname }}</td>
@@ -47,7 +47,7 @@
                                                         <td>{{ employee.category }}</td>
                                                         <td>{{ employee.position }}</td>
                                                         <td>{{ employee.privilege }}</td>
-                                                        <td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-employee({ id : employee.employee_id })"></i></td>
+                                                        <!--<td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-employee({ id : employee.employee_id })"></i></td>-->
                                                     </tr>
 
                                                 </tbody>

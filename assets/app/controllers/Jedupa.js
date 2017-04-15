@@ -21,6 +21,10 @@ app.factory('Factory', function(){
         return app_data;
     };
     
+    data.getSchool = function(){
+        return app_data.school;
+    }
+    
     /** academic department **/
     data.getStudentDepartments = function(){
         return app_data.student_departments;
@@ -718,6 +722,47 @@ app.factory('Factory', function(){
     }
     
     
+    /** behavioural traits **/
+    
+    data.getPsychomotors = function(){
+        return app_data.psychomotors;
+    }
+    
+    data.updatePsychomotors = function(dt){
+        app_data.psychomotors = dt;
+    }
+    
+    data.getActivePsychomotors = function(){
+        dt = [];
+        angular.forEach(app_data.psychomotors, function(value, key, obj){
+            if(value.status == 1){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    data.getEffectiveAreas = function(){
+        return app_data.effective_areas;
+    }
+    
+    data.updateEffectiveAreas = function(dt){
+        app_data.effective_areas = dt;
+    }
+    
+    data.getActiveEffectiveAreas = function(){
+        dt = [];
+        angular.forEach(app_data.effective_areas, function(value, key, obj){
+            if(value.status == 1){
+                dt.push(angular.copy(obj[key]));
+            }
+        });
+        return dt;
+    }
+    
+    /** end behavioural traits **/
+    
+    
     /** 
      *  UTILITIES
     **/
@@ -751,7 +796,47 @@ app.factory('Factory', function(){
         return d;
     }
 
+    data.getPosition = function(scores, score){
+        scores.sort().reverse();
+        pos = scores.indexOf(score) + 1; pos = pos+"";
+        last_fig = pos.substr(pos.length-1, pos.length);
+        if(last_fig == "1")
+            return pos+"st";
+        else if(last_fig == "2")
+            return pos+"nd";
+        else if(last_fig == "3")
+            return pos+"rd";
+        else
+            return pos+"th";
+    }
     
+    data.getScoreAttr = function(values, score){
+        values.sort(function(a, b){
+           return b.min_score - a.min_score;
+        });
+        var dt = {};
+        for(i = 0; i < values.length; i++){
+            if(score >= values[i].min_score){
+                dt = values[i];
+                break;
+            }
+        }
+        return dt;
+   }
+   
+   data.getEffortRating = function(values){
+       max_score = 100;
+       values.sort(function(a, b){
+           return b.min_score - a.min_score;
+        });
+        var dt = [];
+        for(i = 0; i < values.length; i++){
+//            dt[i] = values[i].name+"("+max_score+" - "+values[i].min_score+") "+values[i].description;
+            dt[i] = values[i].name+"-"+values[i].description;
+            max_score = values[i].min_score;
+        }
+        return dt;
+   }
     
     return data;
     
@@ -1294,9 +1379,13 @@ app.service('Service', function($http){
         return $http.get(base_url+"api/get-class-quota-result-settings", {
             params : {'quota-id': quota_id, 'class-id': class_id}
         });
+    };  
+    
+    this.getClassTotalQuotaSubjectExamsScores = function(class_id, quota_id){
+        return $http.get(base_url+"api/get-class-total-quota-subject-exams-scores", {
+            params : {'quota-id': quota_id, 'class-id': class_id}
+        });
     };
-    
-    
     
     
     /** user privilege **/
@@ -1327,6 +1416,106 @@ app.service('Service', function($http){
             params : {'filter-field': 'school_id', 'filter-value': school_id}
         });
     };
+    
+    /*
+     * BEHAVIOURAL TRAIT
+     */
+    
+    /** psychomotor skills **/
+    this.addPsychomotor = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-psychomotor",
+            data: data
+        });
+    };
+    
+    this.getPsychomotors = function(school_id){
+        return $http.get(base_url+"api/get-psychomotors", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    }; 
+    
+    this.getClassQuotaPsychomotors = function(class_id, quota_id){
+        return $http.get(base_url+"api/get-class-quota-psychomotors", {
+            params : {'class-id': class_id, 'quota-id': quota_id}
+        });
+    };
+    
+    this.updatePsychomotor = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/update-psychomotor",
+            data: data
+        });
+    };
+    
+    this.addUserPsychomotor = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-user-psychomotor",
+            data: data
+        });
+    };
+    
+    
+    /***** effective-area ******/
+    
+    this.addEffectiveArea = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-effective-area",
+            data: data
+        });
+    };
+    
+    this.getEffectiveAreas = function(school_id){
+        return $http.get(base_url+"api/get-effective-areas", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.updateEffectiveArea = function(data){
+        return $http({
+            method: "POST",
+            url: base_url+"api/update-effective-area",
+            data: data
+        });
+    };
+    
+    this.getClassQuotaEffectiveAreas = function(class_id, quota_id){
+        return $http.get(base_url+"api/get-class-quota-effective-areas", {
+            params : {'class-id': class_id, 'quota-id': quota_id}
+        });
+    };
+    
+    this.addUserEffectiveArea = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-user-effective-area",
+            data: data
+        });
+    };
+    
+    
+    /** Remark **/
+    this.addRemark = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-remark",
+            data: data
+        });
+    };  
+    
+    this.getClassQuotaRemarks = function(class_id, quota_id){
+        return $http.get(base_url+"api/get-class-quota-remarks", {
+            params : {'class-id': class_id, 'quota-id': quota_id}
+        });
+    };
+    
+    
+    
+    
     
 });
 
@@ -1525,6 +1714,12 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 sessions: function(Service, Factory){
                     return Service.getSessions(Factory.getSchoolID());
+                },
+                psychomotors: function(Service, Factory){
+                    return Service.getPsychomotors(Factory.getSchoolID());
+                },
+                effective_areas: function(Service, Factory){
+                    return Service.getEffectiveAreas(Factory.getSchoolID());
                 }
             }
         })
@@ -1672,7 +1867,7 @@ app.controller('mainCtrl', function($rootScope, $state, Factory, Service){
     
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){ 
         hide_loading_overlay();
-        toastr.success('No Internet Access');
+        toastr.error('No Internet Access');
     });
     
     

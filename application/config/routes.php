@@ -180,6 +180,7 @@ $route['api/get-class-quota-subjects-contuinuous-assessment-sums'] = 'Examinatio
 $route['api/get-class-quota-broadsheet'] = 'Examination/getClassQuotaBroadsheet'; 
 $route['api/add-class-quota-result-settings'] = 'Examination/insertClassQuotaResultSettings'; 
 $route['api/get-class-quota-result-settings'] = 'Examination/getClassQuotaResultSettings'; 
+$route['api/get-class-total-quota-subject-exams-scores'] = 'Examination/getClassTotalQuotaSubjectExamsScores_';
 
 
 
@@ -189,3 +190,23 @@ $route['api/add-user-privilege'] = 'UserPrivilege/addUserPrivilege';
 $route['api/get-user-privileges'] = 'UserPrivilege/getUserPrivileges';
 $route['api/add-user-privilege-modules'] = 'UserPrivilege/insertUserPrivilegeModules';
 $route['api/get-user-privilege-modules'] = 'UserPrivilege/getUserPrivilegeModules';
+
+
+/************ Behavioural Traits APIs **************/
+$route['api/add-psychomotor'] = 'BehaviouralTrait/addPsychometer';
+$route['api/get-psychomotors'] = 'BehaviouralTrait/getPsychometers';
+$route['api/update-psychomotor'] = 'BehaviouralTrait/updatePsychometer'; 
+$route['api/add-user-psychomotor'] = 'BehaviouralTrait/addUserPsychomotor'; 
+$route['api/get-class-quota-psychomotors'] = 'BehaviouralTrait/getClassQuotaPsychomotors';
+
+$route['api/add-effective-area'] = 'BehaviouralTrait/addEffectiveArea';
+$route['api/get-effective-areas'] = 'BehaviouralTrait/getEffectiveAreas';
+$route['api/update-effective-area'] = 'BehaviouralTrait/updateEffectiveArea';
+$route['api/add-user-effective-area'] = 'BehaviouralTrait/addUserEffectiveArea'; 
+$route['api/get-class-quota-effective-areas'] = 'BehaviouralTrait/getClassQuotaEffectiveAreas';
+
+
+
+/************ Remark APIs **************/
+$route['api/add-remark'] = 'Remark/addRemark';
+$route['api/get-class-quota-remarks'] = 'Remark/getClassQuotaRemarks';

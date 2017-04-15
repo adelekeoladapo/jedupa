@@ -72,21 +72,21 @@
                                                 <div class="col-md-10 main-table-with-sidebar">
                                                     <div class="sidebar-container" ng-if="(subject.name)">
                                                         <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">{{ subject.name }}</h3>
-                                                        <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px"> 
+                                                        <table class="table table-hover table-bordered table-responsive" style="margin-bottom: 0px"> 
                                                             <thead class="table-bordered">
                                                                 <tr>
-                                                                    <th>SN</th>
-                                                                    <th>Student</th>
-                                                                    <th ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" }}</th>
+                                                                    <th class="center">SN</th>
+                                                                    <th>STUDENT</th>
+                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" | uppercase }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="table-bordered" id="ca_table">
                                                                 <tr ng-repeat="student in students" ng-init="student_index_data = { 'index':  $index, 'student_id': student.student_id }" ng-if="(students.length > 0)">
-                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td class="center">{{ $index + 1 }}</td>
                                                                     <td>
                                                                         {{ student.firstname+" "+student.lastname }}
                                                                     </td>
-                                                                    <td ng-repeat="exam in quota_exams" ng-if="(exam.weightage > 0)" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].examination_id = exam.examination_id ">
+                                                                    <td class="no-padding center" ng-repeat="exam in quota_exams" ng-if="(exam.weightage > 0)" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].examination_id = exam.examination_id ">
                                                                         <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].student_id = student_index_data.student_id">
                                                                             <span ng-init="ca = factory.getContinuousAssessment(student_index_data.student_id, exam.examination_id, subject.subject_id)">
                                                                                 
@@ -96,7 +96,7 @@
 
                                                                                 <!-- examination score -->
                                                                                 <span ng-init="score = (ca) ? ca.score : -1">
-                                                                                    <input ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
+                                                                                    <input class="form-control center no-border" ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
                                                                                 </span>
                                                                                 <!--/ examination score -->
                                                                             </span>
