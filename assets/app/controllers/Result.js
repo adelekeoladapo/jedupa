@@ -446,13 +446,14 @@ app.controller('ResultCtrl', function($scope, $scope, Factory, Service, class_ty
         show_loading_overlay();
         //$scope.setClass_2($scope.classs_2.class_id);
         Service.getClassStudents($scope.classs_2.class_id).then(function(response){
+            Factory.setStudents(response.data);
             $scope.students_2 = response.data;
             $scope.basic_class_subjects_2 = Factory.getBasicClassSubjects($scope.classs_2.class_id);
             $scope.quota_exams = Factory.getClassQuotaExams($scope.classs_2.class_id, $scope.default_quota.quota_id);
             Service.getClassQuotaContinuousAssessment(Factory.getSchoolID(), $scope.default_quota, $scope.classs_2.class_id).then(function(response){
                 Factory.updateClassQuotaContinuousAssessment(response.data);
             },  function(error){});
-            $scope.student_2 = {'student_id': student_id};
+            $scope.student_2 = Factory.getStudent(student_id);
             $scope.student_broadsheet = $scope.getStudentBroadsheet(student_id);
             $scope.student_psychomotors = $scope.getStudentPsychomotors($scope.student_2.student_id); 
             $scope.student_effective_areas = $scope.getStudentEffectiveAreas($scope.student_2.student_id); 

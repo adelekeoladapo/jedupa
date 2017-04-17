@@ -1,0 +1,15 @@
+                                                        <table class="table table-school-header no-border table-little-margin-bottom yes-print">
+                                                            <tr>
+                                                                <th class="sch-logo no-border">
+                                                                    <div class="img-placeholder" id="img-placeholder" ng-init=" path = (school.logo) ? 'uploads/'+school.school_id+'/'+school.logo : 'system-images/placeholder.png' ">
+                                                                        <img ng-src="assets/images/{{ path }}">
+                                                                    </div>
+                                                                </th>
+                                                                <th class="no-border">
+                                                                    <h2 class="school-name">{{ school.name }}</h2>
+                                                                    <p>{{ school.address1+', '+school.state }}</p>
+                                                                    <p>{{ 'Tel: '+school.phone1+', '+school.phone2 }}</p>
+                                                                    <p>{{ 'Website: '+school.website+' | Email: '+school.email }}</p>
+                                                                </th>
+                                                            </tr>
+                                                        </table>

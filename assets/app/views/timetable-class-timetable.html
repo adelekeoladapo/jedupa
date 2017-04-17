@@ -44,15 +44,34 @@
                                                 </div>
                                             </fieldset>
                                             
-                                            <div class="jd-tb-timetable-wrapper" ng-if="classs.class_id">
-                                                <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                                    Timetable: {{ classs.name }}
-                                                </h1>
+                                            <div class="jd-tb-timetable-wrapper no-border" id="div-class-timetable" ng-if="classs.class_id">
+                                                
+                                                <!-- school header -->
+                                                <div ng-include="'assets/app/views/templates/school-header.html'">
+
+                                                </div>
+                                                <!--/ school header -->
+
+                                                <!-- transcript header -->
+                                                <table class="table table-bordered table-little-margin-bottom">
+                                                    <thead>
+                                                        <tr class="">
+                                                            <th colspan="3" class="center">FULL-TERM TIMETABLE, {{ default_quota.name+" "+default_quota.session | uppercase }}</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>CLASS TYPE: {{ classs.class_type | uppercase }}</th>
+                                                            <th>CLASS LEVEL: {{ classs.level_name | uppercase }}</th>
+                                                            <th>CLASS: {{ classs.code | uppercase }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                                <!--/ transcript header -->
+                                                
                                                 <table class="table table-bordered jd-tb-timetable">
                                                     <tr ng-repeat="weekday in class_weekday_periods" ng-if="weekday.info.class_timing_id">
                                                         <td class="weekday-title">{{ factory.break_str(factory.abr_week_day(weekday.weekday.name)) }}</td>
                                                         <td class="period {{ (is_break == 1) ? 'break' : ''; }}" ng-init="is_break = period.is_break" ng-repeat="period in weekday.periods">
-                                                            {{ period.start_time+" - "+period.end_time }} <input ng-if="is_break == 0" class="check" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
+                                                            {{ period.start_time+" - "+period.end_time }} <input ng-if="is_break == 0" class="check no-print" ng-model="status" type="checkbox" ng-click="togglePeriods({'weekday_id': weekday.weekday.weekday_id, 'class_period_id': period.class_period_id}, status)">
                                                             <span ng-if="is_break == 0" ng-init="timetable = factory.getClassWeekdayPeriodTimetable(classs.class_id, weekday.weekday.weekday_id, period.class_period_id)">
                                                                 <span class="subject"><br />{{ timetable.subject }}</span>
                                                                 <span class="teacher"><br />{{ timetable.teacher }}</span>
@@ -78,7 +97,7 @@
                                                     </form>
                                                     <button class="btn jd-btn jd-btn-default" ng-click="resetClassTimetablePeriods()">Reset</button>
                                                     <button class="btn jd-btn jd-btn-error" ng-click="resetClassWeekdaysPeriodsSubjects()">Reset Timetable</button>
-                                                    <button class="btn jd-btn jd-btn-default" ng-click="">Print Timetable</button>
+                                                    <button class="btn jd-btn jd-btn-default" ng-click="factory.printDiv('div-class-timetable')">Print Timetable</button>
                                                 </div>
                                             </div>
                                             <!--/ timetable controls -->

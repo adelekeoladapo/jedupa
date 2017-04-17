@@ -66,6 +66,7 @@
     <script src="<? echo base_url(); ?>assets/app/controllers/Timetable.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Examination.js"></script>
     <script src="<? echo base_url(); ?>assets/app/controllers/Result.js"></script>
+    <script src="<? echo base_url(); ?>assets/app/controllers/Library.js"></script>
     
     <!-- JS Links -->
     

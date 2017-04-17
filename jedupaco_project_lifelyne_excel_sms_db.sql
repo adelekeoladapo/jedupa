@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2017 at 12:06 AM
+-- Generation Time: Apr 17, 2017 at 03:31 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -38,6 +38,19 @@ CREATE TABLE `tb_assessment_timetable` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_author`
+--
+
+CREATE TABLE `tb_author` (
+  `author_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `school_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_batch`
 --
 
@@ -48,6 +61,40 @@ CREATE TABLE `tb_batch` (
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_book`
+--
+
+CREATE TABLE `tb_book` (
+  `book_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `isbn` varchar(11) NOT NULL,
+  `available` int(11) NOT NULL DEFAULT '1',
+  `author_id` int(11) NOT NULL,
+  `publisher_id` int(11) NOT NULL,
+  `photo` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_borrowed_by`
+--
+
+CREATE TABLE `tb_borrowed_by` (
+  `borrowed_by_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `borrower_id` int(11) NOT NULL,
+  `due_date` datetime NOT NULL,
+  `return_date` datetime NOT NULL,
+  `issue` varchar(500) NOT NULL,
+  `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -802,7 +849,7 @@ INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `position`, `url`, `has_ch
 (1, 'Student', 'graduation', 1, 'students', 0, 0),
 (2, 'Guardian', 'users', 2, 'parents', 0, 0),
 (3, 'Employee', 'directions', 3, 'employees', 0, 0),
-(4, 'Library', 'folder', 4, '', 0, 0),
+(4, 'Library', 'folder', 4, '', 1, 0),
 (5, 'Event', 'calendar', 5, '', 0, 0),
 (6, 'Timetable', 'book-open', 6, 'timetable', 0, 0),
 (7, 'Result', 'docs', 8, '', 1, 0),
@@ -832,7 +879,10 @@ INSERT INTO `tb_module` (`module_id`, `name`, `icon`, `position`, `url`, `has_ch
 (32, 'Assessment', '', 0, 'examination-assessment', 0, 28),
 (33, 'Settings', '', 0, 'examination-settings', 1, 28),
 (34, 'Class Result', '', 0, 'result-class-result', 0, 7),
-(35, 'Settings', '', 0, 'result-settings', 0, 7);
+(35, 'Settings', '', 0, 'result-settings', 0, 7),
+(38, 'Books', '', 28, 'library-books', 0, 4),
+(39, 'Authors', '', 29, 'library-author', 0, 4),
+(40, 'Publishers', '', 30, 'library-publishers', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -895,6 +945,34 @@ INSERT INTO `tb_psychometer` (`psychomotor_id`, `name`, `status`, `school_id`, `
 (3, 'Musical Skills', 1, 1, '2017-04-12 10:11:50'),
 (4, 'Sports', 1, 1, '2017-04-14 14:26:46'),
 (5, 'Painting', 0, 1, '2017-04-14 14:30:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_publisher`
+--
+
+CREATE TABLE `tb_publisher` (
+  `publisher_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `website` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `photo` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_publisher`
+--
+
+INSERT INTO `tb_publisher` (`publisher_id`, `school_id`, `name`, `address`, `email`, `website`, `phone`, `photo`) VALUES
+(1, 1, 'Evans Publishers Ltd', 'Suite A5 Poly Plaza, Plot 102 Adetokunbo Ademola Crescent, Wuse II, Abuja, FCT', 'evans@evanspublishers.com', 'www.evanspublishers.com', '0819 921 0892', 'evans.png'),
+(2, 1, 'Kachifo Limited', '253 Herbert Macaulay Way Yaba, Lagos - Nigeria', 'info@kachifo.com', 'http://kachifo.com', '+234 807 736 4217', 'kachifo.jpg'),
+(3, 1, 'Pearson Education', 'Felix Iwerebon House, 52, Oba Akran Avenue', 'info@pearsonelt.com', 'www.pearsonelt.com', '08020803585', '200px-Pearson_Longman_logo.png'),
+(4, 1, 'Learn Africa PLC', 'Felix Iwerebon House, \r\n52 Oba Akran Avenue, Ikeja, Lagos.	', 'connect@learnafricaplc.com', 'https://learnafricaplc.com', '08036819969', 'logo.png'),
+(5, 1, 'Emotion Press', 'Jakin Street, Ibadan, Oyo State', 'info@omojojolo.com', 'omojojolo.com', '', 'Hydrangeas.jpg');
 
 -- --------------------------------------------------------
 
@@ -1018,7 +1096,7 @@ CREATE TABLE `tb_school` (
 --
 
 INSERT INTO `tb_school` (`school_id`, `name`, `logo`, `code`, `date_created`, `address1`, `address2`, `phone1`, `phone2`, `status_id`, `country_id`, `state_id`, `language_id`, `auto_gen_student_id`, `email`, `website`, `password`, `auto_gen_employee_id`, `auto_gen_parent_id`, `motto`, `unique_code`, `time_zone_id`) VALUES
-(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 1, 0, 0, 'info@oxfordcollege.com', 'www.oxfordcollege.com', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 0, 'Up And On', 'OCA', NULL);
+(1, 'Oxford College Abuja', 'badge.jpg', 'O C A', '0000-00-00 00:00:00', 'PO Box 80, Area 11, Garki', '', '08020803585', '08102937011', 0, 1, 37, 0, 0, 'info@oxfordcollege.com', 'www.oxfordcollege.com', 'd92c25d41fcd9f8ab35545ef34b1e7ed', 0, 0, 'Up And On', 'OCA', NULL);
 
 -- --------------------------------------------------------
 
@@ -1311,7 +1389,7 @@ INSERT INTO `tb_user` (`user_id`, `firstname`, `lastname`, `othernames`, `userna
 (6, 'Miss Wright', '', '', 'OCA/G002', 'ee5b4e08c69e19a7b1d425ad449da87d', 0, 1, NULL, '0000-00-00 00:00:00', '', NULL, '23B Melo Str, Kaduna', '', '08034657876', '', 'write@hotmail.com', '', 0),
 (7, 'James', 'Gosling', '', 'OCA/E002', 'd52e32f3a96a64786814ae9b5279fbe5', 0, 1, 'Male', '2017-02-12 00:00:00', '', 1, 'FUTA', 'Akure', '08034275409', '', 'jamesgosling@gmail.com', '(_)_UGO(_)(1).jpg', 4),
 (8, 'Desmond', 'Idiot', '', 'OCA/E003', 'a39e9eea66930fe0050d56a28bafab72', 0, 1, 'Male', '2017-02-14 00:00:00', '', 10, 'Somewhere in Ahila', 'Ahila', '08034275409', '', 'desmonidiot@yahoo.com', 'temmy(73).jpg', 5),
-(9, 'Mickael', 'Jackson', '', 'OCA/E004', '4b503f9fdf97688234717f3c50dc8bb9', 0, 1, 'Male', '2017-02-08 00:00:00', '', 2, '10 Bala street', 'Yola', '08034275409', '', 'mickaeljackson@mail.com', '(_)_UGO(_)(1)1.jpg', 13),
+(9, 'Mickael', 'Jackson', '', 'OCA/E004', '4b503f9fdf97688234717f3c50dc8bb9', 0, 1, 'Male', '2017-02-08 00:00:00', '', 2, '10 Bala street', 'Yola', '08034275409', '', 'mickaeljackson@mail.com', '(_)_UGO(_)(1)1.jpg', 15),
 (10, 'James', 'Ibori', 'Solomon', 'OCA/17/001', 'd52e32f3a96a64786814ae9b5279fbe5', 0, 1, 'Male', '2017-02-15 00:00:00', '', 1, '10 Ikire Str', 'Ikire', '0803475757', '', 'james@gmail.com', '21-cute-newborn-baby.jpg', 0);
 
 -- --------------------------------------------------------
@@ -1504,7 +1582,11 @@ INSERT INTO `tb_user_effective_area` (`user_effective_area_id`, `student_id`, `c
 (19, 2, 1, 1, 2, 1, 'A'),
 (20, 2, 1, 1, 2, 2, 'C'),
 (21, 2, 1, 1, 2, 3, 'D'),
-(22, 2, 1, 1, 2, 4, 'C');
+(22, 2, 1, 1, 2, 4, 'C'),
+(23, 3, 1, 1, 2, 1, 'B'),
+(24, 3, 1, 1, 2, 2, 'D'),
+(25, 3, 1, 1, 2, 3, 'E'),
+(26, 3, 1, 1, 2, 4, 'E');
 
 -- --------------------------------------------------------
 
@@ -1537,7 +1619,9 @@ INSERT INTO `tb_user_privilege` (`user_privilege_id`, `school_id`, `name`, `desc
 (10, 1, 'Test-3', '', '2017-02-11 07:38:08'),
 (11, 1, 'Test-4', '', '2017-02-12 01:03:46'),
 (12, 1, 'Ass Teacher', '', '2017-02-21 10:33:18'),
-(13, 1, 'New Admin', '', '2017-02-24 06:51:51');
+(13, 1, 'New Admin', '', '2017-02-24 06:51:51'),
+(14, 1, 'New++', '', '2017-04-17 00:47:58'),
+(15, 1, 'New Ad', '', '2017-04-17 00:51:49');
 
 -- --------------------------------------------------------
 
@@ -1886,7 +1970,46 @@ INSERT INTO `tb_user_privilege_module` (`user_privilege_module_id`, `user_privil
 (320, 13, 32, 1, 1, 1, 1, 1, 1, 1, 1),
 (321, 13, 33, 1, 1, 1, 1, 1, 1, 1, 1),
 (322, 13, 34, 1, 1, 1, 1, 1, 1, 1, 1),
-(323, 13, 35, 1, 1, 1, 1, 1, 1, 1, 1);
+(323, 13, 35, 1, 1, 1, 1, 1, 1, 1, 1),
+(324, 15, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(325, 15, 2, 1, 1, 1, 1, 1, 1, 1, 1),
+(326, 15, 3, 1, 1, 1, 1, 1, 1, 1, 1),
+(327, 15, 4, 1, 1, 1, 1, 1, 1, 1, 1),
+(328, 15, 5, 1, 1, 1, 1, 1, 1, 1, 1),
+(329, 15, 6, 1, 1, 1, 1, 1, 1, 1, 1),
+(330, 15, 7, 1, 1, 1, 1, 1, 1, 1, 1),
+(331, 15, 8, 1, 1, 1, 1, 1, 1, 1, 1),
+(332, 15, 9, 1, 1, 1, 1, 1, 1, 1, 1),
+(333, 15, 10, 1, 1, 1, 1, 1, 1, 1, 1),
+(334, 15, 11, 1, 1, 1, 1, 1, 1, 1, 1),
+(335, 15, 12, 1, 1, 1, 1, 1, 1, 1, 1),
+(336, 15, 13, 1, 1, 1, 1, 1, 1, 1, 1),
+(337, 15, 14, 1, 1, 1, 1, 1, 1, 1, 1),
+(338, 15, 15, 1, 1, 1, 1, 1, 1, 1, 1),
+(339, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1),
+(340, 15, 17, 1, 1, 1, 1, 1, 1, 1, 1),
+(341, 15, 18, 1, 1, 1, 1, 1, 1, 1, 1),
+(342, 15, 19, 1, 1, 1, 1, 1, 1, 1, 1),
+(343, 15, 20, 1, 1, 1, 1, 1, 1, 1, 1),
+(344, 15, 21, 1, 1, 1, 1, 1, 1, 1, 1),
+(345, 15, 22, 1, 1, 1, 1, 1, 1, 1, 1),
+(346, 15, 23, 1, 1, 1, 1, 1, 1, 1, 1),
+(347, 15, 24, 1, 1, 1, 1, 1, 1, 1, 1),
+(348, 15, 25, 1, 1, 1, 1, 1, 1, 1, 1),
+(349, 15, 26, 1, 1, 1, 1, 1, 1, 1, 1),
+(350, 15, 27, 1, 1, 1, 1, 1, 1, 1, 1),
+(351, 15, 28, 1, 1, 1, 1, 1, 1, 1, 1),
+(352, 15, 29, 1, 1, 1, 1, 1, 1, 1, 1),
+(353, 15, 30, 1, 1, 1, 1, 1, 1, 1, 1),
+(354, 15, 32, 1, 1, 1, 1, 1, 1, 1, 1),
+(355, 15, 33, 1, 1, 1, 1, 1, 1, 1, 1),
+(356, 15, 34, 1, 1, 1, 1, 1, 1, 1, 1),
+(357, 15, 35, 1, 1, 1, 1, 1, 1, 1, 1),
+(358, 15, 36, 1, 1, 1, 1, 1, 1, 1, 1),
+(359, 15, 37, 1, 1, 1, 1, 1, 1, 1, 1),
+(360, 15, 38, 1, 1, 1, 1, 1, 1, 1, 1),
+(361, 15, 39, 1, 1, 1, 1, 1, 1, 1, 1),
+(362, 15, 40, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1930,7 +2053,11 @@ INSERT INTO `tb_user_psychomotor` (`user_psychomotor_id`, `student_id`, `class_i
 (19, 2, 1, 1, 2, 1, 'B'),
 (20, 2, 1, 1, 2, 2, 'B'),
 (21, 2, 1, 1, 2, 3, 'C'),
-(22, 2, 1, 1, 2, 4, 'A');
+(22, 2, 1, 1, 2, 4, 'A'),
+(23, 3, 1, 1, 2, 1, 'A'),
+(24, 3, 1, 1, 2, 2, 'B'),
+(25, 3, 1, 1, 2, 3, 'D'),
+(26, 3, 1, 1, 2, 4, 'A');
 
 -- --------------------------------------------------------
 
@@ -1994,6 +2121,19 @@ INSERT INTO `tb_weekday_class_period` (`weekday_class_period_id`, `school_id`, `
 (14, 1, 1, 1, 5, 1, 3, '0000-00-00 00:00:00'),
 (15, 1, 1, 1, 6, 3, 3, '0000-00-00 00:00:00'),
 (16, 1, 1, 1, 2, 1, 2, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_written_by`
+--
+
+CREATE TABLE `tb_written_by` (
+  `written_by_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `publisher_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2229,6 +2369,35 @@ CREATE TABLE `vw_quota` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_school`
+--
+CREATE TABLE `vw_school` (
+`school_id` int(11)
+,`name` varchar(100)
+,`logo` varchar(200)
+,`date_created` datetime
+,`address1` varchar(200)
+,`address2` varchar(200)
+,`phone1` varchar(100)
+,`phone2` varchar(100)
+,`status_id` int(11)
+,`country_id` int(11)
+,`state_id` int(11)
+,`language_id` int(11)
+,`auto_gen_student_id` int(11)
+,`email` varchar(200)
+,`website` varchar(100)
+,`auto_gen_employee_id` int(11)
+,`auto_gen_parent_id` int(11)
+,`motto` varchar(1000)
+,`unique_code` varchar(10)
+,`time_zone_id` int(11)
+,`state` varchar(30)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_student`
 --
 CREATE TABLE `vw_student` (
@@ -2443,6 +2612,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_school`
+--
+DROP TABLE IF EXISTS `vw_school`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_school`  AS  select `tb_school`.`school_id` AS `school_id`,`tb_school`.`name` AS `name`,`tb_school`.`logo` AS `logo`,`tb_school`.`date_created` AS `date_created`,`tb_school`.`address1` AS `address1`,`tb_school`.`address2` AS `address2`,`tb_school`.`phone1` AS `phone1`,`tb_school`.`phone2` AS `phone2`,`tb_school`.`status_id` AS `status_id`,`tb_school`.`country_id` AS `country_id`,`tb_school`.`state_id` AS `state_id`,`tb_school`.`language_id` AS `language_id`,`tb_school`.`auto_gen_student_id` AS `auto_gen_student_id`,`tb_school`.`email` AS `email`,`tb_school`.`website` AS `website`,`tb_school`.`auto_gen_employee_id` AS `auto_gen_employee_id`,`tb_school`.`auto_gen_parent_id` AS `auto_gen_parent_id`,`tb_school`.`motto` AS `motto`,`tb_school`.`unique_code` AS `unique_code`,`tb_school`.`time_zone_id` AS `time_zone_id`,`tb_state`.`name` AS `state` from (`tb_school` join `tb_state` on((`tb_school`.`state_id` = `tb_state`.`id`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_student`
 --
 DROP TABLE IF EXISTS `vw_student`;
@@ -2487,10 +2665,28 @@ ALTER TABLE `tb_assessment_timetable`
   ADD PRIMARY KEY (`assessment_timetable_id`);
 
 --
+-- Indexes for table `tb_author`
+--
+ALTER TABLE `tb_author`
+  ADD PRIMARY KEY (`author_id`);
+
+--
 -- Indexes for table `tb_batch`
 --
 ALTER TABLE `tb_batch`
   ADD PRIMARY KEY (`batch_id`);
+
+--
+-- Indexes for table `tb_book`
+--
+ALTER TABLE `tb_book`
+  ADD PRIMARY KEY (`book_id`);
+
+--
+-- Indexes for table `tb_borrowed_by`
+--
+ALTER TABLE `tb_borrowed_by`
+  ADD PRIMARY KEY (`borrowed_by_id`);
 
 --
 -- Indexes for table `tb_class`
@@ -2655,6 +2851,12 @@ ALTER TABLE `tb_psychometer`
   ADD PRIMARY KEY (`psychomotor_id`);
 
 --
+-- Indexes for table `tb_publisher`
+--
+ALTER TABLE `tb_publisher`
+  ADD PRIMARY KEY (`publisher_id`);
+
+--
 -- Indexes for table `tb_quota`
 --
 ALTER TABLE `tb_quota`
@@ -2793,6 +2995,12 @@ ALTER TABLE `tb_weekday_class_period`
   ADD PRIMARY KEY (`weekday_class_period_id`);
 
 --
+-- Indexes for table `tb_written_by`
+--
+ALTER TABLE `tb_written_by`
+  ADD PRIMARY KEY (`written_by_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -2802,10 +3010,25 @@ ALTER TABLE `tb_weekday_class_period`
 ALTER TABLE `tb_assessment_timetable`
   MODIFY `assessment_timetable_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tb_author`
+--
+ALTER TABLE `tb_author`
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tb_batch`
 --
 ALTER TABLE `tb_batch`
   MODIFY `batch_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_book`
+--
+ALTER TABLE `tb_book`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_borrowed_by`
+--
+ALTER TABLE `tb_borrowed_by`
+  MODIFY `borrowed_by_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_class`
 --
@@ -2930,7 +3153,7 @@ ALTER TABLE `tb_grading_system`
 -- AUTO_INCREMENT for table `tb_module`
 --
 ALTER TABLE `tb_module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `tb_parent`
 --
@@ -2941,6 +3164,11 @@ ALTER TABLE `tb_parent`
 --
 ALTER TABLE `tb_psychometer`
   MODIFY `psychomotor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tb_publisher`
+--
+ALTER TABLE `tb_publisher`
+  MODIFY `publisher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_quota`
 --
@@ -3010,12 +3238,27 @@ ALTER TABLE `tb_subject_category`
 -- AUTO_INCREMENT for table `tb_user_effective_area`
 --
 ALTER TABLE `tb_user_effective_area`
-  MODIFY `user_effective_area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_effective_area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `tb_user_privilege`
+--
+ALTER TABLE `tb_user_privilege`
+  MODIFY `user_privilege_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `tb_user_privilege_module`
+--
+ALTER TABLE `tb_user_privilege_module`
+  MODIFY `user_privilege_module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
 --
 -- AUTO_INCREMENT for table `tb_user_psychomotor`
 --
 ALTER TABLE `tb_user_psychomotor`
-  MODIFY `user_psychomotor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_psychomotor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `tb_written_by`
+--
+ALTER TABLE `tb_written_by`
+  MODIFY `written_by_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

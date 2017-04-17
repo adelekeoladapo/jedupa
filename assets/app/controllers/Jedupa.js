@@ -34,6 +34,29 @@ app.factory('Factory', function(){
         app_data.student_departments = dt;
     };
     
+    /** student **/
+    
+    data.setStudents = function(dt){
+        app_data.students = dt;
+    }
+    
+    data.getStudents = function(){
+        return app_data.students;
+    }
+    
+    data.getStudent = function(student_id){
+        var dt = {};
+        angular.forEach(app_data.students, function(value, key, obj){
+            if(value.student_id == student_id){
+                dt = angular.copy(obj[key]);
+            }
+        })
+        return dt;
+    }
+    
+    /** end student **/
+    
+    
     /** class **/
     data.getClasses = function(){
         return app_data.classes;
@@ -837,6 +860,10 @@ app.factory('Factory', function(){
         }
         return dt;
    }
+   
+   data.printDiv = function(div){
+       $('#'+div).printMe({ 'path': [ base_url+'assets/theme/bootstrap/css/bootstrap.min.css', base_url+'assets/theme/assets/css/ui.css', base_url+'assets/lib/printMe/example2.css'] });
+   }
     
     return data;
     
@@ -1514,7 +1541,21 @@ app.service('Service', function($http){
     };
     
     
+    /*** LIBRARY *****/
     
+    /***** publisher *****/
+    
+    this.getPublishers = function(school_id){
+        return $http.get(base_url+"api/get-publishers", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getPublisher = function(id){
+        return $http.get(base_url+"api/get-publisher", {
+            params : {'publisher-id' : id}
+        });
+    };
     
     
 });
@@ -1802,7 +1843,52 @@ app.config(function($stateProvider, $urlRouterProvider){
                     return Service.getEmpGradeLevels(Factory.getSchoolID());
                 }
             }
+        })
+        
+        .state('library-publishers', {
+            url: "/library/publishers",
+            templateUrl: "assets/app/views/library-publishers.html",
+            controller: "PublishersCtrl",
+            resolve: {
+                publishers : function(Service, Factory){
+                    return Service.getPublishers(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('new-publisher', {
+            url: "/library/new-publisher",
+            templateUrl: "assets/app/views/library-new-publisher.html",
+            controller: "NewPublisherCtrl",
+            resolve: {
+                
+            }
+        })
+        
+        .state('view-publisher', {
+            url: "/library/publishers/view/:id",
+            templateUrl: "assets/app/views/library-view-publisher.html",
+            controller: "ViewPublisherCtrl",
+            resolve: {
+                publisher: function($stateParams, Service){
+                    return Service.getPublisher($stateParams.id);
+                }
+            }
+        })
+        
+        .state('edit-publisher', {
+            url: "/library/publishers/edit/:id",
+            templateUrl: "assets/app/views/library-edit-publisher.html",
+            controller: "ViewPublisherCtrl",
+            resolve: {
+                publisher: function($stateParams, Service){
+                    return Service.getPublisher($stateParams.id);
+                }
+            }
         });
+        
+        
+        
         
 //        .state('empty', {});
         

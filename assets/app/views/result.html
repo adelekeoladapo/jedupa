@@ -51,17 +51,50 @@
                                                 </div>
                                             </fieldset>
                                             <div class="row">
-                                                <div class="col-md-12" ng-if="basic_class_subjects.length > 0">
-                                                    <div class="sidebar-container">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">Broad Sheet: {{ classs.name }}</h3>
+                                                <div class="col-md-12" ng-if="basic_class_subjects.length > 0" id="div-class-transcript">
+                                                    <div class="sidebar-container no-border">
+                                                        
+                                                        <!-- school header -->
+                                                        <div ng-include="'assets/app/views/templates/school-header.html'">
+                                                            
+                                                        </div>
+                                                        <!--/ school header -->
+                                                        
+                                                        <!-- transcript header -->
+                                                        <table class="table table-bordered table-little-margin-bottom">
+                                                            <thead>
+                                                                <tr class="">
+                                                                    <th colspan="3" class="center">FULL-TERM BROADSHEET, {{ default_quota.name+" "+default_quota.session | uppercase }}</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>CLASS TYPE: {{ classs.class_type | uppercase }}</th>
+                                                                    <th>CLASS LEVEL: {{ classs.level_name | uppercase }}</th>
+                                                                    <th>CLASS: {{ classs.code | uppercase }}</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="2">DEPARTMENT: {{ classs.department_name | uppercase }}</th>
+                                                                    <th>NO IN CLASS: {{ class_broadsheet.length }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                        <!--/ transcript header -->
+                                                        
                                                         <table class="table table-hover table-striped table-responsive table-bordered" style="margin-bottom: 0px"> 
                                                             <thead>
                                                                 <tr>
+                                                                    <th class="center"></th>
+                                                                    <th></th> 
+                                                                    <th class="center" colspan="{{ basic_class_subjects.length }}">100</th>
+                                                                    <th class="center">{{ 100 * basic_class_subjects.length }}</th>
+                                                                    <th class="center">100</th>
+                                                                    <th class="center"></th>
+                                                                </tr>
+                                                                <tr>
                                                                     <th class="center">SN</th>
                                                                     <th>STUDENT</th> 
-                                                                    <th class="center" ng-repeat="subject in basic_class_subjects">{{ subject.subject_code | uppercase }} [100]</th>
-                                                                    <th class="center">TOTAL [{{ 100 * basic_class_subjects.length }}]</th>
-                                                                    <th class="center">AVERAGE [100]</th>
+                                                                    <th class="center" ng-repeat="subject in basic_class_subjects">{{ subject.subject_code | uppercase }}</th>
+                                                                    <th class="center">TOTAL</th>
+                                                                    <th class="center">AVG</th>
                                                                     <th class="center">POSITION</th>
                                                                 </tr>
                                                             </thead>
@@ -77,10 +110,11 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    
                                                     <!--/ control btns -->
-                                                    <div class="row" ng-if="(subject.name)">
+                                                    <div class="row no-print">
                                                         <div class="col-md-12">
-                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button>
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="factory.printDiv('div-class-transcript')">Print Broadsheet</button>
                                                         </div>
                                                     </div>
                                                     <!--/ control btns -->
@@ -130,37 +164,33 @@
                                                 <!-- student result -->
                                                 <div class="col-md-10 main-table-with-sidebar" id="div-student-result" ng-if="student_2">
                                                     <div class="sidebar-container no-border">
-                                                        <!-- header -->
-                                                        <table class="table table-school-header no-border table-little-margin-bottom yes-print">
-                                                            <tr>
-                                                                <th class="sch-logo no-border">
-                                                                    <div class="img-placeholder" id="img-placeholder" ng-init=" path = (school.logo) ? 'uploads/'+school.school_id+'/'+school.logo : 'system-images/placeholder.png' ">
-                                                                        <img ng-src="assets/images/{{ path }}">
-                                                                    </div>
-                                                                </th>
-                                                                <th class="no-border">
-                                                                    <h2 class="school-name">{{ school.name }}</h2>
-                                                                    <p>{{ school.address1 }}</p>
-                                                                    <p>{{ 'Tel: '+school.phone1+', '+school.phone2 }}</p>
-                                                                    <p>{{ 'Website: '+school.website+' | Email: '+school.email }}</p>
-                                                                </th>
-                                                            </tr>
-                                                        </table>
-                                                        <!--/ header -->
+                                                        
+                                                        <!-- school header -->
+                                                        <div ng-include="'assets/app/views/templates/school-header.html'">
+                                                            
+                                                        </div>
+                                                        <!--/ school header -->
                                                         
                                                         <!-- result header -->
                                                         <table class="table table-bordered table-little-margin-bottom">
                                                             <thead>
                                                                 <tr class="">
-                                                                    <th colspan="2" class="center">FULL-TERM REPORT, FIRST TERM 2016/2017 SESSION</th>
+                                                                    <th colspan="3" class="center">FULL-TERM REPORT, {{ default_quota.name+" "+default_quota.session | uppercase }}</th>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>NAME: ADELEKE OLADAPO</th>
-                                                                    <th>CLASS: J S S 3A</th>
+                                                                    <th>NAME: {{ student_2.firstname+" "+student_2.lastname | uppercase }}</th>
+                                                                    <th>GENDER: {{ student_2.gender | uppercase }}</th>
+                                                                    <th>DATE OF BIRTH: {{ factory.formatDate_1(student_2.dob) | uppercase }}</th>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>GENDER: MALE</td>
-                                                                    <td>AGE: 15 YEARS</td>
+                                                                    <th>CLASS TYPE: {{ student_2.class_type | uppercase }}</th>
+                                                                    <th>CLASS LEVEL: {{ student_2.level | uppercase }}</th>
+                                                                    <th>CLASS: {{ student_2.class_code | uppercase }}</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>DEPARTMENT: {{ student_2.department | uppercase }}</th>
+                                                                    <th>NO IN CLASS: {{ students_2.length }}</th>
+                                                                    <th>POSITION: {{ student_broadsheet.position | uppercase }}</th>
                                                                 </tr>
                                                             </thead>
                                                         </table>
@@ -171,7 +201,7 @@
                                                                 <tr>
                                                                     <th class="center">SN</th>
                                                                     <th>SUBJECT</th> 
-                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" | uppercase }}</th>
+                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"("+exam.weightage+")" | uppercase }}</th>
                                                                     <th class="center">TOTAL</th>
                                                                     <th class="center">CLASS AVG</th>
                                                                     <th class="center">GRADE</th>
@@ -317,14 +347,16 @@
                                                     </div>
                                                     <!--/ keys -->
                                                     
+                                                    <!-- buttons -->
+                                                    <div class="row no-print">
+                                                        <div class="col-md-12">
+                                                            <button class="btn jd-btn jd-btn-primary" type="button" ng-click="factory.printDiv('div-student-result')">Print Result</button>
+                                                        </div>  
+                                                    </div>
+                                                    <!--/ buttons -->
+                                                    
                                                 </div>
                                                 <!-- class result -->
-                                                
-                                                <!-- buttons -->
-                                                <div>
-                                                    <button type="button" onclick="$('#div-student-result').printMe({ 'path': ['http://localhost/jedupa/assets/theme/bootstrap/css/bootstrap.min.css', 'http://localhost/jedupa/assets/theme/assets/css/ui.css', 'http://localhost/jedupa/assets/lib/printMe/example2.css'] });">Print</button>
-                                                </div>
-                                                <!--/ buttons -->
                                                 
                                             </div>
                                         </div>

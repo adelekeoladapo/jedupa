@@ -8,7 +8,7 @@
 
 class SchoolModel extends CI_Model {
     
-    private $table_name = 'tb_school';
+    private $table_name = 'tb_school', $view_school = 'vw_school';
     
     function insertSchool($data){
         $this->db->insert($this->table_name, $data);
@@ -18,7 +18,7 @@ class SchoolModel extends CI_Model {
     function getSchool($id){
         $this->db->select('*');
         $this->db->where('school_id', $id);
-        $query = $this->db->get($this->table_name);
+        $query = $this->db->get($this->view_school);
         return ($query->num_rows()) ? $query->row() : null;
     }
     

@@ -206,7 +206,13 @@ $route['api/add-user-effective-area'] = 'BehaviouralTrait/addUserEffectiveArea';
 $route['api/get-class-quota-effective-areas'] = 'BehaviouralTrait/getClassQuotaEffectiveAreas';
 
 
-
 /************ Remark APIs **************/
 $route['api/add-remark'] = 'Remark/addRemark';
 $route['api/get-class-quota-remarks'] = 'Remark/getClassQuotaRemarks';
+
+
+/************ Library APIs **************/
+$route['api/add-publisher'] = 'Library/addPublisher'; 
+$route['api/update-publisher'] = 'Library/updatePublisher';
+$route['api/get-publishers'] = 'Library/getPublishers'; 
+$route['api/get-publisher'] = 'Library/getPublisher';

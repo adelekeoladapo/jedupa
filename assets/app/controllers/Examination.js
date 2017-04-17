@@ -314,6 +314,8 @@ app.controller('ExaminationAssessmentCtrl', function($scope, $scope, Factory, Se
     
     $scope.factory = Factory;
     
+    $scope.school = Factory.getSchool();
+    
     $scope.default_quota = $scope.$parent.default_quota;
     
     $scope.class_types = class_types.data;

@@ -54,6 +54,8 @@ Future Features
 2. Finance(Income&Expenses)
 3. Inventory(Stock keeping)
 4. Payroll System
+5. Read/download electronic copies of books in the library
+6. Jedupa Books
 
 
 ONGOING TASKS
@@ -312,3 +314,29 @@ CREATE VIEW vw_total_quota_subject_exams_score AS SELECT
     SUM(score) AS score
 FROM tb_continuous_assessment 
     GROUP BY subject_id, student_id, quota_id
+
+
+CREATE VIEW vw_school AS SELECT
+	tb_school.school_id,
+	tb_school.name,
+	tb_school.logo,
+	tb_school.date_created,
+	tb_school.address1,
+	tb_school.address2,
+	tb_school.phone1,
+	tb_school.phone2,
+	tb_school.status_id,
+	tb_school.country_id,
+	tb_school.state_id,
+	tb_school.language_id,
+	tb_school.auto_gen_student_id,
+	tb_school.email,
+	tb_school.website,
+	tb_school.auto_gen_employee_id,
+	tb_school.auto_gen_parent_id,
+	tb_school.motto,
+	tb_school.unique_code,
+	tb_school.time_zone_id,
+	tb_state.name AS state
+FROM tb_school 
+	JOIN tb_state ON tb_school.state_id = tb_state.id

@@ -1,0 +1,129 @@
+                    <!-- Page -->
+                        <div class="jd-page">
+                            
+                                                        <!-- Page Title -->
+                            <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
+                                <a ui-sref="library-publishers">Publishers / </a> {{ publisher.name }}
+                            </h1>
+                            <!-- Page Title -->
+                            
+                            <!-- Page Content -->
+                            <div class="font-normal jd-page-content">
+
+                                <div class="jd-tab-container">
+                                    <span class="top-add-btn-container">
+                                        <a ui-sref="library-publishers" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                    </span>
+                                    <div class="jd-tab-title-block">
+                                        <ul>
+                                            <li class="active" data-href="basic-info">
+                                                <a href="">Basic Details</a>
+                                            </li>
+                                            <li data-href="pane-2">
+                                                <a href="">Books</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jd-tab-content-block">
+                                        <div class="jd-tab-pane jd-info-pane active" id="basic-info">
+                                            <div class="row">
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Name
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ publisher.name }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Email 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ publisher.email }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Website
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    <a href="{{ publisher.website }}" target="_blank">{{ publisher.website }}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Phone No
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ publisher.phone }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                    Address
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    {{ publisher.address }}
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-4 jd-info-block">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Photo 
+                                                                </td>
+                                                                <td class="info-item-descr">
+                                                                    <img ng-src="assets/images/{{ (publisher.photo) ? 'uploads/'+publisher.school_id+'/'+publisher.photo : 'system-images/placeholder.png' }}">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                
+                                                <div class="col-md-12 form-btns-container">
+                                                    <div class="broken-line" style="margin-bottom: 20px"></div>
+                                                    <button class="btn jd-btn jd-btn-primary" ng-click="state.go('edit-publisher', { id : publisher.publisher_id })">Edit</button>
+                                                    <button class="btn jd-btn jd-btn-error" style="margin-left: 10px" onclick="toastr.info('Your not allowed to do this')">Delete</button>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="jd-tab-pane jd-info-pane" id="pane-2">
+                                            List of books by publisher
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Page Content -->
+                            
+                        </div>
+                    <!-- End Page -->
+                    
+                    
+                    
+                    
+<script>
+    $(function(){
+        $('#img-placeholder').imagepreview({
+            input: '[name="photo"]',
+            reset: '',
+            preview: '#img-placeholder'
+        });
+    });
+</script>

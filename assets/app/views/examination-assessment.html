@@ -70,14 +70,39 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10 main-table-with-sidebar">
-                                                    <div class="sidebar-container" ng-if="(subject.name)">
-                                                        <h3 class="h4 m-b-md m-t-none font-normal sidebar-form-title">{{ subject.name }}</h3>
+                                                    <div class="sidebar-container no-border" id="div-subject-continuous-assessment" ng-if="(subject.name)">
+                                                        
+                                                        <!-- school header -->
+                                                        <div ng-include="'assets/app/views/templates/school-header.html'">
+                                                            
+                                                        </div>
+                                                        <!--/ school header -->
+                                                        
+                                                        <!-- transcript header -->
+                                                        <table class="table table-bordered table-little-margin-bottom">
+                                                            <thead>
+                                                                <tr class="">
+                                                                    <th colspan="3" class="center">FULL-TERM CONTINUOUS ASSESSMENT, {{ default_quota.name+" "+default_quota.session | uppercase }}</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>CLASS TYPE: {{ classs.class_type | uppercase }}</th>
+                                                                    <th>CLASS LEVEL: {{ classs.level_name | uppercase }}</th>
+                                                                    <th>CLASS: {{ classs.code | uppercase }}</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="2">SUBJECT: {{ subject.name | uppercase }}</th>
+                                                                    <th>NO IN CLASS: {{ students.length }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                        <!--/ transcript header -->
+                                                        
                                                         <table class="table table-hover table-bordered table-responsive" style="margin-bottom: 0px"> 
                                                             <thead class="table-bordered">
                                                                 <tr>
                                                                     <th class="center">SN</th>
                                                                     <th>STUDENT</th>
-                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"["+exam.weightage+"]" | uppercase }}</th>
+                                                                    <th class="center" ng-if="(exam.weightage > 0)" ng-repeat="exam in quota_exams">{{ exam.name+"("+exam.weightage+")" | uppercase }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="table-bordered" id="ca_table">
@@ -87,7 +112,7 @@
                                                                         {{ student.firstname+" "+student.lastname }}
                                                                     </td>
                                                                     <td class="no-padding center" ng-repeat="exam in quota_exams" ng-if="(exam.weightage > 0)" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].examination_id = exam.examination_id ">
-                                                                        <span ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].student_id = student_index_data.student_id">
+                                                                        <span class="no-padding" ng-init="new_CAs.subjects[subject.subject_id].students[student_index_data.index].student_id = student_index_data.student_id">
                                                                             <span ng-init="ca = factory.getContinuousAssessment(student_index_data.student_id, exam.examination_id, subject.subject_id)">
                                                                                 
                                                                                 <!-- Continuous Assessment ID -->
@@ -96,7 +121,8 @@
 
                                                                                 <!-- examination score -->
                                                                                 <span ng-init="score = (ca) ? ca.score : -1">
-                                                                                    <input class="form-control center no-border" ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
+                                                                                    <input class="form-control center no-border no-print" ng-value="{{ score }}" ng-model="new_CAs.subjects[subject.subject_id].students[student_index_data.index].examinations[$index].score" type="text">
+                                                                                    <span class="yes-print" style="padding-top: 4px">{{ score }}</span>
                                                                                 </span>
                                                                                 <!--/ examination score -->
                                                                             </span>
@@ -112,7 +138,8 @@
                                                     <!--/ control btns -->
                                                     <div class="row" ng-if="(subject.name)">
                                                         <div class="col-md-12">
-                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button>
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="saveContinuousAssessment()">Save</button> 
+                                                            <button class="btn jd-btn jd-btn-primary" ng-click="factory.printDiv('div-subject-continuous-assessment')">Print Report</button>
                                                         </div>
                                                     </div>
                                                     <!--/ control btns -->
