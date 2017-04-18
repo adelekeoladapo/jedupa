@@ -3,7 +3,7 @@
                             
                                                         <!-- Page Title -->
                             <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                Library / <a ui-sref="library-publishers">Publishers / </a> {{ publisher.name }}
+                                Library / <a ui-sref="library-authors">Authors / </a> {{ author.firstname+" "+author.lastname }}
                             </h1>
                             <!-- Page Title -->
                             
@@ -12,7 +12,7 @@
 
                                 <div class="jd-tab-container">
                                     <span class="top-add-btn-container">
-                                        <a ui-sref="library-publishers" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                        <a ui-sref="library-authors" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
                                     </span>
                                     <div class="jd-tab-title-block">
                                         <ul>
@@ -32,10 +32,18 @@
                                                         <tbody>
                                                             <tr class="info-item">
                                                                 <td class="info-item-title">
-                                                                   Name
+                                                                   Firstame
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    {{ publisher.name }}
+                                                                    {{ author.firstname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="info-item">
+                                                                <td class="info-item-title">
+                                                                   Lastname
+                                                                </td>
+                                                                <td class="info-item-descr ng-binding">
+                                                                    {{ author.lastname }}
                                                                 </td>
                                                             </tr>
                                                             <tr class="info-item">
@@ -43,15 +51,7 @@
                                                                    Email 
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    {{ publisher.email }}
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="info-item">
-                                                                <td class="info-item-title">
-                                                                   Website
-                                                                </td>
-                                                                <td class="info-item-descr ng-binding">
-                                                                    <a href="{{ publisher.website }}" target="_blank">{{ publisher.website }}</a>
+                                                                    {{ author.email }}
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -65,7 +65,7 @@
                                                                    Phone No
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    {{ publisher.phone }}
+                                                                    {{ author.phone }}
                                                                 </td>
                                                             </tr>
                                                             <tr class="info-item">
@@ -73,7 +73,7 @@
                                                                     Address
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    {{ publisher.address }}
+                                                                    {{ author.address }}
                                                                 </td>
                                                             </tr>
                                                             
@@ -88,7 +88,7 @@
                                                                    Photo 
                                                                 </td>
                                                                 <td class="info-item-descr">
-                                                                    <img ng-src="assets/images/{{ (publisher.photo) ? 'uploads/'+publisher.school_id+'/'+publisher.photo : 'system-images/placeholder.png' }}">
+                                                                    <img ng-src="assets/images/{{ (author.photo) ? 'uploads/'+author.school_id+'/'+author.photo : 'system-images/placeholder.png' }}">
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -97,7 +97,7 @@
                                                 
                                                 <div class="col-md-12 form-btns-container">
                                                     <div class="broken-line" style="margin-bottom: 20px"></div>
-                                                    <button class="btn jd-btn jd-btn-primary" ng-click="state.go('edit-publisher', { id : publisher.publisher_id })">Edit</button>
+                                                    <button class="btn jd-btn jd-btn-primary" ng-click="state.go('edit-author', { id : author.author_id })">Edit</button>
                                                     <button class="btn jd-btn jd-btn-error" style="margin-left: 10px" onclick="toastr.info('Your not allowed to do this')">Delete</button>
                                                 </div>
                                                 

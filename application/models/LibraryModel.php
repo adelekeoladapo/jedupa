@@ -8,7 +8,7 @@
 
 class LibraryModel extends CI_Model {
     
-    private $table_book = 'tb_book', $table_author = 'tb_author', $table_publisher = 'tb_publisher';
+    private $table_book = 'tb_book', $table_author = 'tb_author', $table_publisher = 'tb_publisher', $table_book_category = 'tb_book_category', $table_book_genre = 'tb_book_genre';
     
     
     /************** Book *************/
@@ -102,5 +102,39 @@ class LibraryModel extends CI_Model {
     }
     
     /************ End Publisher ***************/
+    
+    
+    /*********** SETTINGS ***********/
+    
+    function insertBookCategory($data){
+        $this->db->insert($this->table_book_category, $data);
+        return $this->db->insert_id();
+    }
+    
+    function getBookCategories($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){ 
+        $this->db->select('*');
+        $this->db->order_by($sort_field, $sort_order_mode);
+        ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
+        ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
+        $query = $this->db->get($this->table_book_category);
+        return ($query->num_rows()) ? $query->result() : [];
+    }
+    
+    
+    function insertBookGenre($data){
+        $this->db->insert($this->table_book_genre, $data);
+        return $this->db->insert_id();
+    }
+    
+    function getBookGenres($sort_field = false, $sort_order_mode = false, $filter_field = false, $filter_value = false, $page = false, $page_size = false){ 
+        $this->db->select('*');
+        $this->db->order_by($sort_field, $sort_order_mode);
+        ($filter_value) ? $this->db->where($filter_field, $filter_value) : '';
+        ($page) ? $this->db->limit($page_size, $page) : $this->db->limit($page_size);
+        $query = $this->db->get($this->table_book_genre);
+        return ($query->num_rows()) ? $query->result() : [];
+    }
+    
+    /*********** SETTINGS ***********/
     
 }

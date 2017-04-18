@@ -216,3 +216,14 @@ $route['api/add-publisher'] = 'Library/addPublisher';
 $route['api/update-publisher'] = 'Library/updatePublisher';
 $route['api/get-publishers'] = 'Library/getPublishers'; 
 $route['api/get-publisher'] = 'Library/getPublisher';
+
+$route['api/add-author'] = 'Library/addAuthor'; 
+$route['api/update-author'] = 'Library/updateAuthor';
+$route['api/get-authors'] = 'Library/getAuthors'; 
+$route['api/get-author'] = 'Library/getAuthor';
+
+$route['api/add-book-category'] = 'Library/addBookCategory'; 
+$route['api/get-book-categories'] = 'Library/getBookCategories';
+
+$route['api/add-book-genre'] = 'Library/addBookGenre'; 
+$route['api/get-book-genres'] = 'Library/getBookGenres';

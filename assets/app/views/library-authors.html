@@ -1,9 +1,9 @@
                     <!-- Page -->
                         <div class="jd-page">
                             
-                                                        <!-- Page Title -->
+                            <!-- Page Title -->
                             <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                Library / Publishers
+                                Library / Authors
                             </h1>
                             <!-- Page Title -->
                             
@@ -12,22 +12,23 @@
                                 
                                 <div class="jd-tab-container">
                                     <span class="top-add-btn-container" style="margin-top: -12px;">
-                                        <a ui-sref="new-publisher" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
+                                        <a ui-sref="new-author" class="btn jd-btn jd-btn-primary"><i class="fa fa-plus-circle"> </i> New</a>
                                     </span>
                                     <div class="jd-tab-title-block">
                                         <ul>
-                                            <li class="active" data-href="library-publishers">
-                                                <a href="">All Publishers</a>
+                                            <li class="active" data-href="library-authors">
+                                                <a href="">All Authors</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="jd-tab-content-block">
-                                        <div class="jd-tab-pane active">
+                                        <div class="jd-tab-pane active" id="library-authors">
                                             <table class="table dt-table table-hover table-striped table-responsive" datatable="ng"> 
                                                 <thead class="table-bordered">
                                                     <tr>
                                                         <th>SN</th>
-                                                        <th>Name</th>
+                                                        <th>Firstname</th>
+                                                        <th>Lastname</th>
                                                         <th>Phone No</th>
                                                         <th>Email</th>
                                                         <th>Books</th>
@@ -35,13 +36,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-bordered">
-                                                    <tr ng-repeat="data in publishers" class="clickable" ng-click="state.go('view-publisher', { id : data.publisher_id })">
+                                                    <tr ng-repeat="data in authors" class="clickable" ng-click="state.go('view-author', { id : data.author_id })">
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{{ data.name }}</td>
+                                                        <td>{{ data.firstname }}</td>
+                                                        <td>{{ data.lastname }}</td>
                                                         <td>{{ data.phone }}</td>
                                                         <td>{{ data.email }}</td>
                                                         <td>0</td>
-                                                        <!--<td class="tb-btn"><i class="ion ion-clipboard jd-btn-primary" rel="tooltip" data-toggle="tooltip" data-placement="top" title="" onmouseenter="$(this).tooltip('show')" data-original-title="View" ui-sref="view-student({ id : student.student_id })"></i></td>-->
                                                     </tr>
 
                                                 </tbody>

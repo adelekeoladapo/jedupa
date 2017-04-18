@@ -3,7 +3,7 @@
                             
                                                         <!-- Page Title -->
                             <h1 class="h4 m-b-md m-t-none font-normal jd-page-title">
-                                Library / <a ui-sref="library-publishers">Publishers / </a> {{ publisher.name }}
+                                Library / <a ui-sref="library-authors">Authors / </a> {{ author.name }}
                             </h1>
                             <!-- Page Title -->
                             
@@ -12,41 +12,41 @@
 
                                 <div class="jd-tab-container">
                                     <span class="top-add-btn-container">
-                                        <a ui-sref="view-publisher({ id : publisher.publisher_id })" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
+                                        <a ui-sref="view-author({ id : author.author_id })" class="btn jd-btn jd-btn-back"><i class="fa fa-arrow-circle-left"> </i> Back</a>
                                     </span>
                                     <div class="jd-tab-title-block">
                                         <ul>
                                             <li class="active" data-href="new-publisher">
-                                                <a href="">Edit Publisher</a>
+                                                <a href="">Edit Author</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="jd-tab-content-block">
                                         <div class="jd-tab-pane active" id="new-publisher">
 
-                                            <form class="form-horizontal" name="form-update-publisher" id="form-update-publisher"  novalidate> 
-                                                <input type="hidden" ng-init="school_id = publisher.school_id" name="school-id" value="{{ school_id }}">
-                                                <input type="hidden" ng-init="publisher_id = publisher.publisher_id" name="publisher-id" value="{{ publisher_id }}">
+                                            <form class="form-horizontal" name="form-update-author" id="form-update-author"  novalidate> 
+                                                <input type="hidden" ng-init="school_id = author.school_id" name="school-id" value="{{ school_id }}">
+                                                <input type="hidden" ng-init="author_id = author.author_id" name="author-id" value="{{ author_id }}">
                                                 <div class="row">
 
                                                     <div class="col-md-4 jd-form-block">
                                                         <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Basic Details</h6>
                                                         <div class="form-group">
-                                                            <label for="name" class="col-sm-4 control-label">Name <span class="required-field"> *</span></label>
-                                                            <div class="col-sm-8" ng-init="name = publisher.name" >
-                                                                <input type="text" name="name" value="{{ name }}" class="form-control" required>
+                                                            <label for="name" class="col-sm-4 control-label">Firstname <span class="required-field"> *</span></label>
+                                                            <div class="col-sm-8" ng-init="firstname = author.firstname" >
+                                                                <input type="text" name="firstname" value="{{ firstname }}" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name" class="col-sm-4 control-label">Lastname </label>
+                                                            <div class="col-sm-8" ng-init="lastname = author.lastname" >
+                                                                <input type="text" name="lastname" value="{{ lastname }}" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="email" class="col-sm-4 control-label">Email</label>
-                                                            <div class="col-sm-8" ng-init="email = publisher.email">
+                                                            <div class="col-sm-8" ng-init="email = author.email">
                                                                 <input type="email" name="email" value="{{ email }}" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="website" class="col-sm-4 control-label">Website </label>
-                                                            <div class="col-sm-8" ng-init="website = publisher.website">
-                                                                <input type="text" name="website" value="{{ website }}" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -55,24 +55,24 @@
                                                         <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">More Information</h6>
                                                         <div class="form-group">
                                                             <label for="phone" class="col-sm-4 control-label">Phone No </label>
-                                                            <div class="col-sm-8" ng-init="phone = publisher.phone">
+                                                            <div class="col-sm-8" ng-init="phone = author.phone">
                                                                 <input type="text" name="phone" value="{{ phone }}" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="address" class="col-sm-4 control-label">Address </label>
-                                                            <div class="col-sm-8" ng-init="address = publisher.address">
+                                                            <div class="col-sm-8" ng-init="address = author.address">
                                                                 <textarea class="form-control" name="address" rows="3">{{ address }}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4 jd-form-block plus-115-bottom-margin">
-                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Publisher's Photo</h3>
+                                                        <h3 class="h5 m-b-md m-t-none font-bold jd-form-block-title">Author's Photo</h3>
                                                         <div class="form-group">
                                                             <label for="phone" class="col-sm-4 control-label">Photo</label>
                                                             <div class="col-sm-8">
-                                                                <div class="img-placeholder" id="img-placeholder" ng-init=" path = (publisher.photo) ? 'uploads/'+publisher.school_id+'/'+publisher.photo : 'system-images/placeholder.png' ">
+                                                                <div class="img-placeholder" id="img-placeholder" ng-init=" path = (author.photo) ? 'uploads/'+author.school_id+'/'+author.photo : 'system-images/blank-avatar.png' ">
                                                                     <img ng-src="assets/images/{{ path }}">
                                                                 </div>
                                                                 <div class="select-btn-container">
@@ -86,8 +86,8 @@
 
                                                     <div class="col-md-12 form-btns-container">
                                                         <div class="broken-line"></div>
-                                                        <button class="btn jd-btn jd-btn-default" ng-click="state.go('view-publisher', { 'id' : publisher.publisher_id } )" type="button" >Cancel</button>
-                                                        <button class="btn jd-btn jd-btn-primary" ng-click="updatePublisher()">Save</button>
+                                                        <button class="btn jd-btn jd-btn-default" ng-click="state.go('view-author', { 'id' : author.author_id } )" type="button" >Cancel</button>
+                                                        <button class="btn jd-btn jd-btn-primary" ng-click="updateAuthor()">Save</button>
                                                     </div>
 
 

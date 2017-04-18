@@ -1557,6 +1557,56 @@ app.service('Service', function($http){
         });
     };
     
+    /***** end publisher ******/
+    
+    /***** author *****/
+    
+    this.getAuthors = function(school_id){
+        return $http.get(base_url+"api/get-authors", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    this.getAuthor = function(id){
+        return $http.get(base_url+"api/get-author", {
+            params : {'author-id' : id}
+        });
+    };
+    
+    /***** end author ******/
+    
+    /***** settings *****/
+    
+    this.addBookCategory = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-book-category",
+            data: data
+        });
+    };  
+    
+    this.getBookCategories = function(school_id){
+        return $http.get(base_url+"api/get-book-categories", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    
+    this.addBookGenre = function(data){  
+        return $http({
+            method: "POST",
+            url: base_url+"api/add-book-genre",
+            data: data
+        });
+    };  
+    
+    this.getBookGenres = function(school_id){
+        return $http.get(base_url+"api/get-book-genres", {
+            params : {'filter-field': 'school_id', 'filter-value': school_id}
+        });
+    };
+    
+    /***** end settings ******/
     
 });
 
@@ -1885,7 +1935,63 @@ app.config(function($stateProvider, $urlRouterProvider){
                     return Service.getPublisher($stateParams.id);
                 }
             }
-        });
+        })
+        
+        .state('library-settings', {
+            url: "/library/settings",
+            templateUrl: "assets/app/views/library-settings.html",
+            controller: "LibrarySettingsCtrl",
+            resolve: {
+                book_categories: function(Service, Factory){
+                    return Service.getBookCategories(Factory.getSchoolID());
+                },
+                book_genres: function(Service, Factory){
+                    return Service.getBookGenres(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('library-authors', {
+            url: "/library/authors",
+            templateUrl: "assets/app/views/library-authors.html",
+            controller: "AuthorsCtrl",
+            resolve: {
+                authors : function(Service, Factory){
+                    return Service.getAuthors(Factory.getSchoolID());
+                }
+            }
+        })
+        
+        .state('new-author', {
+            url: "/library/new-author",
+            templateUrl: "assets/app/views/library-new-author.html",
+            controller: "NewAuthorCtrl",
+            resolve: {
+                
+            }
+        })
+        
+        .state('view-author', {
+            url: "/library/authors/view/:id",
+            templateUrl: "assets/app/views/library-view-author.html",
+            controller: "ViewAuthorCtrl",
+            resolve: {
+                author: function($stateParams, Service){
+                    return Service.getAuthor($stateParams.id);
+                }
+            }
+        })
+        
+        .state('edit-author', {
+            url: "/library/authors/edit/:id",
+            templateUrl: "assets/app/views/library-edit-author.html",
+            controller: "ViewAuthorCtrl",
+            resolve: {
+                author: function($stateParams, Service){
+                    return Service.getAuthor($stateParams.id);
+                }
+            }
+        })
         
         
         
